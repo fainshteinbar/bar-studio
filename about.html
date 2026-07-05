@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Bar Fainshtein, Creative Director</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --void: #07071C;
+            --surface: #0F0E2F;
+            --cream: #F4F0E8;
+            --cream-dim: rgba(244,240,232,0.5);
+            --cream-faint: rgba(244,240,232,0.14);
+            --cyan: #00C2FF;
+            --border: rgba(244,240,232,0.08);
+        }
+
+        html { scroll-behavior: smooth; background: var(--void); }
+        body { background: var(--void); color: var(--cream); font-family: 'DM Sans', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; cursor: none; }
+
+        /* CURSOR */
+        .c-dot { position: fixed; width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+        .c-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--cyan); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s cubic-bezier(.25,.46,.45,.94), height .35s cubic-bezier(.25,.46,.45,.94), opacity .35s; opacity: .45; }
+        body.hovering .c-ring { width: 60px; height: 60px; opacity: .2; }
+
+        /* NAV */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; transition: background .3s, padding .3s, border-color .3s; border-bottom: 1px solid transparent; opacity: 0; animation: fadeIn .8s ease .05s forwards; }
+        nav.scrolled { background: rgba(7,7,28,.95); backdrop-filter: blur(16px); padding: 20px 48px; border-bottom-color: var(--border); }
+        .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .08em; color: var(--cream); text-decoration: none; }
+        .nav-links { display: flex; align-items: center; gap: 44px; list-style: none; }
+        .nav-links a { font-size: .73rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--cream-dim); text-decoration: none; transition: color .2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--cream); }
+        .nav-linkedin { font-size: .73rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--cream-dim); text-decoration: none; transition: color .2s; display: flex; align-items: center; gap: 7px; }
+        .nav-linkedin:hover { color: var(--cyan); }
+        .nav-cta { font-size: .73rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--void); background: var(--cyan); text-decoration: none; padding: 11px 26px; border-radius: 100px; transition: background .2s; }
+        .nav-cta:hover { background: var(--cream); }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        .reveal { opacity: 0; transform: translateY(52px); transition: opacity 1.1s cubic-bezier(.22,1,.36,1), transform 1.1s cubic-bezier(.22,1,.36,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-44px); transition: opacity 1.1s cubic-bezier(.22,1,.36,1), transform 1.1s cubic-bezier(.22,1,.36,1); }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+        .inner { max-width: 1320px; margin: 0 auto; padding: 0 48px; }
+        .s-label { display: block; font-size: .65rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--cyan); margin-bottom: 20px; }
+
+        /* ── HERO ── */
+        #about-hero {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 48px 72px;
+        }
+
+        .hero-bg-grad {
+            position: absolute; inset: 0; z-index: 0;
+            background: radial-gradient(ellipse 60% 55% at 72% 28%, rgba(0,194,255,.13) 0%, transparent 60%),
+                        linear-gradient(180deg, var(--void) 0%, #0c0a2a 100%);
+        }
+
+        .hero-watermark {
+            position: absolute; bottom: -.08em; left: -.02em;
+            font-family: 'Bebas Neue', sans-serif; font-size: 42vw; line-height: 1;
+            color: rgba(244,240,232,.018); pointer-events: none; user-select: none; z-index: 0;
+        }
+
+        .hero-photo-bg {
+            position: absolute; top: 0; right: 0; width: 44%; height: 100%; z-index: 1;
+        }
+        .hero-photo-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+        .hero-photo-bg::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to right, var(--void) 0%, rgba(7,7,28,.25) 38%, transparent 65%),
+                        linear-gradient(to top, var(--void) 0%, transparent 25%);
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 1320px; margin: 0 auto; width: 100%; }
+
+        .hero-eyebrow { font-size: .68rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--cyan); margin-bottom: 24px; opacity: 0; animation: fadeUp .6s ease .25s forwards; }
+
+        .hero-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5.5rem, 14vw, 15rem); line-height: .85; letter-spacing: .01em; color: var(--cream); opacity: 0; animation: fadeUp .85s cubic-bezier(.25,.46,.45,.94) .35s forwards; }
+        .hero-name em { font-style: normal; color: var(--cyan); }
+
+        .hero-meta-bar { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--border); padding-top: 36px; margin-top: 48px; opacity: 0; animation: fadeUp .7s ease .6s forwards; }
+        .meta-item { padding-right: 32px; border-right: 1px solid var(--border); }
+        .meta-item:last-child { border-right: none; padding-right: 0; }
+        .meta-item + .meta-item { padding-left: 32px; }
+        .meta-label { font-size: .6rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
+        .meta-value { font-size: .88rem; color: var(--cream-dim); line-height: 1.6; }
+
+        /* ── TAPE ── */
+        .tape-wrap { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; padding: 20px 0; }
+        .tape-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+        .tape-track:hover { animation-play-state: paused; }
+        .tape-item { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .1em; color: var(--cream-dim); white-space: nowrap; padding: 0 44px; }
+        .tape-item.accent { color: var(--cyan); padding: 0 12px; }
+
+        /* ── MANIFESTO ── */
+        #manifesto { padding: 120px 0; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+        .manifesto-big { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.8rem, 9vw, 11rem); line-height: .9; letter-spacing: .01em; color: var(--cream); }
+        .manifesto-big em { font-style: normal; color: var(--cyan); }
+
+        .manifesto-rule { margin-top: 48px; font-size: .8rem; color: var(--cream-faint); letter-spacing: .1em; text-transform: uppercase; padding-top: 32px; border-top: 1px solid var(--border); max-width: 500px; }
+
+        /* ── WHY SPORTS ── */
+        #why-sports { padding: 128px 0; }
+        .challenge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        .challenge-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 5vw, 5.5rem); line-height: .9; letter-spacing: .02em; color: var(--cream); }
+        .challenge-headline em { font-style: normal; color: var(--cyan); }
+        .challenge-body { font-size: 1rem; line-height: 1.9; color: var(--cream-dim); }
+        .challenge-body p + p { margin-top: 20px; }
+        .challenge-body strong { color: var(--cream); font-weight: 500; }
+
+        /* ── PHILOSOPHY ── */
+        #philosophy { padding: 128px 0; border-top: 1px solid var(--border); }
+        .phil-header { margin-bottom: 80px; }
+        .phil-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 6.5rem); line-height: .9; letter-spacing: .02em; color: var(--cream); }
+        .phil-steps { display: flex; flex-direction: column; }
+        .phil-step { display: grid; grid-template-columns: 80px 1fr 1.2fr; gap: 0 64px; padding: 56px 0; border-top: 1px solid var(--border); align-items: start; }
+        .phil-step:last-child { border-bottom: 1px solid var(--border); }
+        .phil-num { font-family: 'Bebas Neue', sans-serif; font-size: .85rem; letter-spacing: .2em; color: var(--cyan); padding-top: 6px; }
+        .phil-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 3vw, 3rem); letter-spacing: .03em; color: var(--cream); line-height: 1; }
+        .phil-desc { font-size: .9rem; line-height: 1.85; color: var(--cream-dim); padding-top: 4px; }
+
+        /* ── AI PRODUCTION ── */
+        #ai-section { padding: 128px 0; background: var(--surface); border-top: 1px solid var(--border); }
+        .ai-header { margin-bottom: 72px; }
+        .ai-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 6.5rem); line-height: .9; letter-spacing: .02em; color: var(--cream); }
+        .ai-lead { font-size: 1rem; line-height: 1.9; color: var(--cream-dim); max-width: 720px; margin-top: 24px; }
+        .ai-lead strong { color: var(--cream); font-weight: 500; }
+
+        .metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 3px; }
+        .metric-card { background: var(--void); padding: 48px 36px; position: relative; overflow: hidden; }
+        .metric-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--cyan); }
+        .metric-num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem,4.5vw,5.5rem); line-height: .8; letter-spacing: .01em; color: var(--cream); margin-bottom: 8px; }
+        .metric-num .count { color: var(--cyan); }
+        .metric-num .unit { color: var(--cyan); }
+        .metric-label { font-size: .65rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 14px; opacity: .7; }
+        .metric-desc { font-size: .8rem; line-height: 1.75; color: var(--cream-dim); }
+
+        /* ── REMOTE ── */
+        #setup { padding: 128px 0; border-top: 1px solid var(--border); }
+        .takeaways-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 120px; align-items: start; }
+        .takeaways-sticky { position: sticky; top: 140px; }
+        .takeaways-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5.5vw, 6rem); line-height: .9; letter-spacing: .02em; color: var(--cream); }
+        .takeaways-title em { font-style: normal; color: var(--cyan); }
+        .takeaways-blurb { font-size: .9rem; line-height: 1.8; color: var(--cream-dim); margin-top: 24px; }
+        .takeaway-list { display: flex; flex-direction: column; }
+        .takeaway-item { padding: 40px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 40px 1fr; gap: 28px; align-items: start; }
+        .takeaway-item:first-child { border-top: 1px solid var(--border); }
+        .takeaway-icon { width: 40px; height: 40px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 4px; }
+        .takeaway-icon svg { color: var(--cyan); }
+        .takeaway-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .04em; color: var(--cream); margin-bottom: 10px; }
+        .takeaway-text { font-size: .85rem; line-height: 1.8; color: var(--cream-dim); }
+        .takeaway-text strong { color: var(--cream); font-weight: 500; }
+
+        /* ── CTA ── */
+        #cta-section { border-top: 1px solid var(--border); background: var(--surface); }
+        .cta-inner { max-width: 1320px; margin: 0 auto; padding: 128px 48px; display: flex; align-items: center; justify-content: space-between; gap: 60px; }
+        .cta-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6.5vw, 7.5rem); line-height: .9; letter-spacing: .02em; color: var(--cream); }
+        .cta-headline em { font-style: normal; color: var(--cyan); }
+        .cta-actions { display: flex; flex-direction: column; gap: 16px; align-items: flex-end; flex-shrink: 0; }
+        .cta-btn { display: inline-block; font-size: .75rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--void); background: var(--cyan); text-decoration: none; padding: 18px 40px; border-radius: 100px; transition: background .2s, transform .15s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--cream); transform: translateY(-2px); }
+        .cta-email { font-size: .78rem; color: var(--cream-dim); letter-spacing: .08em; text-decoration: none; transition: color .2s; text-align: right; }
+        .cta-email:hover { color: var(--cyan); }
+
+        /* ── FOOTER ── */
+        footer { background: var(--void); border-top: 2px solid var(--cyan); padding: 72px 48px 44px; }
+        .footer-inner { max-width: 1320px; margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding-bottom: 56px; border-bottom: 1px solid var(--border); margin-bottom: 36px; align-items: start; }
+        .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; letter-spacing: .06em; color: var(--cream); text-decoration: none; display: block; margin-bottom: 18px; }
+        .footer-tagline { font-size: .82rem; color: var(--cream-dim); line-height: 1.8; max-width: 340px; }
+        .footer-right { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding-top: 8px; }
+        .footer-col h4 { font-size: .62rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--cyan); margin-bottom: 24px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+        .footer-col ul li a { font-size: .85rem; color: var(--cream-dim); text-decoration: none; transition: color .2s; }
+        .footer-col ul li a:hover { color: var(--cream); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+        .footer-bottom p { font-size: .7rem; color: var(--cream-faint); letter-spacing: .06em; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .challenge-grid { grid-template-columns: 1fr; gap: 40px; }
+            .phil-step { grid-template-columns: 60px 1fr; }
+            .phil-desc { grid-column: 2; }
+            .metrics-grid { grid-template-columns: 1fr 1fr; }
+            .takeaways-grid { grid-template-columns: 1fr; gap: 40px; }
+            .takeaways-sticky { position: static; }
+            .cta-inner { flex-direction: column; align-items: flex-start; gap: 40px; }
+            .cta-actions { align-items: flex-start; }
+        }
+        @media (max-width: 860px) {
+            #about-hero { padding: 0 24px 56px; }
+            .hero-photo-bg { display: none; }
+            .hero-meta-bar { grid-template-columns: 1fr 1fr; }
+            .meta-item:nth-child(2n) { border-right: none; padding-right: 0; }
+            nav { padding: 22px 24px; } nav.scrolled { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .inner { padding: 0 24px; }
+            #why-sports, #philosophy, #ai-section, #setup { padding: 72px 0; }
+            #manifesto { padding: 80px 0; }
+            footer { padding: 56px 24px 36px; }
+            .footer-top { grid-template-columns: 1fr; gap: 48px; }
+            .footer-right { grid-template-columns: 1fr; }
+            .cta-inner { padding: 72px 24px; }
+        }
+        @media (max-width: 640px) {
+            .hero-name { font-size: clamp(4.5rem, 18vw, 7rem); }
+            .hero-meta-bar { grid-template-columns: 1fr; }
+            .meta-item { border-right: none !important; padding: 16px 0; border-top: 1px solid var(--border); }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .phil-step { grid-template-columns: 1fr; gap: 12px; padding: 36px 0; }
+            .phil-num { font-size: 1.4rem; }
+        }
+    
+        /* PAGE TRANSITIONS */
+        #pt-overlay {
+            position: fixed; inset: 0; background: #07071C;
+            z-index: 99999; opacity: 1; pointer-events: none;
+            transition: opacity 220ms ease;
+        }
+        #pt-overlay.pt-out { opacity: 0; }
+        
+        /* ── MOBILE MENU ── */
+        .nav-burger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: 1px solid rgba(244,240,232,.08); border-radius: 8px; cursor: none; padding: 0; flex-shrink: 0; }
+        .nav-burger span { display: block; width: 18px; height: 1.5px; background: #F4F0E8; border-radius: 2px; transition: transform .28s cubic-bezier(.4,0,.2,1), opacity .2s; }
+        .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        .mob-menu { position: fixed; inset: 0; background: #07071C; z-index: 150; display: flex; flex-direction: column; padding: 0 28px 48px; overflow-y: auto; transform: translateX(100%); transition: transform .42s cubic-bezier(.16,1,.3,1); border-left: 1px solid rgba(244,240,232,.08); }
+        .mob-menu.open { transform: translateX(0); }
+        .mob-header { display: flex; align-items: center; justify-content: space-between; padding: 26px 0 0; margin-bottom: 36px; }
+        .mob-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .08em; color: #F4F0E8; text-decoration: none; }
+        .mob-close { width: 40px; height: 40px; background: none; border: 1px solid rgba(244,240,232,.08); border-radius: 50%; color: rgba(244,240,232,.62); font-size: 1rem; cursor: none; display: flex; align-items: center; justify-content: center; transition: border-color .2s, color .2s; }
+        .mob-close:hover { border-color: #00C2FF; color: #00C2FF; }
+        .mob-links { flex: 1; }
+        .mob-link { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid rgba(244,240,232,.08); text-decoration: none; font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; letter-spacing: .03em; color: #F4F0E8; line-height: 1; transition: color .2s; }
+        .mob-link:first-child { border-top: 1px solid rgba(244,240,232,.08); }
+        .mob-link:hover { color: #00C2FF; }
+        .mob-link svg { color: rgba(244,240,232,.22); flex-shrink: 0; transition: color .2s, transform .2s; }
+        .mob-link:hover svg { color: #00C2FF; transform: translate(3px,-3px); }
+        .mob-num { font-size: .7rem; letter-spacing: .18em; color: #00C2FF; width: 22px; flex-shrink: 0; }
+        .mob-cta { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .1em; color: #07071C; background: #00C2FF; text-decoration: none; padding: 18px 32px; border-radius: 100px; display: block; text-align: center; margin-top: 32px; transition: background .2s; }
+        .mob-cta:hover { background: #F4F0E8; }
+        @media(max-width:860px) { .nav-burger { display: flex; } }
+        </style>
+</head>
+<body>
+
+<div class="c-dot" id="cDot"></div>
+<div class="c-ring" id="cRing"></div>
+
+<nav id="mainNav">
+    <a href="index.html" class="nav-logo">bar.studio</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#services">Capabilities</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li>
+            <a href="https://www.linkedin.com/in/bar-fainshtein-67172a207/" target="_blank" rel="noopener" class="nav-linkedin">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+            </a>
+        </li>
+    </ul>
+    <a href="mailto:fainshteinbar@gmail.com" class="nav-cta">Work With Me</a>
+
+    <button class="nav-burger" id="navBurger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+    <div class="mob-header">
+        <a href="index.html" class="mob-logo">bar.studio</a>
+        <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
+    </div>
+    <div class="mob-links">
+        <a href="la-liga.html" class="mob-link"><span class="mob-num">01</span><span>La Liga Israel</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="ifa.html" class="mob-link"><span class="mob-num">02</span><span>Israel Football Assoc.</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="special-olympics.html" class="mob-link"><span class="mob-num">03</span><span>Special Olympics Israel</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="paralympics.html" class="mob-link"><span class="mob-num">04</span><span>Israel Paralympic</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="ai-production.html" class="mob-link"><span class="mob-num">05</span><span>AI Creative Production</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="about.html" class="mob-link"><span class="mob-num"></span><span>About</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+    </div>
+    <a href="mailto:fainshteinbar@gmail.com" class="mob-cta">Work With Me</a>
+</div>
+
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<section id="about-hero">
+    <div class="hero-bg-grad"></div>
+    <div class="hero-watermark">B</div>
+    <div class="hero-photo-bg">
+        <img src="Bar_Hero_Clean.png" alt="Bar Fainshtein">
+    </div>
+    <div class="hero-content">
+        <p class="hero-eyebrow">Creative Director · Sports Branding & AI Production</p>
+        <h1 class="hero-name">Bar<br><em>Fainshtein</em></h1>
+        <div class="hero-meta-bar">
+            <div class="meta-item">
+                <div class="meta-label">Specialty</div>
+                <div class="meta-value">Sports only.<br>Every client since 2019.</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Clients</div>
+                <div class="meta-value">La Liga · IFA · Special Olympics · Paralympics</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Scale</div>
+                <div class="meta-value">500+ assets/year<br>10× team productivity</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Based</div>
+                <div class="meta-value">Hua Hin, Thailand<br>Working globally · Remote-proven</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ TAPE ════════════════════════════════════════════════ -->
+<div class="tape-wrap">
+    <div class="tape-track">
+        <span class="tape-item">La Liga Israel</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Israel Football Association</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Special Olympics Israel</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Israel Paralympic Committee</span><span class="tape-item accent">·</span>
+        <span class="tape-item">AI-Augmented Production</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Winner League Basketball</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Sports Branding</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Fan Engagement Systems</span><span class="tape-item accent">·</span>
+        <span class="tape-item">La Liga Israel</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Israel Football Association</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Special Olympics Israel</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Israel Paralympic Committee</span><span class="tape-item accent">·</span>
+        <span class="tape-item">AI-Augmented Production</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Winner League Basketball</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Sports Branding</span><span class="tape-item accent">·</span>
+        <span class="tape-item">Fan Engagement Systems</span><span class="tape-item accent">·</span>
+    </div>
+</div>
+
+<!-- ══ MANIFESTO ════════════════════════════════════════════ -->
+<section id="manifesto">
+    <div class="inner">
+        <span class="s-label reveal">Point of View</span>
+        <blockquote class="manifesto-big reveal">
+            Sports isn't<br>
+            a content<br>
+            <em>category.</em><br>
+            It's a cultural<br>
+            <em>language.</em>
+        </blockquote>
+        <p class="manifesto-rule reveal">— The principle behind every project I take.</p>
+    </div>
+</section>
+
+<!-- ══ WHY SPORTS ════════════════════════════════════════════ -->
+<section id="why-sports">
+    <div class="inner">
+        <div class="challenge-grid">
+            <div class="reveal-left">
+                <span class="s-label">The Decision</span>
+                <h2 class="challenge-headline">Sports.<br>Not a vertical.<br>A <em>choice.</em></h2>
+            </div>
+            <div class="reveal">
+                <div class="challenge-body">
+                    <p>My first client in 2019 was a sports organization. Every client since has been a sports organization. That's not an accident — it's a deliberate choice I made early and have never reconsidered.</p>
+                    <p>Most creative directors come to sports from general agencies. They've built portfolios across fashion, finance, FMCG, and tech — and sports is one more vertical they're applying skills to. <strong>I've never had a non-sports client. That means I'm not learning the industry on your brief.</strong> I already understand the tension between heritage and disruption, the emotional relationship between fans and clubs, and the operational reality of working with federations that have complex stakeholder structures.</p>
+                    <p>When La Liga Israel needed a creative director who could localize a global brand without diluting it, that understanding was worth more than any generalist portfolio. When the Israel Football Association needed a brand system that could sit beside UEFA and FIFA — not just look inspired by them — that specificity was the difference. <strong>Sports clients don't need to explain what they do to me. We start at the work.</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ PHILOSOPHY ════════════════════════════════════════════ -->
+<section id="philosophy">
+    <div class="inner">
+        <div class="phil-header reveal">
+            <span class="s-label">Creative Philosophy</span>
+            <h2 class="phil-title">Three principles.<br>Every project.</h2>
+        </div>
+        <div class="phil-steps">
+            <div class="phil-step reveal">
+                <div class="phil-num">01</div>
+                <div class="phil-name">Design for the fan at 0.5 seconds</div>
+                <p class="phil-desc">A fan scrolling through their feed doesn't pause to read. They feel. The question I ask before every design decision is: what does this communicate before a single word is read? If the answer isn't clear in half a second, the work isn't done.</p>
+            </div>
+            <div class="phil-step reveal">
+                <div class="phil-num">02</div>
+                <div class="phil-name">Build systems, not seasons</div>
+                <p class="phil-desc">The best sports creative work outlasts the campaign it was built for. I design brand architectures — template systems, visual languages, scalable identity frameworks — that make every piece of content downstream cheaper, faster, and more consistent to produce. One season's work that sets up the next five is worth ten seasons of one-offs.</p>
+            </div>
+            <div class="phil-step reveal">
+                <div class="phil-num">03</div>
+                <div class="phil-name">Earned authority over borrowed hype</div>
+                <p class="phil-desc">Sports organizations are tempted by trend-chasing — whatever the biggest club or league is doing this season. The brands that last are built on earned authority: clear positioning, restrained visual language, and a consistent point of view that fans can recognize before they read the logo. I build for durability, not virality.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ AI PRODUCTION ═════════════════════════════════════════ -->
+<section id="ai-section">
+    <div class="inner">
+        <div class="ai-header reveal">
+            <span class="s-label">AI Production</span>
+            <h2 class="ai-title">I built the<br>system. Not<br>just use it.</h2>
+            <p class="ai-lead">The AI production conversation in sports media is mostly noise. Most organizations are experimenting with tools — running images through Midjourney, using GPT to write captions. That's not a workflow. <strong>I built an end-to-end production infrastructure: prompting logic, quality gates, brand compliance checks, and human review at every stage that matters.</strong> The result is a system that produced 10× the content volume of a traditional team — with zero drop in quality metrics.</p>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card reveal">
+                <div class="metric-label">Productivity</div>
+                <div class="metric-num"><span class="count" data-target="10">0</span><span class="unit">×</span></div>
+                <div class="metric-desc">Content output vs. traditional team of same size</div>
+            </div>
+            <div class="metric-card reveal">
+                <div class="metric-label">Assets Delivered</div>
+                <div class="metric-num"><span class="count" data-target="500">0</span><span class="unit">+</span></div>
+                <div class="metric-desc">Digital assets produced per year across all clients</div>
+            </div>
+            <div class="metric-card reveal">
+                <div class="metric-label">Output Growth</div>
+                <div class="metric-num"><span class="count" data-target="3">0</span><span class="unit">×</span></div>
+                <div class="metric-desc">Content volume growth in 4 months — Winner League Basketball</div>
+            </div>
+            <div class="metric-card reveal">
+                <div class="metric-label">Quality Drop</div>
+                <div class="metric-num"><span class="count" data-target="0">—</span></div>
+                <div class="metric-desc">Zero drop in brand compliance or quality metrics after AI integration</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ REMOTE ════════════════════════════════════════════════ -->
+<section id="setup">
+    <div class="inner">
+        <div class="takeaways-grid">
+            <div class="takeaways-sticky reveal-left">
+                <span class="s-label">How I Work</span>
+                <h2 class="takeaways-title">Based in<br>Southeast<br><em>Asia.</em><br>Working<br>globally.</h2>
+                <p class="takeaways-blurb">Hua Hin, Thailand — managing distributed creative teams fully remote since 2023. I don't treat remote as a workaround. It's the model I've been running at production scale for years.</p>
+            </div>
+            <div>
+                <ul class="takeaway-list">
+                    <li class="takeaway-item reveal">
+                        <div class="takeaway-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                        </div>
+                        <div>
+                            <div class="takeaway-name">Communication</div>
+                            <p class="takeaway-text"><strong>Async-first with structured check-ins.</strong> I document decisions, flag blockers early, and don't disappear between updates. You always know where the work stands.</p>
+                        </div>
+                    </li>
+                    <li class="takeaway-item reveal">
+                        <div class="takeaway-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+                        </div>
+                        <div>
+                            <div class="takeaway-name">Standards</div>
+                            <p class="takeaway-text">I hold my work and the team's work to the same bar. <strong>The brief isn't done until it's right</strong> — not until it's on time.</p>
+                        </div>
+                    </li>
+                    <li class="takeaway-item reveal">
+                        <div class="takeaway-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                        </div>
+                        <div>
+                            <div class="takeaway-name">Stakeholders</div>
+                            <p class="takeaway-text"><strong>LL.B background (Reichman University)</strong> means I navigate contracts, licensing, and stakeholder negotiations without escalating everything to legal.</p>
+                        </div>
+                    </li>
+                    <li class="takeaway-item reveal">
+                        <div class="takeaway-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+                        </div>
+                        <div>
+                            <div class="takeaway-name">Availability</div>
+                            <p class="takeaway-text">Open to relocation for the right senior creative role. Southeast Asia timezone extends your production window. <strong>Remote is proven at scale — not a request.</strong></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ CTA ════════════════════════════════════════════════════ -->
+<section id="cta-section">
+    <div class="cta-inner">
+        <h2 class="cta-headline reveal">
+            Let's build<br>
+            something<br>
+            <em>that lasts.</em>
+        </h2>
+        <div class="cta-actions reveal">
+            <a href="mailto:fainshteinbar@gmail.com" class="cta-btn">Get in Touch</a>
+            <a href="mailto:fainshteinbar@gmail.com" class="cta-email">fainshteinbar@gmail.com</a>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════════ -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div>
+                <a href="index.html" class="footer-logo">bar.studio</a>
+                <p class="footer-tagline">Creative direction & AI-augmented production for sports federations, leagues, and clubs.</p>
+            </div>
+            <div class="footer-right">
+                <div class="footer-col">
+                    <h4>Case Studies</h4>
+                    <ul>
+                        <li><a href="la-liga.html">La Liga Israel</a></li>
+                        <li><a href="ifa.html">Israel Football Association</a></li>
+                        <li><a href="special-olympics.html">Special Olympics Israel</a></li>
+                        <li><a href="paralympics.html">Israel Paralympic Committee</a></li>
+                        <li><a href="ai-production.html">AI Creative Production</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="mailto:fainshteinbar@gmail.com">fainshteinbar@gmail.com</a></li>
+                        <li><a href="https://www.linkedin.com/in/bar-fainshtein-67172a207/" target="_blank" rel="noopener">LinkedIn</a></li>
+                        <li><a href="bar-resume.pdf" target="_blank">Download Resume</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 bar.studio — Bar Fainshtein</p>
+            <p>Open to senior creative leadership opportunities in global sports.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function(){
+    var dot=document.getElementById('cDot'),ring=document.getElementById('cRing'),mx=-100,my=-100,rx=-100,ry=-100;
+    if(window.matchMedia('(pointer: fine)').matches){
+        document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
+        document.querySelectorAll('a,button').forEach(function(el){
+            el.addEventListener('mouseenter',function(){document.body.classList.add('hovering');});
+            el.addEventListener('mouseleave',function(){document.body.classList.remove('hovering');});
+        });
+        (function loop(){
+            rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+            if(dot){dot.style.left=mx+'px';dot.style.top=my+'px';}
+            if(ring){ring.style.left=rx+'px';ring.style.top=ry+'px';}
+            requestAnimationFrame(loop);
+        })();
+    } else {
+        if(dot)dot.style.display='none';
+        if(ring)ring.style.display='none';
+    }
+
+    var nav=document.getElementById('mainNav');
+    window.addEventListener('scroll',function(){ nav.classList.toggle('scrolled',window.scrollY>40); });
+
+    var reveals=document.querySelectorAll('.reveal,.reveal-left');
+    var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
+    },{threshold:0.1});
+    reveals.forEach(function(el){io.observe(el);});
+
+    var counters=document.querySelectorAll('.count[data-target]');
+    var countIO=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if(!e.isIntersecting) return;
+            var el=e.target, target=parseInt(el.getAttribute('data-target')), start=Date.now(), dur=1400;
+            (function step(){
+                var p=Math.min((Date.now()-start)/dur,1), ease=1-Math.pow(1-p,3);
+                el.textContent=Math.floor(ease*target);
+                if(p<1) requestAnimationFrame(step); else el.textContent=target;
+            })();
+            countIO.unobserve(el);
+        });
+    },{threshold:0.5});
+    counters.forEach(function(el){countIO.observe(el);});
+})();
+</script>
+
+<script>
+(function(){
+    var ov = document.createElement('div');
+    ov.id = 'pt-overlay';
+    document.body.prepend(ov);
+    requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ ov.classList.add('pt-out'); });
+    });
+    document.addEventListener('click', function(e){
+        var a = e.target.closest('a[href]');
+        if (!a) return;
+        var h = a.getAttribute('href');
+        if (!h || h.startsWith('#') || h.startsWith('mailto') || h.startsWith('http') || h.startsWith('//') || a.target === '_blank') return;
+        e.preventDefault();
+        ov.classList.remove('pt-out');
+        setTimeout(function(){ window.location.href = h; }, 240);
+    });
+})();
+</script>
+
+</body>
+</html>

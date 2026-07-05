@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Israel Paralympic Committee — Bar Fainshtein, Creative Director</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --void: #07071C; --surface: #0F0E2F; --cream: #F4F0E8;
+            --cream-dim: rgba(244,240,232,0.5); --cream-faint: rgba(244,240,232,0.14);
+            --cream-mid: rgba(244,240,232,0.65);
+            --green: #22c55e;
+            --pink: #00C2FF; --border: rgba(244,240,232,0.08);
+            --accent: #1D4ED8;
+            --para-red: #DC2626; --para-blue: #1D4ED8; --para-green: #16A34A;
+        }
+        html { scroll-behavior: smooth; background: var(--void); }
+        body { background: var(--void); color: var(--cream); font-family: 'DM Sans', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; cursor: none; }
+        .c-dot { position: fixed; width: 8px; height: 8px; background: var(--pink); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+        .c-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--pink); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s cubic-bezier(.25,.46,.45,.94), height .35s, opacity .35s; opacity: .45; }
+        body.hovering .c-ring { width: 60px; height: 60px; opacity: .2; }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; transition: background .3s, padding .3s, border-color .3s; border-bottom: 1px solid transparent; opacity: 0; animation: fadeIn .8s ease .05s forwards; }
+        nav.scrolled { background: rgba(7,7,28,.95); backdrop-filter: blur(16px); padding: 20px 48px; border-bottom-color: var(--border); }
+        .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .08em; color: var(--cream); text-decoration: none; }
+        .nav-links { display: flex; align-items: center; gap: 44px; list-style: none; }
+        .nav-links a, .nav-linkedin { font-size: .73rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--cream-dim); text-decoration: none; transition: color .2s; }
+        .nav-links a:hover { color: var(--cream); }
+        .nav-linkedin { display: flex; align-items: center; gap: 7px; }
+        .nav-linkedin:hover { color: var(--pink); }
+        .nav-cta { font-size: .73rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--void); background: var(--pink); text-decoration: none; padding: 11px 26px; border-radius: 100px; transition: background .2s, transform .15s; }
+        .nav-cta:hover { background: var(--cream); }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { to { opacity: 1; } }
+        .reveal { opacity: 0; transform: translateY(52px); transition: opacity 1.1s cubic-bezier(.22,1,.36,1), transform 1.1s cubic-bezier(.22,1,.36,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-44px); transition: opacity 1.1s cubic-bezier(.22,1,.36,1), transform 1.1s cubic-bezier(.22,1,.36,1); }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+        .inner { max-width: 1320px; margin: 0 auto; padding: 0 48px; }
+        .s-label { display: block; font-size: .65rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--pink); margin-bottom: 20px; }
+        .m-word { color: rgba(244,240,232,.1); display: inline; transition: color .55s ease; }
+
+        #project-hero { min-height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 48px 72px; }
+        .hero-bg-grad { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 60% 30%, rgba(29,78,216,.2) 0%, transparent 55%), radial-gradient(ellipse 40% 55% at 15% 70%, rgba(220,38,38,.1) 0%, transparent 50%), linear-gradient(180deg, var(--void) 0%, #080718 100%); }
+        .hero-watermark { position: absolute; bottom: -.08em; left: -.02em; font-family: 'Bebas Neue', sans-serif; font-size: 28vw; line-height: 1; color: rgba(244,240,232,.016); pointer-events: none; user-select: none; z-index: 0; }
+        .hero-back { position: absolute; top: 140px; left: 48px; z-index: 2; display: flex; align-items: center; gap: 10px; font-size: .68rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--cream-faint); text-decoration: none; transition: color .2s; opacity: 0; animation: fadeIn .6s ease .2s forwards; }
+        .hero-back:hover { color: var(--pink); }
+        .hero-back svg { transition: transform .2s; }
+        .hero-back:hover svg { transform: translateX(-3px); }
+        .hero-content { position: relative; z-index: 2; max-width: 1320px; margin: 0 auto; width: 100%; }
+        .hero-eyebrow { font-size: .68rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--pink); margin-bottom: 24px; opacity: 0; animation: fadeUp .6s ease .25s forwards; }
+        .project-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 9vw, 10rem); line-height: .85; letter-spacing: .01em; color: var(--cream); opacity: 0; animation: fadeUp .85s cubic-bezier(.25,.46,.45,.94) .35s forwards; }
+        .project-subtitle { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 4vw, 4.5rem); line-height: .9; letter-spacing: .02em; color: var(--para-blue); margin-bottom: 56px; opacity: 0; animation: fadeUp .85s cubic-bezier(.25,.46,.45,.94) .45s forwards; }
+        .hero-meta-bar { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--border); padding-top: 36px; opacity: 0; animation: fadeUp .7s ease .6s forwards; }
+        .meta-item { padding-right: 32px; border-right: 1px solid var(--border); }
+        .meta-item:last-child { border-right: none; padding-right: 0; }
+        .meta-item + .meta-item { padding-left: 32px; }
+        .meta-label { font-size: .6rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
+        .meta-value { font-size: .88rem; color: var(--cream-dim); line-height: 1.6; }
+
+        #challenge { padding: 128px 0; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        .section-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 5vw, 5.5rem); line-height: .9; letter-spacing: .02em; color: var(--cream); }
+        .body-copy { font-size: 1rem; line-height: 1.9; color: var(--cream-dim); }
+        .body-copy p + p { margin-top: 20px; }
+        .body-copy strong { color: var(--cream); font-weight: 500; }
+
+        #mandate { padding: 96px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+        .mandate-quote { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 4.5vw, 5rem); line-height: 1.05; letter-spacing: .02em; color: var(--cream); max-width: 1000px; }
+        .mandate-quote em { font-style: normal; color: var(--para-blue); }
+        .mandate-sub { margin-top: 32px; font-size: .82rem; color: var(--cream-faint); letter-spacing: .1em; text-transform: uppercase; }
+
+        /* AGITOS REFERENCE */
+        #agitos-section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+        .agitos-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: center; }
+        .agitos-symbol { display: flex; align-items: center; justify-content: center; }
+        .agitos-circles { position: relative; width: 120px; height: 120px; }
+        .ag-circle { position: absolute; width: 60px; height: 60px; border-radius: 50%; border: 4px solid; }
+        .ag-1 { border-color: var(--para-red); top: 0; left: 0; }
+        .ag-2 { border-color: var(--para-blue); top: 0; right: 0; }
+        .ag-3 { border-color: var(--para-green); bottom: 0; left: 50%; transform: translateX(-50%); }
+        .agitos-text { font-size: .9rem; line-height: 1.85; color: var(--cream-dim); }
+        .agitos-text strong { color: var(--cream); font-weight: 500; }
+
+        #process { padding: 128px 0; }
+        .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 6.5rem); line-height: .9; letter-spacing: .02em; color: var(--cream); }
+        .process-steps { display: flex; flex-direction: column; margin-top: 80px; }
+        .process-step { display: grid; grid-template-columns: 80px 1fr 1fr; gap: 0 64px; padding: 56px 0; border-top: 1px solid var(--border); align-items: start; }
+        .process-step:last-child { border-bottom: 1px solid var(--border); }
+        .step-num { font-family: 'Bebas Neue', sans-serif; font-size: .85rem; letter-spacing: .2em; color: var(--para-blue); padding-top: 6px; }
+        .step-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem,3vw,3rem); letter-spacing: .03em; color: var(--cream); line-height: 1; }
+        .step-desc { font-size: .9rem; line-height: 1.85; color: var(--cream-dim); padding-top: 4px; }
+
+        #transformation { padding: 128px 0; border-top: 1px solid var(--border); }
+        .transformation-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,6vw,6.5rem); line-height: .9; letter-spacing: .02em; color: var(--cream); margin-bottom: 20px; }
+        .transformation-desc { font-size: .9rem; color: var(--cream-dim); line-height: 1.8; max-width: 560px; margin-bottom: 48px; }
+        .slider-wrap { position: relative; width: 100%; aspect-ratio: 16/7; overflow: hidden; user-select: none; }
+        .slider-panel { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+        .slider-before { z-index: 1; background: linear-gradient(135deg,#1a1a2e 0%,#2d2d4e 100%); }
+        .slider-before-content { text-align: center; opacity: .25; }
+        .sb-text { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; letter-spacing: .04em; color: #aaaacc; }
+        .sb-sub { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(170,170,204,.4); margin-top: 8px; }
+        .slider-after { z-index: 2; clip-path: inset(0 50% 0 0); background: linear-gradient(135deg,#1D4ED8 0%,#0a1a5a 40%,#DC2626 100%); }
+        .slider-after-content { text-align: center; }
+        .sa-agitos { display: flex; gap: 10px; justify-content: center; margin-bottom: 16px; }
+        .sa-ag { width: 36px; height: 36px; border-radius: 50%; border: 3px solid; }
+        .sa-ag-r { border-color: var(--para-red); }
+        .sa-ag-b { border-color: #fff; }
+        .sa-ag-g { border-color: var(--para-green); }
+        .sa-text { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; letter-spacing: .04em; color: var(--cream); }
+        .sa-sub2 { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-top: 8px; }
+        .slider-handle { position: absolute; top: 0; bottom: 0; left: 50%; z-index: 10; width: 2px; background: #fff; transform: translateX(-50%); cursor: ew-resize; }
+        .slider-handle-knob { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 3px solid var(--void); display: flex; align-items: center; justify-content: center; }
+        .slider-lbl-pair { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; padding: 24px 28px; pointer-events: none; z-index: 5; }
+        .slider-lbl { font-size: .58rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; padding: 5px 14px; }
+        .slider-lbl-b { color: rgba(170,170,204,.5); border: 1px solid rgba(170,170,204,.2); }
+        .slider-lbl-a { color: #fff; background: var(--para-blue); }
+        .slider-hint { text-align: center; margin-top: 20px; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--cream-faint); }
+
+        #gallery { padding: 3px 0 128px; border-top: 1px solid var(--border); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 3px; }
+        .g-item { overflow: hidden; position: relative; }
+        .g-item:nth-child(1) { grid-column: span 6; aspect-ratio: 16/9; }
+        .g-item:nth-child(2) { grid-column: span 6; aspect-ratio: 16/9; }
+        .g-item:nth-child(3) { grid-column: span 12; aspect-ratio: 32/9; }
+        .g-fill { position: absolute; inset: 0; }
+        .g-item:nth-child(1) .g-fill { background: linear-gradient(135deg,#1D4ED8 0%,#0a1a5a 100%); }
+        .g-item:nth-child(2) .g-fill { background: linear-gradient(135deg,#07071C 0%,#DC2626 100%); }
+        .g-item:nth-child(3) .g-fill { background: linear-gradient(135deg,#07071C 0%,#1D4ED8 40%,#DC2626 70%,#16A34A 100%); }
+        .g-cap { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 20px; background: linear-gradient(to top,rgba(7,7,28,.8) 0%,transparent 100%); font-size: .62rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--cream-dim); z-index: 2; }
+
+        #metrics { padding: 128px 0; background: var(--surface); border-top: 1px solid var(--border); }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; margin-top: 64px; }
+        .metric-card { background: var(--void); padding: 52px 40px; position: relative; overflow: hidden; }
+        .metric-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--para-blue); }
+        .metric-num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,4vw,5rem); line-height: .8; letter-spacing: .01em; color: var(--cream); margin-bottom: 8px; }
+        .metric-num span { color: var(--para-blue); }
+        .metric-label { font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; }
+        .metric-desc { font-size: .82rem; line-height: 1.75; color: var(--cream-dim); }
+
+        #takeaways { padding: 128px 0; border-top: 1px solid var(--border); }
+        .takeaways-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 120px; align-items: start; }
+        .takeaways-sticky { position: sticky; top: 140px; }
+        .takeaways-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,5.5vw,6rem); line-height: .9; letter-spacing: .02em; color: var(--cream); }
+        .takeaways-blurb { font-size: .9rem; line-height: 1.8; color: var(--cream-dim); margin-top: 24px; }
+        .takeaway-list { display: flex; flex-direction: column; }
+        .takeaway-item { padding: 40px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 40px 1fr; gap: 28px; align-items: start; }
+        .takeaway-item:first-child { border-top: 1px solid var(--border); }
+        .takeaway-icon { width: 40px; height: 40px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 4px; }
+        .takeaway-icon svg { color: var(--pink); }
+        .takeaway-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .04em; color: var(--cream); margin-bottom: 10px; }
+        .takeaway-text { font-size: .85rem; line-height: 1.8; color: var(--cream-dim); }
+
+        #next-project { display: block; text-decoration: none; color: inherit; background: var(--surface); border-top: 1px solid var(--border); transition: background .4s; }
+        #next-project:hover { background: #14123a; }
+        .next-inner { max-width: 1320px; margin: 0 auto; padding: 80px 48px; display: flex; align-items: center; justify-content: space-between; }
+        .next-label { font-size: .62rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; }
+        .next-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem,4vw,4.5rem); letter-spacing: .03em; color: var(--cream); line-height: 1; }
+        .next-arrow { color: var(--cream-faint); flex-shrink: 0; transition: color .3s, transform .3s; }
+        #next-project:hover .next-arrow { color: var(--pink); transform: translate(6px,-6px); }
+
+        footer { background: var(--void); border-top: 2px solid var(--pink); padding: 72px 48px 44px; }
+        .footer-inner { max-width: 1320px; margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding-bottom: 56px; border-bottom: 1px solid var(--border); margin-bottom: 36px; align-items: start; }
+        .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; letter-spacing: .06em; color: var(--cream); text-decoration: none; display: block; margin-bottom: 18px; }
+        .footer-tagline { font-size: .82rem; color: var(--cream-dim); line-height: 1.8; max-width: 340px; }
+        .footer-right { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding-top: 8px; }
+        .footer-col h4 { font-size: .62rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--pink); margin-bottom: 24px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+        .footer-col ul li a { font-size: .85rem; color: var(--cream-dim); text-decoration: none; transition: color .2s; }
+        .footer-col ul li a:hover { color: var(--cream); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+        .footer-bottom p { font-size: .7rem; color: var(--cream-faint); letter-spacing: .06em; }
+
+        @media (max-width: 1024px) {
+            .two-col, .takeaways-grid, .agitos-grid { grid-template-columns: 1fr; gap: 48px; }
+            .process-step { grid-template-columns: 60px 1fr; }
+            .step-desc { grid-column: 2; }
+            .metrics-grid { grid-template-columns: 1fr 1fr; }
+            .takeaways-sticky { position: static; }
+            .g-item:nth-child(n) { grid-column: span 12; }
+        }
+        @media (max-width: 860px) {
+            #project-hero { padding: 0 24px 56px; }
+            .hero-back { left: 24px; }
+            .hero-meta-bar { grid-template-columns: 1fr 1fr; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            nav { padding: 22px 24px; } nav.scrolled { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .inner { padding: 0 24px; }
+        }
+        @media (max-width: 640px) {
+            .project-title { font-size: clamp(3rem,14vw,5rem); }
+            .hero-meta-bar { grid-template-columns: 1fr; }
+            .meta-item { border-right: none !important; padding: 16px 0; border-top: 1px solid var(--border); }
+            footer { padding: 56px 24px 36px; }
+            .footer-top { grid-template-columns: 1fr; gap: 48px; }
+            .footer-right { grid-template-columns: 1fr; }
+            .next-inner { flex-direction: column; align-items: flex-start; gap: 32px; padding: 56px 24px; }
+        }
+    
+        /* PAGE TRANSITIONS */
+        #pt-overlay {
+            position: fixed; inset: 0; background: #07071C;
+            z-index: 99999; opacity: 1; pointer-events: none;
+            transition: opacity 220ms ease;
+        }
+        #pt-overlay.pt-out { opacity: 0; }
+        
+        /* ── MOBILE MENU ── */
+        .nav-burger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: 1px solid rgba(244,240,232,.08); border-radius: 8px; cursor: none; padding: 0; flex-shrink: 0; }
+        .nav-burger span { display: block; width: 18px; height: 1.5px; background: #F4F0E8; border-radius: 2px; transition: transform .28s cubic-bezier(.4,0,.2,1), opacity .2s; }
+        .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        .mob-menu { position: fixed; inset: 0; background: #07071C; z-index: 150; display: flex; flex-direction: column; padding: 0 28px 48px; overflow-y: auto; transform: translateX(100%); transition: transform .42s cubic-bezier(.16,1,.3,1); border-left: 1px solid rgba(244,240,232,.08); }
+        .mob-menu.open { transform: translateX(0); }
+        .mob-header { display: flex; align-items: center; justify-content: space-between; padding: 26px 0 0; margin-bottom: 36px; }
+        .mob-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .08em; color: #F4F0E8; text-decoration: none; }
+        .mob-close { width: 40px; height: 40px; background: none; border: 1px solid rgba(244,240,232,.08); border-radius: 50%; color: rgba(244,240,232,.62); font-size: 1rem; cursor: none; display: flex; align-items: center; justify-content: center; transition: border-color .2s, color .2s; }
+        .mob-close:hover { border-color: #00C2FF; color: #00C2FF; }
+        .mob-links { flex: 1; }
+        .mob-link { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid rgba(244,240,232,.08); text-decoration: none; font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; letter-spacing: .03em; color: #F4F0E8; line-height: 1; transition: color .2s; }
+        .mob-link:first-child { border-top: 1px solid rgba(244,240,232,.08); }
+        .mob-link:hover { color: #00C2FF; }
+        .mob-link svg { color: rgba(244,240,232,.22); flex-shrink: 0; transition: color .2s, transform .2s; }
+        .mob-link:hover svg { color: #00C2FF; transform: translate(3px,-3px); }
+        .mob-num { font-size: .7rem; letter-spacing: .18em; color: #00C2FF; width: 22px; flex-shrink: 0; }
+        .mob-cta { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .1em; color: #07071C; background: #00C2FF; text-decoration: none; padding: 18px 32px; border-radius: 100px; display: block; text-align: center; margin-top: 32px; transition: background .2s; }
+        .mob-cta:hover { background: #F4F0E8; }
+        @media(max-width:860px) { .nav-burger { display: flex; } }
+        </style>
+</head>
+<body>
+<div class="c-dot" id="cDot"></div>
+<div class="c-ring" id="cRing"></div>
+
+<nav id="mainNav">
+    <a href="index.html" class="nav-logo">bar.studio</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#services">Capabilities</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://www.linkedin.com/in/bar-fainshtein-67172a207/" target="_blank" rel="noopener" class="nav-linkedin"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a></li>
+    </ul>
+    <a href="index.html#cta" class="nav-cta">Work With Me</a>
+
+    <button class="nav-burger" id="navBurger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+    <div class="mob-header">
+        <a href="index.html" class="mob-logo">bar.studio</a>
+        <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
+    </div>
+    <div class="mob-links">
+        <a href="la-liga.html" class="mob-link"><span class="mob-num">01</span><span>La Liga Israel</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="ifa.html" class="mob-link"><span class="mob-num">02</span><span>Israel Football Assoc.</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="special-olympics.html" class="mob-link"><span class="mob-num">03</span><span>Special Olympics Israel</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="paralympics.html" class="mob-link"><span class="mob-num">04</span><span>Israel Paralympic</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="ai-production.html" class="mob-link"><span class="mob-num">05</span><span>AI Creative Production</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="about.html" class="mob-link"><span class="mob-num"></span><span>About</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+    </div>
+    <a href="mailto:fainshteinbar@gmail.com" class="mob-cta">Work With Me</a>
+</div>
+
+<section id="project-hero">
+    <div class="hero-bg-grad"></div>
+    <div class="hero-watermark" aria-hidden="true">IPC</div>
+    <a href="index.html" class="hero-back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>All Work</a>
+    <div class="hero-content">
+        <div class="hero-eyebrow">Israel Paralympic Committee · 2021–2024</div>
+        <h1 class="project-title">Israel Paralympic</h1>
+        <div class="project-subtitle">Committee — New Identity</div>
+        <div class="hero-meta-bar">
+            <div class="meta-item"><div class="meta-label">Client</div><div class="meta-value">Israel Paralympic Committee<br>(National Governing Body)</div></div>
+            <div class="meta-item"><div class="meta-label">My Role</div><div class="meta-value">Creative Director<br>Brand Architect</div></div>
+            <div class="meta-item"><div class="meta-label">Deliverables</div><div class="meta-value">New Logo · Brand Architecture<br>Identity System · Campaign Direction</div></div>
+            <div class="meta-item"><div class="meta-label">Result</div><div class="meta-value">2 Olympic cycles. Zero revisions.<br>15+ disciplines covered</div></div>
+        </div>
+    </div>
+</section>
+
+<section id="challenge">
+    <div class="inner">
+        <div class="two-col">
+            <div class="reveal-left">
+                <span class="s-label">The Brief</span>
+                <h2 class="section-headline">A New Logo<br>for a New<br>Chapter.</h2>
+            </div>
+            <div class="reveal">
+                <div class="body-copy">
+                    <p>The Israel Paralympic Committee needed to rebuild its brand from the ground up. <strong>A new logo. A complete visual architecture. An identity that could represent Israeli Paralympic sport at the highest international level — from Tokyo to Paris to Los Angeles.</strong></p>
+                    <p>Paralympic identity work sits at the intersection of national pride, athletic excellence, and inclusivity — a combination that's easy to get wrong. Too nationalistic and it ignores the global Paralympic movement. Too generic and it fails to represent Israel specifically. Too soft and it misrepresents what Paralympic sport actually is: the most demanding athletic competition in the world.</p>
+                    <p>I designed the new identity by starting at the intersection of those tensions, not trying to avoid them. The result is a brand that carries national weight, communicates athletic intensity, and belongs unmistakably to the Paralympic family — without looking like a copy of any existing Paralympic brand.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="mandate">
+    <div class="inner">
+        <div class="reveal">
+            <span class="s-label">The Standard</span>
+            <p class="mandate-quote">"Paralympic athletes compete at the limits of human performance. The brand I designed had to be <em>as serious as they are.</em>"</p>
+            <p class="mandate-sub">— The principle behind every design decision.</p>
+        </div>
+    </div>
+</section>
+
+<section id="agitos-section">
+    <div class="inner">
+        <div class="agitos-grid reveal">
+            <div class="agitos-symbol">
+                <div class="agitos-circles">
+                    <div class="ag-circle ag-1"></div>
+                    <div class="ag-circle ag-2"></div>
+                    <div class="ag-circle ag-3"></div>
+                </div>
+            </div>
+            <div class="agitos-text">
+                <p>The Paralympic movement's Agitos symbol — three asymmetric shapes in red, blue, and green — is one of the most internationally recognized marks in sport. Any national committee brand must co-exist with it without competing or imitating. <strong>I designed the Israeli identity to be a distinct system that works alongside the global symbol, not a variation of it.</strong> The new logo for Israel's committee reads as clearly Israeli and clearly Paralympic without borrowing visual logic from either the Agitos or the Israeli national crest.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="process">
+    <div class="inner">
+        <div class="reveal">
+            <span class="s-label">What I Built</span>
+            <h2 class="section-title">Ground-Up<br>Brand Architecture</h2>
+        </div>
+        <div class="process-steps">
+            <div class="process-step reveal">
+                <span class="step-num">01</span>
+                <h3 class="step-name">Logo Design</h3>
+                <p class="step-desc">I designed a new logo for the Israel Paralympic Committee that could function as the visual cornerstone of the entire national Paralympic brand — from athlete uniforms to broadcast graphics to official communications. The mark I created works in Hebrew and Latin, scales from digital favicon to physical medal, and carries enough visual authority to represent Israel at IPC-sanctioned events internationally.</p>
+            </div>
+            <div class="process-step reveal">
+                <span class="step-num">02</span>
+                <h3 class="step-name">Color & Visual Language</h3>
+                <p class="step-desc">I built a color system that balanced national identity (the Israeli blue and white as a foundation) with the energy and dynamism required for a high-performance sport brand. The expanded palette I designed introduced accent colors that gave the system range — from official committee communications to athlete celebration content — without losing coherence or national identity.</p>
+            </div>
+            <div class="process-step reveal">
+                <span class="step-num">03</span>
+                <h3 class="step-name">Brand Architecture</h3>
+                <p class="step-desc">The IPC Israel covers multiple sports disciplines, from wheelchair basketball to athletics to swimming. I designed a parent-child architecture that allowed each sport to have visual expression appropriate to its discipline while remaining unmistakably part of the national Paralympic brand. The system also needed to work alongside IPC global assets — I built in compatibility from the start rather than treating it as a retrofit.</p>
+            </div>
+            <div class="process-step reveal">
+                <span class="step-num">04</span>
+                <h3 class="step-name">Campaign Direction</h3>
+                <p class="step-desc">I directed the campaigns that launched the new identity — internally to athletes and federation partners, and publicly across digital and out-of-home. The Paralympic Games cycle (Tokyo 2020 → Paris 2024) gave the work two major public moments. I designed both rollouts to be appropriate to their context: the Tokyo announcement was necessarily digital-first; Paris allowed for a broader physical presence. Both campaigns centered the athletes, not the committee.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="transformation">
+    <div class="inner">
+        <div class="reveal">
+            <span class="s-label">Before & After</span>
+            <h2 class="transformation-title">Brand<br>Rebuild</h2>
+            <p class="transformation-desc">Drag to compare the Israel Paralympic Committee's visual identity before and after the new logo and brand architecture I designed.</p>
+        </div>
+        <div class="reveal">
+            <div class="slider-wrap" id="baSlider">
+                <div class="slider-lbl-pair">
+                    <span class="slider-lbl slider-lbl-b">Before</span>
+                    <span class="slider-lbl slider-lbl-a">After</span>
+                </div>
+                <div class="slider-panel slider-before">
+                    <div class="slider-before-content">
+                        <div class="sb-text">IPC Israel</div>
+                        <div class="sb-sub">Pre-Redesign Identity</div>
+                    </div>
+                </div>
+                <div class="slider-panel slider-after" id="afterPanel">
+                    <div class="slider-after-content">
+                        <div class="sa-agitos">
+                            <div class="sa-ag sa-ag-r"></div>
+                            <div class="sa-ag sa-ag-b"></div>
+                            <div class="sa-ag sa-ag-g"></div>
+                        </div>
+                        <div class="sa-text">IPC Israel</div>
+                        <div class="sa-sub2">New Brand Architecture — 2021+</div>
+                    </div>
+                </div>
+                <div class="slider-handle" id="sliderHandle">
+                    <div class="slider-handle-knob"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#07071C" stroke-width="2.5"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7"/></svg></div>
+                </div>
+            </div>
+            <p class="slider-hint">← Drag to compare →</p>
+        </div>
+    </div>
+</section>
+
+<section id="gallery">
+    <div class="gallery-grid">
+        <div class="g-item reveal"><div class="g-fill"></div><span class="g-cap">New Logo System</span></div>
+        <div class="g-item reveal"><div class="g-fill"></div><span class="g-cap">Tokyo 2020 Campaign</span></div>
+        <div class="g-item reveal"><div class="g-fill"></div><span class="g-cap">Paris 2024 Identity Rollout</span></div>
+    </div>
+</section>
+
+<section id="metrics">
+    <div class="inner">
+        <div class="reveal">
+            <span class="s-label">What Was Delivered</span>
+            <h2 class="section-title">A Brand<br>Built to<br>Last Cycles.</h2>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card reveal">
+                <div class="metric-label">Games Cycles Served</div>
+                <div class="metric-num" data-count="2">2<span>+</span></div>
+                <div class="metric-desc">The identity I built served the committee through Tokyo 2020 and Paris 2024 — two complete Paralympic Games cycles — without requiring a fundamental revision. That's proof of durability, not just design quality.</div>
+            </div>
+            <div class="metric-card reveal">
+                <div class="metric-label">Disciplines Covered</div>
+                <div class="metric-num" data-count="15">15<span>+</span></div>
+                <div class="metric-desc">The brand architecture I designed covers every Paralympic sport discipline represented by Israeli athletes — from athletics to swimming to wheelchair basketball — under one coherent visual system.</div>
+            </div>
+            <div class="metric-card reveal">
+                <div class="metric-label">Starting Point</div>
+                <div class="metric-num">Zero<span>.</span></div>
+                <div class="metric-desc">The new logo, the new color system, the new brand architecture — all built from scratch. No templates, no adaptation. A complete brand rebuild for Israel's highest-level Paralympic institution.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="takeaways">
+    <div class="inner">
+        <div class="takeaways-grid">
+            <div class="takeaways-sticky reveal-left">
+                <span class="s-label">What I Learned</span>
+                <h2 class="takeaways-title">National<br>Identity Is<br>Complex Work.</h2>
+                <p class="takeaways-blurb">Designing for a national governing body means your work represents a country, not just an organization. Every design decision carries that weight. This project taught me what it means to design at that scale of responsibility.</p>
+            </div>
+            <div class="takeaway-list">
+                <div class="takeaway-item reveal">
+                    <div class="takeaway-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                    <div>
+                        <div class="takeaway-name">International Standards Require International Research</div>
+                        <p class="takeaway-text">Before designing a single mark, I studied how every major Paralympic committee brand operated — how they balanced national and global identity, which visual strategies held up across games cycles, what distinguished the strongest national brands from the forgettable ones. That research shaped every decision I made for Israel's committee.</p>
+                    </div>
+                </div>
+                <div class="takeaway-item reveal">
+                    <div class="takeaway-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+                    <div>
+                        <div class="takeaway-name">Durability Is a Design Requirement</div>
+                        <p class="takeaway-text">A national committee brand isn't redesigned every season. It needs to work across four-year Olympic cycles, leadership changes, new sport disciplines, and shifting cultural contexts. I designed the IPC Israel identity to be durable first — which meant being conservative about trend-driven choices and generous with systematic flexibility.</p>
+                    </div>
+                </div>
+                <div class="takeaway-item reveal">
+                    <div class="takeaway-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+                    <div>
+                        <div class="takeaway-name">Athletes Are the Clients You Design For</div>
+                        <p class="takeaway-text">The Israel Paralympic Committee's stakeholders include board members, federation partners, sponsors, and government liaisons. But the real clients — the people the brand ultimately serves — are the athletes. Every decision I made was filtered through the question: does this represent them with the seriousness they deserve?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<a href="ai-production.html" id="next-project">
+    <div class="next-inner">
+        <div><div class="next-label">Next Case Study</div><div class="next-title">AI-Augmented Creative Production</div></div>
+        <svg class="next-arrow" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </div>
+</a>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div>
+                <a href="index.html" class="footer-logo">bar.studio</a>
+                <p class="footer-tagline">Creative Director specializing in sports brand systems and AI-augmented creative production. Building the identities that make sports organizations recognizable, memorable, and culturally relevant.</p>
+            </div>
+            <div class="footer-right">
+                <div class="footer-col">
+                    <h4>Case Studies</h4>
+                    <ul>
+                        <li><a href="la-liga.html">La Liga Israel</a></li>
+                        <li><a href="ifa.html">Israel Football Association</a></li>
+                        <li><a href="special-olympics.html">Special Olympics Israel</a></li>
+                        <li><a href="paralympics.html">Israel Paralympic Committee</a></li>
+                        <li><a href="ai-production.html">AI Creative Production</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="mailto:fainshteinbar@gmail.com">fainshteinbar@gmail.com</a></li>
+                        <li><a href="https://www.linkedin.com/in/bar-fainshtein-67172a207/" target="_blank" rel="noopener">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 bar.studio — Bar Fainshtein</p>
+            <p>Open to senior creative leadership opportunities in global sports.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function(){
+    var dot=document.getElementById('cDot'),ring=document.getElementById('cRing'),mx=-100,my=-100,rx=-100,ry=-100;
+    if(window.matchMedia('(pointer: fine)').matches){
+        document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+        (function tick(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+        document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('hovering');});el.addEventListener('mouseleave',function(){document.body.classList.remove('hovering');});});
+    } else { document.body.style.cursor='auto';dot.style.display='none';ring.style.display='none'; }
+    var nav=document.getElementById('mainNav');
+    window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+    /* STAGGERED REVEALS — siblings get incremental delay */
+    document.querySelectorAll('.reveal,.reveal-left').forEach(function(el){
+        var sibs=Array.from(el.parentNode.querySelectorAll('.reveal,.reveal-left'));
+        var idx=sibs.indexOf(el);
+        if(idx>0) el.style.transitionDelay=(idx*0.13)+'s';
+    });
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+    });},{threshold:.06,rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('.reveal,.reveal-left').forEach(function(el){io.observe(el);});
+
+    /* MANDATE WORD REVEAL */
+    var mqEl=document.querySelector('.mandate-quote');
+    var accentColor=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#00C2FF';
+    if(mqEl){
+        (function(){
+            var nodes=Array.from(mqEl.childNodes),frag=document.createDocumentFragment();
+            nodes.forEach(function(node){
+                if(node.nodeType===3){
+                    node.textContent.split(/(\s+)/).forEach(function(w){
+                        if(/\S/.test(w)){var s=document.createElement('span');s.className='m-word';s.textContent=w;frag.appendChild(s);}
+                        else if(w) frag.appendChild(document.createTextNode(w));
+                    });
+                } else if(node.nodeName==='EM'){
+                    node.textContent.split(/(\s+)/).forEach(function(w){
+                        if(/\S/.test(w)){var s=document.createElement('span');s.className='m-word';s.dataset.accent='1';s.textContent=w;frag.appendChild(s);}
+                        else if(w) frag.appendChild(document.createTextNode(w));
+                    });
+                } else { frag.appendChild(node.cloneNode(true)); }
+            });
+            while(mqEl.firstChild) mqEl.removeChild(mqEl.firstChild);
+            mqEl.appendChild(frag);
+        })();
+        function revealMQ(){
+            var rect=mqEl.getBoundingClientRect();
+            var prog=Math.max(0,Math.min(1,(window.innerHeight*0.88-rect.top)/(window.innerHeight*1.1)));
+            var words=mqEl.querySelectorAll('.m-word'),n=words.length;
+            words.forEach(function(w,i){
+                var p=Math.max(0,Math.min(1,(prog*(n+8)-i)/7));
+                if(w.dataset.accent){
+                    w.style.color=p>0.6 ? accentColor : 'rgba(244,240,232,'+(0.1+p*0.55)+')';
+                } else {
+                    w.style.color='rgba(244,240,232,'+(0.1+p*0.88)+')';
+                }
+            });
+        }
+        window.addEventListener('scroll',revealMQ,{passive:true});
+        revealMQ();
+    }
+
+    /* METRIC COUNTER ANIMATION */
+    var metricIO=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if(!e.isIntersecting) return;
+            metricIO.unobserve(e.target);
+            var el=e.target,target=parseInt(el.getAttribute('data-count'));
+            if(isNaN(target)) return;
+            var orig=el.innerHTML,numMatch=orig.match(/[\d,]+/);
+            if(!numMatch) return;
+            var t0=performance.now(),dur=2200;
+            (function step(now){
+                var t=Math.min(1,(now-t0)/dur);
+                var ease=1-Math.pow(1-t,3);
+                el.innerHTML=orig.replace(numMatch[0],Math.round(ease*target).toLocaleString('en-US'));
+                if(t<1) requestAnimationFrame(step);
+            })(t0);
+        });
+    },{threshold:.5});
+    document.querySelectorAll('.metric-num[data-count]').forEach(function(el){metricIO.observe(el);});
+    var wrap=document.getElementById('baSlider'),after=document.getElementById('afterPanel'),handle=document.getElementById('sliderHandle'),drag=false;
+    function set(x){var r=wrap.getBoundingClientRect(),p=Math.max(2,Math.min(98,((x-r.left)/r.width)*100));after.style.clipPath='inset(0 '+(100-p)+'% 0 0)';handle.style.left=p+'%';}
+    handle.addEventListener('mousedown',function(e){drag=true;e.preventDefault();});
+    document.addEventListener('mousemove',function(e){if(drag)set(e.clientX);});
+    document.addEventListener('mouseup',function(){drag=false;});
+    handle.addEventListener('touchstart',function(e){drag=true;e.preventDefault();},{passive:false});
+    document.addEventListener('touchmove',function(e){if(drag)set(e.touches[0].clientX);},{passive:true});
+    document.addEventListener('touchend',function(){drag=false;});
+})();
+</script>
+
+<script>
+(function(){
+    var ov = document.createElement('div');
+    ov.id = 'pt-overlay';
+    document.body.prepend(ov);
+    requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ ov.classList.add('pt-out'); });
+    });
+    document.addEventListener('click', function(e){
+        var a = e.target.closest('a[href]');
+        if (!a) return;
+        var h = a.getAttribute('href');
+        if (!h || h.startsWith('#') || h.startsWith('mailto') || h.startsWith('http') || h.startsWith('//') || a.target === '_blank') return;
+        e.preventDefault();
+        ov.classList.remove('pt-out');
+        setTimeout(function(){ window.location.href = h; }, 240);
+    });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bar Fainshtein — Creative Director</title>
+    <style>
+        /* ── LOCAL FONTS (PDF-safe) ─────────────────── */
+        @font-face {
+            font-family: 'Bebas Neue';
+            font-style: normal;
+            font-weight: 400;
+            font-display: block;
+            src: url('fonts/BebasNeue-latin-ext.woff2') format('woff2'),
+                 url('fonts/BebasNeue-latin.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'DM Sans';
+            font-style: normal;
+            font-weight: 300 500;
+            font-display: block;
+            src: url('fonts/DMSans-normal-latin.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'DM Sans';
+            font-style: italic;
+            font-weight: 400;
+            font-display: block;
+            src: url('fonts/DMSans-italic-400.woff2') format('woff2');
+        }
+
+        @page { size: A4; margin: 0; }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --void:     #07071C;
+            --surface:  #0f0d2a;
+            --cream:    #F4F0E8;
+            --dim:      rgba(244,240,232,.78);
+            --soft:     rgba(244,240,232,.48);
+            --faint:    rgba(244,240,232,.14);
+            --cyan:     #00C2FF;
+            --cyan-dim: rgba(0,194,255,.12);
+            --cyan-mid: rgba(0,194,255,.28);
+            --border:   rgba(244,240,232,.11);
+            --green:    #22c55e;
+        }
+
+        html { width: 210mm; background: var(--void); }
+
+        body {
+            width: 210mm;
+            height: 297mm;
+            background: var(--void);
+            color: var(--cream);
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            font-size: 8.5pt;
+            line-height: 1.55;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── HEADER ──────────────────────────────────── */
+        .r-header {
+            background: var(--void);
+            border-bottom: 2px solid var(--cyan);
+            padding: 5mm 8mm 4.5mm;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 6mm;
+        }
+
+        .h-photo {
+            width: 26mm;
+            height: 26mm;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--cyan);
+            flex-shrink: 0;
+        }
+
+        .h-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .h-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36pt;
+            letter-spacing: .025em;
+            color: var(--cream);
+            line-height: .88;
+        }
+
+        .h-name em { color: var(--cyan); font-style: normal; }
+
+        .h-title {
+            font-size: 7pt;
+            font-weight: 400;
+            letter-spacing: .19em;
+            text-transform: uppercase;
+            color: var(--soft);
+            margin-top: 4px;
+        }
+
+        .h-role {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 9.5pt;
+            letter-spacing: .07em;
+            color: var(--cyan);
+            margin-top: 2px;
+        }
+
+        .h-contact {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .h-contact-row {
+            font-size: 7pt;
+            color: var(--soft);
+            letter-spacing: .03em;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 5px;
+        }
+
+        .h-dot {
+            width: 3px;
+            height: 3px;
+            background: var(--cyan);
+            border-radius: 50%;
+            opacity: .7;
+            flex-shrink: 0;
+        }
+
+        /* ── BODY GRID ───────────────────────────────── */
+        .r-body { display: flex; flex: 1; }
+
+        /* ── SIDEBAR ─────────────────────────────────── */
+        .sidebar {
+            width: 60mm;
+            flex-shrink: 0;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: 5.5mm 5mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* ── MAIN ────────────────────────────────────── */
+        .main {
+            flex: 1;
+            padding: 5.5mm 7mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* ── SHARED ──────────────────────────────────── */
+        .s-label {
+            display: block;
+            font-size: 6pt;
+            font-weight: 600;
+            letter-spacing: .26em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 3.5px;
+        }
+
+        .rule { height: 1px; background: var(--border); }
+
+        /* ── AVAILABILITY ────────────────────────────── */
+        .avail-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 2mm 3mm;
+            background: rgba(34,197,94,.07);
+            border: 1px solid rgba(34,197,94,.28);
+            border-radius: 100px;
+            font-size: 6pt;
+            font-weight: 600;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--green);
+        }
+
+        .avail-pulse {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--green);
+            flex-shrink: 0;
+        }
+
+        .avail-note {
+            font-size: 7pt;
+            color: var(--soft);
+            line-height: 1.6;
+            margin-top: 2mm;
+            text-align: center;
+        }
+
+        /* ── CAPABILITIES ────────────────────────────── */
+        .cap-list { display: flex; flex-direction: column; gap: 2.5mm; }
+
+        .cap-item {
+            padding: 2mm 2.5mm;
+            background: var(--cyan-dim);
+            border: 1px solid var(--cyan-mid);
+            border-radius: 3px;
+        }
+
+        .cap-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 8.5pt;
+            letter-spacing: .04em;
+            color: var(--cream);
+            display: block;
+            line-height: 1;
+            margin-bottom: 1.5px;
+        }
+
+        .cap-desc { font-size: 6.2pt; color: var(--dim); line-height: 1.45; }
+
+        /* ── CLIENTS ─────────────────────────────────── */
+        .client-list { list-style: none; display: flex; flex-direction: column; gap: 1.5mm; }
+
+        .client-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 7.6pt;
+            color: var(--dim);
+            line-height: 1;
+        }
+
+        .client-pip {
+            width: 3px; height: 3px;
+            background: var(--cyan);
+            border-radius: 50%;
+            flex-shrink: 0;
+            opacity: .55;
+        }
+
+        /* ── TAGS ────────────────────────────────────── */
+        .tag-group { display: flex; flex-wrap: wrap; gap: 1.8mm; }
+
+        .tag {
+            font-size: 6.2pt;
+            font-weight: 500;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            color: var(--dim);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 1.2mm 2.2mm;
+        }
+
+        /* ── LANGUAGES ───────────────────────────────── */
+        .lang-list { display: flex; gap: 2mm; flex-wrap: wrap; }
+
+        .lang-item {
+            font-size: 6.8pt;
+            color: var(--dim);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            padding: 1mm 2mm;
+        }
+
+        /* ── POSITIONING ─────────────────────────────── */
+        .pos-text {
+            font-size: 8pt;
+            color: var(--dim);
+            line-height: 1.68;
+            border-left: 2px solid var(--cyan);
+            padding-left: 5px;
+        }
+
+        /* ── METRICS ─────────────────────────────────── */
+        .metrics-row { display: flex; gap: 2mm; }
+
+        .metric {
+            flex: 1;
+            padding: 2mm;
+            background: var(--cyan-dim);
+            border: 1px solid var(--cyan-mid);
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        .metric-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22pt;
+            color: var(--cyan);
+            line-height: 1;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 6.2pt;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+            color: var(--dim);
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* ── EXPERIENCE ──────────────────────────────── */
+        .exp-list { display: flex; flex-direction: column; gap: 3.5mm; }
+
+        .exp-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 4px;
+        }
+
+        .exp-role {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 10.5pt;
+            letter-spacing: .04em;
+            color: var(--cream);
+            line-height: 1;
+        }
+
+        .exp-period {
+            font-size: 6.2pt;
+            font-weight: 500;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            flex-shrink: 0;
+        }
+
+        .exp-org {
+            font-size: 7.6pt;
+            color: var(--dim);
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            margin-top: 1px;
+            margin-bottom: 2px;
+        }
+
+        .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 1.5px; }
+
+        .exp-bullets li {
+            font-size: 7.8pt;
+            color: var(--dim);
+            padding-left: 9px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .exp-bullets li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+            font-size: 5.8pt;
+            line-height: 1.65;
+        }
+
+        /* ── SELECTED WORK ───────────────────────────── */
+        .work-list { display: flex; flex-direction: column; }
+
+        .work-item {
+            border-bottom: 1px solid var(--border);
+            padding: 2.5mm 0;
+        }
+
+        .work-item:first-child { padding-top: 0; }
+        .work-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+        .work-top {
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+            margin-bottom: 1px;
+        }
+
+        .work-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 6pt;
+            letter-spacing: .18em;
+            color: var(--cyan);
+            opacity: .6;
+            flex-shrink: 0;
+        }
+
+        .work-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 10pt;
+            letter-spacing: .04em;
+            color: var(--cream);
+            line-height: 1;
+        }
+
+        .work-cat {
+            font-size: 6pt;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-left: auto;
+            flex-shrink: 0;
+            opacity: .85;
+        }
+
+        .work-desc { font-size: 7.6pt; color: var(--dim); line-height: 1.5; }
+
+        /* ── EDUCATION (main — horizontal) ───────────── */
+        .edu-row {
+            display: flex;
+            gap: 5mm;
+        }
+
+        .edu-inline { flex: 1; }
+
+        .edu-degree {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 9.5pt;
+            letter-spacing: .03em;
+            color: var(--cream);
+            display: block;
+            line-height: 1.1;
+        }
+
+        .edu-school {
+            font-size: 7pt;
+            color: var(--dim);
+            letter-spacing: .04em;
+        }
+
+        /* ── INLINE HIGHLIGHT ───────────────────────── */
+        .hl {
+            color: var(--cream);
+            font-weight: 500;
+        }
+
+        .hl-cyan {
+            color: var(--cyan);
+            font-weight: 500;
+        }
+
+        /* ── LINKS ───────────────────────────────────── */
+        a { color: inherit; text-decoration: none; }
+
+        /* ── PRINT ───────────────────────────────────── */
+        @media print {
+            html, body { width: 210mm; overflow: hidden; }
+            a { color: inherit !important; text-decoration: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<header class="r-header">
+    <div class="h-photo">
+        <img src="Bar_Hero_Clean.png" alt="Bar Fainshtein">
+    </div>
+    <div>
+        <div class="h-name">Bar <em>Fainshtein</em></div>
+        <div class="h-title">Creative Director &nbsp;·&nbsp; Sports Branding &amp; AI-Augmented Production</div>
+        <div class="h-role">Head of Studio &nbsp;·&nbsp; Sporta.Digital</div>
+    </div>
+    <div class="h-contact">
+        <div class="h-contact-row"><span class="h-dot"></span><a href="mailto:fainshteinbar@gmail.com">fainshteinbar@gmail.com</a></div>
+        <div class="h-contact-row"><span class="h-dot"></span>+66-084-183-1104</div>
+        <div class="h-contact-row"><span class="h-dot"></span><a href="https://www.linkedin.com/in/bar-fainshtein-67172a207/">linkedin.com/in/bar-fainshtein-67172a207</a></div>
+        <div class="h-contact-row"><span class="h-dot"></span>Hua Hin, Thailand · Open to Relocation</div>
+        <div class="h-contact-row"><span class="h-dot"></span><a href="https://bar.studio">bar.studio</a></div>
+    </div>
+</header>
+
+<!-- ══ BODY ════════════════════════════════════════════════ -->
+<div class="r-body">
+
+    <!-- ── SIDEBAR ─────────────────────────────────────── -->
+    <aside class="sidebar">
+
+        <!-- Availability -->
+        <div>
+            <div class="avail-badge"><span class="avail-pulse"></span>Available Now</div>
+            <p class="avail-note">Senior creative leadership · Global.<br>Remote-first · Open to relocation.</p>
+        </div>
+
+        <div class="rule"></div>
+
+        <!-- Capabilities -->
+        <div>
+            <span class="s-label">Core Capabilities</span>
+            <div class="cap-list">
+                <div class="cap-item">
+                    <span class="cap-title">Sports Brand Systems</span>
+                    <span class="cap-desc">Visual identities &amp; scalable design systems for federations, leagues &amp; competitions — from social to broadcast.</span>
+                </div>
+                <div class="cap-item">
+                    <span class="cap-title">Campaign Direction</span>
+                    <span class="cap-desc">High-impact creative campaigns for matchdays, season launches, fan engagement. Briefing teams, defining visual language, resolving creative conflicts.</span>
+                </div>
+                <div class="cap-item">
+                    <span class="cap-title">AI-Augmented Production</span>
+                    <span class="cap-desc">AI-enhanced workflows delivering 10× content volume without scaling headcount — with full editorial control at every step.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="rule"></div>
+
+        <!-- Clients -->
+        <div>
+            <span class="s-label">Sports Clients</span>
+            <ul class="client-list">
+                <li class="client-item"><span class="client-pip"></span>La Liga Israel</li>
+                <li class="client-item"><span class="client-pip"></span>Israel Football Association</li>
+                <li class="client-item"><span class="client-pip"></span>Special Olympics Israel</li>
+                <li class="client-item"><span class="client-pip"></span>Israel Paralympic Committee</li>
+                <li class="client-item"><span class="client-pip"></span>Winner League Basketball</li>
+                <li class="client-item"><span class="client-pip"></span>Hapoel Jerusalem Basketball</li>
+                <li class="client-item"><span class="client-pip"></span>Israel Beach Soccer League</li>
+            </ul>
+        </div>
+
+        <div class="rule"></div>
+
+        <!-- Tools -->
+        <div>
+            <span class="s-label">Tools &amp; Software</span>
+            <div class="tag-group">
+                <span class="tag">Photoshop</span>
+                <span class="tag">Illustrator</span>
+                <span class="tag">After Effects</span>
+                <span class="tag">Monday</span>
+                <span class="tag">WordPress</span>
+                <span class="tag">Kling</span>
+                <span class="tag">Nana Banana</span>
+                <span class="tag">Lovable</span>
+            </div>
+        </div>
+
+        <div class="rule"></div>
+
+        <!-- Languages -->
+        <div>
+            <span class="s-label">Languages</span>
+            <div class="lang-list">
+                <span class="lang-item">Hebrew · Native</span>
+                <span class="lang-item">English · Fluent</span>
+                <span class="lang-item">Russian · Fluent</span>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- ── MAIN ────────────────────────────────────────── -->
+    <main class="main">
+
+        <!-- Positioning -->
+        <p class="pos-text">Creative Director with a <span class="hl">single-industry focus in sports</span> — building visual identities and campaigns for federations, leagues, and international competitions since 2019. Production system built around <span class="hl">AI-augmented workflows</span> that allow small creative teams to produce at the volume and speed of large ones. Sports is not a vertical I entered. It is the only one I have worked in.</p>
+
+        <!-- Metrics -->
+        <div class="metrics-row">
+            <div class="metric">
+                <span class="metric-num">500+</span>
+                <span class="metric-label">Digital Assets / Year</span>
+            </div>
+            <div class="metric">
+                <span class="metric-num">10×</span>
+                <span class="metric-label">Content Output Scale</span>
+            </div>
+            <div class="metric">
+                <span class="metric-num">3×</span>
+                <span class="metric-label">Output Growth in 4 Months<br><span style="font-size:5.5pt;letter-spacing:.06em;opacity:.6">Winner League Basketball</span></span>
+            </div>
+            <div class="metric">
+                <span class="metric-num">7+</span>
+                <span class="metric-label">Sports Clients</span>
+            </div>
+        </div>
+
+        <!-- Experience -->
+        <div>
+            <span class="s-label">Experience</span>
+            <div class="exp-list">
+
+                <div class="exp-item">
+                    <div class="exp-top">
+                        <span class="exp-role">Head of Studio</span>
+                        <span class="exp-period">2023 — Present</span>
+                    </div>
+                    <div class="exp-org">Sporta.Digital &nbsp;·&nbsp; Israel &nbsp;·&nbsp; Remote</div>
+                    <ul class="exp-bullets">
+                        <li>Produced <span class="hl-cyan">500+ digital assets</span> annually across social, web, and campaign channels for major sports leagues and federations</li>
+                        <li>Introduced AI-powered design workflow — <span class="hl-cyan">10× content output</span> without growing headcount</li>
+                        <li>Lead creative direction for <span class="hl">La Liga Israel, Israel Football Association,</span> and <span class="hl">Israel Paralympic Committee</span></li>
+                        <li>Manage studio operations, project pipelines, and delivery across <span class="hl">distributed teams across Israel–Asia time zones</span> — fully remote since 2023</li>
+                        <li>Mentor and lead designers and creators to maintain high creative standards at production scale</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-top">
+                        <span class="exp-role">Art Director &amp; Social Media Manager</span>
+                        <span class="exp-period">2019 — 2023</span>
+                    </div>
+                    <div class="exp-org">Funatix Club &nbsp;·&nbsp; Israel</div>
+                    <ul class="exp-bullets">
+                        <li>Directed <span class="hl">visual identity and digital content</span> for marketing campaigns across social and web platforms</li>
+                        <li>Developed cohesive visual storytelling systems across multiple digital platforms, aligning creative output with audience behavior</li>
+                        <li>Implemented UI/UX standards for digital products and marketing assets</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-top">
+                        <span class="exp-role">Creative Director &amp; Founder</span>
+                        <span class="exp-period">2019 — 2022</span>
+                    </div>
+                    <div class="exp-org">Bfain.Studio &nbsp;·&nbsp; Independent</div>
+                    <ul class="exp-bullets">
+                        <li>Comprehensive design services — <span class="hl">branding, motion, and digital development</span> for sports and commercial clients</li>
+                        <li>Managed client contracts, licensing agreements, and project scope using legal background from concurrent LL.B studies — no external legal support needed</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Selected Work -->
+        <div>
+            <span class="s-label">Selected Work</span>
+            <div class="work-list">
+
+                <div class="work-item">
+                    <div class="work-top">
+                        <span class="work-num">01</span>
+                        <span class="work-name">La Liga Israel</span>
+                        <span class="work-cat">Brand Localization · Fan Engagement</span>
+                    </div>
+                    <p class="work-desc"><span class="hl-cyan">+2,305% follower growth. +1,138% likes per post.</span> Full-season content system built to make La Liga feel genuinely Israeli while holding global brand standards.</p>
+                </div>
+
+                <div class="work-item">
+                    <div class="work-top">
+                        <span class="work-num">02</span>
+                        <span class="work-name">Israel Football Association</span>
+                        <span class="work-cat">Federation Identity · Brand System</span>
+                    </div>
+                    <p class="work-desc">Unified three national competitions under one federation identity without erasing each competition's character — a brand architecture built to outlast any individual campaign.</p>
+                </div>
+
+                <div class="work-item">
+                    <div class="work-top">
+                        <span class="work-num">03</span>
+                        <span class="work-name">Special Olympics Israel</span>
+                        <span class="work-cat">Original Identity · Emotional Branding</span>
+                    </div>
+                    <p class="work-desc"><span class="hl-cyan">4,000+ athletes. First original identity.</span> Built from scratch — not a licensed global template. Designed around athletic pride, not disability. Client called it transformative.</p>
+                </div>
+
+                <div class="work-item">
+                    <div class="work-top">
+                        <span class="work-num">04</span>
+                        <span class="work-name">AI-Augmented Creative Production</span>
+                        <span class="work-cat">AI Workflow · Production System</span>
+                    </div>
+                    <p class="work-desc">End-to-end AI production system — prompting logic, quality gates, brand compliance checks — tripling content volume in four months without adding headcount.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div>
+            <span class="s-label">Education</span>
+            <div class="edu-row">
+                <div class="edu-inline">
+                    <span class="edu-degree">LL.B &amp; B.A Management</span>
+                    <div class="edu-school">Reichman University, Israel · 2019–2023</div>
+                    <div class="edu-school" style="color:var(--cyan);opacity:.75;margin-top:1.5px">Applied to contracts &amp; studio ops</div>
+                </div>
+                <div class="edu-inline">
+                    <span class="edu-degree">Full Stack Developer</span>
+                    <div class="edu-school">Netcraft, Israel · 2023</div>
+                </div>
+                <div class="edu-inline">
+                    <span class="edu-degree">UI/UX Studies</span>
+                    <div class="edu-school">Vision, Israel · 2020</div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

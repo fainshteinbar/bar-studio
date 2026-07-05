@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bar Fainshtein — Creative Director</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4; margin: 0; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { width: 210mm; background: #fff; }
+
+        body {
+            width: 210mm;
+            background: #fff;
+            color: #111827;
+            font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            font-size: 8pt;
+            line-height: 1.45;
+            padding: 0 14mm;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* ── HEADER ── */
+        .r-name {
+            font-size: 26pt;
+            font-weight: 600;
+            letter-spacing: -.01em;
+            color: #0B0C1E;
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+
+        .r-title {
+            font-size: 10pt;
+            font-weight: 400;
+            color: #374151;
+            letter-spacing: .01em;
+            margin-bottom: 7px;
+        }
+
+        .r-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 18px;
+            font-size: 8pt;
+            color: #4B5563;
+        }
+
+        .r-contact span { display: flex; align-items: center; gap: 4px; }
+
+        .accent-bar {
+            height: 3px;
+            background: linear-gradient(to right, #00C2FF, #0066CC);
+            margin: 8px 0 12px;
+            border-radius: 2px;
+        }
+
+        /* ── SECTION ── */
+        .section { margin-bottom: 8px; }
+
+        .section-title {
+            font-size: 7pt;
+            font-weight: 600;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: #0066CC;
+            margin-bottom: 5px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        /* ── PAGE MARGINS (simulated since --no-margins kills @page) ── */
+        .page-top { height: 11mm; }
+        .page-bottom-pad { padding-bottom: 10mm; }
+
+        /* ── PAGE 2 START ── */
+        .page2-start {
+            break-before: page;
+            padding-top: 12mm;
+        }
+
+        /* ── SUMMARY ── */
+        .summary {
+            font-size: 9pt;
+            color: #374151;
+            line-height: 1.65;
+        }
+
+        /* ── METRICS ROW ── */
+        .metrics-row {
+            display: flex;
+            gap: 0;
+            border: 1px solid #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 11px;
+        }
+
+        .metric-cell {
+            flex: 1;
+            padding: 6px 10px;
+            border-right: 1px solid #E5E7EB;
+            text-align: center;
+        }
+
+        .metric-cell:last-child { border-right: none; }
+
+        .metric-num {
+            font-size: 14pt;
+            font-weight: 600;
+            color: #0066CC;
+            line-height: 1.1;
+            display: block;
+        }
+
+        .metric-lbl {
+            font-size: 6.5pt;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            display: block;
+            margin-top: 1px;
+        }
+
+        /* ── EXPERIENCE ── */
+        .exp-item { margin-bottom: 7px; break-inside: avoid; }
+        .exp-item:last-child { margin-bottom: 0; }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 1px;
+        }
+
+        .exp-role {
+            font-size: 10pt;
+            font-weight: 600;
+            color: #0B0C1E;
+        }
+
+        .exp-period {
+            font-size: 8pt;
+            font-weight: 500;
+            color: #0066CC;
+            flex-shrink: 0;
+        }
+
+        .exp-org {
+            font-size: 8.5pt;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+
+        .exp-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding-left: 10px;
+        }
+
+        .exp-bullets li {
+            font-size: 8.5pt;
+            color: #374151;
+            line-height: 1.55;
+            position: relative;
+        }
+
+        .exp-bullets li::before {
+            content: '•';
+            position: absolute;
+            left: -10px;
+            color: #0066CC;
+        }
+
+        /* ── WORK ── */
+        .work-item { margin-bottom: 5px; break-inside: avoid; }
+        .work-item:last-child { margin-bottom: 0; }
+
+        .work-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 1px;
+        }
+
+        .work-name {
+            font-size: 9.5pt;
+            font-weight: 600;
+            color: #0B0C1E;
+        }
+
+        .work-cat {
+            font-size: 7.5pt;
+            color: #6B7280;
+            flex-shrink: 0;
+        }
+
+        .work-desc {
+            font-size: 8.5pt;
+            color: #374151;
+            line-height: 1.55;
+        }
+
+        .work-stat {
+            font-size: 8.5pt;
+            font-weight: 600;
+            color: #0066CC;
+        }
+
+        /* ── SKILLS ── */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .skill-tag {
+            font-size: 7.5pt;
+            color: #374151;
+            border: 1px solid #D1D5DB;
+            border-radius: 3px;
+            padding: 2px 7px;
+        }
+
+        /* ── EDU ── */
+        .edu-item { margin-bottom: 6px; break-inside: avoid; }
+        .edu-item:last-child { margin-bottom: 0; }
+
+        .edu-degree {
+            font-size: 9pt;
+            font-weight: 600;
+            color: #0B0C1E;
+        }
+
+        .edu-school {
+            font-size: 8pt;
+            color: #374151;
+        }
+
+        .edu-note {
+            font-size: 7.5pt;
+            color: #0066CC;
+        }
+
+        /* ── LANG ── */
+        .lang-row {
+            font-size: 8.5pt;
+            color: #374151;
+        }
+
+        @media print {
+            html, body { width: 210mm; }
+            a { color: inherit !important; text-decoration: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PAGE 1 TOP MARGIN -->
+<div class="page-top"></div>
+
+<!-- HEADER -->
+<div class="r-name">Bar Fainshtein</div>
+<div class="r-title">Creative Director · Sports Branding & AI-Augmented Production</div>
+<div class="r-contact">
+    <span><a href="mailto:fainshteinbar@gmail.com">fainshteinbar@gmail.com</a></span>
+    <span>+66-084-183-1104</span>
+    <span><a href="https://www.linkedin.com/in/bar-fainshtein-67172a207/">linkedin.com/in/bar-fainshtein-67172a207</a></span>
+    <span><a href="https://bar.studio">bar.studio</a></span>
+    <span>Hua Hin, Thailand · Open to Relocation · Remote-Proven</span>
+</div>
+<div class="accent-bar"></div>
+
+<!-- SUMMARY -->
+<div class="section">
+    <div class="section-title">Professional Summary</div>
+    <p class="summary">Creative Director and Brand Strategist with 7+ years of single-industry focus in sports — leading visual identity systems, brand architecture, and integrated campaigns for federations, leagues, and international competitions. Expert in creative direction, art direction, campaign management, and AI-augmented content production. Built and led distributed creative teams fully remote since 2023, delivering 500+ assets annually at 10× traditional team output. Clients include La Liga Israel, Israel Football Association, Special Olympics Israel, Israel Paralympic Committee, and Winner League Basketball. Deep expertise in federation branding, brand guidelines, stakeholder management, and cross-functional creative leadership at an international level.</p>
+</div>
+
+<!-- METRICS -->
+<div class="metrics-row">
+    <div class="metric-cell">
+        <span class="metric-num">500+</span>
+        <span class="metric-lbl">Digital Assets / Year</span>
+    </div>
+    <div class="metric-cell">
+        <span class="metric-num">10×</span>
+        <span class="metric-lbl">Content Output Scale</span>
+    </div>
+    <div class="metric-cell">
+        <span class="metric-num">+2,305%</span>
+        <span class="metric-lbl">Follower Growth · La Liga Israel</span>
+    </div>
+    <div class="metric-cell">
+        <span class="metric-num">7+</span>
+        <span class="metric-lbl">Sports Clients · 100% Sports</span>
+    </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section">
+    <div class="section-title">Work Experience</div>
+
+    <div class="exp-item">
+        <div class="exp-header">
+            <span class="exp-role">Head of Studio / Creative Director</span>
+            <span class="exp-period">2023 – Present</span>
+        </div>
+        <div class="exp-org">Sporta.Digital · Israel · Remote</div>
+        <ul class="exp-bullets">
+            <li>Led creative direction, brand strategy, and campaign management for major sports leagues and federations, producing 500+ digital assets annually across social, broadcast, and web channels</li>
+            <li>Designed and implemented AI-augmented production workflow achieving 10× content output without increasing headcount; tripled output for Winner League Basketball in 4 months</li>
+            <li>Directed brand identity and visual systems for La Liga Israel (+2,305% follower growth, +1,138% engagement per post), Israel Football Association (12+ sub-brands unified, full UEFA/FIFA compliance), and Israel Paralympic Committee (2 Olympic cycles, zero revisions)</li>
+            <li>Managed cross-functional creative teams across Israel–Asia time zones; led stakeholder presentations, creative briefs, and project pipelines fully remote since 2023</li>
+            <li>Mentored designers, set brand guidelines, and maintained quality standards at production scale across all client accounts</li>
+        </ul>
+    </div>
+
+    <div class="exp-item">
+        <div class="exp-header">
+            <span class="exp-role">Art Director & Social Media Manager</span>
+            <span class="exp-period">2019 – 2023</span>
+        </div>
+        <div class="exp-org">Funatix Club · Israel</div>
+        <ul class="exp-bullets">
+            <li>Directed visual identity, art direction, and digital content strategy for marketing campaigns across social and web platforms</li>
+            <li>Built cohesive visual storytelling systems and content calendars aligned with audience behavior and engagement data</li>
+            <li>Applied UI/UX design principles to digital products and marketing assets, improving user experience and visual consistency</li>
+        </ul>
+    </div>
+
+    <div class="exp-item">
+        <div class="exp-header">
+            <span class="exp-role">Creative Director & Founder</span>
+            <span class="exp-period">2019 – 2022</span>
+        </div>
+        <div class="exp-org">Bfain.Studio · Freelance / Independent</div>
+        <ul class="exp-bullets">
+            <li>Delivered end-to-end creative services — brand identity, motion graphics, and digital development — for sports and commercial clients</li>
+            <li>Managed client contracts, licensing negotiations, and project scope independently using concurrent LL.B legal training — no external legal support required</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SELECTED WORK -->
+<div class="section page-bottom-pad">
+    <div class="section-title">Selected Work</div>
+
+    <div class="work-item">
+        <div class="work-header">
+            <span class="work-name">La Liga Israel</span>
+            <span class="work-cat">Brand Localization · Fan Engagement · Content Strategy</span>
+        </div>
+        <p class="work-desc"><span class="work-stat">+2,305% follower growth. +1,138% likes per post.</span> Full-season content system built to make La Liga feel genuinely Israeli while holding global brand standards.</p>
+    </div>
+
+    <div class="work-item">
+        <div class="work-header">
+            <span class="work-name">Israel Football Association</span>
+            <span class="work-cat">Federation Brand Identity · Visual Systems · UEFA/FIFA Compliance</span>
+        </div>
+        <p class="work-desc"><span class="work-stat">12+ sub-brands unified. UEFA/FIFA compliant.</span> Unified brand architecture for three national competitions — built to outlast any individual campaign or season.</p>
+    </div>
+
+    <div class="work-item">
+        <div class="work-header">
+            <span class="work-name">Special Olympics Israel</span>
+            <span class="work-cat">Original Brand Identity · Emotional Branding</span>
+        </div>
+        <p class="work-desc"><span class="work-stat">4,000+ athletes represented. First original SOI identity.</span> Built from scratch — not a licensed global template. Designed around athletic pride, not disability.</p>
+    </div>
+
+    <div class="work-item">
+        <div class="work-header">
+            <span class="work-name">AI-Augmented Creative Production System</span>
+            <span class="work-cat">AI Workflow · Production Design · Team Leadership</span>
+        </div>
+        <p class="work-desc"><span class="work-stat">10× output. 500+ assets/year. Zero quality drop.</span> End-to-end AI production infrastructure — prompting logic, quality gates, brand compliance checks — tripling content volume without adding headcount.</p>
+    </div>
+</div>
+
+<!-- SKILLS — page 2 start -->
+<div class="section page2-start">
+    <div class="section-title">Skills</div>
+    <div class="skills-list">
+        <span class="skill-tag">Creative Direction</span>
+        <span class="skill-tag">Art Direction</span>
+        <span class="skill-tag">Brand Strategy</span>
+        <span class="skill-tag">Visual Identity Systems</span>
+        <span class="skill-tag">Brand Architecture</span>
+        <span class="skill-tag">Campaign Management</span>
+        <span class="skill-tag">Content Strategy</span>
+        <span class="skill-tag">Design Systems</span>
+        <span class="skill-tag">Brand Guidelines</span>
+        <span class="skill-tag">Federation Branding</span>
+        <span class="skill-tag">Fan Engagement</span>
+        <span class="skill-tag">Sports Marketing</span>
+        <span class="skill-tag">AI-Augmented Production</span>
+        <span class="skill-tag">Motion Graphics</span>
+        <span class="skill-tag">Broadcast Design</span>
+        <span class="skill-tag">Social Media Creative</span>
+        <span class="skill-tag">Digital Marketing</span>
+        <span class="skill-tag">Creative Brief Writing</span>
+        <span class="skill-tag">Stakeholder Management</span>
+        <span class="skill-tag">Cross-functional Leadership</span>
+        <span class="skill-tag">Remote Team Management</span>
+        <span class="skill-tag">Project Management</span>
+        <span class="skill-tag">UI/UX Design</span>
+    </div>
+</div>
+
+<!-- TOOLS -->
+<div class="section">
+    <div class="section-title">Tools & Software</div>
+    <div class="skills-list">
+        <span class="skill-tag">Adobe Photoshop</span>
+        <span class="skill-tag">Adobe Illustrator</span>
+        <span class="skill-tag">Adobe After Effects</span>
+        <span class="skill-tag">Adobe InDesign</span>
+        <span class="skill-tag">Monday.com</span>
+        <span class="skill-tag">WordPress</span>
+        <span class="skill-tag">Midjourney</span>
+        <span class="skill-tag">Kling AI</span>
+        <span class="skill-tag">Lovable</span>
+        <span class="skill-tag">ChatGPT / GPT-4</span>
+    </div>
+</div>
+
+<!-- EDUCATION -->
+<div class="section">
+    <div class="section-title">Education</div>
+
+    <div class="edu-item">
+        <div class="edu-degree">LL.B & B.A Management</div>
+        <div class="edu-school">Reichman University, Israel · 2019 – 2023</div>
+        <div class="edu-note">Applied to contracts, licensing & studio operations</div>
+    </div>
+
+    <div class="edu-item">
+        <div class="edu-degree">Full Stack Developer Certificate</div>
+        <div class="edu-school">Netcraft Academy, Israel · 2023</div>
+    </div>
+
+    <div class="edu-item">
+        <div class="edu-degree">UI/UX Design</div>
+        <div class="edu-school">Vision College, Israel · 2020</div>
+    </div>
+</div>
+
+<!-- SPORTS CLIENTS -->
+<div class="section">
+    <div class="section-title">Sports Clients</div>
+    <div class="skills-list">
+        <span class="skill-tag">La Liga Israel</span>
+        <span class="skill-tag">Israel Football Association</span>
+        <span class="skill-tag">Special Olympics Israel</span>
+        <span class="skill-tag">Israel Paralympic Committee</span>
+        <span class="skill-tag">Winner League Basketball</span>
+        <span class="skill-tag">Hapoel Jerusalem Basketball</span>
+        <span class="skill-tag">Israel Beach Soccer League</span>
+    </div>
+</div>
+
+<!-- LANGUAGES -->
+<div class="section page-bottom-pad">
+    <div class="section-title">Languages</div>
+    <div class="lang-row">Hebrew — Native &nbsp;·&nbsp; English — Fluent &nbsp;·&nbsp; Russian — Fluent</div>
+</div>
+
+
+</body>
+</html>

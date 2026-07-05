@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+    @font-face {
+        font-family: 'Bebas Neue';
+        font-style: normal;
+        font-weight: 400;
+        src: url('fonts/BebasNeue-latin-ext.woff2') format('woff2'),
+             url('fonts/BebasNeue-latin.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 300 500;
+        src: url('fonts/DMSans-normal-latin.woff2') format('woff2');
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+        width: 1400px;
+        height: 350px;
+        overflow: hidden;
+        background: #07071C;
+    }
+
+    .banner {
+        width: 1400px;
+        height: 350px;
+        background: #07071C;
+        position: relative;
+        display: flex;
+        overflow: hidden;
+    }
+
+    /* ── BACKGROUND GLOWS ── */
+    .glow-right {
+        position: absolute;
+        top: -100px;
+        right: -60px;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle at center,
+            rgba(0,194,255,.30) 0%,
+            rgba(0,194,255,.12) 38%,
+            rgba(0,194,255,.02) 62%,
+            transparent 75%);
+        pointer-events: none;
+    }
+
+    .glow-centre {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        height: 300px;
+        background: radial-gradient(ellipse at center,
+            rgba(0,194,255,.06) 0%,
+            transparent 70%);
+        pointer-events: none;
+    }
+
+    /* subtle dot grid */
+    .grid-overlay {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle, rgba(0,194,255,.12) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        opacity: .4;
+    }
+
+    /* ── ACCENT BARS ── */
+    .top-bar {
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg,
+            transparent 0%,
+            #00C2FF 20%,
+            rgba(0,194,255,.5) 65%,
+            transparent 100%);
+    }
+
+    .bottom-bar {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(0,194,255,.25) 30%,
+            transparent 100%);
+    }
+
+    /* ── LEFT ZONE — name (clears profile photo) ── */
+    /* LinkedIn profile photo: ~168px circle, bottom-left, center ~(84,305) in 1400×350 */
+    .zone-left {
+        width: 490px;
+        flex-shrink: 0;
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 28px 96px 0 44px; /* right padding = left padding of zone-right for symmetry */
+    }
+
+    .lbl {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: .30em;
+        text-transform: uppercase;
+        color: rgba(0,194,255,.80);
+        margin-bottom: 8px;
+    }
+
+    .name {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 78px;
+        letter-spacing: .02em;
+        line-height: .87;
+        color: #F4F0E8;
+    }
+
+    .name em { color: #00C2FF; font-style: normal; }
+
+    /* subtitle removed from left — sits in profile photo zone */
+
+    /* ── VERTICAL DIVIDER ── */
+    .vdiv {
+        width: 1px;
+        align-self: stretch;
+        background: linear-gradient(180deg,
+            transparent 8%,
+            rgba(0,194,255,.40) 30%,
+            rgba(0,194,255,.40) 70%,
+            transparent 92%);
+        flex-shrink: 0;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* ── RIGHT ZONE — tagline + stats ── */
+    .zone-right {
+        flex: 1;
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 36px 60px 36px 96px; /* matches zone-left right padding */
+    }
+
+    /* top row: label */
+    .right-label {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: .26em;
+        text-transform: uppercase;
+        color: rgba(0,194,255,.65);
+    }
+
+    /* big tagline */
+    .tagline {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 44px;
+        letter-spacing: .03em;
+        line-height: 1.0;
+        color: #F4F0E8;
+    }
+
+    .tagline .t-cyan { color: #00C2FF; }
+
+    /* stats row */
+    .stats-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 40px;
+    }
+
+    .stat-num {
+        display: block;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 40px;
+        color: #00C2FF;
+        line-height: 1;
+    }
+
+    .stat-label {
+        display: block;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 8.5px;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: rgba(244,240,232,.45);
+        margin-top: 2px;
+    }
+</style>
+</head>
+<body>
+<div class="banner">
+    <div class="glow-right"></div>
+    <div class="glow-centre"></div>
+    <div class="grid-overlay"></div>
+    <div class="top-bar"></div>
+    <div class="bottom-bar"></div>
+
+    <!-- LEFT: name (content kept in upper 60% — bottom-left is LinkedIn profile photo) -->
+    <div class="zone-left">
+        <div class="lbl">Creative Director</div>
+        <div class="name">Bar <em>Fainshtein</em></div>
+    </div>
+
+    <div class="vdiv"></div>
+
+    <!-- RIGHT: tagline + stats -->
+    <div class="zone-right">
+        <div class="right-label">Sports · The Only Industry I Work In</div>
+
+        <div class="tagline">
+            <span class="t-cyan">Sports Branding</span> &amp; AI Production<br>
+            for Federations, Leagues &amp; Clubs.
+        </div>
+
+        <div class="stats-row">
+            <div class="stat">
+                <span class="stat-num">500+</span>
+                <span class="stat-label">Digital Assets / Year</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num">10×</span>
+                <span class="stat-label">Content Output Scale</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num">7+</span>
+                <span class="stat-label">Sports Clients</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

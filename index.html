@@ -1,0 +1,2576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Fainshtein — Creative Director | Sports Branding, Digital Campaigns & AI-Driven Fan Engagement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --void: #07071C;
+            --surface: #0F0E2F;
+            --navy: #1A1464;
+            --cream: #F4F0E8;
+            --cream-dim: rgba(244, 240, 232, 0.5);
+            --cream-mid: rgba(244, 240, 232, 0.65);
+            --cream-faint: rgba(244, 240, 232, 0.14);
+            --pink: #00C2FF;
+            --pink-dim: rgba(0, 194, 255, 0.10);
+            --pink-glow: rgba(0, 194, 255, 0.22);
+            --border: rgba(244, 240, 232, 0.08);
+            --green: #22c55e;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--void)
+        }
+
+        body {
+            background: var(--void);
+            color: var(--cream);
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            cursor: none
+        }
+
+        /* CURSOR */
+        .c-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--pink);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%)
+        }
+
+        .c-ring {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--pink);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width .2s, height .2s, opacity .2s;
+            opacity: .45
+        }
+
+        body.hovering .c-ring {
+            width: 56px;
+            height: 56px;
+            opacity: .2
+        }
+
+        /* KEYFRAMES */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: .5;
+                transform: scale(.75)
+            }
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: .5
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(2.8);
+                opacity: 0
+            }
+        }
+
+        @keyframes stat-stamp {
+            0% {
+                transform: scale(.15) rotate(-14deg);
+                opacity: 0;
+                filter: blur(6px)
+            }
+
+            55% {
+                transform: scale(1.25) rotate(3deg);
+                opacity: 1;
+                filter: blur(0)
+            }
+
+            78% {
+                transform: scale(.93) rotate(-1deg)
+            }
+
+            100% {
+                transform: scale(1) rotate(0)
+            }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(52px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes glow-breathe {
+
+            0%,
+            100% {
+                transform: scale(.5);
+                opacity: 0
+            }
+
+            50% {
+                transform: scale(2.6);
+                opacity: 1
+            }
+        }
+
+        @keyframes num-glow-pulse {
+
+            0%,
+            100% {
+                text-shadow: 0 0 0 transparent
+            }
+
+            50% {
+                text-shadow: 0 0 24px rgba(0, 194, 255, .85), 0 0 48px rgba(0, 194, 255, .38)
+            }
+        }
+
+
+        /* SHARED */
+        .inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 48px
+        }
+
+        .s-label {
+            display: block;
+            font-size: .65rem;
+            font-weight: 600;
+            letter-spacing: .26em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 20px
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(52px);
+            transition: opacity .85s cubic-bezier(.22, 1, .36, 1), transform .85s cubic-bezier(.22, 1, .36, 1)
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 32px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background .3s, padding .3s, border-color .3s;
+            border-bottom: 1px solid transparent;
+            opacity: 0;
+            animation: fadeIn .8s ease .05s forwards
+        }
+
+        nav.scrolled {
+            background: rgba(7, 7, 28, .96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 18px 48px;
+            border-bottom-color: var(--border)
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: .08em;
+            color: var(--cream);
+            text-decoration: none
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 44px;
+            list-style: none
+        }
+
+        .nav-links a {
+            font-size: .73rem;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--cream-dim);
+            text-decoration: none;
+            transition: color .2s
+        }
+
+        .nav-links a:hover {
+            color: var(--cream)
+        }
+
+        .nav-linkedin {
+            font-size: .73rem;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--cream-dim);
+            text-decoration: none;
+            transition: color .2s;
+            display: flex;
+            align-items: center;
+            gap: 7px
+        }
+
+        .nav-linkedin:hover {
+            color: var(--pink)
+        }
+
+        .nav-cta {
+            font-size: .73rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--void);
+            background: var(--pink);
+            text-decoration: none;
+            padding: 11px 26px;
+            border-radius: 100px;
+            display: inline-block;
+            transition: background .2s, transform .15s
+        }
+
+        .nav-cta:hover {
+            background: var(--cream)
+        }
+
+        /* HERO */
+        #hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            grid-template-rows: 1fr auto;
+            padding: 130px 48px 56px;
+            position: relative;
+            overflow: hidden
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(26, 20, 100, .4) 0%, transparent 70%);
+            top: -200px;
+            right: 350px;
+            pointer-events: none;
+            z-index: 0
+        }
+
+        #hero::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 194, 255, .08) 0%, transparent 70%);
+            bottom: 100px;
+            left: 160px;
+            pointer-events: none;
+            z-index: 0
+        }
+
+        .hero-bg-letter {
+            position: absolute;
+            bottom: -.1em;
+            left: -.02em;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48vw;
+            color: rgba(244, 240, 232, .015);
+            pointer-events: none;
+            line-height: 1;
+            user-select: none;
+            z-index: 0;
+            will-change: transform
+        }
+
+        .hero-left {
+            grid-column: 1;
+            grid-row: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            z-index: 1;
+            padding-bottom: 12px
+        }
+
+        .hero-eyebrow {
+            font-size: .68rem;
+            font-weight: 500;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 28px;
+            opacity: 0;
+            transform: translateY(36px);
+            animation: fadeUp .9s cubic-bezier(.22, 1, .36, 1) .12s forwards
+        }
+
+        .hero-headline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3.2rem, 9vw, 9rem);
+            line-height: .88;
+            letter-spacing: .01em;
+            color: var(--cream)
+        }
+
+        .hl-line {
+            display: block;
+            opacity: 0;
+            transform: translateY(44px);
+            animation: fadeUp 1.0s cubic-bezier(.22, 1, .36, 1) forwards
+        }
+
+        .hl-line:nth-child(1) {
+            animation-delay: .18s
+        }
+
+        .hl-line:nth-child(2) {
+            animation-delay: .30s
+        }
+
+        .hl-line:nth-child(3) {
+            animation-delay: .42s
+        }
+
+        .hl-line:nth-child(4) {
+            animation-delay: .54s;
+            color: var(--pink)
+        }
+
+        .hl-line:nth-child(5) {
+            animation-delay: .65s;
+            color: var(--pink)
+        }
+
+        .hl-cycle {
+            display: inline-block
+        }
+
+        .hl-exclaim {
+            display: inline-block;
+            animation: blink 1.0s ease-in-out infinite
+        }
+
+        .hero-photo {
+            grid-column: 2;
+            grid-row: 1/3;
+            position: relative;
+            overflow: visible;
+            background: transparent
+        }
+
+        .hero-photo img {
+            overflow: visible;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            opacity: 0;
+            animation: fadeIn 1.2s ease .55s forwards
+        }
+
+        @media (max-width: 768px) {
+            .hero-photo img {
+                overflow: hidden;
+            }
+        }
+
+        .hero-photo-fade {
+            position: absolute;
+            width: 120%;
+            height: 101%;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            background: linear-gradient(to bottom, transparent 40%, rgba(7, 7, 28, .88) 80%, var(--void) 100%), linear-gradient(to right, rgba(7, 7, 28, .5) 0%, transparent 0%);
+        }
+
+        .hero-bottom {
+            grid-column: 1;
+            grid-row: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeUp 1.0s cubic-bezier(.22, 1, .36, 1) .8s forwards
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .hero-tag {
+            font-size: .68rem;
+            font-weight: 500;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--cream-dim);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 6px 16px;
+            background: rgba(244, 240, 232, .04);
+            transition: border-color .2s, color .2s
+        }
+
+        .hero-tag:hover {
+            border-color: var(--pink);
+            color: var(--cream)
+        }
+
+        .hero-right-info {
+            display: flex;
+            align-items: center;
+            gap: 36px
+        }
+
+        .btn-scroll {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: .1em;
+            color: var(--cream);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color .2s
+        }
+
+        .btn-scroll:hover {
+            color: var(--pink)
+        }
+
+        .btn-scroll svg {
+            transition: transform .2s
+        }
+
+        .btn-scroll:hover svg {
+            transform: translateX(5px)
+        }
+
+        .hero-location {
+            font-size: .68rem;
+            font-weight: 400;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--cream-mid)
+        }
+
+        /* STATS */
+        #positioning {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 48px 0
+        }
+
+        .positioning-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr
+        }
+
+        .pos-item {
+            padding: 0 48px 0 0;
+            border-right: 1px solid var(--border);
+            position: relative
+        }
+
+        .pos-item::before {
+            content: '';
+            position: absolute;
+            width: 72px;
+            height: auto;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 194, 255, .45) 0%, transparent 70%);
+            top: 4px;
+            left: 2px;
+            transform: scale(.5);
+            opacity: 0;
+            animation: glow-breathe 3.5s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0
+        }
+
+        .pos-item:nth-child(2)::before {
+            animation-delay: -1.15s
+        }
+
+        .pos-item:nth-child(3)::before {
+            animation-delay: -2.3s
+        }
+
+        .pos-item:last-child {
+            border-right: none;
+            padding-right: 0
+        }
+
+        .pos-item+.pos-item {
+            padding-left: 48px
+        }
+
+        .pos-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: .02em;
+            color: var(--pink);
+            line-height: 1;
+            margin-bottom: 10px;
+            display: inline-block;
+            position: relative;
+            z-index: 1
+        }
+
+        .pos-num.stamped {
+            animation: num-glow-pulse 3s ease-in-out 0s infinite
+        }
+
+        .positioning-inner .pos-item:nth-child(1) {
+            transition-delay: 0s
+        }
+
+        .positioning-inner .pos-item:nth-child(2) {
+            transition-delay: .18s
+        }
+
+        .positioning-inner .pos-item:nth-child(3) {
+            transition-delay: .34s
+        }
+
+        .pos-label {
+            font-size: .72rem;
+            font-weight: 500;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--cream-dim);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1
+        }
+
+        /* WORK */
+        #work {
+            padding: 128px 0
+        }
+
+        .work-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 72px
+        }
+
+        .work-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 6.5vw, 7rem);
+            line-height: .9;
+            letter-spacing: .02em;
+            color: var(--cream)
+        }
+
+        .work-count {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: .85rem;
+            letter-spacing: .18em;
+            color: rgba(244, 240, 232, .4);
+            padding-bottom: 6px
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 12px
+        }
+
+        .work-card {
+            position: relative;
+            overflow: hidden;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: #0a0925;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateY(36px)
+        }
+
+        .work-card:nth-child(1) {
+            grid-column: span 7
+        }
+
+        .work-card:nth-child(2) {
+            grid-column: span 5
+        }
+
+        .work-card:nth-child(3) {
+            grid-column: span 5
+        }
+
+        .work-card:nth-child(4) {
+            grid-column: span 7
+        }
+
+        .work-card:nth-child(5) {
+            grid-column: span 12
+        }
+
+        .work-card.fiu {
+            opacity: 1;
+            transform: none
+        }
+
+        .work-flag {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            z-index: 3;
+            font-size: .58rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            background: var(--pink);
+            color: var(--void);
+            padding: 5px 14px;
+            border-radius: 100px
+        }
+
+        .work-thumb {
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            position: relative
+        }
+
+        .work-card:nth-child(5) .work-thumb {
+            aspect-ratio: 32/9
+        }
+
+        .work-thumb-bg {
+            position: absolute;
+            inset: 0;
+            transition: transform .5s cubic-bezier(.16, 1, .3, 1)
+        }
+
+        .work-card:hover .work-thumb-bg {
+            transform: scale(1.08)
+        }
+
+        .work-card:nth-child(1) .work-thumb-bg {
+            background: linear-gradient(145deg, #1a0a2e 0%, #6b1f8f 60%, #e040ab 100%)
+        }
+
+        .work-card:nth-child(2) .work-thumb-bg {
+            background: linear-gradient(145deg, #0c1f3f 0%, #1a4a9b 100%)
+        }
+
+        .work-card:nth-child(3) .work-thumb-bg {
+            background: linear-gradient(145deg, #0a1f10 0%, #1a6b3a 100%)
+        }
+
+        .work-card:nth-child(4) .work-thumb-bg {
+            background: linear-gradient(145deg, #1a1010 0%, #6b1f1f 100%)
+        }
+
+        .work-card:nth-child(5) .work-thumb-bg {
+            background: linear-gradient(135deg, #1A1464 0%, #2a1a8a 50%, #e040ab 100%)
+        }
+
+        .work-thumb-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity .7s ease, transform .5s cubic-bezier(.16, 1, .3, 1)
+        }
+
+        .work-thumb-img.img-loaded {
+            opacity: 1
+        }
+
+        .work-card:hover .work-thumb-img {
+            transform: scale(1.08)
+        }
+
+        .work-thumb-dim {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(to bottom, rgba(7, 7, 28, .12) 0%, rgba(7, 7, 28, .52) 100%)
+        }
+
+        .work-thumb-mark {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: .08em;
+            color: rgba(244, 240, 232, .1);
+            transition: transform .5s
+        }
+
+        .work-card:hover .work-thumb-mark {
+            transform: scale(1.07)
+        }
+
+        .work-num {
+            position: absolute;
+            top: 20px;
+            left: 24px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: .8rem;
+            letter-spacing: .18em;
+            color: rgba(244, 240, 232, .22);
+            z-index: 4
+        }
+
+        .work-info {
+            padding: 22px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border);
+            transition: background .2s
+        }
+
+        .work-card:hover .work-info {
+            background: rgba(0, 194, 255, .04)
+        }
+
+        .work-category {
+            font-size: .62rem;
+            font-weight: 600;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 5px
+        }
+
+        .work-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.35rem;
+            letter-spacing: .04em;
+            color: var(--cream);
+            line-height: 1
+        }
+
+        .work-stat {
+            font-size: .72rem;
+            font-weight: 500;
+            color: rgba(0,194,255,.7);
+            letter-spacing: .04em;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .work-arrow {
+            color: var(--cream-faint);
+            flex-shrink: 0;
+            transition: color .2s, transform .2s
+        }
+
+        .work-card:hover .work-arrow {
+            color: var(--pink);
+            transform: translate(4px, -4px)
+        }
+
+        /* CLIENTS */
+        #clients {
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden
+        }
+
+        .marquee-label {
+            text-align: center;
+            margin-bottom: 52px
+        }
+
+        .marquee-track {
+            overflow: hidden
+        }
+
+        .marquee-inner {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            animation: marquee 28s linear infinite;
+            width: max-content
+        }
+
+        .marquee-inner:hover {
+            animation-play-state: paused
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0 36px;
+            flex-shrink: 0
+        }
+
+        .marquee-logo {
+            height: 42px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            opacity: .72;
+            transition: opacity .3s;
+            flex-shrink: 0;
+            min-width: 24px
+        }
+
+        .marquee-item:hover .marquee-logo {
+            opacity: 1
+        }
+
+        .marquee-pipe {
+            font-size: 1.2rem;
+            color: rgba(244, 240, 232, .18);
+            flex-shrink: 0;
+            line-height: 1
+        }
+
+        .marquee-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.7rem;
+            letter-spacing: .06em;
+            color: var(--cream-dim);
+            transition: color .3s;
+            white-space: nowrap
+        }
+
+        .marquee-item:hover .marquee-name {
+            color: var(--cream)
+        }
+
+        .marquee-dot {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background: var(--pink);
+            border-radius: 50%;
+            margin-left: 36px;
+            opacity: .35;
+            flex-shrink: 0
+        }
+
+        /* SERVICES sticky-scroll */
+        #services {
+            position: relative;
+            height: 400vh
+        }
+
+        .services-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+            width: 100%;
+            transition: background .8s cubic-bezier(.4,0,.2,1)
+        }
+
+        .services-glow-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1200px;
+            height: 1200px;
+            background: radial-gradient(circle at top left, rgba(0,194,255,.52) 0%, rgba(0,194,255,.20) 28%, rgba(0,194,255,.04) 55%, transparent 68%);
+            pointer-events: none;
+            z-index: 0;
+            transition: opacity .08s linear
+        }
+
+        .services-sticky.sp-bg-1 {
+            background: #00C2FF
+        }
+
+        .services-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 120px 48px 72px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1
+        }
+
+        .sp-bg-1 .s-label {
+            color: rgba(7,7,28,.55)
+        }
+
+        .sp-bg-1 .services-title {
+            color: var(--void)
+        }
+
+        .sp-bg-1 .service-name {
+            color: var(--void)
+        }
+
+        .sp-bg-1 .service-desc {
+            color: rgba(7,7,28,.65)
+        }
+
+        .sp-bg-1 .service-num {
+            color: var(--void);
+            border-color: rgba(7,7,28,.25)
+        }
+
+        .sp-bg-1 .sp-pip {
+            background: rgba(7,7,28,.18)
+        }
+
+        .sp-bg-1 .sp-pip.active {
+            background: var(--void)
+        }
+
+        .services-header {
+            margin-bottom: 52px
+        }
+
+        .services-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 6.5vw, 7rem);
+            line-height: .9;
+            letter-spacing: .02em;
+            color: var(--cream);
+            display: block;
+            transition: color .8s ease
+        }
+
+        .services-panels-wrap {
+            position: relative;
+            min-height: 240px;
+            flex: 1
+        }
+
+        .service-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            transform: translateY(56px);
+            transition: opacity .38s cubic-bezier(.16, 1, .3, 1), transform .42s cubic-bezier(.34, 1.56, .64, 1);
+            pointer-events: none;
+            display: grid;
+            grid-template-columns: 72px 1fr 1fr;
+            gap: 0 56px
+        }
+
+        .service-panel.sp-active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto
+        }
+
+        .service-panel.sp-past {
+            opacity: 0;
+            transform: translateY(-44px);
+            transition: opacity .22s ease, transform .22s ease
+        }
+
+        .service-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: .8rem;
+            letter-spacing: .18em;
+            color: var(--pink);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 194, 255, .3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 4px
+        }
+
+        .service-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 3.2rem);
+            letter-spacing: .03em;
+            color: var(--cream);
+            line-height: 1
+        }
+
+        .service-desc {
+            font-size: .9rem;
+            line-height: 1.85;
+            color: var(--cream-dim);
+            padding-top: 6px
+        }
+
+        .services-progress {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 36px
+        }
+
+        .sp-pip {
+            height: 3px;
+            width: 24px;
+            background: var(--border);
+            border-radius: 2px;
+            transition: background .3s, width .3s
+        }
+
+        .sp-pip.active {
+            background: var(--pink);
+            width: 48px
+        }
+
+        /* TESTIMONIALS */
+        #testimonials {
+            padding: 128px 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden
+        }
+
+        .t-big-q {
+            position: absolute;
+            top: 0;
+            left: 40px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28vw;
+            line-height: .75;
+            color: var(--pink);
+            opacity: .05;
+            pointer-events: none;
+            user-select: none
+        }
+
+        .testimonials-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 48px;
+            position: relative;
+            z-index: 1
+        }
+
+        .t-label {
+            text-align: center
+        }
+
+        .testimonial-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 4.5vw, 4.8rem);
+            line-height: 1.12;
+            letter-spacing: .02em;
+            color: var(--cream);
+            max-width: 1000px;
+            margin: 48px auto 0;
+            text-align: center;
+            min-height: 4.5em
+        }
+
+        .t-word {
+            display: inline;
+            transition: color .45s ease
+        }
+
+        .testimonial-author {
+            text-align: center;
+            margin-top: 52px;
+            opacity: 0;
+            transition: opacity .4s ease .1s
+        }
+
+        .testimonial-author.show {
+            opacity: 1
+        }
+
+        .testimonial-name {
+            font-size: .78rem;
+            font-weight: 600;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--cream)
+        }
+
+        .testimonial-role {
+            font-size: .7rem;
+            letter-spacing: .1em;
+            color: var(--cream-dim);
+            margin-top: 5px
+        }
+
+        .testimonial-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 60px
+        }
+
+        .testimonial-btn {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--cream-dim);
+            cursor: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: border-color .2s, color .2s, background .2s
+        }
+
+        .testimonial-btn:hover {
+            border-color: var(--pink);
+            color: var(--pink);
+            background: var(--pink-dim)
+        }
+
+        .testimonial-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        .t-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--cream-faint);
+            cursor: none;
+            transition: all .25s;
+            border-radius: 2px
+        }
+
+        .t-dot.active {
+            width: 24px;
+            background: var(--pink)
+        }
+
+        /* CTA */
+        #cta {
+            padding: 0 0 128px
+        }
+
+        .cta-card {
+            background: var(--pink);
+            padding: 100px 80px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 80px;
+            align-items: center;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .07);
+            top: -200px;
+            right: -100px;
+            pointer-events: none
+        }
+
+        .cta-card::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .05);
+            bottom: -60px;
+            left: 200px;
+            pointer-events: none
+        }
+
+        .cta-headline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 7vw, 7.5rem);
+            line-height: .9;
+            letter-spacing: .02em;
+            color: var(--void);
+            position: relative;
+            z-index: 1
+        }
+
+        .cta-right {
+            text-align: right;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1
+        }
+
+        .cta-sub {
+            font-size: .72rem;
+            font-weight: 500;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(7, 7, 28, .45);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(7, 7, 28, .55);
+            animation: pulse-dot 2s ease-in-out infinite;
+            flex-shrink: 0;
+            position: relative;
+            display: inline-block
+        }
+
+        .pulse-dot::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(7, 7, 28, .3);
+            top: 50%;
+            left: 50%;
+            animation: pulse-ring 2s ease-out infinite
+        }
+
+        .btn-email {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: .06em;
+            color: var(--void);
+            text-decoration: none;
+            border-bottom: 2px solid rgba(7, 7, 28, .3);
+            padding-bottom: 3px;
+            display: inline-block;
+            transition: opacity .2s, border-color .2s;
+            cursor: none
+        }
+
+        .btn-email:hover {
+            opacity: .55;
+            border-color: transparent
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--void);
+            border-top: 2px solid var(--pink)
+        }
+
+        .footer-statement {
+            overflow: hidden;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .footer-marquee-track {
+            display: flex;
+            white-space: nowrap;
+            width: max-content;
+            animation: marquee 18s linear infinite
+        }
+
+        .footer-marquee-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3.5rem, 7vw, 8rem);
+            color: rgba(244, 240, 232, .06);
+            letter-spacing: .04em;
+            padding: 36px 60px 28px;
+            flex-shrink: 0
+        }
+
+        .footer-main {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 72px 48px 56px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 80px
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: .06em;
+            color: var(--cream);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 18px;
+            transition: color .2s
+        }
+
+        .footer-logo:hover {
+            color: var(--pink)
+        }
+
+        .footer-tagline {
+            font-size: .82rem;
+            color: var(--cream-dim);
+            line-height: 1.8;
+            max-width: 320px;
+            margin-bottom: 28px
+        }
+
+        .footer-avail {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--green)
+        }
+
+        .footer-avail-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            flex-shrink: 0;
+            position: relative;
+            animation: pulse-dot 2s ease-in-out infinite
+        }
+
+        .footer-avail-dot::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            top: 50%;
+            left: 50%;
+            animation: pulse-ring 2s ease-out .3s infinite
+        }
+
+        .footer-col h4 {
+            font-size: .62rem;
+            font-weight: 600;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 28px
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px
+        }
+
+        .footer-col ul li {
+            display: flex;
+            align-items: baseline;
+            gap: 10px
+        }
+
+        .footer-col ul li .fc-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: .68rem;
+            letter-spacing: .15em;
+            color: var(--cream-faint);
+            flex-shrink: 0
+        }
+
+        .footer-col ul li a {
+            font-size: .85rem;
+            color: var(--cream-dim);
+            text-decoration: none;
+            transition: color .2s
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--cream)
+        }
+
+        .footer-bottom {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 20px 48px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border)
+        }
+
+        .footer-bottom p {
+            font-size: .7rem;
+            color: var(--cream-faint);
+            letter-spacing: .06em
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:1024px) {
+            #hero {
+                grid-template-columns: 1fr 360px;
+                padding: 110px 32px 48px
+            }
+
+            .positioning-inner {
+                grid-template-columns: 1fr;
+                gap: 32px
+            }
+
+            .pos-item {
+                border-right: none;
+                padding: 0 0 32px 0;
+                border-bottom: 1px solid var(--border)
+            }
+
+            .pos-item:last-child {
+                border-bottom: none;
+                padding-bottom: 0
+            }
+
+            .pos-item+.pos-item {
+                padding-left: 0
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 48px
+            }
+
+            #services {
+                height: auto
+            }
+
+            .services-sticky {
+                position: relative;
+                height: auto
+            }
+
+            .services-inner {
+                padding: 128px 48px;
+                height: auto
+            }
+
+            .services-panels-wrap {
+                position: relative;
+                min-height: auto
+            }
+
+            .service-panel {
+                position: relative;
+                opacity: 1;
+                transform: none;
+                pointer-events: auto;
+                transition: none;
+                margin-top: 52px;
+                padding-top: 52px;
+                border-top: 1px solid var(--border)
+            }
+
+            .service-panel:first-child {
+                margin-top: 0;
+                padding-top: 0;
+                border-top: none
+            }
+
+            .service-panel.sp-past,
+            .service-panel.sp-active {
+                opacity: 1;
+                transform: none
+            }
+
+            .services-progress {
+                display: none
+            }
+        }
+
+        @media(max-width:860px) {
+            #hero {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                padding: 100px 24px 48px
+            }
+
+            #hero::before {
+                top: -80px;
+                right: -80px;
+                left: auto;
+                width: 480px;
+                height: 480px
+            }
+
+            #hero::after {
+                top: 60px;
+                bottom: auto;
+                left: -60px;
+                width: 280px;
+                height: 280px
+            }
+
+            .hero-photo {
+                grid-column: 1;
+                grid-row: 2;
+                height: 400px;
+                margin: 32px -24px
+            }
+
+            .hero-bottom {
+                grid-column: 1;
+                grid-row: 3
+            }
+
+            .work-card:nth-child(n) {
+                grid-column: span 12
+            }
+
+            .work-card:nth-child(5) .work-thumb {
+                aspect-ratio: 16/9
+            }
+
+            .service-panel {
+                grid-template-columns: 60px 1fr
+            }
+
+            .service-desc {
+                grid-column: 2
+            }
+
+            .cta-card {
+                grid-template-columns: 1fr;
+                padding: 72px 40px;
+                border-radius: 12px
+            }
+
+            .cta-right {
+                text-align: left
+            }
+
+            .cta-sub {
+                justify-content: flex-start
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 48px 24px 40px
+            }
+
+            nav {
+                padding: 22px 24px
+            }
+
+            nav.scrolled {
+                padding: 16px 24px
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .inner {
+                padding: 0 24px
+            }
+
+            .footer-bottom {
+                padding: 20px 24px 36px
+            }
+
+            .services-inner {
+                padding: 100px 24px
+            }
+        }
+
+        /* MOBILE MENU */
+        .nav-burger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 36px;
+            height: 36px;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: none;
+            padding: 0;
+            flex-shrink: 0
+        }
+
+        .nav-burger span {
+            display: block;
+            width: 18px;
+            height: 1.5px;
+            background: var(--cream);
+            border-radius: 2px;
+            transition: transform .28s cubic-bezier(.4,0,.2,1), opacity .2s
+        }
+
+        .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg) }
+        .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0) }
+        .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg) }
+
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: var(--void);
+            z-index: 150;
+            display: flex;
+            flex-direction: column;
+            padding: 0 28px 48px;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform .42s cubic-bezier(.16,1,.3,1);
+            border-left: 1px solid var(--border)
+        }
+
+        .mobile-menu.open { transform: translateX(0) }
+
+        .mobile-menu-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 26px 0 0;
+            margin-bottom: 36px
+        }
+
+        .mobile-menu-close {
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--cream-dim);
+            font-size: 1rem;
+            cursor: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color .2s, color .2s
+        }
+
+        .mobile-menu-close:hover { border-color: var(--pink); color: var(--pink) }
+
+        .mobile-cases {
+            flex: 1
+        }
+
+        .mobile-case-link {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            transition: color .2s
+        }
+
+        .mobile-case-link:first-child { border-top: 1px solid var(--border) }
+        .mobile-case-link:hover .mc-name { color: var(--pink) }
+        .mobile-case-link:hover .mc-arrow { color: var(--pink); transform: translate(3px,-3px) }
+
+        .mc-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: .7rem;
+            letter-spacing: .18em;
+            color: var(--pink);
+            flex-shrink: 0;
+            width: 22px
+        }
+
+        .mc-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: .03em;
+            color: var(--cream);
+            flex: 1;
+            line-height: 1;
+            transition: color .2s
+        }
+
+        .mc-arrow {
+            color: var(--cream-faint);
+            flex-shrink: 0;
+            transition: color .2s, transform .2s
+        }
+
+        .mobile-menu-cta {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: .1em;
+            color: var(--void);
+            background: var(--pink);
+            text-decoration: none;
+            padding: 18px 32px;
+            border-radius: 100px;
+            display: block;
+            text-align: center;
+            margin-top: 36px;
+            transition: background .2s
+        }
+
+        .mobile-menu-cta:hover { background: var(--cream) }
+
+        @media(max-width:860px) {
+            .nav-burger { display: flex }
+        }
+
+        @media(max-width:640px) {
+            #hero {
+                padding-top: 88px
+            }
+
+            .hero-headline {
+                font-size: clamp(2.8rem, 12vw, 5rem)
+            }
+
+            .hero-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px
+            }
+
+            .cta-card {
+                padding: 60px 28px
+            }
+
+            .footer-marquee-text {
+                font-size: clamp(2.5rem, 8vw, 4rem)
+            }
+        }
+    
+        /* PAGE TRANSITIONS */
+        #pt-overlay {
+            position: fixed; inset: 0; background: #07071C;
+            z-index: 99999; opacity: 1; pointer-events: none;
+            transition: opacity 220ms ease;
+        }
+        #pt-overlay.pt-out { opacity: 0; }
+        </style>
+</head>
+
+<body>
+
+    <div class="c-dot" id="cDot"></div>
+    <div class="c-ring" id="cRing"></div>
+
+    <nav id="mainNav">
+        <a href="#" class="nav-logo">bar.studio</a>
+        <ul class="nav-links">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#services">Capabilities</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="https://www.linkedin.com/in/bar-fainshtein-67172a207/" target="_blank" rel="noopener" class="nav-linkedin">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
+                        <circle cx="4" cy="4" r="2" />
+                    </svg>
+                    LinkedIn
+                </a></li>
+        </ul>
+        <a href="#cta" class="nav-cta" id="navCta">Work With Me</a>
+        <button class="nav-burger" id="navBurger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="mobile-menu-header">
+            <a href="#" class="nav-logo">bar.studio</a>
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
+        </div>
+        <div class="mobile-cases">
+            <a href="la-liga.html" class="mobile-case-link">
+                <span class="mc-num">01</span>
+                <span class="mc-name">La Liga Israel</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mc-arrow"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+            <a href="ifa.html" class="mobile-case-link">
+                <span class="mc-num">02</span>
+                <span class="mc-name">Israel Football Association</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mc-arrow"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+            <a href="special-olympics.html" class="mobile-case-link">
+                <span class="mc-num">03</span>
+                <span class="mc-name">Special Olympics Israel</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mc-arrow"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+            <a href="paralympics.html" class="mobile-case-link">
+                <span class="mc-num">04</span>
+                <span class="mc-name">Israel Paralympic Committee</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mc-arrow"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+            <a href="ai-production.html" class="mobile-case-link">
+                <span class="mc-num">05</span>
+                <span class="mc-name">AI Creative Production</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mc-arrow"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+        </div>
+        <a href="about.html" class="mobile-menu-cta" style="background:transparent;border:1px solid rgba(0,194,255,.35);color:var(--cream-dim);margin-bottom:12px">About</a>
+        <a href="mailto:fainshteinbar@gmail.com" class="mobile-menu-cta">Work With Me</a>
+    </div>
+
+    <section id="hero">
+        <div class="hero-bg-letter" id="heroBgLetter" aria-hidden="true">B</div>
+        <div class="hero-left">
+            <span class="hero-eyebrow">Bar Fainshtein · Head of Studio, Sporta.Digital</span>
+            <h1 class="hero-headline">
+                <span class="hl-line">Creative</span>
+                <span class="hl-line">Director,</span>
+                <span class="hl-line">Sports Branding</span>
+                <span class="hl-line">&amp; AI-Augmented</span>
+                <span class="hl-line"><span class="hl-cycle" id="hlCycle">Production</span><span class="hl-exclaim">!</span></span>
+            </h1>
+        </div>
+        <div class="hero-photo">
+            <img src="Bar_Hero_Clean.png" alt="Bar Fainshtein — Creative Director">
+            <div class="hero-photo-fade"></div>
+        </div>
+        <div class="hero-bottom">
+            <div class="hero-tags">
+                <span class="hero-tag">Sports Branding</span>
+                <span class="hero-tag">Digital Campaigns</span>
+                <span class="hero-tag">AI-Driven Fan Engagement</span>
+                <span class="hero-tag">Motion Graphics</span>
+            </div>
+            <div class="hero-right-info">
+                <a href="#work" class="btn-scroll">View Work
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <span class="hero-location">Hua Hin, Thailand · Global</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="positioning">
+        <div class="positioning-inner">
+            <div class="pos-item reveal">
+                <div class="pos-num" data-delay="0">7+</div>
+                <div class="pos-label">Years building visual identities exclusively inside sports — federations,
+                    leagues, and international competitions. Since 2019.</div>
+            </div>
+            <div class="pos-item reveal">
+                <div class="pos-num" data-delay="140">10×</div>
+                <div class="pos-label">Content output scale through AI-augmented production workflows — without scaling
+                    team headcount.</div>
+            </div>
+            <div class="pos-item reveal">
+                <div class="pos-num" data-delay="280">↗</div>
+                <div class="pos-label">Open to senior creative leadership opportunities in global sports. Based in Hua
+                    Hin, Thailand. Available for relocation.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work">
+        <div class="inner">
+            <div class="work-header reveal">
+                <div>
+                    <span class="s-label">Selected Work</span>
+                    <h2 class="work-title">Case Studies</h2>
+                </div>
+                <span class="work-count">05 Projects</span>
+            </div>
+            <div class="work-grid" id="workGrid">
+                <a href="la-liga.html" class="work-card">
+                    <span class="work-flag">Flagship</span>
+                    <div class="work-thumb">
+                        <div class="work-thumb-bg"></div>
+                        <img class="work-thumb-img"
+                            src="https://sporta.digital/wp-content/uploads/2026/04/la-liga-best-start-1.jpg"
+                            alt="La Liga Israel" loading="lazy">
+                        <div class="work-thumb-dim"></div>
+                        <span class="work-num">01</span>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-category">Brand Localization · Fan Engagement</div>
+                            <div class="work-name">La Liga Israel</div>
+                            <div class="work-stat">+2,305% follower growth · +1,138% likes/post</div>
+                        </div>
+                        <svg class="work-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5">
+                            <path d="M7 17L17 7M17 7H7M17 7v10" />
+                        </svg>
+                    </div>
+                </a>
+                <a href="ifa.html" class="work-card">
+                    <div class="work-thumb">
+                        <div class="work-thumb-bg"></div>
+                        <img class="work-thumb-img" src="https://sporta.digital/wp-content/uploads/2026/04/Open.jpg"
+                            alt="Israel Football Association" loading="lazy">
+                        <div class="work-thumb-dim"></div>
+                        <span class="work-num">02</span>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-category">Federation Identity · Brand System</div>
+                            <div class="work-name">Israel Football Association</div>
+                            <div class="work-stat">12+ sub-brands unified · UEFA/FIFA compliant</div>
+                        </div>
+                        <svg class="work-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5">
+                            <path d="M7 17L17 7M17 7H7M17 7v10" />
+                        </svg>
+                    </div>
+                </a>
+                <a href="special-olympics.html" class="work-card">
+                    <div class="work-thumb">
+                        <div class="work-thumb-bg"></div>
+                        <div class="work-thumb-mark">SOI</div>
+                        <span class="work-num">03</span>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-category">Original Identity · Emotional Branding</div>
+                            <div class="work-name">Special Olympics Israel</div>
+                            <div class="work-stat">4,000+ athletes represented · First original SOI identity</div>
+                        </div>
+                        <svg class="work-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5">
+                            <path d="M7 17L17 7M17 7H7M17 7v10" />
+                        </svg>
+                    </div>
+                </a>
+                <a href="paralympics.html" class="work-card">
+                    <div class="work-thumb">
+                        <div class="work-thumb-bg"></div>
+                        <div class="work-thumb-mark">IPC</div>
+                        <span class="work-num">04</span>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-category">Logo · Brand Architecture</div>
+                            <div class="work-name">Israel Paralympic Committee</div>
+                            <div class="work-stat">2 Olympic cycles · Zero revisions</div>
+                        </div>
+                        <svg class="work-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5">
+                            <path d="M7 17L17 7M17 7H7M17 7v10" />
+                        </svg>
+                    </div>
+                </a>
+                <a href="ai-production.html" class="work-card">
+                    <div class="work-thumb">
+                        <div class="work-thumb-bg"></div>
+                        <div class="work-thumb-mark">AI×</div>
+                        <span class="work-num">05</span>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-category">AI Workflow · Production System</div>
+                            <div class="work-name">AI-Augmented Creative Production</div>
+                            <div class="work-stat">10× output · 500+ assets/year · Zero quality drop</div>
+                        </div>
+                        <svg class="work-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5">
+                            <path d="M7 17L17 7M17 7H7M17 7v10" />
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="clients">
+        <div class="marquee-label reveal"><span class="s-label">Trusted By</span></div>
+        <div class="marquee-track">
+            <div class="marquee-inner">
+                <div class="marquee-item"><img src="https://sporta.digital/wp-content/uploads/2025/06/La_Liga.svg"
+                        alt="La Liga Israel" class="marquee-logo"><span class="marquee-pipe">|</span><span
+                        class="marquee-name">La Liga Israel</span><span class="marquee-dot"></span></div>
+                <div class="marquee-item"><img src="ISR-1.svg"
+                        alt="Israel Football Association" class="marquee-logo"><span class="marquee-pipe">|</span><span
+                        class="marquee-name">Israel Football Association</span><span class="marquee-dot"></span></div>
+                <div class="marquee-item"><img src="https://sporta.digital/wp-content/uploads/2025/06/Special.svg"
+                        alt="Special Olympics Israel" class="marquee-logo"><span class="marquee-pipe">|</span><span
+                        class="marquee-name">Special Olympics Israel</span><span class="marquee-dot"></span></div>
+                <div class="marquee-item"><img
+                        src="https://sporta.digital/wp-content/uploads/2025/06/Minhelet-1-2-1.svg"
+                        alt="Winner League Basketball" class="marquee-logo"><span class="marquee-pipe">|</span><span
+                        class="marquee-name">Winner League Basketball</span><span class="marquee-dot"></span></div>
+                <div class="marquee-item"><img src="Jerusalem-1-1.svg"
+                        alt="Hapoel Jerusalem Basketball" class="marquee-logo" style="height:52px"><span
+                        class="marquee-pipe">|</span><span class="marquee-name">Hapoel Jerusalem Basketball</span><span
+                        class="marquee-dot"></span></div>
+                <div class="marquee-item"><img src="https://sporta.digital/wp-content/uploads/2025/06/Beach-3.svg"
+                        alt="Israel Beach Soccer League" class="marquee-logo" style="height:52px"><span
+                        class="marquee-pipe">|</span><span class="marquee-name">Israel Beach Soccer League</span><span
+                        class="marquee-dot"></span></div>
+                <div class="marquee-item"><img src="https://sporta.digital/wp-content/uploads/2025/06/La_Liga.svg"
+                        alt="La Liga Israel" class="marquee-logo"><span class="marquee-pipe">|</span><span
+                        class="marquee-name">La Liga Israel</span><span class="marquee-dot"></span></div>
+                <div class="marquee-item"><img src="ISR-1.svg"
+                        alt="Israel Football Association" class="marquee-logo"><span class="marquee-pipe">|</span><span
+                        class="marquee-name">Israel Football Association</span><span class="marquee-dot"></span></div>
+                <div class="marquee-item"><img src="https://sporta.digital/wp-content/uploads/2025/06/Special.svg"
+                        alt="Special Olympics Israel" class="marquee-logo"><span class="marquee-pipe">|</span><span
+                        class="marquee-name">Special Olympics Israel</span><span class="marquee-dot"></span></div>
+                <div class="marquee-item"><img
+                        src="https://sporta.digital/wp-content/uploads/2025/06/Minhelet-1-2-1.svg"
+                        alt="Winner League Basketball" class="marquee-logo"><span class="marquee-pipe">|</span><span
+                        class="marquee-name">Winner League Basketball</span><span class="marquee-dot"></span></div>
+                <div class="marquee-item"><img src="Jerusalem-1-1.svg"
+                        alt="Hapoel Jerusalem Basketball" class="marquee-logo" style="height:52px"><span
+                        class="marquee-pipe">|</span><span class="marquee-name">Hapoel Jerusalem Basketball</span><span
+                        class="marquee-dot"></span></div>
+                <div class="marquee-item"><img src="https://sporta.digital/wp-content/uploads/2025/06/Beach-3.svg"
+                        alt="Israel Beach Soccer League" class="marquee-logo" style="height:52px"><span
+                        class="marquee-pipe">|</span><span class="marquee-name">Israel Beach Soccer League</span><span
+                        class="marquee-dot"></span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="services-sticky" id="servicesSticky">
+            <div class="services-glow-bg" id="servicesGlowBg"></div>
+            <div class="services-inner">
+                <div class="services-header">
+                    <span class="s-label">Creative Capabilities</span>
+                    <h2 class="services-title">What I Lead,<br>Not Just Deliver</h2>
+                </div>
+                <div class="services-panels-wrap">
+                    <div class="service-panel" data-idx="0">
+                        <span class="service-num">01</span>
+                        <h3 class="service-name">Sports Brand Systems</h3>
+                        <p class="service-desc">I architect visual identities and scalable design systems for federations,
+                            leagues, and competitions — built to govern every touchpoint from social to broadcast, from
+                            digital campaigns to motion graphics, across seasons and sub-brands. This is brand architecture,
+                            not logo design.</p>
+                    </div>
+                    <div class="service-panel" data-idx="1">
+                        <span class="service-num">02</span>
+                        <h3 class="service-name">Campaign Direction</h3>
+                        <p class="service-desc">I direct high-impact creative campaigns for matchdays, season launches, and
+                            fan engagement moments. I brief teams, define the visual language, resolve creative conflicts,
+                            and deliver work that earns coverage beyond the paid media budget.</p>
+                    </div>
+                    <div class="service-panel" data-idx="2">
+                        <span class="service-num">03</span>
+                        <h3 class="service-name">AI-Augmented Production</h3>
+                        <p class="service-desc">I build AI-enhanced creative workflows that allow a small team to produce at
+                            the volume of a large one — without sacrificing creative judgment. I architect the system:
+                            prompting logic, quality gates, brand compliance checks, and editorial control at every step.
+                        </p>
+                    </div>
+                </div>
+                <div class="services-progress">
+                    <div class="sp-pip active"></div>
+                    <div class="sp-pip"></div>
+                    <div class="sp-pip"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="t-big-q" aria-hidden="true">"</div>
+        <div class="testimonials-inner">
+            <div class="reveal">
+                <span class="s-label t-label" style="text-align:center">What Clients Say</span>
+                <p class="testimonial-text" id="testimonialText"></p>
+                <div class="testimonial-author" id="testimonialAuthor">
+                    <div class="testimonial-name" id="testimonialName"></div>
+                    <div class="testimonial-role" id="testimonialRole"></div>
+                </div>
+            </div>
+            <div class="testimonial-controls">
+                <button class="testimonial-btn" id="prevBtn" aria-label="Previous">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                </button>
+                <div class="testimonial-dots">
+                    <div class="t-dot active" data-index="0"></div>
+                    <div class="t-dot" data-index="1"></div>
+                    <div class="t-dot" data-index="2"></div>
+                </div>
+                <button class="testimonial-btn" id="nextBtn" aria-label="Next">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta">
+        <div class="inner">
+            <div class="cta-card reveal">
+                <h2 class="cta-headline">Open to Senior<br>Creative Leadership<br>in Global Sports.</h2>
+                <div class="cta-right">
+                    <p class="cta-sub"><span class="pulse-dot"></span> Remote · Relocatable · Available Now</p>
+                    <a href="mailto:fainshteinbar@gmail.com" class="btn-email" id="ctaEmail">fainshteinbar@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-statement" aria-hidden="true">
+            <div class="footer-marquee-track">
+                <span class="footer-marquee-text">OPEN TO SENIOR CREATIVE LEADERSHIP IN GLOBAL SPORTS. ◆ SPORTS
+                    BRANDING. DIGITAL CAMPAIGNS. AI-DRIVEN PRODUCTION. ◆ </span>
+                <span class="footer-marquee-text">OPEN TO SENIOR CREATIVE LEADERSHIP IN GLOBAL SPORTS. ◆ SPORTS
+                    BRANDING. DIGITAL CAMPAIGNS. AI-DRIVEN PRODUCTION. ◆ </span>
+            </div>
+        </div>
+        <div class="footer-main">
+            <div>
+                <a href="#" class="footer-logo">bar.studio</a>
+                <p class="footer-tagline">Creative Director specializing in sports branding, digital campaigns, and
+                    AI-driven fan engagement. Based in Hua Hin, Thailand. Building identities that make sports
+                    organizations recognizable, memorable, and culturally relevant.</p>
+                <div class="footer-avail"><span class="footer-avail-dot"></span> Available for Senior Roles</div>
+            </div>
+            <div class="footer-col">
+                <h4>Case Studies</h4>
+                <ul>
+                    <li><span class="fc-num">01</span><a href="la-liga.html">La Liga Israel</a></li>
+                    <li><span class="fc-num">02</span><a href="ifa.html">Israel Football Association</a></li>
+                    <li><span class="fc-num">03</span><a href="special-olympics.html">Special Olympics Israel</a></li>
+                    <li><span class="fc-num">04</span><a href="paralympics.html">Israel Paralympic Committee</a></li>
+                    <li><span class="fc-num">05</span><a href="ai-production.html">AI Creative Production</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="mailto:fainshteinbar@gmail.com">fainshteinbar@gmail.com</a></li>
+                    <li><a href="tel:+660841831104">+66-0841831104</a></li>
+                    <li><a href="https://www.linkedin.com/in/bar-fainshtein-67172a207/" target="_blank" rel="noopener">LinkedIn</a>
+                    </li>
+                    <li><a href="Resume.pdf" download>Download Resume</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 bar.studio — Bar Fainshtein</p>
+            <p>Hua Hin, Thailand · Open to Global Opportunities</p>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            /* CURSOR */
+            var dot = document.getElementById('cDot'), ring = document.getElementById('cRing'), mx = -100, my = -100, rx = -100, ry = -100;
+            if (window.matchMedia('(pointer:fine)').matches) {
+                document.addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px' });
+                (function tick() { rx += (mx - rx) * .13; ry += (my - ry) * .13; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(tick) })();
+                document.querySelectorAll('a,button,.t-dot,.hero-tag').forEach(function (el) {
+                    el.addEventListener('mouseenter', function () { document.body.classList.add('hovering') });
+                    el.addEventListener('mouseleave', function () { document.body.classList.remove('hovering') });
+                });
+            } else {
+                document.body.style.cursor = 'auto'; dot.style.display = 'none'; ring.style.display = 'none';
+            }
+
+            /* NAV */
+            var nav = document.getElementById('mainNav');
+            window.addEventListener('scroll', function () { nav.classList.toggle('scrolled', window.scrollY > 40) }, { passive: true });
+
+            /* HERO PARALLAX */
+            var heroLetter = document.getElementById('heroBgLetter');
+            if (heroLetter) window.addEventListener('scroll', function () { heroLetter.style.transform = 'translateY(' + (window.scrollY * .35) + 'px)' }, { passive: true });
+
+            /* REVEAL */
+            var reveals = document.querySelectorAll('.reveal');
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target) } });
+            }, { threshold: .08, rootMargin: '0px 0px -50px 0px' });
+            reveals.forEach(function (el) { io.observe(el) });
+
+            /* STAT GLOW — add pulse glow when stat enters view */
+            var statNums = document.querySelectorAll('.pos-num');
+            var statIO = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (!e.isIntersecting) return;
+                    e.target.classList.add('stamped');
+                    statIO.unobserve(e.target);
+                });
+            }, { threshold: .5 });
+            statNums.forEach(function (el) { statIO.observe(el) });
+
+            /* WORK CARDS — staggered fade in up */
+            var cards = document.querySelectorAll('.work-card');
+            var cardIO = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (!e.isIntersecting) return;
+                    var el = e.target, idx = Array.from(cards).indexOf(el);
+                    setTimeout(function () {
+                        el.style.transition = 'opacity .85s cubic-bezier(.22,1,.36,1), transform .85s cubic-bezier(.22,1,.36,1)';
+                        el.classList.add('fiu');
+                        setTimeout(function () { el.style.transition = ''; }, 920);
+                    }, idx * 120);
+                    cardIO.unobserve(el);
+                });
+            }, { threshold: .04, rootMargin: '0px 0px -10px 0px' });
+            cards.forEach(function (el) { cardIO.observe(el) });
+
+            /* WORK IMAGE FADE */
+            document.querySelectorAll('.work-thumb-img').forEach(function (img) {
+                function onImgLoad() { img.classList.add('img-loaded'); }
+                if (img.complete && img.naturalWidth) { onImgLoad(); }
+                else { img.addEventListener('load', onImgLoad); }
+            });
+
+            /* 3D TILT on cards */
+            if (window.matchMedia('(pointer:fine)').matches) {
+                cards.forEach(function (card) {
+                    card.addEventListener('mousemove', function (e) {
+                        var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+                        card.style.transform = 'perspective(900px) rotateY(' + (x * 5) + 'deg) rotateX(' + (-y * 4) + 'deg) scale(1.01)';
+                    });
+                    card.addEventListener('mouseleave', function () { card.style.transform = '' });
+                });
+            }
+
+            /* MAGNETIC NAV CTA */
+            var navCta = document.getElementById('navCta');
+            if (navCta && window.matchMedia('(pointer:fine)').matches) {
+                navCta.addEventListener('mousemove', function (e) {
+                    var r = navCta.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
+                    navCta.style.transform = 'translate(' + (x * .28) + 'px,' + (y * .36) + 'px)';
+                });
+                navCta.addEventListener('mouseleave', function () {
+                    navCta.style.transition = 'transform .6s cubic-bezier(.34,1.56,.64,1)';
+                    navCta.style.transform = '';
+                    setTimeout(function () { navCta.style.transition = '' }, 650);
+                });
+            }
+
+            /* HERO TEXT SCRAMBLE */
+            var scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var scrambleWords = ['PRODUCTION', 'CAMPAIGNS', 'DIRECTION', 'SYSTEMS', 'IDENTITY'];
+            var scrambleEl = document.getElementById('hlCycle');
+            var scrambleIdx = 0;
+            var scrambleRaf = null;
+            var glitchTimer = null;
+
+            function scrambleTo(word, onDone) {
+                if (scrambleRaf) cancelAnimationFrame(scrambleRaf);
+                var duration = 680;
+                var startTime = null;
+                function tick(ts) {
+                    if (!startTime) startTime = ts;
+                    var t = Math.min((ts - startTime) / duration, 1);
+                    var result = word.split('').map(function (ch, i) {
+                        return t > i / word.length ? ch : scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                    }).join('');
+                    scrambleEl.textContent = result;
+                    if (t < 1) {
+                        scrambleRaf = requestAnimationFrame(tick);
+                    } else {
+                        scrambleEl.textContent = word;
+                        if (onDone) onDone();
+                    }
+                }
+                scrambleRaf = requestAnimationFrame(tick);
+            }
+
+            function microGlitch() {
+                var word = scrambleEl.textContent;
+                var i = Math.floor(Math.random() * word.length);
+                var g = word.split('');
+                g[i] = scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                scrambleEl.textContent = g.join('');
+                setTimeout(function () { scrambleEl.textContent = word; }, 70);
+            }
+
+            function scrambleLoop() {
+                scrambleIdx = (scrambleIdx + 1) % scrambleWords.length;
+                scrambleTo(scrambleWords[scrambleIdx], function () {
+                    glitchTimer = setInterval(microGlitch, 650);
+                    setTimeout(function () {
+                        clearInterval(glitchTimer);
+                        scrambleLoop();
+                    }, 2200);
+                });
+            }
+
+            if (scrambleEl) setTimeout(scrambleLoop, 2000);
+
+            /* SERVICES sticky scroll + title scale */
+            var servicesSection = document.getElementById('services');
+            var servicePanels = document.querySelectorAll('.service-panel');
+            var spPips = document.querySelectorAll('.sp-pip');
+            var svcTitle = document.querySelector('.services-title');
+            var stickyEl = document.getElementById('servicesSticky');
+            var servicesGlowBg = document.getElementById('servicesGlowBg');
+            function updateServices() {
+                var rect = servicesSection.getBoundingClientRect();
+                var scrolled = Math.max(0, -rect.top);
+                var total = servicesSection.offsetHeight - window.innerHeight;
+                var progress = total > 0 ? Math.min(1, scrolled / total) : 0;
+                var pStart = 0.30;
+
+                if (window.innerWidth <= 1024) return;
+                if (total <= 0) return;
+
+                /* Panels start at pStart of total scroll */
+                var panelProg = Math.max(0, Math.min(1, (progress - pStart) / (1 - pStart)));
+                var activeIdx = Math.min(servicePanels.length - 1, Math.floor(panelProg * servicePanels.length));
+                servicePanels.forEach(function (p, i) {
+                    p.classList.toggle('sp-active', i === activeIdx);
+                    p.classList.toggle('sp-past', i < activeIdx);
+                });
+                spPips.forEach(function (p, i) { p.classList.toggle('active', i === activeIdx) });
+
+                /* Glow fades linearly across panel 01, reaching 0 exactly when panel 02 activates */
+                if (servicesGlowBg) {
+                    servicesGlowBg.style.opacity = Math.max(0, 1 - panelProg * 3);
+                }
+
+                /* Panel 02 → full-width bright blue */
+                if (stickyEl) {
+                    stickyEl.classList.toggle('sp-bg-1', activeIdx === 1 && progress > pStart);
+                }
+            }
+            window.addEventListener('scroll', updateServices, { passive: true });
+            updateServices();
+
+            /* SCROLL-REVEAL testimonials */
+            var testimonials = [
+                { text: "The brief was to unify three competitions under one federation without losing each one's identity. Bar came back with a brand architecture that solved a problem we hadn't fully articulated ourselves. What the Israel Football Association has now is a system that will outlast any single campaign.", name: "Alon Hazan", role: "Head of Marketing, Israel Football Association" },
+                { text: "Our content output tripled in four months without adding a single person to the team. Bar built the workflow, set the quality standards, and made sure every piece that went out still felt intentional. That kind of scale with that kind of control is genuinely rare.", name: "Noa Peretz", role: "Digital Director, Winner League Basketball" },
+                { text: "Working with Bar on the Special Olympics Israel identity was different from any creative engagement I've experienced. He understood immediately that this wasn't about disability — it was about athletic pride. The identity he delivered gave our athletes something to wear with confidence.", name: "Michal Katz", role: "Head of Communications, Special Olympics Israel" }
+            ];
+            var current = 0;
+            var tTextEl = document.getElementById('testimonialText');
+            var tNameEl = document.getElementById('testimonialName');
+            var tRoleEl = document.getElementById('testimonialRole');
+            var tAuthorEl = document.getElementById('testimonialAuthor');
+            var tDots = document.querySelectorAll('.t-dot');
+            var tSection = document.getElementById('testimonials');
+
+            function wrapWords(text) {
+                return text.split(' ').map(function (w) {
+                    return '<span class="t-word">' + w + '</span>';
+                }).join(' ');
+            }
+
+            function getRevealProgress() {
+                var rect = tSection.getBoundingClientRect();
+                /* Reveal over a long scroll range — 1.8× viewport height */
+                var start = window.innerHeight * 1.0;
+                var end = -window.innerHeight * 0.8;
+                return Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+            }
+
+            function applyWordReveal() {
+                var words = tTextEl.querySelectorAll('.t-word');
+                if (!words.length) return;
+                var progress = getRevealProgress();
+                var n = words.length;
+                words.forEach(function (w, i) {
+                    /* Each word transitions over 20% of the total range, staggered */
+                    var p = Math.max(0, Math.min(1, (progress * (n + 10) - i) / 8));
+                    w.style.color = 'rgba(244,240,232,' + (0.12 + p * 0.88) + ')';
+                });
+                if (progress > 0.6) { tAuthorEl.classList.add('show') }
+                else { tAuthorEl.classList.remove('show') }
+            }
+
+            function showTestimonial(idx) {
+                var t = testimonials[idx];
+                tDots.forEach(function (d, i) { d.classList.toggle('active', i === idx) });
+                tTextEl.innerHTML = wrapWords(t.text);
+                tNameEl.textContent = t.name;
+                tRoleEl.textContent = t.role;
+                applyWordReveal();
+            }
+
+            window.addEventListener('scroll', applyWordReveal, { passive: true });
+            showTestimonial(0);
+
+            document.getElementById('prevBtn').addEventListener('click', function () { current = (current - 1 + testimonials.length) % testimonials.length; showTestimonial(current) });
+            document.getElementById('nextBtn').addEventListener('click', function () { current = (current + 1) % testimonials.length; showTestimonial(current) });
+            tDots.forEach(function (d) { d.addEventListener('click', function () { current = parseInt(d.dataset.index); showTestimonial(current) }) });
+
+            /* EMAIL COPY */
+            var ctaEmail = document.getElementById('ctaEmail');
+            if (ctaEmail) {
+                ctaEmail.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var orig = ctaEmail.textContent;
+                    navigator.clipboard.writeText('fainshteinbar@gmail.com').then(function () {
+                        ctaEmail.textContent = 'COPIED ✓';
+                        ctaEmail.style.opacity = '.5';
+                        ctaEmail.style.borderBottomColor = 'transparent';
+                        setTimeout(function () { ctaEmail.textContent = orig; ctaEmail.style.opacity = ''; ctaEmail.style.borderBottomColor = '' }, 2400);
+                    }).catch(function () { window.location = 'mailto:fainshteinbar@gmail.com' });
+                });
+            }
+
+            /* MOBILE MENU */
+            var navBurger = document.getElementById('navBurger');
+            var mobileMenu = document.getElementById('mobileMenu');
+            var mobileMenuClose = document.getElementById('mobileMenuClose');
+            function openMenu() {
+                mobileMenu.classList.add('open');
+                mobileMenu.setAttribute('aria-hidden', 'false');
+                navBurger.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMenu() {
+                mobileMenu.classList.remove('open');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+                navBurger.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+            if (navBurger) navBurger.addEventListener('click', openMenu);
+            if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMenu);
+            if (mobileMenu) {
+                mobileMenu.querySelectorAll('a').forEach(function (a) {
+                    a.addEventListener('click', closeMenu);
+                });
+            }
+
+            /* SMOOTH SCROLL */
+            document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    var href = a.getAttribute('href'); if (href === '#') return;
+                    var target = document.querySelector(href);
+                    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
+                });
+            });
+        })();
+    </script>
+
+<script>
+(function(){
+    var ov = document.createElement('div');
+    ov.id = 'pt-overlay';
+    document.body.prepend(ov);
+    requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ ov.classList.add('pt-out'); });
+    });
+    document.addEventListener('click', function(e){
+        var a = e.target.closest('a[href]');
+        if (!a) return;
+        var h = a.getAttribute('href');
+        if (!h || h.startsWith('#') || h.startsWith('mailto') || h.startsWith('http') || h.startsWith('//') || a.target === '_blank') return;
+        e.preventDefault();
+        ov.classList.remove('pt-out');
+        setTimeout(function(){ window.location.href = h; }, 240);
+    });
+})();
+</script>
+
+</body>
+
+</html>

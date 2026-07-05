@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open /Users/barfainshtein/Documents/bar-studio/index.html)",
+      "WebSearch",
+      "Bash(mkdir -p /tmp/barstudio_shots)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --hide-scrollbars --window-size=1440,900 --screenshot=/tmp/barstudio_shots/index_desktop_fold.png \"file:///Users/barfainshtein/Documents/bar-studio/index.html\" --virtual-time-budget=8000)",
+      "Bash(python3 -)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --hide-scrollbars --window-size=1440,8000 --screenshot=/tmp/barstudio_shots/index_desktop_full.png \"file:///tmp/barstudio_shots/index_full_temp.html\" --virtual-time-budget=10000)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --hide-scrollbars --window-size=390,6000 --screenshot=/tmp/barstudio_shots/index_mobile_full.png \"file:///tmp/barstudio_shots/index_full_temp.html\" --virtual-time-budget=10000)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --hide-scrollbars --window-size=1440,7200 --screenshot=/tmp/barstudio_shots/index_desktop_full.png \"file:///Users/barfainshtein/Documents/bar-studio/_temp_index_flat.html\" --virtual-time-budget=12000)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --hide-scrollbars --window-size=390,7400 --screenshot=/tmp/barstudio_shots/index_mobile_full.png \"file:///Users/barfainshtein/Documents/bar-studio/_temp_index_flat.html\" --virtual-time-budget=12000)"
+    ]
+  }
+}

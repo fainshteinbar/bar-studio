@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Augmented Creative Production — Bar Fainshtein, Creative Director</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --void: #07071C; --surface: #0F0E2F; --cream: #F4F0E8;
+            --cream-dim: rgba(244,240,232,0.5); --cream-faint: rgba(244,240,232,0.14);
+            --cream-mid: rgba(244,240,232,0.65);
+            --green: #22c55e;
+            --pink: #00C2FF; --pink-dim: rgba(0,194,255,0.10);
+            --border: rgba(244,240,232,0.08);
+            --accent: #00C2FF;
+            --ai-teal: #00C2FF; --ai-glow: rgba(0,194,255,0.18);
+        }
+        html { scroll-behavior: smooth; background: var(--void); }
+        body { background: var(--void); color: var(--cream); font-family: 'DM Sans', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; cursor: none; }
+        .c-dot { position: fixed; width: 8px; height: 8px; background: var(--pink); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+        .c-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--pink); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s cubic-bezier(.25,.46,.45,.94), height .35s, opacity .35s; opacity: .45; }
+        body.hovering .c-ring { width: 60px; height: 60px; opacity: .2; }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; transition: background .3s, padding .3s, border-color .3s; border-bottom: 1px solid transparent; opacity: 0; animation: fadeIn .8s ease .05s forwards; }
+        nav.scrolled { background: rgba(7,7,28,.95); backdrop-filter: blur(16px); padding: 20px 48px; border-bottom-color: var(--border); }
+        .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .08em; color: var(--cream); text-decoration: none; }
+        .nav-links { display: flex; align-items: center; gap: 44px; list-style: none; }
+        .nav-links a, .nav-linkedin { font-size: .73rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--cream-dim); text-decoration: none; transition: color .2s; }
+        .nav-links a:hover { color: var(--cream); }
+        .nav-linkedin { display: flex; align-items: center; gap: 7px; }
+        .nav-linkedin:hover { color: var(--pink); }
+        .nav-cta { font-size: .73rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--void); background: var(--pink); text-decoration: none; padding: 11px 26px; border-radius: 100px; transition: background .2s, transform .15s; }
+        .nav-cta:hover { background: var(--cream); }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes pulse { 0%,100% { opacity:.4; } 50% { opacity:1; } }
+        @keyframes flow { 0% { stroke-dashoffset: 100; } 100% { stroke-dashoffset: 0; } }
+        .reveal { opacity: 0; transform: translateY(52px); transition: opacity 1.1s cubic-bezier(.22,1,.36,1), transform 1.1s cubic-bezier(.22,1,.36,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-44px); transition: opacity 1.1s cubic-bezier(.22,1,.36,1), transform 1.1s cubic-bezier(.22,1,.36,1); }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+        .inner { max-width: 1320px; margin: 0 auto; padding: 0 48px; }
+        .s-label { display: block; font-size: .65rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--pink); margin-bottom: 20px; }
+        .m-word { color: rgba(244,240,232,.1); display: inline; transition: color .55s ease; }
+
+        /* HERO */
+        #project-hero { min-height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 48px 72px; }
+        .hero-bg-grad { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,194,255,.12) 0%, transparent 60%), linear-gradient(180deg, var(--void) 0%, #060618 100%); }
+        .hero-grid-lines { position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(rgba(0,194,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,194,255,.04) 1px, transparent 1px); background-size: 80px 80px; }
+        .hero-watermark { position: absolute; bottom: -.08em; left: -.02em; font-family: 'Bebas Neue', sans-serif; font-size: 36vw; line-height: 1; color: rgba(244,240,232,.014); pointer-events: none; user-select: none; z-index: 0; }
+        .hero-back { position: absolute; top: 140px; left: 48px; z-index: 2; display: flex; align-items: center; gap: 10px; font-size: .68rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--cream-faint); text-decoration: none; transition: color .2s; opacity: 0; animation: fadeIn .6s ease .2s forwards; }
+        .hero-back:hover { color: var(--pink); }
+        .hero-back svg { transition: transform .2s; }
+        .hero-back:hover svg { transform: translateX(-3px); }
+        .hero-content { position: relative; z-index: 2; max-width: 1320px; margin: 0 auto; width: 100%; }
+        .hero-eyebrow { font-size: .68rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--pink); margin-bottom: 24px; opacity: 0; animation: fadeUp .6s ease .25s forwards; }
+        .project-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 9rem); line-height: .85; letter-spacing: .01em; color: var(--cream); opacity: 0; animation: fadeUp .85s cubic-bezier(.25,.46,.45,.94) .35s forwards; }
+        .project-subtitle { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 4vw, 4.5rem); line-height: .9; letter-spacing: .02em; color: var(--pink); margin-bottom: 56px; opacity: 0; animation: fadeUp .85s cubic-bezier(.25,.46,.45,.94) .45s forwards; }
+        .hero-meta-bar { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--border); padding-top: 36px; opacity: 0; animation: fadeUp .7s ease .6s forwards; }
+        .meta-item { padding-right: 32px; border-right: 1px solid var(--border); }
+        .meta-item:last-child { border-right: none; padding-right: 0; }
+        .meta-item + .meta-item { padding-left: 32px; }
+        .meta-label { font-size: .6rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
+        .meta-value { font-size: .88rem; color: var(--cream-dim); line-height: 1.6; }
+
+        /* INTRO */
+        #intro { padding: 128px 0; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        .section-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 5vw, 5.5rem); line-height: .9; letter-spacing: .02em; color: var(--cream); }
+        .body-copy { font-size: 1rem; line-height: 1.9; color: var(--cream-dim); }
+        .body-copy p + p { margin-top: 20px; }
+        .body-copy strong { color: var(--cream); font-weight: 500; }
+
+        /* MANDATE */
+        #mandate { padding: 96px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+        .mandate-quote { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 4.5vw, 5rem); line-height: 1.05; letter-spacing: .02em; color: var(--cream); max-width: 1000px; }
+        .mandate-quote em { font-style: normal; color: var(--pink); }
+        .mandate-sub { margin-top: 32px; font-size: .82rem; color: var(--cream-faint); letter-spacing: .1em; text-transform: uppercase; }
+
+        /* WORKFLOW DIAGRAM */
+        #workflow { padding: 128px 0; }
+        .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 6.5rem); line-height: .9; letter-spacing: .02em; color: var(--cream); }
+        .workflow-diagram { margin-top: 80px; position: relative; }
+        .workflow-stages { display: grid; grid-template-columns: repeat(5,1fr); gap: 3px; }
+        .w-stage { padding: 40px 28px; background: var(--surface); position: relative; border-top: 2px solid transparent; transition: border-color .3s, background .3s; }
+        .w-stage:hover { background: rgba(0,194,255,.04); border-top-color: var(--pink); }
+        .w-num { font-family: 'Bebas Neue', sans-serif; font-size: .7rem; letter-spacing: .22em; color: var(--pink); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .w-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); animation: pulse 2s ease-in-out infinite; }
+        .w-stage:nth-child(2) .w-dot { animation-delay: .4s; }
+        .w-stage:nth-child(3) .w-dot { animation-delay: .8s; }
+        .w-stage:nth-child(4) .w-dot { animation-delay: 1.2s; }
+        .w-stage:nth-child(5) .w-dot { animation-delay: 1.6s; }
+        .w-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .04em; color: var(--cream); line-height: 1; margin-bottom: 16px; }
+        .w-desc { font-size: .8rem; line-height: 1.75; color: var(--cream-dim); }
+        .w-tag { display: inline-block; margin-top: 16px; font-size: .58rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--pink); border: 1px solid var(--pink-dim); padding: 4px 10px; }
+        .workflow-arrow { display: none; }
+
+        /* SCALE PROOF */
+        #scale { padding: 128px 0; border-top: 1px solid var(--border); background: var(--surface); }
+        .scale-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .scale-numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+        .scale-num-card { background: var(--void); padding: 40px 32px; position: relative; overflow: hidden; }
+        .scale-num-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--pink); }
+        .scale-big { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5vw, 5.5rem); line-height: .85; color: var(--cream); }
+        .scale-big span { color: var(--pink); }
+        .scale-small { font-size: .7rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--cream-dim); margin-top: 10px; }
+
+        /* PROCESS STEPS */
+        #process { padding: 128px 0; }
+        .process-steps { display: flex; flex-direction: column; margin-top: 80px; }
+        .process-step { display: grid; grid-template-columns: 80px 1fr 1fr; gap: 0 64px; padding: 56px 0; border-top: 1px solid var(--border); align-items: start; }
+        .process-step:last-child { border-bottom: 1px solid var(--border); }
+        .step-num { font-family: 'Bebas Neue', sans-serif; font-size: .85rem; letter-spacing: .2em; color: var(--pink); padding-top: 6px; }
+        .step-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem,3vw,3rem); letter-spacing: .03em; color: var(--cream); line-height: 1; }
+        .step-desc { font-size: .9rem; line-height: 1.85; color: var(--cream-dim); padding-top: 4px; }
+
+        /* COMPARISON TABLE */
+        #comparison { padding: 128px 0; border-top: 1px solid var(--border); }
+        .comparison-table { margin-top: 64px; }
+        .ct-header { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3px; margin-bottom: 3px; }
+        .ct-col-label { padding: 20px 28px; font-size: .6rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+        .ct-col-label.traditional { color: var(--cream-dim); background: rgba(244,240,232,.04); }
+        .ct-col-label.augmented { color: var(--void); background: var(--pink); }
+        .ct-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3px; margin-bottom: 3px; }
+        .ct-cell { padding: 24px 28px; font-size: .85rem; }
+        .ct-metric { background: var(--surface); color: var(--cream); font-weight: 500; }
+        .ct-traditional { background: rgba(244,240,232,.03); color: var(--cream-dim); }
+        .ct-augmented { background: rgba(0,194,255,.07); color: var(--cream); border-left: 2px solid var(--pink); }
+        .ct-augmented.win { color: var(--pink); font-weight: 600; }
+
+        /* GALLERY */
+        #gallery { padding: 0 0 128px; border-top: 1px solid var(--border); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 3px; }
+        .g-item { overflow: hidden; position: relative; }
+        .g-item:nth-child(1) { grid-column: span 12; aspect-ratio: 21/8; }
+        .g-item:nth-child(2) { grid-column: span 6; aspect-ratio: 16/9; }
+        .g-item:nth-child(3) { grid-column: span 6; aspect-ratio: 16/9; }
+        .g-fill { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+        .g-item:nth-child(1) .g-fill { background: linear-gradient(135deg,#07071C 0%,#0a1a3a 40%,rgba(0,194,255,.15) 100%); }
+        .g-item:nth-child(2) .g-fill { background: linear-gradient(145deg,#07071C 0%,#0d2040 100%); }
+        .g-item:nth-child(3) .g-fill { background: linear-gradient(145deg,#07071C 0%,rgba(0,194,255,.1) 100%); }
+        .g-flow { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; padding: 40px; width: 100%; }
+        .g-flow-node { aspect-ratio: 1; border: 1px solid rgba(0,194,255,.2); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: .65rem; letter-spacing: .1em; color: rgba(0,194,255,.5); text-align: center; line-height: 1.2; }
+        .g-flow-node.active { border-color: var(--pink); color: var(--pink); background: rgba(0,194,255,.06); }
+        .g-cap { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 20px; background: linear-gradient(to top,rgba(7,7,28,.85) 0%,transparent 100%); font-size: .62rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--cream-dim); z-index: 2; }
+
+        /* METRICS */
+        #metrics { padding: 128px 0; background: var(--surface); border-top: 1px solid var(--border); }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; margin-top: 64px; }
+        .metric-card { background: var(--void); padding: 52px 40px; position: relative; overflow: hidden; }
+        .metric-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--pink); }
+        .metric-num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,4vw,5rem); line-height: .8; letter-spacing: .01em; color: var(--cream); margin-bottom: 8px; }
+        .metric-num span { color: var(--pink); }
+        .metric-label { font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; }
+        .metric-desc { font-size: .82rem; line-height: 1.75; color: var(--cream-dim); }
+
+        /* TAKEAWAYS */
+        #takeaways { padding: 128px 0; border-top: 1px solid var(--border); }
+        .takeaways-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 120px; align-items: start; }
+        .takeaways-sticky { position: sticky; top: 140px; }
+        .takeaways-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,5.5vw,6rem); line-height: .9; letter-spacing: .02em; color: var(--cream); }
+        .takeaways-blurb { font-size: .9rem; line-height: 1.8; color: var(--cream-dim); margin-top: 24px; }
+        .takeaway-list { display: flex; flex-direction: column; }
+        .takeaway-item { padding: 40px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 40px 1fr; gap: 28px; align-items: start; }
+        .takeaway-item:first-child { border-top: 1px solid var(--border); }
+        .takeaway-icon { width: 40px; height: 40px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 4px; }
+        .takeaway-icon svg { color: var(--pink); }
+        .takeaway-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .04em; color: var(--cream); margin-bottom: 10px; }
+        .takeaway-text { font-size: .85rem; line-height: 1.8; color: var(--cream-dim); }
+
+        /* CTA */
+        #cta-block { padding: 0 0 128px; border-top: 1px solid var(--border); }
+        .cta-card { background: var(--pink); padding: 100px 80px; display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; margin-top: 0; }
+        .cta-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 7.5rem); line-height: .9; letter-spacing: .02em; color: var(--void); }
+        .cta-right { text-align: right; flex-shrink: 0; }
+        .cta-sub { font-size: .72rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: rgba(7,7,28,.45); margin-bottom: 20px; }
+        .btn-email { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: .06em; color: var(--void); text-decoration: none; border-bottom: 2px solid rgba(7,7,28,.3); padding-bottom: 3px; display: inline-block; transition: border-color .2s, opacity .2s; }
+        .btn-email:hover { opacity: .55; border-color: transparent; }
+
+        footer { background: var(--void); border-top: 2px solid var(--pink); padding: 72px 48px 44px; }
+        .footer-inner { max-width: 1320px; margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding-bottom: 56px; border-bottom: 1px solid var(--border); margin-bottom: 36px; align-items: start; }
+        .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; letter-spacing: .06em; color: var(--cream); text-decoration: none; display: block; margin-bottom: 18px; }
+        .footer-tagline { font-size: .82rem; color: var(--cream-dim); line-height: 1.8; max-width: 340px; }
+        .footer-right { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding-top: 8px; }
+        .footer-col h4 { font-size: .62rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--pink); margin-bottom: 24px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+        .footer-col ul li a { font-size: .85rem; color: var(--cream-dim); text-decoration: none; transition: color .2s; }
+        .footer-col ul li a:hover { color: var(--cream); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+        .footer-bottom p { font-size: .7rem; color: var(--cream-faint); letter-spacing: .06em; }
+
+        @media (max-width: 1024px) {
+            .two-col, .takeaways-grid, .scale-grid { grid-template-columns: 1fr; gap: 48px; }
+            .workflow-stages { grid-template-columns: 1fr 1fr; }
+            .process-step { grid-template-columns: 60px 1fr; }
+            .step-desc { grid-column: 2; }
+            .metrics-grid { grid-template-columns: 1fr 1fr; }
+            .takeaways-sticky { position: static; }
+            .g-item:nth-child(n) { grid-column: span 12; }
+            .cta-card { grid-template-columns: 1fr; padding: 72px 40px; }
+            .cta-right { text-align: left; }
+        }
+        @media (max-width: 860px) {
+            #project-hero { padding: 0 24px 56px; }
+            .hero-back { left: 24px; }
+            .hero-meta-bar { grid-template-columns: 1fr 1fr; }
+            .workflow-stages { grid-template-columns: 1fr; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .ct-header, .ct-row { grid-template-columns: 1fr; }
+            .ct-col-label.traditional { display: none; }
+            .ct-traditional { display: none; }
+            nav { padding: 22px 24px; } nav.scrolled { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .inner { padding: 0 24px; }
+        }
+        @media (max-width: 640px) {
+            .project-title { font-size: clamp(3rem,13vw,5rem); }
+            .hero-meta-bar { grid-template-columns: 1fr; }
+            .meta-item { border-right: none !important; padding: 16px 0; border-top: 1px solid var(--border); }
+            .scale-numbers { grid-template-columns: 1fr; }
+            footer { padding: 56px 24px 36px; }
+            .footer-top { grid-template-columns: 1fr; gap: 48px; }
+            .footer-right { grid-template-columns: 1fr; }
+            .cta-card { padding: 60px 28px; }
+        }
+    
+        /* PAGE TRANSITIONS */
+        #pt-overlay {
+            position: fixed; inset: 0; background: #07071C;
+            z-index: 99999; opacity: 1; pointer-events: none;
+            transition: opacity 220ms ease;
+        }
+        #pt-overlay.pt-out { opacity: 0; }
+        
+        /* ── MOBILE MENU ── */
+        .nav-burger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: 1px solid rgba(244,240,232,.08); border-radius: 8px; cursor: none; padding: 0; flex-shrink: 0; }
+        .nav-burger span { display: block; width: 18px; height: 1.5px; background: #F4F0E8; border-radius: 2px; transition: transform .28s cubic-bezier(.4,0,.2,1), opacity .2s; }
+        .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        .mob-menu { position: fixed; inset: 0; background: #07071C; z-index: 150; display: flex; flex-direction: column; padding: 0 28px 48px; overflow-y: auto; transform: translateX(100%); transition: transform .42s cubic-bezier(.16,1,.3,1); border-left: 1px solid rgba(244,240,232,.08); }
+        .mob-menu.open { transform: translateX(0); }
+        .mob-header { display: flex; align-items: center; justify-content: space-between; padding: 26px 0 0; margin-bottom: 36px; }
+        .mob-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .08em; color: #F4F0E8; text-decoration: none; }
+        .mob-close { width: 40px; height: 40px; background: none; border: 1px solid rgba(244,240,232,.08); border-radius: 50%; color: rgba(244,240,232,.62); font-size: 1rem; cursor: none; display: flex; align-items: center; justify-content: center; transition: border-color .2s, color .2s; }
+        .mob-close:hover { border-color: #00C2FF; color: #00C2FF; }
+        .mob-links { flex: 1; }
+        .mob-link { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid rgba(244,240,232,.08); text-decoration: none; font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; letter-spacing: .03em; color: #F4F0E8; line-height: 1; transition: color .2s; }
+        .mob-link:first-child { border-top: 1px solid rgba(244,240,232,.08); }
+        .mob-link:hover { color: #00C2FF; }
+        .mob-link svg { color: rgba(244,240,232,.22); flex-shrink: 0; transition: color .2s, transform .2s; }
+        .mob-link:hover svg { color: #00C2FF; transform: translate(3px,-3px); }
+        .mob-num { font-size: .7rem; letter-spacing: .18em; color: #00C2FF; width: 22px; flex-shrink: 0; }
+        .mob-cta { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .1em; color: #07071C; background: #00C2FF; text-decoration: none; padding: 18px 32px; border-radius: 100px; display: block; text-align: center; margin-top: 32px; transition: background .2s; }
+        .mob-cta:hover { background: #F4F0E8; }
+        @media(max-width:860px) { .nav-burger { display: flex; } }
+        </style>
+</head>
+<body>
+<div class="c-dot" id="cDot"></div>
+<div class="c-ring" id="cRing"></div>
+
+<nav id="mainNav">
+    <a href="index.html" class="nav-logo">bar.studio</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#services">Capabilities</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://www.linkedin.com/in/bar-fainshtein-67172a207/" target="_blank" rel="noopener" class="nav-linkedin"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a></li>
+    </ul>
+    <a href="index.html#cta" class="nav-cta">Work With Me</a>
+
+    <button class="nav-burger" id="navBurger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+    <div class="mob-header">
+        <a href="index.html" class="mob-logo">bar.studio</a>
+        <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
+    </div>
+    <div class="mob-links">
+        <a href="la-liga.html" class="mob-link"><span class="mob-num">01</span><span>La Liga Israel</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="ifa.html" class="mob-link"><span class="mob-num">02</span><span>Israel Football Assoc.</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="special-olympics.html" class="mob-link"><span class="mob-num">03</span><span>Special Olympics Israel</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="paralympics.html" class="mob-link"><span class="mob-num">04</span><span>Israel Paralympic</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="ai-production.html" class="mob-link"><span class="mob-num">05</span><span>AI Creative Production</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="about.html" class="mob-link"><span class="mob-num"></span><span>About</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+    </div>
+    <a href="mailto:fainshteinbar@gmail.com" class="mob-cta">Work With Me</a>
+</div>
+
+<section id="project-hero">
+    <div class="hero-bg-grad"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-watermark" aria-hidden="true">AI</div>
+    <a href="index.html" class="hero-back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>All Work</a>
+    <div class="hero-content">
+        <div class="hero-eyebrow">AI-Augmented Production · Ongoing</div>
+        <h1 class="project-title">AI-Augmented<br>Creative</h1>
+        <div class="project-subtitle">Production System</div>
+        <div class="hero-meta-bar">
+            <div class="meta-item"><div class="meta-label">Context</div><div class="meta-value">Applied across all clients<br>and production pipelines</div></div>
+            <div class="meta-item"><div class="meta-label">My Role</div><div class="meta-value">Workflow Architect<br>Creative Director</div></div>
+            <div class="meta-item"><div class="meta-label">Tools Integrated</div><div class="meta-value">Midjourney · Runway · GPT-4<br>Claude · Custom Prompt Systems</div></div>
+            <div class="meta-item"><div class="meta-label">Output Scale</div><div class="meta-value">10× content volume<br>same team size</div></div>
+        </div>
+    </div>
+</section>
+
+<section id="intro">
+    <div class="inner">
+        <div class="two-col">
+            <div class="reveal-left">
+                <span class="s-label">The Capability</span>
+                <h2 class="section-headline">I Built the<br>System That<br>Runs the Work.</h2>
+            </div>
+            <div class="reveal">
+                <div class="body-copy">
+                    <p>Every sports organization I've worked with faces the same production problem: the calendar never stops, the demand for content never stops, and the budget for headcount always has a ceiling. <strong>The answer isn't to hire more people. It's to build smarter infrastructure.</strong></p>
+                    <p>I've spent three years building and refining AI-augmented production workflows that allow a lean creative team to produce at the volume and quality of a much larger operation. This isn't about replacing creativity with automation. It's about removing the friction between creative direction and finished output — so the human energy goes where it matters most.</p>
+                    <p>The system I built is deployed across La Liga Israel, Winner League, and other clients. It's the reason we produced over 1,000 pieces of content per month at La Liga Israel with a small team. It's the reason our engagement metrics outperformed organizations running teams three times our size. And it's a capability I bring to any senior creative leadership role.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="mandate">
+    <div class="inner">
+        <div class="reveal">
+            <span class="s-label">The Design Principle</span>
+            <p class="mandate-quote">"AI doesn't replace creative direction. It removes the bottleneck between the idea and the asset — so the director can direct more, not <em>produce less.</em>"</p>
+            <p class="mandate-sub">— How I position AI in every production workflow I build.</p>
+        </div>
+    </div>
+</section>
+
+<section id="workflow">
+    <div class="inner">
+        <div class="reveal">
+            <span class="s-label">The System</span>
+            <h2 class="section-title">How the Workflow<br>Actually Works</h2>
+        </div>
+        <div class="workflow-diagram reveal">
+            <div class="workflow-stages">
+                <div class="w-stage">
+                    <div class="w-num"><div class="w-dot"></div>Stage 01</div>
+                    <div class="w-name">Creative Brief</div>
+                    <div class="w-desc">Every workflow starts with human creative direction. I define the concept, the tone, the brand guardrails, and the specific output required. AI cannot brief itself — this stage is entirely my work.</div>
+                    <div class="w-tag">Human-Led</div>
+                </div>
+                <div class="w-stage">
+                    <div class="w-num"><div class="w-dot"></div>Stage 02</div>
+                    <div class="w-name">Prompt Engineering</div>
+                    <div class="w-desc">I translate the creative brief into a structured prompt architecture — a system of instructions designed to produce on-brand output consistently. I build prompt libraries for each client that encode their visual DNA into reusable templates.</div>
+                    <div class="w-tag">Director + AI</div>
+                </div>
+                <div class="w-stage">
+                    <div class="w-num"><div class="w-dot"></div>Stage 03</div>
+                    <div class="w-name">AI Generation</div>
+                    <div class="w-desc">The generation stage runs at scale — images, copy variants, motion concepts, layout explorations. Volume is the point here. I generate 20–50 variants where a manual workflow would produce 3–5, then curate to the strongest candidates.</div>
+                    <div class="w-tag">AI-Accelerated</div>
+                </div>
+                <div class="w-stage">
+                    <div class="w-num"><div class="w-dot"></div>Stage 04</div>
+                    <div class="w-name">Editorial Control</div>
+                    <div class="w-desc">I review every output against the brand brief before anything enters production. This is non-negotiable. AI generates — I decide. The quality gate is human, and the standard it holds is exactly the same as a fully manual pipeline.</div>
+                    <div class="w-tag">Human-Led</div>
+                </div>
+                <div class="w-stage">
+                    <div class="w-num"><div class="w-dot"></div>Stage 05</div>
+                    <div class="w-name">Production & Deploy</div>
+                    <div class="w-desc">Approved assets enter the production pipeline: final formatting, caption generation, scheduling. This stage is where the 10× efficiency gain compounds — a single approved direction becomes 20 platform-ready assets in the time a manual process would finish 2.</div>
+                    <div class="w-tag">AI-Accelerated</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="scale">
+    <div class="inner">
+        <div class="scale-grid">
+            <div class="reveal-left">
+                <span class="s-label">The Scale Proof</span>
+                <h2 class="section-title">What 10× Actually<br>Looks Like.</h2>
+                <p style="font-size:.9rem;line-height:1.8;color:var(--cream-dim);margin-top:24px;">These numbers come from real production across real clients. Not hypothetical workflow projections — actual output tracked against industry benchmarks for comparable team sizes.</p>
+            </div>
+            <div class="scale-numbers reveal">
+                <div class="scale-num-card">
+                    <div class="scale-big">1,000<span>+</span></div>
+                    <div class="scale-small">Content pieces per month<br>La Liga Israel · 3-person team</div>
+                </div>
+                <div class="scale-num-card">
+                    <div class="scale-big">10<span>×</span></div>
+                    <div class="scale-small">Output vs. comparable<br>manual team size</div>
+                </div>
+                <div class="scale-num-card">
+                    <div class="scale-big">60<span>%</span></div>
+                    <div class="scale-small">Reduction in time-to-publish<br>for campaign assets</div>
+                </div>
+                <div class="scale-num-card">
+                    <div class="scale-big">0<span>%</span></div>
+                    <div class="scale-small">Drop in brand compliance<br>or quality metrics</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="process">
+    <div class="inner">
+        <div class="reveal">
+            <span class="s-label">What I Actually Do</span>
+            <h2 class="section-title">The Director's<br>Role in an AI<br>Pipeline</h2>
+        </div>
+        <div class="process-steps">
+            <div class="process-step reveal">
+                <span class="step-num">01</span>
+                <h3 class="step-name">Prompt System Architecture</h3>
+                <p class="step-desc">I design the prompt infrastructure for each client — not one-off prompts, but reusable, parameterized prompt systems that encode the brand's visual DNA. A well-built prompt library means every team member can generate on-brand assets without requiring senior art direction on each output. I build, maintain, and update these systems as brand guidelines evolve.</p>
+            </div>
+            <div class="process-step reveal">
+                <span class="step-num">02</span>
+                <h3 class="step-name">Quality Gate Design</h3>
+                <p class="step-desc">The most important structural decision in any AI pipeline is where the human review points sit. I design quality gates that are tight enough to catch off-brand output and fast enough to maintain production velocity. For La Liga Israel, I built a three-stage review process that kept brand compliance at 100% while adding less than 15 minutes to each asset's production cycle.</p>
+            </div>
+            <div class="process-step reveal">
+                <span class="step-num">03</span>
+                <h3 class="step-name">AI Tool Integration</h3>
+                <p class="step-desc">I work across the full stack of current AI creative tools — Midjourney and Stable Diffusion for imagery, Runway and Pika for motion, GPT-4 and Claude for copy and copy variants, custom API integrations for scheduling and formatting automation. I evaluate new tools against specific production needs rather than adopting for novelty — and I know when a manual process is faster.</p>
+            </div>
+            <div class="process-step reveal">
+                <span class="step-num">04</span>
+                <h3 class="step-name">Team Training & Workflow Documentation</h3>
+                <p class="step-desc">An AI workflow that only I can operate isn't a system — it's a dependency. I build every pipeline to be teachable and documented. Junior team members can produce senior-level output through the guardrails I build. This is the multiplier effect: one well-designed system scales the capability of every person who uses it, permanently.</p>
+            </div>
+            <div class="process-step reveal">
+                <span class="step-num">05</span>
+                <h3 class="step-name">Performance Analysis & Iteration</h3>
+                <p class="step-desc">I track which AI-assisted content formats perform against which manual formats — and use that data to refine both the prompt systems and the editorial criteria. The La Liga Israel engagement data didn't just validate the workflow; it showed me exactly which types of AI-assisted content were outperforming manual production and why. That learning loop is how the system improves continuously rather than becoming stale.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="comparison">
+    <div class="inner">
+        <div class="reveal">
+            <span class="s-label">The Business Case</span>
+            <h2 class="section-title">Traditional vs.<br>AI-Augmented</h2>
+        </div>
+        <div class="comparison-table reveal">
+            <div class="ct-header">
+                <div class="ct-col-label" style="background:transparent;"></div>
+                <div class="ct-col-label traditional">Traditional Pipeline</div>
+                <div class="ct-col-label augmented">AI-Augmented Pipeline</div>
+            </div>
+            <div class="ct-row">
+                <div class="ct-cell ct-metric">Monthly content output (3-person team)</div>
+                <div class="ct-cell ct-traditional">80–120 pieces</div>
+                <div class="ct-cell ct-augmented win">1,000+ pieces</div>
+            </div>
+            <div class="ct-row">
+                <div class="ct-cell ct-metric">Time from brief to publish-ready asset</div>
+                <div class="ct-cell ct-traditional">2–4 hours</div>
+                <div class="ct-cell ct-augmented win">20–40 minutes</div>
+            </div>
+            <div class="ct-row">
+                <div class="ct-cell ct-metric">Creative variants per campaign</div>
+                <div class="ct-cell ct-traditional">3–6 variants</div>
+                <div class="ct-cell ct-augmented win">20–50 variants</div>
+            </div>
+            <div class="ct-row">
+                <div class="ct-cell ct-metric">Brand compliance rate</div>
+                <div class="ct-cell ct-traditional">~85% (human error)</div>
+                <div class="ct-cell ct-augmented win">100% (systematic QG)</div>
+            </div>
+            <div class="ct-row">
+                <div class="ct-cell ct-metric">Cost per piece of content</div>
+                <div class="ct-cell ct-traditional">High (hourly rate × hours)</div>
+                <div class="ct-cell ct-augmented win">Fraction of manual cost</div>
+            </div>
+            <div class="ct-row">
+                <div class="ct-cell ct-metric">Creative director's time</div>
+                <div class="ct-cell ct-traditional">Producing</div>
+                <div class="ct-cell ct-augmented win">Directing</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="gallery">
+    <div class="gallery-grid">
+        <div class="g-item reveal">
+            <div class="g-fill">
+                <div class="g-flow">
+                    <div class="g-flow-node active">Brief</div>
+                    <div class="g-flow-node">→</div>
+                    <div class="g-flow-node active">Prompt System</div>
+                    <div class="g-flow-node">→</div>
+                    <div class="g-flow-node active">Generation</div>
+                    <div class="g-flow-node">→</div>
+                    <div class="g-flow-node active">QG Review</div>
+                    <div class="g-flow-node">→</div>
+                    <div class="g-flow-node active">Deploy</div>
+                    <div class="g-flow-node active">1 Brief</div>
+                    <div class="g-flow-node"></div>
+                    <div class="g-flow-node active">50 Variants</div>
+                    <div class="g-flow-node"></div>
+                    <div class="g-flow-node active">1,000+/mo</div>
+                </div>
+            </div>
+            <span class="g-cap">Production Workflow Architecture</span>
+        </div>
+        <div class="g-item reveal">
+            <div class="g-fill" style="flex-direction:column;gap:16px;padding:40px;">
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--pink);line-height:1;">La Liga Israel</div>
+                <div style="font-size:.75rem;color:var(--cream-dim);letter-spacing:.12em;text-transform:uppercase;">Live Client · 1,000+ pieces/month</div>
+                <div style="width:100%;height:2px;background:rgba(0,194,255,.2);"></div>
+                <div style="font-size:.82rem;color:var(--cream-dim);line-height:1.7;">3-person team. Full matchday cycle covered. Brand compliance maintained at 100% across all AI-assisted content.</div>
+            </div>
+            <span class="g-cap">Case Study: La Liga Israel Production System</span>
+        </div>
+        <div class="g-item reveal">
+            <div class="g-fill" style="flex-direction:column;gap:16px;padding:40px;">
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--cream);line-height:1;">Winner League</div>
+                <div style="font-size:.75rem;color:var(--cream-dim);letter-spacing:.12em;text-transform:uppercase;">Live Client · 12M+ Impressions</div>
+                <div style="width:100%;height:2px;background:rgba(244,240,232,.1);"></div>
+                <div style="font-size:.82rem;color:var(--cream-dim);line-height:1.7;">420% follower growth. AI-assisted content generation enabled real-time matchday coverage at scale previously impossible for the team size.</div>
+            </div>
+            <span class="g-cap">Case Study: Winner League Production System</span>
+        </div>
+    </div>
+</section>
+
+<section id="metrics">
+    <div class="inner">
+        <div class="reveal">
+            <span class="s-label">Proven Outcomes</span>
+            <h2 class="section-title">The Numbers<br>Are Real.</h2>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card reveal">
+                <div class="metric-label">Output Scale Factor</div>
+                <div class="metric-num" data-count="10">10<span>×</span></div>
+                <div class="metric-desc">Content output versus a comparable manual team size — achieved through the prompt systems, quality gate architecture, and production pipelines I designed and operate.</div>
+            </div>
+            <div class="metric-card reveal">
+                <div class="metric-label">Monthly Content Volume</div>
+                <div class="metric-num" data-count="1000">1,000<span>+</span></div>
+                <div class="metric-desc">Pieces produced monthly at La Liga Israel through the AI-augmented workflow I built — maintained at full brand compliance with a three-person team. Source: Sporta Digital production records.</div>
+            </div>
+            <div class="metric-card reveal">
+                <div class="metric-label">Quality Standard</div>
+                <div class="metric-num">Same<span>.</span></div>
+                <div class="metric-desc">AI augmentation increased volume. It did not reduce quality. Every piece passes the same brand compliance review as manual work — because the quality gate is human, not automated.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="takeaways">
+    <div class="inner">
+        <div class="takeaways-grid">
+            <div class="takeaways-sticky reveal-left">
+                <span class="s-label">What I've Learned</span>
+                <h2 class="takeaways-title">AI Changes<br>the Job,<br>Not the Role.</h2>
+                <p class="takeaways-blurb">Three years of building AI production systems across sports clients has taught me more about creative direction than it has about AI. The technology is a tool. The judgment about when to use it, how to constrain it, and what it cannot replace — that's the work.</p>
+            </div>
+            <div class="takeaway-list">
+                <div class="takeaway-item reveal">
+                    <div class="takeaway-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+                    <div>
+                        <div class="takeaway-name">The Brief Is More Important Than the Tool</div>
+                        <p class="takeaway-text">AI is only as good as the creative direction it receives. A weak brief produces unusable AI output regardless of which model you use. The investment in clear, specific, brand-anchored creative direction pays compound returns in an AI pipeline — because it runs at 10× the volume of a manual one.</p>
+                    </div>
+                </div>
+                <div class="takeaway-item reveal">
+                    <div class="takeaway-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                    <div>
+                        <div class="takeaway-name">Quality Gates Are the Whole Game</div>
+                        <p class="takeaway-text">The organizations that get AI production wrong skip the review stage. They assume AI output is good enough because it passes a visual check. The organizations that get it right build systematic quality gates — specific criteria, applied consistently, by humans who know the brand deeply. I design those gates before I design any prompt.</p>
+                    </div>
+                </div>
+                <div class="takeaway-item reveal">
+                    <div class="takeaway-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+                    <div>
+                        <div class="takeaway-name">The CD's Value Goes Up, Not Down</div>
+                        <p class="takeaway-text">The most common fear I hear from creative directors about AI: that it makes their role redundant. My experience is the opposite. When production is fast, the bottleneck shifts to creative judgment — which is exactly what a CD provides. AI doesn't replace the person who decides what's worth making. It makes that decision more consequential.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="cta-block">
+    <div class="inner">
+        <div class="cta-card reveal">
+            <h2 class="cta-headline">Open to Senior<br>Creative Leadership<br>in Global Sports.</h2>
+            <div class="cta-right">
+                <p class="cta-sub">Remote · Relocatable · Available Now</p>
+                <a href="mailto:fainshteinbar@gmail.com" class="btn-email">fainshteinbar@gmail.com</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div>
+                <a href="index.html" class="footer-logo">bar.studio</a>
+                <p class="footer-tagline">Creative Director specializing in sports brand systems and AI-augmented creative production. Building the identities that make sports organizations recognizable, memorable, and culturally relevant.</p>
+            </div>
+            <div class="footer-right">
+                <div class="footer-col">
+                    <h4>Case Studies</h4>
+                    <ul>
+                        <li><a href="la-liga.html">La Liga Israel</a></li>
+                        <li><a href="ifa.html">Israel Football Association</a></li>
+                        <li><a href="special-olympics.html">Special Olympics Israel</a></li>
+                        <li><a href="paralympics.html">Israel Paralympic Committee</a></li>
+                        <li><a href="ai-production.html">AI Creative Production</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="mailto:fainshteinbar@gmail.com">fainshteinbar@gmail.com</a></li>
+                        <li><a href="https://www.linkedin.com/in/bar-fainshtein-67172a207/" target="_blank" rel="noopener">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 bar.studio — Bar Fainshtein</p>
+            <p>Open to senior creative leadership opportunities in global sports.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function(){
+    var dot=document.getElementById('cDot'),ring=document.getElementById('cRing'),mx=-100,my=-100,rx=-100,ry=-100;
+    if(window.matchMedia('(pointer: fine)').matches){
+        document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+        (function tick(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+        document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('hovering');});el.addEventListener('mouseleave',function(){document.body.classList.remove('hovering');});});
+    } else { document.body.style.cursor='auto';dot.style.display='none';ring.style.display='none'; }
+    var nav=document.getElementById('mainNav');
+    window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+    /* STAGGERED REVEALS — siblings get incremental delay */
+    document.querySelectorAll('.reveal,.reveal-left').forEach(function(el){
+        var sibs=Array.from(el.parentNode.querySelectorAll('.reveal,.reveal-left'));
+        var idx=sibs.indexOf(el);
+        if(idx>0) el.style.transitionDelay=(idx*0.13)+'s';
+    });
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+    });},{threshold:.06,rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('.reveal,.reveal-left').forEach(function(el){io.observe(el);});
+
+    /* MANDATE WORD REVEAL */
+    var mqEl=document.querySelector('.mandate-quote');
+    var accentColor=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#00C2FF';
+    if(mqEl){
+        (function(){
+            var nodes=Array.from(mqEl.childNodes),frag=document.createDocumentFragment();
+            nodes.forEach(function(node){
+                if(node.nodeType===3){
+                    node.textContent.split(/(\s+)/).forEach(function(w){
+                        if(/\S/.test(w)){var s=document.createElement('span');s.className='m-word';s.textContent=w;frag.appendChild(s);}
+                        else if(w) frag.appendChild(document.createTextNode(w));
+                    });
+                } else if(node.nodeName==='EM'){
+                    node.textContent.split(/(\s+)/).forEach(function(w){
+                        if(/\S/.test(w)){var s=document.createElement('span');s.className='m-word';s.dataset.accent='1';s.textContent=w;frag.appendChild(s);}
+                        else if(w) frag.appendChild(document.createTextNode(w));
+                    });
+                } else { frag.appendChild(node.cloneNode(true)); }
+            });
+            while(mqEl.firstChild) mqEl.removeChild(mqEl.firstChild);
+            mqEl.appendChild(frag);
+        })();
+        function revealMQ(){
+            var rect=mqEl.getBoundingClientRect();
+            var prog=Math.max(0,Math.min(1,(window.innerHeight*0.88-rect.top)/(window.innerHeight*1.1)));
+            var words=mqEl.querySelectorAll('.m-word'),n=words.length;
+            words.forEach(function(w,i){
+                var p=Math.max(0,Math.min(1,(prog*(n+8)-i)/7));
+                if(w.dataset.accent){
+                    w.style.color=p>0.6 ? accentColor : 'rgba(244,240,232,'+(0.1+p*0.55)+')';
+                } else {
+                    w.style.color='rgba(244,240,232,'+(0.1+p*0.88)+')';
+                }
+            });
+        }
+        window.addEventListener('scroll',revealMQ,{passive:true});
+        revealMQ();
+    }
+
+    /* METRIC COUNTER ANIMATION */
+    var metricIO=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if(!e.isIntersecting) return;
+            metricIO.unobserve(e.target);
+            var el=e.target,target=parseInt(el.getAttribute('data-count'));
+            if(isNaN(target)) return;
+            var orig=el.innerHTML,numMatch=orig.match(/[\d,]+/);
+            if(!numMatch) return;
+            var t0=performance.now(),dur=2200;
+            (function step(now){
+                var t=Math.min(1,(now-t0)/dur);
+                var ease=1-Math.pow(1-t,3);
+                el.innerHTML=orig.replace(numMatch[0],Math.round(ease*target).toLocaleString('en-US'));
+                if(t<1) requestAnimationFrame(step);
+            })(t0);
+        });
+    },{threshold:.5});
+    document.querySelectorAll('.metric-num[data-count]').forEach(function(el){metricIO.observe(el);});
+})();
+</script>
+
+<script>
+(function(){
+    var ov = document.createElement('div');
+    ov.id = 'pt-overlay';
+    document.body.prepend(ov);
+    requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ ov.classList.add('pt-out'); });
+    });
+    document.addEventListener('click', function(e){
+        var a = e.target.closest('a[href]');
+        if (!a) return;
+        var h = a.getAttribute('href');
+        if (!h || h.startsWith('#') || h.startsWith('mailto') || h.startsWith('http') || h.startsWith('//') || a.target === '_blank') return;
+        e.preventDefault();
+        ov.classList.remove('pt-out');
+        setTimeout(function(){ window.location.href = h; }, 240);
+    });
+})();
+</script>
+
+</body>
+</html>
