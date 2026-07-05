@@ -762,15 +762,195 @@
         }
 
         .work-card:nth-child(3) .work-thumb-bg {
-            background: linear-gradient(145deg, #0a1f10 0%, #1a6b3a 100%)
+            background: linear-gradient(128deg, #2a1050 0%, #5B2B8F 44%, #E8641B 100%)
         }
 
         .work-card:nth-child(4) .work-thumb-bg {
-            background: linear-gradient(145deg, #1a1010 0%, #6b1f1f 100%)
+            background: linear-gradient(118deg, #060f2e 0%, #0a2a6e 58%, #0038B8 100%)
         }
 
         .work-card:nth-child(5) .work-thumb-bg {
-            background: linear-gradient(135deg, #1A1464 0%, #2a1a8a 50%, #e040ab 100%)
+            background: linear-gradient(135deg, #07071C 0%, #1A1464 100%)
+        }
+
+        /* ART-DIRECTED THUMBS (cards without photography yet) */
+        .wt-art {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none
+        }
+
+        .soi-ghost, .ipc-ghost {
+            position: absolute;
+            font-family: 'Bebas Neue', sans-serif;
+            color: rgba(244, 240, 232, .13);
+            letter-spacing: .04em;
+            line-height: 1;
+            white-space: nowrap
+        }
+
+        .soi-ghost {
+            font-size: clamp(4rem, 7vw, 6.5rem);
+            left: 26px;
+            bottom: 14px
+        }
+
+        .soi-tape {
+            position: absolute;
+            height: 13px;
+            background: var(--cream);
+            border-radius: 2px;
+            transition: transform .5s cubic-bezier(.16, 1, .3, 1)
+        }
+
+        .soi-tape-1 {
+            width: 46%;
+            left: -3%;
+            top: 34%;
+            transform: rotate(-13deg)
+        }
+
+        .soi-tape-2 {
+            width: 44%;
+            right: -3%;
+            top: 46%;
+            transform: rotate(-9deg);
+            background: #4FC3F7
+        }
+
+        .work-card:hover .soi-tape-1 { transform: rotate(-13deg) translateX(-10px) }
+        .work-card:hover .soi-tape-2 { transform: rotate(-9deg) translateX(10px) }
+
+        .soi-ring {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border: 3px solid rgba(232, 100, 27, .9);
+            border-radius: 50%;
+            top: -48px;
+            right: -36px
+        }
+
+        .ipc-ghost {
+            font-size: clamp(3rem, 5.5vw, 4.6rem);
+            left: 28px;
+            bottom: 16px
+        }
+
+        .ipc-line {
+            position: absolute;
+            height: 11px;
+            transform: skewX(-28deg);
+            transition: transform .5s cubic-bezier(.16, 1, .3, 1)
+        }
+
+        .ipc-line-1 { width: 44%; right: -2%; top: 24%; background: var(--cream) }
+        .ipc-line-2 { width: 30%; right: -2%; top: 40%; background: var(--pink) }
+        .ipc-line-3 { width: 17%; right: -2%; top: 56%; background: rgba(244, 240, 232, .35) }
+
+        .work-card:hover .ipc-line-1 { transform: skewX(-28deg) translateX(-16px) }
+        .work-card:hover .ipc-line-2 { transform: skewX(-28deg) translateX(-30px) }
+        .work-card:hover .ipc-line-3 { transform: skewX(-28deg) translateX(-44px) }
+
+        /* AI card — live production strip of real assets */
+        .wt-ai {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            display: flex
+        }
+
+        .ai-strip {
+            display: flex;
+            height: 100%;
+            width: max-content;
+            animation: aiStrip 52s linear infinite
+        }
+
+        .work-card:hover .ai-strip {
+            animation-play-state: paused
+        }
+
+        .ai-strip-half {
+            display: flex;
+            height: 100%
+        }
+
+        .ai-strip-half img {
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+            margin-right: 4px;
+            filter: saturate(.94)
+        }
+
+        @keyframes aiStrip {
+            to { transform: translateX(-50%) }
+        }
+
+        .ai-scan {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(90deg, rgba(7, 7, 28, .88) 0%, rgba(7, 7, 28, .12) 16%, rgba(7, 7, 28, .12) 84%, rgba(7, 7, 28, .88) 100%), linear-gradient(to bottom, rgba(7, 7, 28, .05) 55%, rgba(7, 7, 28, .6) 100%)
+        }
+
+        /* MATCH CLOCK — broadcast corner bug */
+        #matchClock {
+            position: fixed;
+            left: 22px;
+            bottom: 22px;
+            z-index: 90;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.05rem;
+            letter-spacing: .14em;
+            color: var(--cream);
+            background: rgba(7, 7, 28, .78);
+            border: 1px solid rgba(0, 194, 255, .35);
+            border-radius: 6px;
+            padding: 7px 13px 6px;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .35s, transform .35s;
+            pointer-events: none
+        }
+
+        #matchClock.on {
+            opacity: 1;
+            transform: none
+        }
+
+        #matchClock .mc-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--pink);
+            animation: mcPulse 2s ease-in-out infinite
+        }
+
+        #matchClock .mc-min {
+            color: var(--pink)
+        }
+
+        @keyframes mcPulse {
+            50% { opacity: .35 }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ai-strip { animation: none }
+            #matchClock .mc-dot { animation: none }
+        }
+
+        @media (max-width: 760px) {
+            #matchClock { display: none }
+            .soi-ghost { font-size: 3.4rem }
+            .ipc-ghost { font-size: 2.6rem }
         }
 
         .work-thumb-img {
@@ -1885,6 +2065,12 @@
         </button>
     </nav>
 
+    <div id="matchClock" aria-hidden="true">
+        <span class="mc-dot"></span>
+        <span>LIVE</span>
+        <span class="mc-min" id="mcMin">1'</span>
+    </div>
+
     <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
         <div class="mobile-menu-header">
             <a href="#" class="nav-logo">bar.studio</a>
@@ -2030,7 +2216,12 @@
                 <a href="special-olympics.html" class="work-card">
                     <div class="work-thumb">
                         <div class="work-thumb-bg"></div>
-                        <div class="work-thumb-mark">SOI</div>
+                        <div class="wt-art" aria-hidden="true">
+                            <span class="soi-ring"></span>
+                            <span class="soi-tape soi-tape-1"></span>
+                            <span class="soi-tape soi-tape-2"></span>
+                            <span class="soi-ghost">4,000+</span>
+                        </div>
                         <span class="work-num">03</span>
                     </div>
                     <div class="work-info">
@@ -2048,7 +2239,12 @@
                 <a href="paralympics.html" class="work-card">
                     <div class="work-thumb">
                         <div class="work-thumb-bg"></div>
-                        <div class="work-thumb-mark">IPC</div>
+                        <div class="wt-art" aria-hidden="true">
+                            <span class="ipc-line ipc-line-1"></span>
+                            <span class="ipc-line ipc-line-2"></span>
+                            <span class="ipc-line ipc-line-3"></span>
+                            <span class="ipc-ghost">TOKYO → PARIS</span>
+                        </div>
                         <span class="work-num">04</span>
                     </div>
                     <div class="work-info">
@@ -2066,7 +2262,35 @@
                 <a href="ai-production.html" class="work-card">
                     <div class="work-thumb">
                         <div class="work-thumb-bg"></div>
-                        <div class="work-thumb-mark">AI×</div>
+                        <div class="wt-ai" aria-hidden="true">
+                            <div class="ai-strip">
+                                <div class="ai-strip-half">
+                                    <img src="Images/sporta/2.jpg" alt="" loading="lazy">
+                                    <img src="Images/IFA/1.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/3.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/4.jpg" alt="" loading="lazy">
+                                    <img src="Images/IFA/2.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/5.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/6.jpg" alt="" loading="lazy">
+                                    <img src="Images/IFA/3.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/7.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/8.jpg" alt="" loading="lazy">
+                                </div>
+                                <div class="ai-strip-half">
+                                    <img src="Images/sporta/2.jpg" alt="" loading="lazy">
+                                    <img src="Images/IFA/1.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/3.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/4.jpg" alt="" loading="lazy">
+                                    <img src="Images/IFA/2.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/5.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/6.jpg" alt="" loading="lazy">
+                                    <img src="Images/IFA/3.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/7.jpg" alt="" loading="lazy">
+                                    <img src="Images/sporta/8.jpg" alt="" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="ai-scan"></div>
+                        </div>
                         <span class="work-num">05</span>
                     </div>
                     <div class="work-info">
@@ -2282,6 +2506,18 @@
             /* NAV */
             var nav = document.getElementById('mainNav');
             window.addEventListener('scroll', function () { nav.classList.toggle('scrolled', window.scrollY > 40) }, { passive: true });
+
+            /* MATCH CLOCK — scroll position as match minutes */
+            var mcEl = document.getElementById('matchClock');
+            var mcMin = document.getElementById('mcMin');
+            if (mcEl && mcMin) {
+                window.addEventListener('scroll', function () {
+                    var range = document.documentElement.scrollHeight - window.innerHeight;
+                    var m = range > 0 ? Math.round(window.scrollY / range * 90) : 0;
+                    mcMin.textContent = (m >= 90 ? "90'+" : m + "'");
+                    mcEl.classList.toggle('on', window.scrollY > window.innerHeight * .6);
+                }, { passive: true });
+            }
 
             /* HERO PARALLAX */
             var heroLetter = document.getElementById('heroBgLetter');
