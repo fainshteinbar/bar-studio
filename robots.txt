@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fainshteinbar.github.io/bar-studio/sitemap.xml

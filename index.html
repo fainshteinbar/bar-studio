@@ -5,6 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar Fainshtein — Creative Director | Sports Branding, Digital Campaigns & AI-Driven Fan Engagement</title>
+    <meta name="description" content="Sports creative director specializing in brand systems for federations, leagues, and AI-augmented content production. La Liga Israel, Israel Football Association, Special Olympics Israel. Based in Thailand, open to senior roles globally.">
+    <link rel="canonical" href="https://fainshteinbar.github.io/bar-studio/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bar Fainshtein — Creative Director | Sports Branding, Digital Campaigns & AI-Driven Fan Engagement">
+    <meta property="og:description" content="Sports creative director specializing in brand systems for federations, leagues, and AI-augmented content production. La Liga Israel, Israel Football Association, Special Olympics Israel. Based in Thailand, open to senior roles globally.">
+    <meta property="og:url" content="https://fainshteinbar.github.io/bar-studio/">
+    <meta property="og:image" content="https://fainshteinbar.github.io/bar-studio/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bar Fainshtein — Creative Director | Sports Branding, Digital Campaigns & AI-Driven Fan Engagement">
+    <meta name="twitter:description" content="Sports creative director specializing in brand systems for federations, leagues, and AI-augmented content production. La Liga Israel, Israel Football Association, Special Olympics Israel. Based in Thailand, open to senior roles globally.">
+    <meta name="twitter:image" content="https://fainshteinbar.github.io/bar-studio/og-image.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -730,6 +745,59 @@
             color: var(--void);
             padding: 5px 14px;
             border-radius: 100px
+        }
+
+        .work-flag.wip {
+            background: #f0ab3d
+        }
+
+        .work-card.wip {
+            cursor: default
+        }
+
+        .work-card.wip .work-thumb-bg,
+        .work-card.wip .wt-art,
+        .work-card.wip .wt-ai,
+        .work-card.wip .work-thumb-img {
+            filter: grayscale(.55) brightness(.7)
+        }
+
+        .work-card.wip:hover .work-thumb-bg,
+        .work-card.wip:hover .wt-art,
+        .work-card.wip:hover .work-thumb-img {
+            transform: none
+        }
+
+        .work-card.wip .work-arrow {
+            opacity: .15
+        }
+
+        .work-card.wip:hover .work-arrow {
+            transform: none
+        }
+
+        .mc-name.wip,
+        .fc-name.wip {
+            color: var(--cream-dim)
+        }
+
+        .mc-wip-tag,
+        .fc-wip-tag {
+            font-size: .58rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: #f0ab3d;
+            margin-inline-start: 8px;
+            font-weight: 700
+        }
+
+        .mobile-case-link.wip,
+        .footer-col ul li a.wip {
+            cursor: default
+        }
+
+        .mobile-case-link.wip .mc-arrow {
+            opacity: .2
         }
 
         .work-thumb {
@@ -1668,7 +1736,8 @@
             flex-shrink: 0
         }
 
-        .footer-col ul li a {
+        .footer-col ul li a,
+        .footer-col ul li .fc-name {
             font-size: .85rem;
             color: var(--cream-dim);
             text-decoration: none;
@@ -2087,21 +2156,18 @@
                 <span class="mc-name">Israel Football Association</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mc-arrow"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </a>
-            <a href="special-olympics.html" class="mobile-case-link">
+            <div class="mobile-case-link wip">
                 <span class="mc-num">03</span>
-                <span class="mc-name">Special Olympics Israel</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mc-arrow"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-            </a>
-            <a href="paralympics.html" class="mobile-case-link">
+                <span class="mc-name wip">Special Olympics Israel<span class="mc-wip-tag">WIP</span></span>
+            </div>
+            <div class="mobile-case-link wip">
                 <span class="mc-num">04</span>
-                <span class="mc-name">Israel Paralympic Committee</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mc-arrow"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-            </a>
-            <a href="ai-production.html" class="mobile-case-link">
+                <span class="mc-name wip">Israel Paralympic Committee<span class="mc-wip-tag">WIP</span></span>
+            </div>
+            <div class="mobile-case-link wip">
                 <span class="mc-num">05</span>
-                <span class="mc-name">AI Creative Production</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mc-arrow"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-            </a>
+                <span class="mc-name wip">AI Creative Production<span class="mc-wip-tag">WIP</span></span>
+            </div>
         </div>
         <a href="about.html" class="mobile-menu-cta" style="background:transparent;border:1px solid rgba(0,194,255,.35);color:var(--cream-dim);margin-bottom:12px">About</a>
         <a href="mailto:fainshteinbar@gmail.com" class="mobile-menu-cta">Work With Me</a>
@@ -2213,7 +2279,8 @@
                         </svg>
                     </div>
                 </a>
-                <a href="special-olympics.html" class="work-card">
+                <div class="work-card wip">
+                    <span class="work-flag wip">Still in Progress</span>
                     <div class="work-thumb">
                         <div class="work-thumb-bg"></div>
                         <div class="wt-art" aria-hidden="true">
@@ -2235,8 +2302,9 @@
                             <path d="M7 17L17 7M17 7H7M17 7v10" />
                         </svg>
                     </div>
-                </a>
-                <a href="paralympics.html" class="work-card">
+                </div>
+                <div class="work-card wip">
+                    <span class="work-flag wip">Still in Progress</span>
                     <div class="work-thumb">
                         <div class="work-thumb-bg"></div>
                         <div class="wt-art" aria-hidden="true">
@@ -2258,8 +2326,9 @@
                             <path d="M7 17L17 7M17 7H7M17 7v10" />
                         </svg>
                     </div>
-                </a>
-                <a href="ai-production.html" class="work-card">
+                </div>
+                <div class="work-card wip">
+                    <span class="work-flag wip">Still in Progress</span>
                     <div class="work-thumb">
                         <div class="work-thumb-bg"></div>
                         <div class="wt-ai" aria-hidden="true">
@@ -2304,7 +2373,7 @@
                             <path d="M7 17L17 7M17 7H7M17 7v10" />
                         </svg>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
     </section>
@@ -2409,7 +2478,6 @@
                 <p class="testimonial-text" id="testimonialText"></p>
                 <div class="testimonial-author" id="testimonialAuthor">
                     <div class="testimonial-name" id="testimonialName"></div>
-                    <div class="testimonial-role" id="testimonialRole"></div>
                 </div>
             </div>
             <div class="testimonial-controls">
@@ -2466,9 +2534,9 @@
                 <ul>
                     <li><span class="fc-num">01</span><a href="la-liga.html">La Liga Israel</a></li>
                     <li><span class="fc-num">02</span><a href="ifa.html">Israel Football Association</a></li>
-                    <li><span class="fc-num">03</span><a href="special-olympics.html">Special Olympics Israel</a></li>
-                    <li><span class="fc-num">04</span><a href="paralympics.html">Israel Paralympic Committee</a></li>
-                    <li><span class="fc-num">05</span><a href="ai-production.html">AI Creative Production</a></li>
+                    <li><span class="fc-num">03</span><span class="fc-name wip">Special Olympics Israel<span class="fc-wip-tag">WIP</span></span></li>
+                    <li><span class="fc-num">04</span><span class="fc-name wip">Israel Paralympic Committee<span class="fc-wip-tag">WIP</span></span></li>
+                    <li><span class="fc-num">05</span><span class="fc-name wip">AI Creative Production<span class="fc-wip-tag">WIP</span></span></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -2681,14 +2749,13 @@
 
             /* SCROLL-REVEAL testimonials */
             var testimonials = [
-                { text: "The brief was to unify three competitions under one federation without losing each one's identity. Bar came back with a brand architecture that solved a problem we hadn't fully articulated ourselves. What the Israel Football Association has now is a system that will outlast any single campaign.", name: "Alon Hazan", role: "Head of Marketing, Israel Football Association" },
-                { text: "Our content output tripled in four months without adding a single person to the team. Bar built the workflow, set the quality standards, and made sure every piece that went out still felt intentional. That kind of scale with that kind of control is genuinely rare.", name: "Noa Peretz", role: "Digital Director, Winner League Basketball" },
-                { text: "Working with Bar on the Special Olympics Israel identity was different from any creative engagement I've experienced. He understood immediately that this wasn't about disability — it was about athletic pride. The identity he delivered gave our athletes something to wear with confidence.", name: "Michal Katz", role: "Head of Communications, Special Olympics Israel" }
+                { text: "The brief was to unify three competitions under one federation without losing each one's identity. Bar came back with a brand architecture that solved a problem we hadn't fully articulated ourselves. What the Israel Football Association has now is a system that will outlast any single campaign.", org: "Israel Football Association" },
+                { text: "Our content output tripled in four months without adding a single person to the team. Bar built the workflow, set the quality standards, and made sure every piece that went out still felt intentional. That kind of scale with that kind of control is genuinely rare.", org: "Winner League Basketball" },
+                { text: "Working with Bar on the Special Olympics Israel identity was different from any creative engagement I've experienced. He understood immediately that this wasn't about disability — it was about athletic pride. The identity he delivered gave our athletes something to wear with confidence.", org: "Special Olympics Israel" }
             ];
             var current = 0;
             var tTextEl = document.getElementById('testimonialText');
             var tNameEl = document.getElementById('testimonialName');
-            var tRoleEl = document.getElementById('testimonialRole');
             var tAuthorEl = document.getElementById('testimonialAuthor');
             var tDots = document.querySelectorAll('.t-dot');
             var tSection = document.getElementById('testimonials');
@@ -2725,8 +2792,7 @@
                 var t = testimonials[idx];
                 tDots.forEach(function (d, i) { d.classList.toggle('active', i === idx) });
                 tTextEl.innerHTML = wrapWords(t.text);
-                tNameEl.textContent = t.name;
-                tRoleEl.textContent = t.role;
+                tNameEl.textContent = t.org;
                 applyWordReveal();
             }
 
