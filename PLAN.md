@@ -170,13 +170,13 @@ Chrome counts a video's poster or first frame as the LCP candidate. So: every ca
 
 ### 4.9 Bootstrap
 
-Run the workflow by hand (`workflow_dispatch`) as soon as the token exists; it backfills all historical media. If the token is delayed, phase 2 uses placeholder loops generated locally with ffmpeg (`assets/placeholders/`, committed, small).
+Run the workflow by hand (`workflow_dispatch`) as soon as the token exists; it backfills all historical media. Done 2026-10-12: the first CI sync backfilled all 17 Reels to Bunny; the phase 2 placeholders and fixture scripts were then removed.
 
 Sources: developers.facebook.com/docs/instagram-platform (overview, instagram-api-with-instagram-login, get-started, business-login, app-review, reference/instagram-media, reference/instagram-media/insights, oembed, changelog), developers.facebook.com/blog/post/2024/09/04/update-on-instagram-basic-display-api, developers.facebook.com/docs/graph-api/overview/rate-limiting, developers.cloudflare.com/r2 (pricing, public-buckets, platform/limits, api/tokens, examples/rclone), developers.cloudflare.com/stream/pricing, bunny.net/pricing (storage, cdn, stream), cloudinary.com/pricing, docs.github.com (pages limits, workflow-syntax, events-that-trigger-workflows, disabling-and-enabling-a-workflow, fine-grained PAT permissions, dependency-caching, notifications-for-workflow-runs, actions billing), cli.github.com/manual/gh_secret_set, github.com/actions/runner-images Ubuntu2404-Readme, github.blog/changelog/2026-09-17-ubuntu-26, web.dev/articles/lcp, web.dev/articles/optimize-lcp, web.dev/articles/fast-playback-with-preload, webkit.org/blog/6784.
 
 ## 5. Owner setup and upkeep (phase 3, Bunny)
 
-Secrets are only ever typed into `gh secret set NAME --repo fainshteinbar/bar-studio` (hidden prompt), never into a chat.
+Secrets never go into a chat. They are copied in the browser and stored with `pbpaste | tr -d '[:space:]' | gh secret set NAME --repo fainshteinbar/bar-studio` (the hidden paste prompt of plain `gh secret set` proved unreliable in the app's terminal); the clipboard is cleared afterwards.
 
 | Name | Kind | What it is | Who sets it |
 |---|---|---|---|
@@ -204,7 +204,7 @@ src/                    page templates (index.html + partials) with {{i18n.key}}
 i18n/he.json, en.json   every string, including meta, OG, alt text
 i18n/site.json          WHATSAPP_NUMBER, email, instagram handle, media base URL
 data/instagram.json     manifest written by the sync job; data/overrides.json (lanes, hero picks)
-assets/css|js|fonts|img|placeholders
+assets/css|js|fonts|img
 scripts/build.mjs       Node, zero deps: renders / (he, dir=rtl) and /en/ (en, dir=ltr), injects manifest, hreflang, per-language meta, JSON-LD
 scripts/ig-sync.mjs     fetch → diff → download → ffmpeg (preview, full, rail) + poster → Bunny upload → translate → manifest
 scripts/shots.mjs       Playwright: screenshots of given URLs at 390 and 1440 px, he + en
@@ -224,6 +224,8 @@ directions/1..5/        phase 2 only
 - `scripts/shots.mjs` captures 5 × {390, 1440} × {he, en} = 20 screenshots into `directions/shots/`. Pick the strongest with reasons referring to the screenshots. Stop at the checkpoint.
 
 **Status (2026-10-12):** phase 2 done and committed, with six directions. Direction 6 ("current site, evolved") was added at Bar's request, along with `scripts/import-reels.mjs` for swapping real Reels into every direction. Comparison, live-site audit, Lighthouse table and the recommendation (6, with 1 Matchday a close second) are in `directions/README.md`. Bar chose direction 6 as the base with a work-first premise (genre.ai structure, Dennis craft). The 14 rules were confirmed and direction 6 was rebuilt on them with the real Reels (step 5, see the end of `directions/README.md`). Next: phase 3, the production build at `/` and `/en/` from this direction. The WhatsApp number lives in `i18n/site.json` (`972536224344`). Reusable pieces for phase 3: `assets/js/reels.js`, `assets/css/base.css`, `scripts/build-directions.mjs` (template engine and head/hreflang logic to lift into `scripts/build.mjs`), `scripts/shots.mjs`, `scripts/serve.mjs`, `scripts/make-placeholders.sh` (its hero-loop step is the 4.7 recipe).
+
+**Phase 3 status (2026-10-12):** owner setup done. All four secrets are set: Bunny password, Gemini key, the PAT (expires 2027-10-11) and a new Instagram token (issued 2026-10-12, expires 2026-12-11; the weekly refresh extends it). The token pasted in chat during phase 2 was not revoked by removing the app in Instagram, so it lapses on its own around 2026-12-11. First runs on `phase3`: token refresh green (skipped, token under 24 h old), sync green (17 Reels, 429K views, all media on `bfain-media.b-cdn.net`).
 
 ### 6.3 Phase 3: build (after Bar's choice)
 

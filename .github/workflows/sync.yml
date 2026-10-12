@@ -71,7 +71,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git add data/instagram.json data/translations.json index.html en/index.html sitemap.xml robots.txt
+          git add -A data/instagram.json data/translations.json index.html en/index.html sitemap.xml robots.txt assets/first
           if git diff --cached --quiet; then echo "No changes."; exit 0; fi
           git -c user.name="bfain-sync" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -q -m "Sync Instagram Reels ($(date -u +%F))"
           git push

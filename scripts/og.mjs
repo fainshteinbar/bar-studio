@@ -1,13 +1,13 @@
 // Renders the branded Open Graph images (1200×630) for both languages with real Chrome:
 //   assets/img/og-he.jpg, assets/img/og-en.jpg
 // Uses the logo, the headline in Narkiss Hadash Condensed (Adobe kit) and four Reel covers.
-// Run locally after a sync (needs media/ig posters):  node scripts/og.mjs
+// Run locally after a sync:  node scripts/og.mjs  (posters load from the media CDN)
 import { chromium } from 'playwright';
 import { readFileSync, writeFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
 import { serve } from './serve.mjs';
 
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
-const manifest = read(existsSync('data/instagram.local.json') ? 'data/instagram.local.json' : 'data/instagram.json');
+const manifest = read(process.env.MANIFEST === 'local' && existsSync('data/instagram.local.json') ? 'data/instagram.local.json' : 'data/instagram.json');
 const overrides = existsSync('data/overrides.json') ? read('data/overrides.json') : {};
 const byId = Object.fromEntries(manifest.items.map((i) => [i.id, i]));
 const picks = [...(overrides.rail || []).map((id) => byId[id]).filter(Boolean), ...manifest.items].filter((x, i, a) => x.poster_url && a.indexOf(x) === i).slice(0, 4);

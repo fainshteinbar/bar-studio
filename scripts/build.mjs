@@ -3,21 +3,22 @@
 //   -> index.html (he, rtl, the site root) and en/index.html (en, ltr), sitemap.xml, robots.txt
 // Zero dependencies (template engine below).
 //
-// Manifest: data/instagram.json (committed; written by the sync with Bunny CDN URLs). For local previews,
-// data/instagram.local.json (gitignored; media/ig paths) wins unless MANIFEST=committed.
+// Manifest: data/instagram.json (committed; written by the CI sync with Bunny CDN URLs). MANIFEST=local uses
+// data/instagram.local.json (gitignored, media/ig paths) for offline work.
+// The two first-screen rail posters (the LCP image and its neighbour) are copied into assets/first/ and served
+// from the site's own origin, so LCP never waits on a second connection to the media CDN.
 //
 // Template syntax
 //   {{path}}            escaped value      {{{path}}}  raw HTML
 //   {{#each path [n]}}…{{/each}}  loop (not nested); inside: {{it.x}}, {{n}} (01-based), {{i}}
 //   {{#if path}}…{{/if}}  {{#unless path}}…{{/unless}}  (nestable)
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { pitchOf, englishPitch, readTranslations } from './lib/captions.mjs';
 
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
 const site = read('i18n/site.json');
-// A local import (scripts/import-reels.mjs, gitignored) takes precedence over the committed fixture.
-const MANIFEST = !['fixture', 'committed'].includes(process.env.MANIFEST) && existsSync('data/instagram.local.json') ? 'data/instagram.local.json' : 'data/instagram.json';
+const MANIFEST = process.env.MANIFEST === 'local' && existsSync('data/instagram.local.json') ? 'data/instagram.local.json' : 'data/instagram.json';
 const manifest = read(MANIFEST);
 const fixture = read('data/instagram.json');
 // Logo for inlining: the delivered dark-background SVG, colours untouched; only the C2PA provenance block
@@ -32,6 +33,38 @@ const translations = readTranslations();
 const overridesAll = existsSync('data/overrides.json') ? read('data/overrides.json') : {};
 console.log(`manifest: ${MANIFEST}`);
 const langs = { he: read('i18n/he.json'), en: read('i18n/en.json') };
+
+// Featured = most-watched visible Reel; rail = data/overrides.json rail IDs, else the newest four others.
+function pickRail(items, ov) {
+  const featured = items.reduce((a, b) => ((b.views ?? -1) > (a?.views ?? -1) ? b : a), null);
+  const others = items.filter((x) => x !== featured);
+  const picked = (ov.rail || []).map((id) => others.find((x) => x.id === id)).filter(Boolean);
+  const rail = picked.length >= 2 ? picked.concat(others.filter((x) => !picked.includes(x))).slice(0, 4) : others.slice(0, 4);
+  return { featured, others, rail };
+}
+
+// Same-origin copies of the first-screen posters (downloaded from the CDN when missing; stale ones removed).
+const FIRST = 'assets/first';
+const firstLocal = {};
+{
+  const want = pickRail(manifest.items.filter((it) => it.visible !== false), overridesAll).rail.slice(0, 2).filter((it) => it.poster_url);
+  mkdirSync(FIRST, { recursive: true });
+  const keep = new Set(want.map((it) => `${it.id}.webp`));
+  for (const f of readdirSync(FIRST)) if (!keep.has(f)) rmSync(join(FIRST, f));
+  for (const it of want) {
+    const file = join(FIRST, `${it.id}.webp`);
+    if (!existsSync(file)) {
+      if (/^https?:/.test(it.poster_url)) {
+        const r = await fetch(it.poster_url);
+        if (!r.ok) { console.log(`   first-screen poster ${it.id}: HTTP ${r.status}, staying on the CDN`); continue; }
+        writeFileSync(file, Buffer.from(await r.arrayBuffer()));
+      } else if (existsSync(it.poster_url)) {
+        writeFileSync(file, readFileSync(it.poster_url));
+      } else continue;
+    }
+    firstLocal[it.id] = `${FIRST}/${it.id}.webp`;
+  }
+}
 
 const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -80,7 +113,7 @@ function context(lang, root, base) {
   const mediaHtml = (it, { eager = false, priority = false, railVideo = false } = {}) =>
     `<span class="reel-media" style="aspect-ratio:${it.width}/${it.height}">` +
     (eager
-      ? `<img class="reel-poster" src="${esc(url(it.poster_url))}" width="${it.width}" height="${it.height}" alt="" decoding="async" fetchpriority="${priority ? 'high' : 'low'}" style="background-image:url(${it.lqip})">`
+      ? `<img class="reel-poster" src="${esc(url(firstLocal[it.id] || it.poster_url))}" width="${it.width}" height="${it.height}" alt="" decoding="async" fetchpriority="${priority ? 'high' : 'low'}" style="background-image:url(${it.lqip})">`
       : `<img class="reel-poster" src="${it.lqip || 'data:,'}" data-poster="${esc(url(it.poster_url))}" width="${it.width}" height="${it.height}" alt="" decoding="async">`) +
     (it.has_video
       ? (railVideo && it.rail_url
@@ -122,12 +155,8 @@ function context(lang, root, base) {
       media_rail: mediaHtml(it, { eager: i < 2, priority: false }),
     };
   });
-  // Featured = most-watched visible Reel; rail = the newest four others (first poster is the LCP image).
-  const featured = items.reduce((a, b) => ((b.views ?? -1) > (a?.views ?? -1) ? b : a), null);
-  const others = items.filter((x) => x !== featured);
-  const ov = existsSync('data/overrides.json') ? read('data/overrides.json') : {};
-  const picked = (ov.rail || []).map((id) => others.find((x) => x.id === id)).filter(Boolean);
-  const railSrc = picked.length >= 2 ? picked.concat(others.filter((x) => !picked.includes(x))).slice(0, 4) : others.slice(0, 4);
+  // The first rail poster is the LCP image.
+  const { featured, others, rail: railSrc } = pickRail(items, overridesAll);
   const rail = railSrc.map((x, i) => ({ ...x, media_rail: mediaHtml(x, { eager: i < 2, priority: i === 0, railVideo: true }) }));
   const featuredCtx = featured && { ...featured, media_big: mediaHtml(featured, {}) };
   const words = (str) => str.split(' ').map((w, i) => `<span class="w"><span style="--i:${i}">${esc(w)}</span></span>`).join(' ');

@@ -2,7 +2,6 @@
 _temp*
 node_modules/
 *.mp4
-!assets/placeholders/*.mp4
 .env
 .env.*
 directions/shots/*.jpg
