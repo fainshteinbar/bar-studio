@@ -1,20 +1,101 @@
 {
   "_help": "English pitches for the Reels, keyed by Instagram media ID. hash = hash of the original caption; when Bar edits a caption on Instagram the hash changes and the sync translates it again. Manual English in data/overrides.json (captions_en) always wins over this file.",
   "items": {
-    "18112796969467846": { "hash": "c7648f3fc4b054e3", "pitch": "Eli Dasa picked up the call from Haifa.", "more": "Welcome to Sammy Ofer. An AI film I made for the signing. Characters and scenes are AI-generated, not real footage.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "17901612813374816": { "hash": "abd9154b28e79229", "pitch": "A “monologue,” except the words literally happen. Wait for Shuli.", "more": "Send it to the friend you can never get a word in with. AI clip; characters and scenes are synthetic.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "17996145848834714": { "hash": "96f0b390cc4526a1", "pitch": "Every Israeli in Thailand knows the moment they start converting to shekels.", "more": "Tag the friend who walked into 7-Eleven for a bottle of water and left with half a shelf. Made with AI.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "17943051837086700": { "hash": "e5e2a61a2ca11147", "pitch": "Every Israeli knows this ice cream tub in the freezer. I thought I knew what's in it.", "more": "Send this to whoever stores leftovers in ice cream tubs.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "18127153129842174": { "hash": "810475a17ed8a153", "pitch": "This day hasn't happened yet. But it already feels like home.", "more": "My second film for the Shabiro Haifa competition: less about the apartment, more about the life around it.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "18487666432129017": { "hash": "251323f644975e5f", "pitch": "After 14 apartments, finally one that doesn't ask what you'll settle for.", "more": "My film for the Shabiro Haifa competition. The brief: don't sell an apartment. Make someone say “I want to live there.”", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "18113922386100931": { "hash": "2438f154c6e7aed3", "pitch": "Technically… there's no contact here.", "more": "", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "17958556212232372": { "hash": "9aa9d2a8bd8c0cbd", "pitch": "“This time we won't stand out,” they said.", "more": "Send this to the one you're never flying with again. Made with AI.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "18130994455682363": { "hash": "01e7ce09fef0d066", "pitch": "Rare things in Israel #1: parking in Tel Aviv on the first try.", "more": "Send it to a Tel Avivian. They'll get it.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "17957239818238876": { "hash": "a862ca0df36c3321", "pitch": "When a podcast story gets a Netflix budget.", "more": "All this for a ticket to Gate 5.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "17981987253079891": { "hash": "c9c9c6626de05307", "pitch": "Leaked: the first rehearsal of “Hysteria.”", "more": "7 stars. One stage. And one sound guy who already regrets it. The production is asked to confirm or deny.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "18110908592128454": { "hash": "01a15511109b66b1", "pitch": "When you're the waiter, the busser and the phone line at your own event…", "more": "Something went wrong here. For winter, we took Fainsy Events in a slightly different direction.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "18115863469771345": { "hash": "ea067c62779b0360", "pitch": "First day at work.", "more": "Didn't expect the checklist to move this fast. A goal and an assist in the very first game.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "18627196816008046": { "hash": "16fd8f74773d9065", "pitch": "20 seconds of sports drama. For a bottle cap.", "more": "Built the tension of a fitness ad, then broke it with one punchline. Got a brand and an idea like this? Talk to me.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" },
-    "18105146096190451": { "hash": "5f45df0df5fd3b5e", "pitch": "5 minutes for myself.", "more": "Just me, the ice, the frying pan, the phone, work… and inner peace. In short: balance.", "source": "claude-opus-5-5 via Claude Code, 2026-10-12" }
+    "18112796969467846": {
+      "hash": "c7648f3fc4b054e3",
+      "pitch": "Eli Dasa picked up the call from Haifa.",
+      "more": "Welcome to Sammy Ofer. An AI film I made for the signing. Characters and scenes are AI-generated, not real footage.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "17901612813374816": {
+      "hash": "abd9154b28e79229",
+      "pitch": "A “monologue,” except the words literally happen. Wait for Shuli.",
+      "more": "Send it to the friend you can never get a word in with. AI clip; characters and scenes are synthetic.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "17996145848834714": {
+      "hash": "96f0b390cc4526a1",
+      "pitch": "Every Israeli in Thailand knows the moment they start converting to shekels.",
+      "more": "Tag the friend who walked into 7-Eleven for a bottle of water and left with half a shelf. Made with AI.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "17943051837086700": {
+      "hash": "e5e2a61a2ca11147",
+      "pitch": "Every Israeli knows this ice cream tub in the freezer. I thought I knew what's in it.",
+      "more": "Send this to whoever stores leftovers in ice cream tubs.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "18127153129842174": {
+      "hash": "810475a17ed8a153",
+      "pitch": "This day hasn't happened yet. But it already feels like home.",
+      "more": "My second film for the Shabiro Haifa competition: less about the apartment, more about the life around it.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "18487666432129017": {
+      "hash": "251323f644975e5f",
+      "pitch": "After 14 apartments, finally one that doesn't ask what you'll settle for.",
+      "more": "My film for the Shabiro Haifa competition. The brief: don't sell an apartment. Make someone say “I want to live there.”",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "18113922386100931": {
+      "hash": "2438f154c6e7aed3",
+      "pitch": "Technically… there's no contact here.",
+      "more": "",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "17958556212232372": {
+      "hash": "9aa9d2a8bd8c0cbd",
+      "pitch": "“This time we won't stand out,” they said.",
+      "more": "Send this to the one you're never flying with again. Made with AI.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "18130994455682363": {
+      "hash": "01e7ce09fef0d066",
+      "pitch": "Rare things in Israel #1: parking in Tel Aviv on the first try.",
+      "more": "Send it to a Tel Avivian. They'll get it.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "17957239818238876": {
+      "hash": "a862ca0df36c3321",
+      "pitch": "When a podcast story gets a Netflix budget.",
+      "more": "All this for a ticket to Gate 5.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "17981987253079891": {
+      "hash": "c9c9c6626de05307",
+      "pitch": "Leaked: the first rehearsal of “Hysteria.”",
+      "more": "7 stars. One stage. And one sound guy who already regrets it. The production is asked to confirm or deny.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "18110908592128454": {
+      "hash": "01a15511109b66b1",
+      "pitch": "When you're the waiter, the busser and the phone line at your own event…",
+      "more": "Something went wrong here. For winter, we took Fainsy Events in a slightly different direction.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "18115863469771345": {
+      "hash": "ea067c62779b0360",
+      "pitch": "First day at work.",
+      "more": "Didn't expect the checklist to move this fast. A goal and an assist in the very first game.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "18627196816008046": {
+      "hash": "16fd8f74773d9065",
+      "pitch": "20 seconds of sports drama. For a bottle cap.",
+      "more": "Built the tension of a fitness ad, then broke it with one punchline. Got a brand and an idea like this? Talk to me.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "18105146096190451": {
+      "hash": "5f45df0df5fd3b5e",
+      "pitch": "5 minutes for myself.",
+      "more": "Just me, the ice, the frying pan, the phone, work… and inner peace. In short: balance.",
+      "source": "claude-opus-5-5 via Claude Code, 2026-10-12"
+    },
+    "18118270045962443": {
+      "hash": "387eadf12fea83ba",
+      "pitch": "He complained about 139 shekels. Then he tasted the Dream Cake.",
+      "more": "Tag the friend who argues over every price. AI-generated video. Characters, voices, and scenes were created with AI.",
+      "source": "gemini-3.8-flash (Gemini), 2026-10-12"
+    }
   }
 }

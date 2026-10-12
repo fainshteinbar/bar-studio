@@ -1,22 +1,44 @@
 {
-  "generated_at": "2026-10-12T07:55:36.584Z",
+  "generated_at": "2026-10-12T13:55:29.609Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 17,
-    "total_views": 430765,
-    "views_counted_over": 17,
+    "total_videos": 18,
+    "total_views": 444576,
+    "views_counted_over": 18,
     "views_sample": false,
-    "top_visible_views": 210965,
+    "top_visible_views": 211990,
     "top_visible_id": "17943051837086700",
-    "shown": 17,
+    "shown": 18,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/18118270045962443.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/18118270045962443.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/18118270045962443.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/18118270045962443.webp",
+      "lqip": "data:image/webp;base64,UklGRioBAABXRUJQVlA4IB4BAABwBwCdASoYACsAPu1eqk8ppKOiMBqoATAdiWQArDlBVQdqIBCE8xWxO26VEM5g2uL1UpkR39rFa1r8cbqS3kKyqpIGAAD+8RmVZdGFfbnxq7d3tqsSHEVvNUfq0DVUPsJjKPMdiydjSJZk39RS/UezohROhIK53h+6UXEpwUuX2gO6B1p5xvCbnlhWsExH+RiKq8BDkELKqMwLSKpdrUo2bmWXXImW8LHJTBqPYXA8pPH9jGJkinktnmStR7ScV2JAcEKyoFiYaZuh4rkh5woKx34jLeHcTATb22wAD34kA2l9Nmj103PnzeH/6mSqDAk8Bes+7BAvt4kaNcQxwWEfbrBL1c9K6z/HfmzdAYbPAPh0zINMr/QgmlzZTEAA",
+      "width": 720,
+      "height": 1280,
+      "duration": 25.4,
+      "id": "18118270045962443",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DeY9-IgShoh/",
+      "timestamp": "2026-10-12T10:00:37+0000",
+      "caption": "הוא התלונן על 139 שקל. ואז הוא טעם את ה־Dream Cake 🍫\nתייגו את החבר שמתווכח על כל מחיר.\n\nסרטון שנוצר בבינה מלאכותית. הדמויות, הקולות והסצנות נוצרו ב-AI.\n#Danis #דניאלעמית #דרים_קייק #עוגתלוטוס",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "flag_reason": "",
+      "views": 1229,
+      "likes": 8
+    },
     {
       "has_video": true,
       "video_url": "https://bfain-media.b-cdn.net/reels/18112796969467846.mp4",
@@ -36,8 +58,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 80595,
-      "likes": 3729
+      "views": 91372,
+      "likes": 4105
     },
     {
       "has_video": true,
@@ -58,8 +80,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4188,
-      "likes": 97
+      "views": 4220,
+      "likes": 98
     },
     {
       "has_video": true,
@@ -80,8 +102,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 38397,
-      "likes": 853
+      "views": 38834,
+      "likes": 867
     },
     {
       "has_video": true,
@@ -102,7 +124,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4295,
+      "views": 4308,
       "likes": 46
     },
     {
@@ -124,8 +146,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 210965,
-      "likes": 4556
+      "views": 211990,
+      "likes": 4572
     },
     {
       "has_video": true,
@@ -146,7 +168,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1030,
+      "views": 1038,
       "likes": 11
     },
     {
@@ -168,7 +190,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 863,
+      "views": 872,
       "likes": 13
     },
     {
@@ -190,7 +212,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 3073,
+      "views": 3080,
       "likes": 21
     },
     {
@@ -212,7 +234,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1625,
+      "views": 1632,
       "likes": 18
     },
     {
@@ -234,7 +256,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4382,
+      "views": 4385,
       "likes": 50
     },
     {
@@ -256,7 +278,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 14851,
+      "views": 14859,
       "likes": 118
     },
     {
@@ -278,7 +300,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 6051,
+      "views": 6070,
       "likes": 88
     },
     {
@@ -300,7 +322,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 810,
+      "views": 814,
       "likes": 9
     },
     {
@@ -322,8 +344,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 56556,
-      "likes": 2038
+      "views": 56785,
+      "likes": 2044
     },
     {
       "has_video": true,
@@ -344,7 +366,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 668,
+      "views": 670,
       "likes": 10
     },
     {
@@ -366,7 +388,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2416,
+      "views": 2418,
       "likes": 11
     },
     {
