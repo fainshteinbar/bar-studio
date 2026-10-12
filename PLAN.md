@@ -205,6 +205,8 @@ directions/1..5/        phase 2 only
 - Five genuinely different axes, not five palettes. Working list: (1) broadcast/sports-graphics density, (2) cinematic dark full-bleed loop-first, (3) feed-native phone-frame grid, (4) brutalist Hebrew display type, (5) light cream studio minimal. Finalize at build time using `frontend-design` and `redesign-existing-projects`.
 - `scripts/shots.mjs` captures 5 × {390, 1440} × {he, en} = 20 screenshots into `directions/shots/`. Pick the strongest with reasons referring to the screenshots. Stop at the checkpoint.
 
+**Status (2026-10-12):** phase 2 done and committed. Directions, checks, Lighthouse table and the recommendation (Matchday, with the WhatsApp chat CTA and profile proof from Feed as optional grafts) are in `directions/README.md`. Waiting for Bar's choice. The WhatsApp number lives in `i18n/site.json` (`972536224344`). Reusable pieces for phase 3: `assets/js/reels.js`, `assets/css/base.css`, `scripts/build-directions.mjs` (template engine and head/hreflang logic to lift into `scripts/build.mjs`), `scripts/shots.mjs`, `scripts/serve.mjs`, `scripts/make-placeholders.sh` (its hero-loop step is the 4.7 recipe).
+
 ### 6.3 Phase 3: build (after Bar's choice)
 
 1. Remove Sporta material listed in section 1. Leave thin redirect stubs for the deleted case URLs (they are linked from LinkedIn and the resume) pointing to `/`.
