@@ -1,16 +1,17 @@
-// Screenshots + functional checks for the design directions, in real Google Chrome
+// Screenshots + functional checks for the production pages, in real Google Chrome
 // (Playwright's bundled Chromium has no H.264, so videos would never play there).
 //
-//   node scripts/shots.mjs            all directions
-//   node scripts/shots.mjs 1 3        only directions 1 and 3
+//   node scripts/shots.mjs                       local build (served from the repo root)
+//   node scripts/shots.mjs https://fainshteinbar.github.io/bar-studio/    the live site
 //
-// Output: directions/shots/<d>-<lang>-<viewport>-{fold,full}.jpg, report.json, index.html
+// Output: shots-local/<target>/<lang>-<viewport>-{fold,full}.jpg and report.json (gitignored)
 import { chromium } from 'playwright';
 import { mkdirSync, readdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
 import { serve } from './serve.mjs';
 
 const PORT = 4174;
-const OUT = process.env.SHOTS_OUT || 'directions/shots';
+const LIVE = process.argv.slice(2).find((a) => /^https?:/.test(a));
+const OUT = process.env.SHOTS_OUT || `shots-local/${LIVE ? 'live' : 'local'}`;
 const VIEWPORTS = {
   mobile: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 },
   desktop: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 },
@@ -18,12 +19,11 @@ const VIEWPORTS = {
 const site = JSON.parse(readFileSync('i18n/site.json', 'utf8'));
 const prefill = { he: JSON.parse(readFileSync('i18n/he.json', 'utf8')).wa_prefill, en: JSON.parse(readFileSync('i18n/en.json', 'utf8')).wa_prefill };
 
-const all = readdirSync('directions').filter((d) => /^\d+$/.test(d) && existsSync(`directions/${d}/index.html`)).sort();
-const only = process.argv.slice(2).filter((a) => /^\d+$/.test(a));
-const dirs = only.length ? all.filter((d) => only.includes(d)) : all;
+const dirs = ['site'];
+const BASE = LIVE ? LIVE.replace(/\/?$/, '/') : `http://localhost:${PORT}/`;
 
 mkdirSync(OUT, { recursive: true });
-const server = await serve(PORT, process.cwd());
+const server = LIVE ? null : await serve(PORT, process.cwd());
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const reportPath = `${OUT}/report.json`;
@@ -32,7 +32,7 @@ const report = existsSync(reportPath) ? JSON.parse(readFileSync(reportPath, 'utf
 for (const d of dirs) {
   for (const lang of ['he', 'en']) {
     for (const [vpName, vp] of Object.entries(VIEWPORTS)) {
-      const key = `${d}-${lang}-${vpName}`;
+      const key = `${lang}-${vpName}`;
       const ctx = await browser.newContext({ ...vp, reducedMotion: 'no-preference', locale: lang === 'he' ? 'he-IL' : 'en-US' });
       const page = await ctx.newPage();
       const errors = [];
@@ -41,7 +41,7 @@ for (const d of dirs) {
       page.on('requestfailed', (r) => !/\.mp4/.test(r.url()) && errors.push(`failed: ${r.url()}`));
       page.on('response', (r) => r.status() >= 400 && errors.push(`${r.status()}: ${r.url()}`));
 
-      const url = `http://localhost:${PORT}/directions/${d}/${lang === 'en' ? 'en/' : ''}`;
+      const url = `${BASE}${lang === 'en' ? 'en/' : ''}`;
       await page.goto(url, { waitUntil: 'load' });
       await page.evaluate(() => document.fonts.ready);
       await sleep(1800);
@@ -152,25 +152,5 @@ for (const d of dirs) {
 
 writeFileSync(reportPath, JSON.stringify(report, null, 2) + '\n');
 
-// Contact sheet
-const shots = readdirSync(OUT).filter((f) => f.endsWith('.jpg')).sort();
-const dsAll = [...new Set(shots.map((f) => f.split('-')[0]))];
-const cell = (f) => (shots.includes(f) ? `<a href="${f}"><img src="${f}" loading="lazy" alt="${f}"></a>` : '<span>missing</span>');
-writeFileSync(
-  `${OUT}/index.html`,
-  `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Directions: screenshots</title>
-<style>body{margin:0;background:#07071C;color:#F4F0E8;font:15px/1.5 system-ui,sans-serif;padding:24px}h2{margin:40px 0 12px;font-weight:600}.row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:start}.row figure{margin:0}figcaption{font-size:12px;opacity:.7;margin-bottom:6px}img{width:100%;height:auto;display:block;border:1px solid #1A1464}a{color:#00C2FF}</style></head><body>
-<h1>Design directions: fold screenshots</h1><p>Click any image for full size. Full-page captures: files ending in -full.jpg. <a href="../">Back to directions</a></p>
-${dsAll
-  .map(
-    (d) =>
-      `<h2>Direction ${d}</h2><div class="row">${['he-desktop', 'en-desktop', 'he-mobile', 'en-mobile']
-        .map((k) => `<figure><figcaption>${k} · <a href="${d}-${k}-full.jpg">full page</a></figcaption>${cell(`${d}-${k}-fold.jpg`)}</figure>`)
-        .join('')}</div>`
-  )
-  .join('\n')}
-</body></html>\n`
-);
-
 await browser.close();
-server.close();
+server?.close();

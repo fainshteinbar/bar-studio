@@ -7,7 +7,7 @@ Phase 1 output (research, decisions, installed tooling, build plan). Written 202
 | # | Topic | Decision |
 |---|---|---|
 | 1 | Contact number | WhatsApp Business. The number itself is a config value (`WHATSAPP_NUMBER` in `i18n/site.json`), Bar fills it in (+972 or +66, digits only, no `+`). |
-| 2 | Media host | Cloudflare R2. Bar is buying a custom domain and putting it on Cloudflare DNS. Until it is live, everything targets an rclone remote named `media`, so the switch is config only (`MEDIA_BASE_URL`). |
+| 2 | Media host | **Superseded 2026-10-12 (phase 3):** no custom domain for now, so media goes to **Bunny Storage + CDN**: storage zone `bfain-media` (Frankfurt, `storage.bunnycdn.com`), pull zone `https://bfain-media.b-cdn.net`. Upload is a plain HTTPS PUT to the Bunny Storage API from `scripts/ig-sync.mjs --upload` (no rclone). Moving to R2 or a custom domain later means changing `MEDIA_BASE_URL` and the upload function. |
 | 3 | Response promise | "עונה באותו יום" / "Same-day replies". Not "within an hour". |
 | 4 | Client names | None for now. Proof row uses view counts (and counts of videos/projects), never client names or logos. |
 | 5 | Licensed audio | On the first backfill, report how many Reels return no `media_url`. If over ~25%, propose the "masters folder" fallback (section 4.6). |
@@ -18,6 +18,7 @@ Phase 1 output (research, decisions, installed tooling, build plan). Written 202
 | 10 | Display font (2026-10-12) | Narkiss Hadash Condensed from Adobe Fonts kit `gce3kmw` (Hebrew + English subset, font-display swap; no domain allowlist needed; self-hosting not allowed). Body: Noto Sans Hebrew (self-hosted variable) and DM Sans. Details: `directions/references/font-kit.md`. |
 | 12 | English captions (2026-10-12) | The sync translates each new or edited Hebrew caption to English once with the Claude API (`claude-haiku-5-5`, low effort, for meaning and humor), cached in `data/translations.json` by media ID + caption hash. `captions_en` in `data/overrides.json` always wins. If translation fails, the English card shows no pitch (never Hebrew). The first 15 were translated in the Claude Code session and written to the cache. Code: `scripts/lib/translate.mjs`, `scripts/lib/captions.mjs`. |
 | 11 | Token hygiene | The first long-lived token (generated 2026-10-12) was exposed in chat. Rotate it in phase 3 when the GitHub secrets are created, and revoke the old one. |
+| 13 | Brand (2026-10-12) | The site is **bfain.studio**: title, meta, OG, JSON-LD, header/footer, copy and alt text. Hosted on GitHub Pages at https://fainshteinbar.github.io/bar-studio/ (Hebrew at `/`, English at `/en/`), no custom domain yet. |
 
 ## 1. Current state of the repo (verified 2026-10-12)
 
@@ -136,7 +137,7 @@ Instagram embeds are unusable for the grid (heavy, Instagram chrome, no clean mu
 | Cloudinary free | not viable | Video bandwidth is paid-plans only. |
 | GitHub Pages / jsDelivr | not viable | Bandwidth cap, video in git, 20 MB file cap on jsDelivr. |
 
-Upload from Actions with `rclone copy` to a remote named `media` configured from secrets. R2 is S3-compatible; the remote is defined by env vars (`RCLONE_CONFIG_MEDIA_TYPE=s3`, `RCLONE_CONFIG_MEDIA_PROVIDER=Cloudflare`, endpoint `https://<ACCOUNT_ID>.r2.cloudflarestorage.com`, access key, secret). Switching host later means changing those env vars and `MEDIA_BASE_URL`.
+(Phase 3, decision 2:) Upload goes to Bunny Storage with an HTTPS PUT per file from `scripts/ig-sync.mjs --upload`; the files are served by the `bfain-media.b-cdn.net` pull zone. The R2/rclone plan above is kept for reference only.
 
 ### 4.6 Sync job design (`scripts/ig-sync.mjs`, Node, zero runtime deps)
 
@@ -157,7 +158,7 @@ Schedule: `cron: "23 4 * * *"` plus `workflow_dispatch`, `concurrency: { group: 
 
 ### 4.6.1 Status (2026-10-12)
 
-`scripts/ig-sync.mjs --local` is implemented and run against the real account: @barfainshtein (MEDIA_CREATOR), 17 videos, 0 without media_url, 418K views across all 17, top Reel 210K. It writes `media/ig/` and `data/instagram.local.json` (both gitignored); the build prefers the local manifest, and `MANIFEST=fixture` forces the committed fixture before commits. Manifest items now also carry `visible`, `status`, `full_url`; stats carry `top_visible_views`, `top_visible_id`, `shown`, `hidden`. The CDN upload mode (`rclone` to R2, `data/instagram.json`) is still phase 3. Shared pipeline: `scripts/lib/media.mjs`.
+`scripts/ig-sync.mjs --local` is implemented and run against the real account: @barfainshtein (MEDIA_CREATOR), 17 videos, 0 without media_url, 418K views across all 17, top Reel 210K. It writes `media/ig/` and `data/instagram.local.json` (both gitignored); the build prefers the local manifest, and `MANIFEST=fixture` forces the committed fixture before commits. Manifest items now also carry `visible`, `status`, `full_url`; stats carry `top_visible_views`, `top_visible_id`, `shown`, `hidden`. Phase 3 added `--upload` (Bunny Storage, `data/instagram.json`, incremental against the committed manifest). Shared pipeline: `scripts/lib/media.mjs`.
 
 ### 4.7 Hero loop from the Reels (decision 6)
 
@@ -173,18 +174,26 @@ Run the workflow by hand (`workflow_dispatch`) as soon as the token exists; it b
 
 Sources: developers.facebook.com/docs/instagram-platform (overview, instagram-api-with-instagram-login, get-started, business-login, app-review, reference/instagram-media, reference/instagram-media/insights, oembed, changelog), developers.facebook.com/blog/post/2024/09/04/update-on-instagram-basic-display-api, developers.facebook.com/docs/graph-api/overview/rate-limiting, developers.cloudflare.com/r2 (pricing, public-buckets, platform/limits, api/tokens, examples/rclone), developers.cloudflare.com/stream/pricing, bunny.net/pricing (storage, cdn, stream), cloudinary.com/pricing, docs.github.com (pages limits, workflow-syntax, events-that-trigger-workflows, disabling-and-enabling-a-workflow, fine-grained PAT permissions, dependency-caching, notifications-for-workflow-runs, actions billing), cli.github.com/manual/gh_secret_set, github.com/actions/runner-images Ubuntu2404-Readme, github.blog/changelog/2026-09-17-ubuntu-26, web.dev/articles/lcp, web.dev/articles/optimize-lcp, web.dev/articles/fast-playback-with-preload, webkit.org/blog/6784.
 
-## 5. Owner-only setup checklist (Bar)
+## 5. Owner setup and upkeep (phase 3, Bunny)
 
-1. Meta for Developers: create an app of type Business, add the Instagram product, under "API setup with Instagram business login" add @barfainshtein as an Instagram tester, accept the invite in the Instagram app.
-2. Click "Generate token" in the app dashboard → long-lived 60-day token. Note the expiry date shown.
-3. Cloudflare: add the new domain as a free zone; R2 → create bucket `bar-studio-media`; connect custom domain `media.<domain>`; create an R2 API token with Object Read & Write scoped to that bucket → Access Key ID, Secret, Account ID.
-4. GitHub: fine-grained PAT for this repo only, permissions Secrets: read/write, Variables: read/write, Metadata: read; 366-day expiry; note the expiry date.
-5. Repo secrets: `IG_ACCESS_TOKEN` (a fresh token; revoke the one exposed on 2026-10-12), `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `GH_SECRETS_PAT`, `ANTHROPIC_API_KEY` (Claude API key from console.anthropic.com, used by the sync to translate new captions to English with `claude-haiku-5-5`; cost is a few cents a month because each Reel is translated once and cached).
-6. Repo variables: `MEDIA_BASE_URL` (e.g. `https://media.<domain>`), `R2_BUCKET=bar-studio-media`, `IG_API_VERSION=v26.0`, `IG_TOKEN_EXPIRES_AT` (ISO date), `GH_PAT_EXPIRES_AT` (ISO date).
-7. Fill `WHATSAPP_NUMBER` in `i18n/site.json`.
-8. Run the "Instagram sync" workflow once by hand; read the run summary for the missing-`media_url` percentage.
+Secrets are only ever typed into `gh secret set NAME --repo fainshteinbar/bar-studio` (hidden prompt), never into a chat.
 
-Phase 3 will restate this list in the repo README with exact click paths.
+| Name | Kind | What it is | Who sets it |
+|---|---|---|---|
+| `IG_ACCESS_TOKEN` | secret | Long-lived Instagram token (Meta app → Instagram → API setup with Instagram business login → Generate token) | Bar once; then the weekly refresh workflow rewrites it |
+| `BUNNY_STORAGE_PASSWORD` | secret | Bunny → Storage → bfain-media → Access → Password (read/write) | Bar |
+| `ANTHROPIC_API_KEY` | secret | console.anthropic.com → API keys (caption translation, cents per month) | Bar |
+| `GH_SECRETS_PAT` | secret | Fine-grained PAT, this repo only, Secrets + Variables read/write, 1-year expiry; lets the refresh workflow rewrite `IG_ACCESS_TOKEN` | Bar |
+| `BUNNY_STORAGE_ZONE`, `BUNNY_STORAGE_HOST`, `MEDIA_BASE_URL`, `IG_API_VERSION` | variables | `bfain-media`, `storage.bunnycdn.com`, `https://bfain-media.b-cdn.net`, `v26.0` | Claude Code |
+| `IG_TOKEN_ISSUED_AT`, `IG_TOKEN_EXPIRES_AT` | variables | When the Instagram token was issued / expires; the refresh workflow keeps them current | Claude Code, then automatic |
+| `GH_PAT_EXPIRES_AT` | variable | The PAT's expiry date (GitHub shows it on creation); both workflows fail with a 7-day warning before it | Claude Code from Bar's date |
+
+Workflows (`.github/workflows/`):
+- `sync.yml`, daily 04:23 UTC: token/PAT expiry check → `ig-sync.mjs --upload` (new Reels → 3 renditions + poster → Bunny; views refreshed; new captions translated) → `build.mjs` → commit → Pages build. Manual run: Actions → Instagram sync → Run workflow (tick "force" to reprocess everything).
+- `token-refresh.yml`, Mondays 05:41 UTC: checks the PAT, refreshes the Instagram token (once it is at least 24 h old), writes the new secret and expiry variables.
+- On any failure GitHub emails Bar and the workflow opens (or comments on) an issue "Site automation needs attention: …" with the fix.
+
+Yearly upkeep: renew the PAT before `GH_PAT_EXPIRES_AT` (the workflows warn a week ahead). Nothing else is manual: if the Instagram token is ever revoked, regenerate it in the Meta dashboard and `gh secret set IG_ACCESS_TOKEN`.
 
 ## 6. Build plan
 
@@ -197,7 +206,7 @@ i18n/site.json          WHATSAPP_NUMBER, email, instagram handle, media base URL
 data/instagram.json     manifest written by the sync job; data/overrides.json (lanes, hero picks)
 assets/css|js|fonts|img|placeholders
 scripts/build.mjs       Node, zero deps: renders / (he, dir=rtl) and /en/ (en, dir=ltr), injects manifest, hreflang, per-language meta, JSON-LD
-scripts/ig-sync.mjs     fetch → diff → download → ffmpeg → rclone upload → hero loop → manifest → build
+scripts/ig-sync.mjs     fetch → diff → download → ffmpeg (preview, full, rail) + poster → Bunny upload → translate → manifest
 scripts/shots.mjs       Playwright: screenshots of given URLs at 390 and 1440 px, he + en
 .github/workflows/ig-sync.yml, ig-token-refresh.yml
 directions/1..5/        phase 2 only

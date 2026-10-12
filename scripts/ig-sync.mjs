@@ -1,36 +1,49 @@
-// Instagram sync (PLAN.md 4.6). Reads Bar's own media through the Instagram API with Instagram Login,
-// downloads Reels in the same run (media URLs expire), transcodes them, builds the hero loops and
-// writes the manifest the site reads.
+// Instagram sync (PLAN.md 4.6). Reads Bar's own Reels through the Instagram API with Instagram Login,
+// downloads new ones in the same run (Instagram media URLs expire), makes three renditions + a poster,
+// translates new captions, and writes the manifest the site is built from.
 //
-//   node scripts/ig-sync.mjs --local [--transcode 12]   local preview: media/ig/ + data/instagram.local.json (both gitignored)
-//   node scripts/ig-sync.mjs --check                    token + account check only, downloads nothing
+//   node scripts/ig-sync.mjs --upload [--force]   production (CI): media to Bunny Storage, manifest data/instagram.json
+//   node scripts/ig-sync.mjs --local              local preview: media/ig/ + data/instagram.local.json (both gitignored)
+//   node scripts/ig-sync.mjs --check              token + account check only
 //
-// Token: env IG_ACCESS_TOKEN, else the local file .secrets/ig-token (gitignored, chmod 600).
-// The token is never printed; any URL that appears in an error is redacted.
-// CDN upload (rclone remote "media", data/instagram.json) is phase 3 and not wired yet.
+// Upload mode is incremental against the committed manifest: Reels already on the CDN only get fresh
+// views/likes/captions; new Reels (or --force) are downloaded, transcoded and uploaded.
+//
+// Env: IG_ACCESS_TOKEN (else .secrets/ig-token locally), IG_API_VERSION (default v26.0),
+//      upload mode: BUNNY_STORAGE_PASSWORD (secret), BUNNY_STORAGE_ZONE, BUNNY_STORAGE_HOST, MEDIA_BASE_URL,
+//      translation: ANTHROPIC_API_KEY (optional; without it new English captions stay empty).
+// Secrets are never printed; any URL that appears in an error is redacted.
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync, createWriteStream, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { Readable } from 'node:stream';
-import { transcodeReel, transcodeFull, posterFrom, buildHeroLoops, laneFor, tempDir, probe, brightness } from './lib/media.mjs';
+import { transcodeReel, transcodeFull, posterFrom, laneFor, tempDir, probe, brightness } from './lib/media.mjs';
 import { readTranslations, writeTranslations } from './lib/captions.mjs';
 import { translateMissing } from './lib/translate.mjs';
 
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
-const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? +args[i + 1] : d; };
+const UPLOAD = has('--upload');
+const LOCAL = has('--local');
 const API = `https://graph.instagram.com/${process.env.IG_API_VERSION || 'v26.0'}`;
-const OUT = 'media/ig';
-const MANIFEST = 'data/instagram.local.json';
-const TRANSCODE = opt('--transcode', 1000);
 const PREVIEW_SECONDS = 12; // rule 14: grid previews are the first 12 s
+const MANIFEST = UPLOAD ? 'data/instagram.json' : 'data/instagram.local.json';
 
 const TOKEN = (process.env.IG_ACCESS_TOKEN || (existsSync('.secrets/ig-token') ? readFileSync('.secrets/ig-token', 'utf8') : '')).trim();
-if (!TOKEN) {
-  console.error('No token. Save it with the command from the setup steps (.secrets/ig-token), or set IG_ACCESS_TOKEN.');
+if (!TOKEN) { console.error('No Instagram token (IG_ACCESS_TOKEN).'); process.exit(2); }
+
+const BUNNY = {
+  password: process.env.BUNNY_STORAGE_PASSWORD || '',
+  zone: process.env.BUNNY_STORAGE_ZONE || '',
+  host: (process.env.BUNNY_STORAGE_HOST || 'storage.bunnycdn.com').replace(/^https?:\/\//, '').replace(/\/$/, ''),
+  base: (process.env.MEDIA_BASE_URL || '').replace(/\/$/, ''),
+};
+if (UPLOAD && (!BUNNY.password || !BUNNY.zone || !BUNNY.base)) {
+  console.error('Upload mode needs BUNNY_STORAGE_PASSWORD, BUNNY_STORAGE_ZONE and MEDIA_BASE_URL.');
   process.exit(2);
 }
-const redact = (s) => String(s).split(TOKEN).join('[token]').replace(/access_token=[^&\s"]+/g, 'access_token=[token]');
+const SECRETS = [TOKEN, BUNNY.password, process.env.ANTHROPIC_API_KEY].filter(Boolean);
+const redact = (s) => SECRETS.reduce((acc, x) => acc.split(x).join('[secret]'), String(s)).replace(/access_token=[^&\s"]+/g, 'access_token=[secret]');
 
 async function api(path, params = {}) {
   const u = new URL(path.startsWith('http') ? path : `${API}${path}`);
@@ -40,7 +53,7 @@ async function api(path, params = {}) {
   const j = await r.json().catch(() => ({}));
   if (!r.ok || j.error) {
     const e = j.error || {};
-    const hint = e.code === 190 ? ' The token is invalid or expired: generate a new one in the app dashboard.'
+    const hint = e.code === 190 ? ' The token is invalid or expired: generate a new one in the Meta app dashboard.'
       : e.code === 10 || e.code === 200 ? ' Missing permission: check the scopes granted when the token was generated.' : '';
     throw new Error(redact(`Instagram API ${r.status} ${e.type || ''} code ${e.code ?? '?'}: ${e.message || 'request failed'}.${hint}`));
   }
@@ -53,28 +66,35 @@ async function download(url, file) {
   await pipeline(Readable.fromWeb(r.body), createWriteStream(file));
 }
 
+const TYPES = { '.mp4': 'video/mp4', '.webp': 'image/webp' };
+async function bunnyPut(localFile, remotePath) {
+  const ext = remotePath.slice(remotePath.lastIndexOf('.'));
+  const r = await fetch(`https://${BUNNY.host}/${BUNNY.zone}/${remotePath}`, {
+    method: 'PUT',
+    headers: { AccessKey: BUNNY.password, 'Content-Type': TYPES[ext] || 'application/octet-stream' },
+    body: readFileSync(localFile),
+  });
+  if (r.status !== 201 && r.status !== 200) throw new Error(redact(`Bunny upload failed for ${remotePath}: HTTP ${r.status}`));
+}
+
 const me = await api('/me', { fields: 'user_id,username,account_type,media_count' });
 console.log(`Account: @${me.username} · type ${me.account_type || 'unknown'} · ${me.media_count ?? '?'} posts`);
 if (has('--check')) {
-  // Token age/expiry is not exposed by this API; the dashboard shows it. Report what we can.
   console.log('Token works. Media access OK:', !!(await api(`/${me.user_id || me.id}/media`, { fields: 'id', limit: '1' })).data);
   process.exit(0);
 }
-if (!has('--local')) {
-  console.error('Only --local mode exists in this phase (CDN upload comes with R2 in phase 3).');
-  process.exit(2);
-}
+if (!UPLOAD && !LOCAL) { console.error('Choose --upload (CI) or --local (preview).'); process.exit(2); }
 
-// 1. List all media, newest first.
+// 1. All media, newest first; Reels are the VIDEO items.
 const fields = 'id,caption,media_type,media_product_type,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count';
 let page = await api(`/${me.user_id || me.id}/media`, { fields, limit: '50' });
 const all = [...page.data];
 while (page.paging?.next) { page = await api(page.paging.next); all.push(...page.data); }
 const videos = all.filter((m) => m.media_type === 'VIDEO');
 const missing = videos.filter((m) => !m.media_url);
-console.log(`Media: ${all.length} total, ${videos.length} videos, ${missing.length} without media_url (${videos.length ? Math.round((missing.length / videos.length) * 100) : 0}%).`);
+console.log(`Media: ${all.length} total, ${videos.length} videos, ${missing.length} without media_url.`);
 
-// 2. Views (needs instagram_business_manage_insights; skipped quietly if not granted).
+// 2. Views (instagram_business_manage_insights); skipped if not granted.
 let insightsOk = true;
 async function viewsFor(id) {
   if (!insightsOk) return null;
@@ -82,90 +102,95 @@ async function viewsFor(id) {
     const j = await api(`/${id}/insights`, { metric: 'views' });
     return j.data?.[0]?.values?.[0]?.value ?? j.data?.[0]?.total_value?.value ?? null;
   } catch (e) {
-    if (/code (10|200|100)\b/.test(e.message)) { insightsOk = false; console.log('Views: insights permission not granted, skipping view counts.'); return null; }
+    if (/code (10|200|100)\b/.test(e.message)) { insightsOk = false; console.log('Views: insights permission not granted, skipping.'); return null; }
     throw e;
   }
 }
 
-// 3. Visibility: data/reels.json lists media IDs Bar has hidden. Everything else is shown.
+// 3. Visibility: data/reels.json lists media IDs Bar has hidden.
 const hiddenCfg = (existsSync('data/reels.json') ? JSON.parse(readFileSync('data/reels.json', 'utf8')) : {}).hidden || {};
-const visibility = (m) => (hiddenCfg[m.id] ? { status: 'hidden', reason: String(hiddenCfg[m.id] || 'hidden') } : { status: 'shown', reason: '' });
-
-// 4. Posters for every video (the review page needs them all); renditions only for visible Reels.
-mkdirSync(OUT, { recursive: true });
 const overrides = existsSync('data/overrides.json') ? JSON.parse(readFileSync('data/overrides.json', 'utf8')) : {};
-const items = [];
+const previous = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : { items: [] };
+const prevById = Object.fromEntries((previous.items || []).filter((i) => !i.placeholder).map((i) => [i.id, i]));
+
+// 4. Renditions + poster for each visible Reel that is new (or --force); reuse everything else.
+const OUT = LOCAL ? 'media/ig' : tempDir('igsync-out');
+mkdirSync(OUT, { recursive: true });
+const urlFor = (name) => (UPLOAD ? `${BUNNY.base}/reels/${name}` : `${OUT}/${name}`);
 const tmp = tempDir('igsync');
-let transcoded = 0;
+const items = [];
+let processed = 0, reused = 0;
 try {
   for (const m of videos) {
-    const vis = visibility(m);
-    const prev = join(OUT, `${m.id}.mp4`), full = join(OUT, `${m.id}.full.mp4`);
-    const webp = join(OUT, `${m.id}.webp`), lqFile = join(OUT, `${m.id}.lqip`);
-    const want = vis.status === 'shown' && m.media_url && transcoded < TRANSCODE;
-    const stale = existsSync(prev) && probe(prev).d > PREVIEW_SECONDS + 0.5;
-    if (want && (!existsSync(prev) || !existsSync(full) || stale)) {
+    const hidden = !!hiddenCfg[m.id];
+    const prev = prevById[m.id];
+    const reusable = UPLOAD && !has('--force') && prev?.has_video && prev.video_url?.startsWith(BUNNY.base);
+    const localReady = LOCAL && existsSync(join(OUT, `${m.id}.mp4`)) && existsSync(join(OUT, `${m.id}.full.mp4`)) && existsSync(join(OUT, `${m.id}.rail.mp4`)) && existsSync(join(OUT, `${m.id}.webp`));
+    let entry;
+    if (hidden) {
+      entry = { has_video: false };
+    } else if (reusable || localReady) {
+      entry = reusable ? { ...prev } : JSON.parse(readFileSync(join(OUT, `${m.id}.json`), 'utf8'));
+      reused++;
+    } else if (m.media_url) {
       const raw = join(tmp, `${m.id}.src.mp4`);
+      const prevMp4 = join(OUT, `${m.id}.mp4`), fullMp4 = join(OUT, `${m.id}.full.mp4`), railMp4 = join(OUT, `${m.id}.rail.mp4`), webp = join(OUT, `${m.id}.webp`);
       await download(m.media_url, raw);
-      transcodeReel(raw, prev, { maxSeconds: PREVIEW_SECONDS });
-      transcodeFull(raw, full);
+      transcodeReel(raw, prevMp4, { maxSeconds: PREVIEW_SECONDS });
+      const full = transcodeFull(raw, fullMp4);
+      transcodeReel(prevMp4, railMp4, { maxSeconds: 6, width: 360, crf: 31 });
+      // Poster: the cover Bar chose on Instagram; a picked video frame if there is no cover or it is near-black.
+      let lqip;
+      if (m.thumbnail_url) {
+        const jpg = join(tmp, `${m.id}.jpg`);
+        await download(m.thumbnail_url, jpg);
+        lqip = posterFrom(jpg, webp, { isImage: true });
+      }
+      if (!lqip || brightness(webp) < 12) lqip = posterFrom(prevMp4, webp, { pick: true });
       rmSync(raw, { force: true });
+      if (UPLOAD) {
+        for (const f of [prevMp4, fullMp4, railMp4, webp]) await bunnyPut(f, `reels/${f.split('/').pop()}`);
+      }
+      const pw = probe(webp);
+      entry = {
+        has_video: true,
+        video_url: urlFor(`${m.id}.mp4`), full_url: urlFor(`${m.id}.full.mp4`), rail_url: urlFor(`${m.id}.rail.mp4`), poster_url: urlFor(`${m.id}.webp`),
+        lqip, width: full.w || pw.w, height: full.h || pw.h, duration: Math.round(full.d * 10) / 10,
+      };
+      if (LOCAL) writeFileSync(join(OUT, `${m.id}.json`), JSON.stringify(entry));
+      processed++;
+      const kb = (f) => Math.round(statSync(f).size / 1024);
+      console.log(`   + ${m.id} ${m.timestamp.slice(0, 10)}  preview ${kb(prevMp4)} KB · full ${kb(fullMp4)} KB · rail ${kb(railMp4)} KB${UPLOAD ? ' · uploaded' : ''}`);
+    } else {
+      entry = { has_video: false };
     }
-    // Poster: the cover Bar chose on Instagram; a frame from the preview only if there is no cover.
-    if (!existsSync(webp) && !m.thumbnail_url && existsSync(prev)) {
-      writeFileSync(lqFile, posterFrom(prev, webp));
-    } else if (!existsSync(webp) && m.thumbnail_url) {
-      const jpg = join(tmp, `${m.id}.jpg`);
-      await download(m.thumbnail_url, jpg);
-      writeFileSync(lqFile, posterFrom(jpg, webp, { isImage: true }));
-    }
-    // Small rendition for the first screen on portrait screens: 360 px, first 6 s (keeps LCP bandwidth free).
-    const railMp4 = join(OUT, `${m.id}.rail.mp4`);
-    if (vis.status === 'shown' && existsSync(prev) && !existsSync(railMp4)) transcodeReel(prev, railMp4, { maxSeconds: 6, width: 360, crf: 31 });
-    // A near-black cover (some Reels have one) is replaced by the most representative frame of the video.
-    if (existsSync(webp) && existsSync(prev) && brightness(webp) < 12) {
-      writeFileSync(lqFile, posterFrom(prev, webp, { pick: true }));
-      console.log(`   ${m.id}: cover is near-black, using a frame from the video instead`);
-    }
-    const has_video = !!want && existsSync(prev) && existsSync(full);
-    if (has_video) transcoded++;
-    const p = has_video ? probe(full) : null;
-    const pw = existsSync(webp) ? probe(webp) : { w: 720, h: 1280 };
     items.push({
+      ...entry,
       id: m.id, placeholder: false, permalink: m.permalink, timestamp: m.timestamp,
       caption: m.caption || '', lane: laneFor(m.caption, m.id, overrides.lanes || {}),
-      visible: vis.status === 'shown' && has_video, status: vis.status, flag_reason: vis.reason,
-      has_video, video_url: has_video ? `${OUT}/${m.id}.mp4` : null, full_url: has_video ? `${OUT}/${m.id}.full.mp4` : null, rail_url: has_video && existsSync(railMp4) ? `${OUT}/${m.id}.rail.mp4` : null,
-      poster_url: existsSync(webp) ? `${OUT}/${m.id}.webp` : null, lqip: existsSync(lqFile) ? readFileSync(lqFile, 'utf8') : '',
-      width: p ? p.w : pw.w, height: p ? p.h : pw.h, duration: p ? Math.round(p.d * 10) / 10 : null,
+      visible: !hidden && !!entry.has_video, status: hidden ? 'hidden' : 'shown', flag_reason: hidden ? String(hiddenCfg[m.id]) : '',
       views: await viewsFor(m.id), likes: m.like_count ?? null,
     });
-    const it = items.at(-1);
-    console.log(`${String(items.length).padStart(2, '0')} ${m.timestamp.slice(0, 10)} ${vis.status.padEnd(7)} ${has_video ? `${Math.round(statSync(prev).size / 1024)} KB preview, ${Math.round(statSync(full).size / 1024)} KB full` : '-'}  ${String(it.views ?? '-').padStart(7)} views  ${(m.caption || '').split('\n')[0].slice(0, 44)}`);
   }
 } finally {
   rmSync(tmp, { recursive: true, force: true });
+  if (UPLOAD) rmSync(OUT, { recursive: true, force: true });
 }
 
 // 5. English captions: translate new or edited Hebrew captions once (Claude API), cached in data/translations.json.
 const cache = readTranslations();
 const tr = await translateMissing(items, cache, overrides);
 if (tr.translated) writeTranslations(cache);
-console.log(`Translations: ${tr.translated} new, ${tr.failed} failed, ${tr.pending} still missing${tr.noCredentials ? ' (no ANTHROPIC_API_KEY: those English cards show no pitch until it is set)' : ''}.`);
+console.log(`Translations: ${tr.translated} new, ${tr.failed} failed, ${tr.pending} still missing${tr.noCredentials ? ' (no ANTHROPIC_API_KEY)' : ''}.`);
 
-// 6. Hero loops from visible Reels only (override list first).
 const playable = items.filter((i) => i.visible);
-const heroIds = (overrides.hero || []).filter((id) => playable.some((i) => i.id === id));
-const heroSrc = (heroIds.length >= 3 ? heroIds.map((id) => playable.find((i) => i.id === id)) : playable).slice(0, 9).map((i) => i.video_url);
-const hero = heroSrc.length ? buildHeroLoops(heroSrc, OUT) : null;
-
 const views = items.map((i) => i.views).filter((v) => typeof v === 'number');
 const top = playable.reduce((a, b) => ((b.views ?? -1) > (a?.views ?? -1) ? b : a), null);
 const manifest = {
   generated_at: new Date().toISOString(),
   placeholder: false,
-  source: 'instagram api (local preview)',
-  media_base_url: '',
+  source: UPLOAD ? 'instagram api → bunny cdn' : 'instagram api (local preview)',
+  media_base_url: UPLOAD ? BUNNY.base : '',
   stats: {
     total_videos: videos.length,
     total_views: views.length ? views.reduce((a, b) => a + b, 0) : null,
@@ -173,16 +198,21 @@ const manifest = {
     views_sample: views.length === 0,
     top_visible_views: top?.views ?? null,
     top_visible_id: top?.id ?? null,
-    shown: items.filter((i) => i.visible).length,
+    shown: playable.length,
     hidden: items.filter((i) => i.status === 'hidden').length,
     missing_media_url: missing.length,
     missing_media_url_pct: videos.length ? Math.round((missing.length / videos.length) * 1000) / 10 : 0,
   },
-  hero,
+  hero: null,
   items,
 };
 writeFileSync(MANIFEST, JSON.stringify(manifest, null, 2) + '\n');
 const s = manifest.stats;
-console.log(`\nWrote ${MANIFEST}: ${items.length} Reels · ${s.shown} shown · ${s.hidden} hidden · hero ${hero ? 'built' : 'not built'}.`);
-console.log(`Licensed-audio check: ${missing.length} of ${videos.length} videos returned no media_url (${s.missing_media_url_pct}%).`);
-if (s.missing_media_url_pct > 25) console.log('Over 25%: the masters-folder fallback from PLAN.md 4.6 is recommended.');
+const summary = [
+  `Wrote ${MANIFEST}: ${items.length} Reels · ${s.shown} shown · ${s.hidden} hidden · ${processed} new/processed · ${reused} reused.`,
+  `Views: ${s.total_views ?? 'n/a'} total across ${s.views_counted_over} Reels.`,
+  `Licensed-audio check: ${missing.length} of ${videos.length} returned no media_url (${s.missing_media_url_pct}%).${s.missing_media_url_pct > 25 ? ' Over 25%: use the masters-folder fallback (PLAN.md 4.6).' : ''}`,
+  `Translations: ${tr.translated} new, ${tr.pending} missing.`,
+];
+console.log('\n' + summary.join('\n'));
+if (process.env.GITHUB_STEP_SUMMARY) writeFileSync(process.env.GITHUB_STEP_SUMMARY, `### Instagram sync\n\n${summary.map((l) => `- ${l}`).join('\n')}\n`, { flag: 'a' });

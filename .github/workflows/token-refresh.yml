@@ -1,0 +1,73 @@
+# Weekly: refresh the 60-day Instagram token and store it back as a repo secret; verify the PAT that does it.
+name: Token refresh
+
+on:
+  schedule:
+    - cron: '41 5 * * 1' # Mondays
+  workflow_dispatch:
+  push:
+    branches: [phase3] # first run before go-live; removed after the merge to main
+
+concurrency:
+  group: token-refresh
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check PAT works and is not about to expire
+        env:
+          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
+          PAT_EXP: ${{ vars.GH_PAT_EXPIRES_AT }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/actions/variables" --jq '.total_count' >/dev/null || { echo "::error::GH_SECRETS_PAT cannot read this repo's variables (expired, revoked or missing permissions)."; exit 1; }
+          if [ -n "$PAT_EXP" ]; then
+            left=$(( ( $(date -u -d "$PAT_EXP" +%s) - $(date -u +%s) ) / 86400 ))
+            echo "GitHub PAT: $left days left ($PAT_EXP)"
+            if [ "$left" -lt 7 ]; then echo "::error::GH_SECRETS_PAT expires in $left days. Create a new one (PLAN.md section 5)."; exit 1; fi
+          else
+            echo "::warning::GH_PAT_EXPIRES_AT is not set"
+          fi
+
+      - name: Refresh the Instagram token
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          ISSUED: ${{ vars.IG_TOKEN_ISSUED_AT }}
+          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
+        run: |
+          # Instagram only refreshes tokens that are at least 24 hours old.
+          if [ -n "$ISSUED" ] && [ $(( $(date -u +%s) - $(date -u -d "$ISSUED" +%s) )) -lt 90000 ]; then
+            echo "Token was issued less than 25 hours ago ($ISSUED); nothing to refresh yet."
+            exit 0
+          fi
+          resp=$(curl -sS --get "https://graph.instagram.com/refresh_access_token" \
+            --data-urlencode "grant_type=ig_refresh_token" --data-urlencode "access_token=${IG_ACCESS_TOKEN}")
+          new=$(printf '%s' "$resp" | jq -r '.access_token // empty')
+          if [ -z "$new" ]; then
+            echo "::error::Instagram refused the refresh: $(printf '%s' "$resp" | jq -r '.error.message // "unknown error"')"
+            exit 1
+          fi
+          echo "::add-mask::$new"
+          secs=$(printf '%s' "$resp" | jq -r '.expires_in')
+          printf '%s' "$new" | gh secret set IG_ACCESS_TOKEN --repo "$GITHUB_REPOSITORY"
+          gh variable set IG_TOKEN_EXPIRES_AT --repo "$GITHUB_REPOSITORY" --body "$(date -u -d "+${secs} seconds" +%F)"
+          gh variable set IG_TOKEN_ISSUED_AT --repo "$GITHUB_REPOSITORY" --body "$(date -u +%FT%TZ)"
+          echo "Token refreshed; new expiry $(date -u -d "+${secs} seconds" +%F)."
+
+      - name: Open an issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Site automation needs attention: token refresh"
+          existing=$(gh issue list --state open --search "\"$title\" in:title" --json number -q '.[0].number')
+          body="The weekly token refresh failed: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+
+          If the Instagram token expired, regenerate it in the Meta app dashboard and run gh secret set IG_ACCESS_TOKEN, then set IG_TOKEN_ISSUED_AT and IG_TOKEN_EXPIRES_AT. If the PAT expired, create a new fine-grained PAT (this repo, Secrets and Variables read/write), run gh secret set GH_SECRETS_PAT and update GH_PAT_EXPIRES_AT. See PLAN.md section 5."
+          if [ -n "$existing" ]; then gh issue comment "$existing" --body "$body"; else gh issue create --title "$title" --body "$body"; fi
