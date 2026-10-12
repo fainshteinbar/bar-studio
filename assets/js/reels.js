@@ -3,9 +3,19 @@
 // - Grid videos are capped: 2 playing on narrow screens, 4 otherwise. The top-most
 //   visible ones win; the rest keep their poster.
 // - Hero videos (data-hero) play whenever visible and do not count toward the cap.
-// - Observation starts after the load event, so video never competes with LCP.
+// - Posters and video start after the load event AND the first paint, then at idle: on slow CPUs the first
+//   frame can come after load, and video decode would otherwise compete with it (and with LCP).
 // - prefers-reduced-motion or Save-Data: nothing autoplays, posters stay.
 (() => {
+  const afterFirstPaint = (fn) => {
+    const go = () => (window.requestIdleCallback ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200));
+    const wait = () => {
+      if (performance.getEntriesByType('paint').length) return go();
+      try { new PerformanceObserver((l, o) => { o.disconnect(); go(); }).observe({ type: 'paint', buffered: true }); } catch { setTimeout(go, 1000); }
+    };
+    if (document.readyState === 'complete') wait(); else addEventListener('load', wait, { once: true });
+  };
+
   // Deferred posters (below the first screen): real poster replaces the inline LQIP after load, near the viewport.
   const lazyPosters = [...document.querySelectorAll('img[data-poster]')];
   const loadPoster = (img) => { if (img.dataset.poster) { img.src = img.dataset.poster; delete img.dataset.poster; } };
@@ -14,7 +24,7 @@
     const pio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { loadPoster(e.target); pio.unobserve(e.target); } }), { rootMargin: '800px 0px' });
     lazyPosters.forEach((img) => pio.observe(img));
   };
-  if (document.readyState === 'complete') startPosters(); else addEventListener('load', startPosters, { once: true });
+  afterFirstPaint(startPosters);
 
   const vids = [...document.querySelectorAll('video[data-src], video[data-src-landscape]')];
   if (!vids.length) return;
@@ -81,7 +91,5 @@
 
   window.reels = { prefer(v) { preferred = v && visible.has(v) ? v : null; schedule(); }, suspend(on) { suspended = !!on; schedule(); } };
 
-  const begin = () => vids.forEach((v) => io.observe(v));
-  if (document.readyState === 'complete') setTimeout(begin, 0);
-  else addEventListener('load', () => setTimeout(begin, 150), { once: true });
+  afterFirstPaint(() => vids.forEach((v) => io.observe(v)));
 })();

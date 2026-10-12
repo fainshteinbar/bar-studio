@@ -299,9 +299,12 @@ function context(lang, root, base) {
       '<link rel="preconnect" href="https://use.typekit.net" crossorigin>',
       '<link rel="preconnect" href="https://use.typekit.net">',
       '<link rel="preconnect" href="https://p.typekit.net">',
-      // Requested after the load event: PageSpeed's simulation charges any request that starts before first
-      // paint (here the kit CSS, p.typekit.net and two font files on two more origins) to FCP and LCP.
-      '<script>(function(){function k(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://use.typekit.net/gce3kmw.css";document.head.appendChild(l)}if(document.readyState==="complete")k();else addEventListener("load",k,{once:true})})()</script>',
+      // Requested after the load event and the first paint: PageSpeed's simulation charges any request that
+      // starts before first paint (the kit CSS, p.typekit.net, two font files on two more origins) to FCP and
+      // LCP, and on slow CPUs the font swap relayout would compete with the first frame.
+      '<script>(function(){function k(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://use.typekit.net/gce3kmw.css";document.head.appendChild(l)}' +
+        'function w(){if(performance.getEntriesByType("paint").length)return k();try{new PerformanceObserver(function(l,o){o.disconnect();k()}).observe({type:"paint",buffered:true})}catch(e){setTimeout(k,500)}}' +
+        'if(document.readyState==="complete")w();else addEventListener("load",w,{once:true})})()</script>',
       '<noscript><link rel="stylesheet" href="https://use.typekit.net/gce3kmw.css"></noscript>',
       `<style>@font-face{font-family:"Narkiss Fallback";font-weight:100 900;src:url("${root}assets/fonts/noto-sans-hebrew-var-hebrew.woff2") format("woff2");unicode-range:U+0590-05FF,U+FB1D-FB4F;size-adjust:70.5%;ascent-override:122%;descent-override:49%;line-gap-override:0%}` +
         `@font-face{font-family:"Narkiss Fallback";font-weight:100 900;src:url("${root}assets/fonts/dm-sans-latin-600.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212;size-adjust:62%;ascent-override:139%;descent-override:56%;line-gap-override:0%}</style>`,
