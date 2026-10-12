@@ -119,3 +119,50 @@ Everything here is sourced from Bar's Instagram bio or from PLAN.md decisions, e
 - "Produced in Seedance and other tools": from the brief.
 - View counts (1.2M total, per-reel numbers) and "9 videos published": sample data from the placeholder manifest, labelled as such on every page. The real numbers come from the API.
 - Process steps (brief, concept and script, generation, edit and sound, delivery) and the three "why me" points: drafted by Claude from the brief and the old site. Bar should confirm the wording.
+
+---
+
+# Rebuild of direction 6: design rules (step 3, awaiting Bar's confirmation)
+
+Premise from Bar (2026-10-12): direction 6's visual language (palette, bar.studio character, Narkiss Hadash Condensed) with genre.ai's structure and priorities. Work first, Bar second: the portrait-led first screen goes, and Bar appears as a credit. Dennis Snellenberg contributes only craft level. Evidence: `directions/references/notes.md`, screenshots in `directions/references/genre/` and `dennis/` (local only, gitignored).
+
+## What the references actually do
+
+- **genre.ai** makes the work enormous and lets it talk. Each project card is a half-screen video with a one-line, joke-shaped pitch ("Real people post their dreams online. They're boring. We made them more exciting."). It has one accent colour, quiet small type with one huge jump in scale, and a "start a project" button in a nav that never hides. Proof (a logo row) sits directly under the hero. Its first screen is a wordless brand sting, not client work, and it scores Lighthouse mobile 65 (LCP 24.5 s, 17 MB) and accessibility 89.
+- **Dennis** has exact craft: magnetic buttons, fills that sweep up and exit through the top, word-by-word masked text reveals, hover images that follow the cursor with easing, and one motion curve for everything. His costs are a 4.5–6 s loader, no reduced-motion support, Lighthouse 83 and accessibility 75.
+- **Not copied:** genre's ERA timeline, Plex Mono with a lime accent on cream, ↗ "START A PROJECT", the logo-morph sting, and the 16:9 card with a side text column. Dennis's language loader, curved curtain transitions, round blue buttons, name marquee and globe pill.
+
+## Rules
+
+Each rule has a test that `scripts/shots.mjs`, Lighthouse or a grep can check.
+
+**Structure**
+1. **Work from the first frame.** The hero is a full-bleed loop cut from Bar's real Reels, with one short headline on top. At 390×844, at least 2 real Reels are moving and the WhatsApp button is visible without scrolling. At 1440×900, at least 3 moving Reels, the CTA and one proof figure. No loader, no curtain.
+2. **Bar is the credit, not the headline.** A credit line ("בר פאינשטיין · קריאייטיב דיירקטור · וידאו AI") sits under the headline, like a film credit. The portrait moves to a small About block lower down, or is dropped.
+3. **Real proof right under the hero.** Numbers come from the API only: total views (418K), number of Reels (17), most-watched Reel (210K). No client names, logos or testimonials until real, permitted ones exist. Test: client-name grep returns 0, and the proof row starts within 1.2 screens on mobile.
+4. **One loud CTA that never leaves.** WhatsApp sits in a sticky header pill on desktop and a pinned button on mobile (inline-end corner, ≥48 px), visible at every scroll depth. Same wording everywhere plus "עונה באותו יום / Same-day replies". At most 5 WhatsApp CTAs on the page and one email fallback. The number comes only from `i18n/site.json`.
+5. **The work is big and speaks for itself.** Reels are shown large, at least half the viewport height on desktop, never as thumbnails. Each card has the Reel, its own caption's first line as the pitch, and one result (views). No paragraphs.
+6. **Order tells a story.** The most-watched Reel is featured first and largest, then newest first. Lanes (comedy, ads, sports and brand) appear only once Bar tags Reels with hashtags or in `data/overrides.json`; today all 17 are untagged, so there's no lane filter yet.
+7. **Click means watch with sound.** Tapping a Reel opens a 9:16 overlay that plays the full Reel with sound within 150 ms. It closes with Esc, back or a ✕ of at least 44 px, traps focus and returns focus to the card. The grid stays silent. This needs a second rendition per Reel (720 px, AAC audio) loaded only on click: an addition to PLAN.md 4.6.
+
+**Brand**
+8. **Type.** Display is Narkiss Hadash Condensed (Adobe kit) in both languages, at `clamp(48px, 13vw, 168px)` with line-height ≤ 0.95. Body text is Noto Sans Hebrew (self-hosted, normal width) in Hebrew and DM Sans in English. Small text uses at most 4 sizes between 12 and 20 px. Largest display to body ratio is ≥ 6 on desktop and ≥ 3 on mobile.
+9. **Colour.** Void #07071C and navy #1A1464 grounds, cream #F4F0E8 text, and cyan #00C2FF as the only accent (CTA, active state, playing indicator). All text ≥ 4.5:1 contrast.
+10. **bar.studio character kept from direction 6.** The two-tone headline (cream into cyan), tracked uppercase micro-labels in English only, pill buttons, and the blinking cyan "!" as the one signature detail.
+
+**Craft (Dennis level, own forms)**
+11. **One motion system.** Durations are 0.3, 0.5 or 0.7 s only. Two curves: `cubic-bezier(.7,0,.3,1)` for movement and `cubic-bezier(.23,1,.32,1)` for hover and press. A CSS lint finds no other durations.
+12. **Hover and press.**
+    - The WhatsApp CTA is magnetic on fine pointers only: strength ≤ 0.2 × its size, label moving at half strength, one spring overshoot on release.
+    - Card hover swaps the poster to video, scales to 1.02 and slides the caption up.
+    - Pressed elements scale to 0.97.
+    - Link underlines draw from inline-start, mirrored in RTL.
+13. **Reveals.** Headline words rise from a mask once (0.7 s, 30 ms stagger). The LCP element is the hero poster image, never the animated text, preloaded with high priority. No smooth-scroll library, no page transitions; the overlay opens and closes in ≤ 300 ms.
+
+**Hard limits**
+14. **Performance, accessibility and RTL.**
+    - Lighthouse mobile performance ≥ 90, LCP < 2.5 s, accessibility 100, on the real Reels.
+    - Transfer before scrolling ≤ 2.5 MB on mobile. Grid previews are the first 12 s of each Reel (≤ 2 MB each; today's full-length files run up to 8.4 MB), and the hero loop is ≤ 1.5 MB.
+    - Reduced motion means no autoplay, no magnetic effect and no reveals.
+    - Logical properties only, with every horizontal motion mirrored under `:dir(rtl)`.
+    - No horizontal scroll at 390 px in either language.
