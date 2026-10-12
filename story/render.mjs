@@ -9,7 +9,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { serve } from '../scripts/serve.mjs';
 
 const FPS = 30, DURATION = 12.0, FRAMES = Math.round(FPS * DURATION);
-const PAYOFF = { src: 'media/ig/17901612813374816.full.mp4', from: 27.0, at: 7.0, len: 2.5 };   // the Reel's own audio
+const PAYOFF = { src: 'media/ig/17901612813374816.full.mp4', from: 27.45, at: 7.0, len: 2.5 };   // reveal 0.8 s in   // the Reel's own audio
 const arg = (k) => { const i = process.argv.indexOf(k); return i > -1 ? process.argv[i + 1] : null; };
 const stills = arg('--stills')?.split(',').map(Number);
 const ENCODE_ONLY = process.argv.includes('--encode-only');
@@ -23,7 +23,7 @@ page.on('pageerror', (e) => console.error('page error:', e.message));
 await page.goto('http://localhost:4199/story/story.html', { waitUntil: 'networkidle' });
 const data = await page.evaluate(() => window.ready);
 if (!data) throw new Error('Narkiss did not load (Adobe kit)');
-console.log(`data: ${data.reels} Reels, ${data.total} views, hook running totals ${data.cum.join(' / ')}`);
+console.log(`data: ${data.reels} Reels, ${data.total} views`);
 
 const shoot = async (t, path) => {
   await page.evaluate((t) => window.render(t), t);
