@@ -58,7 +58,7 @@ function context(lang, root, base) {
   const mail_url = `mailto:${site.email}?subject=${encodeURIComponent(t.cta.email_subject)}`;
   const ig_url = `https://www.instagram.com/${site.instagram}/`;
 
-  const items = manifest.items.map((it, i) => {
+  const items = manifest.items.filter((it) => it.visible !== false).map((it, i) => {
     const n = String(i + 1).padStart(2, '0');
     const title = it.placeholder ? `${t.grid.sample_title} ${n}` : (it.caption || '').split('\n')[0].slice(0, 70) || `${t.lane_names[it.lane] || it.lane} ${n}`;
     const media =

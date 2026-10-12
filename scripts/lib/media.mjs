@@ -17,10 +17,17 @@ export const tempDir = (tag) => {
   return d;
 };
 
-// Web preview: max 720 px wide (never upscaled), H.264 CRF 28 preset slow, no audio, faststart.
-export function transcodeReel(src, outMp4, { maxSeconds = 0 } = {}) {
+// Silent grid preview: max 640 px wide (never upscaled), H.264 CRF 29 preset slow, no audio, faststart.
+// Grid cards render at most ~430 CSS px wide, so 640 px covers 1.5x screens; rule 14 caps each at 2 MB.
+export function transcodeReel(src, outMp4, { maxSeconds = 0, width = 640, crf = 29 } = {}) {
   const trim = maxSeconds > 0 ? ['-t', String(maxSeconds)] : [];
-  run('ffmpeg', ['-v', 'error', '-y', '-i', src, ...trim, '-vf', "scale='min(720,iw)':-2", '-c:v', 'libx264', '-preset', 'slow', '-crf', '28', '-an', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', outMp4]);
+  run('ffmpeg', ['-v', 'error', '-y', '-i', src, ...trim, '-vf', `scale='min(${width},iw)':-2`, '-c:v', 'libx264', '-preset', 'slow', '-crf', String(crf), '-an', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', outMp4]);
+  return probe(outMp4);
+}
+
+// Full rendition for the watch-with-sound overlay (rule 7): 720 px max, CRF 26, AAC 96 kbps, faststart.
+export function transcodeFull(src, outMp4) {
+  run('ffmpeg', ['-v', 'error', '-y', '-i', src, '-vf', "scale='min(720,iw)':-2", '-c:v', 'libx264', '-preset', 'slow', '-crf', '26', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '96k', '-ac', '2', '-movflags', '+faststart', outMp4]);
   return probe(outMp4);
 }
 

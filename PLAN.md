@@ -13,6 +13,10 @@ Phase 1 output (research, decisions, installed tooling, build plan). Written 202
 | 5 | Licensed audio | On the first backfill, report how many Reels return no `media_url`. If over ~25%, propose the "masters folder" fallback (section 4.6). |
 | 6 | Showreel | Bar has no 16:9 showreel. Hero uses a loop built from the Reels themselves (section 4.7). Leave a slot where a real showreel drops in later. |
 | 7 | PAT expiry | The fine-grained PAT gets the same early-warning check as the Instagram token (section 4.4). |
+| 8 | Renditions (approved 2026-10-12, rules 7 + 14) | Two files per Reel: a silent grid preview (first 12 s, max 640 px wide, H.264 CRF 29, no audio, ≤ 2 MB) and a full rendition for the watch-with-sound overlay (full length, max 720 px, CRF 26, AAC 96 kbps), loaded only on tap. Replaces the single 720 px / CRF 28 file in 4.6. |
+| 9 | Visibility (2026-10-12) | All Reels are shown, including real players and club kits; no automatic hiding by content. `data/reels.json` holds a `hidden` map of Instagram media IDs that the sync and the build skip. It is empty today; Bar hides a Reel later by adding its ID. |
+| 10 | Display font (2026-10-12) | Narkiss Hadash Condensed from Adobe Fonts kit `gce3kmw` (Hebrew + English subset, font-display swap; no domain allowlist needed; self-hosting not allowed). Body: Noto Sans Hebrew (self-hosted variable) and DM Sans. Details: `directions/references/font-kit.md`. |
+| 11 | Token hygiene | The first long-lived token (generated 2026-10-12) was exposed in chat. Rotate it in phase 3 when the GitHub secrets are created, and revoke the old one. |
 
 ## 1. Current state of the repo (verified 2026-10-12)
 
@@ -149,6 +153,10 @@ Items without `media_url` get `has_video: false`, keep their poster (thumbnail i
 Manifest shape (`data/instagram.json`): `{ "generated_at", "media_base_url", "stats": { "total_videos", "total_views", "missing_media_url", "missing_media_url_pct" }, "items": [{ "id", "permalink", "timestamp", "caption", "lane", "has_video", "video_url", "poster_url", "lqip", "width", "height", "duration", "views", "likes" }] }`. `lane` is derived from caption hashtags Bar controls (`#ad`, `#comedy`, `#sport`) with a manual override file `data/overrides.json`; items without a hashtag default to "reels".
 
 Schedule: `cron: "23 4 * * *"` plus `workflow_dispatch`, `concurrency: { group: ig-sync, cancel-in-progress: false }`, runner pinned to `ubuntu-24.04` (`ubuntu-latest` moves to 26.04 between Oct 19 and Nov 19, 2026). Weekly `ig-token-refresh.yml` on `cron: "41 5 * * 1"`. Public repos get hosted runners free. Scheduled workflows are auto-disabled after 60 days without repo activity; the sync job's own commits keep it active (widely reported, not found in docs), and the refresh job commits `data/last-sync.json` weekly as a belt-and-braces measure.
+
+### 4.6.1 Status (2026-10-12)
+
+`scripts/ig-sync.mjs --local` is implemented and run against the real account: @barfainshtein (MEDIA_CREATOR), 17 videos, 0 without media_url, 418K views across all 17, top Reel 210K. It writes `media/ig/` and `data/instagram.local.json` (both gitignored); the build prefers the local manifest, and `MANIFEST=fixture` forces the committed fixture before commits. Manifest items now also carry `visible`, `status`, `full_url`; stats carry `top_visible_views`, `top_visible_id`, `shown`, `hidden`. The CDN upload mode (`rclone` to R2, `data/instagram.json`) is still phase 3. Shared pipeline: `scripts/lib/media.mjs`.
 
 ### 4.7 Hero loop from the Reels (decision 6)
 

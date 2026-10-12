@@ -10,7 +10,7 @@ import { mkdirSync, readdirSync, writeFileSync, existsSync, readFileSync } from 
 import { serve } from './serve.mjs';
 
 const PORT = 4174;
-const OUT = 'directions/shots';
+const OUT = process.env.SHOTS_OUT || 'directions/shots';
 const VIEWPORTS = {
   mobile: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 },
   desktop: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 },

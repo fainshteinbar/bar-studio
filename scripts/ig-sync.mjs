@@ -12,7 +12,7 @@ import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync, createWri
 import { join } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { Readable } from 'node:stream';
-import { transcodeReel, posterFrom, buildHeroLoops, laneFor, tempDir } from './lib/media.mjs';
+import { transcodeReel, transcodeFull, posterFrom, buildHeroLoops, laneFor, tempDir, probe } from './lib/media.mjs';
 
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
@@ -20,7 +20,8 @@ const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? +args[i + 1] 
 const API = `https://graph.instagram.com/${process.env.IG_API_VERSION || 'v26.0'}`;
 const OUT = 'media/ig';
 const MANIFEST = 'data/instagram.local.json';
-const TRANSCODE = opt('--transcode', 12);
+const TRANSCODE = opt('--transcode', 1000);
+const PREVIEW_SECONDS = 12; // rule 14: grid previews are the first 12 s
 
 const TOKEN = (process.env.IG_ACCESS_TOKEN || (existsSync('.secrets/ig-token') ? readFileSync('.secrets/ig-token', 'utf8') : '')).trim();
 if (!TOKEN) {
@@ -84,56 +85,63 @@ async function viewsFor(id) {
   }
 }
 
-// 3. Download + transcode the newest N videos that have media_url (incremental: reuse existing files).
+// 3. Visibility: data/reels.json lists media IDs Bar has hidden. Everything else is shown.
+const hiddenCfg = (existsSync('data/reels.json') ? JSON.parse(readFileSync('data/reels.json', 'utf8')) : {}).hidden || {};
+const visibility = (m) => (hiddenCfg[m.id] ? { status: 'hidden', reason: String(hiddenCfg[m.id] || 'hidden') } : { status: 'shown', reason: '' });
+
+// 4. Posters for every video (the review page needs them all); renditions only for visible Reels.
 mkdirSync(OUT, { recursive: true });
 const overrides = existsSync('data/overrides.json') ? JSON.parse(readFileSync('data/overrides.json', 'utf8')) : {};
 const items = [];
 const tmp = tempDir('igsync');
+let transcoded = 0;
 try {
   for (const m of videos) {
-    if (items.filter((i) => i.has_video).length >= TRANSCODE) break;
-    const mp4 = join(OUT, `${m.id}.mp4`), webp = join(OUT, `${m.id}.webp`), lqFile = join(OUT, `${m.id}.lqip`);
-    let has_video = false, dims = null;
-    if (m.media_url) {
-      if (!existsSync(mp4)) {
-        const raw = join(tmp, `${m.id}.src.mp4`);
-        await download(m.media_url, raw);
-        dims = transcodeReel(raw, mp4);
-        writeFileSync(lqFile, posterFrom(mp4, webp));
-        rmSync(raw, { force: true });
-      }
-      has_video = true;
-    } else if (m.thumbnail_url && !existsSync(webp)) {
+    const vis = visibility(m);
+    const prev = join(OUT, `${m.id}.mp4`), full = join(OUT, `${m.id}.full.mp4`);
+    const webp = join(OUT, `${m.id}.webp`), lqFile = join(OUT, `${m.id}.lqip`);
+    const want = vis.status === 'shown' && m.media_url && transcoded < TRANSCODE;
+    const stale = existsSync(prev) && probe(prev).d > PREVIEW_SECONDS + 0.5;
+    if (want && (!existsSync(prev) || !existsSync(full) || stale)) {
+      const raw = join(tmp, `${m.id}.src.mp4`);
+      await download(m.media_url, raw);
+      transcodeReel(raw, prev, { maxSeconds: PREVIEW_SECONDS });
+      transcodeFull(raw, full);
+      writeFileSync(lqFile, posterFrom(prev, webp));
+      rmSync(raw, { force: true });
+    } else if (!existsSync(webp) && m.thumbnail_url) {
       const jpg = join(tmp, `${m.id}.jpg`);
       await download(m.thumbnail_url, jpg);
       writeFileSync(lqFile, posterFrom(jpg, webp, { isImage: true }));
     }
-    if (!existsSync(webp)) continue;
-    const { w, h, d } = dims || (has_video ? (await import('./lib/media.mjs')).probe(mp4) : { w: 720, h: 1280, d: 0 });
+    const has_video = !!want && existsSync(prev) && existsSync(full);
+    if (has_video) transcoded++;
+    const p = has_video ? probe(full) : null;
+    const pw = existsSync(webp) ? probe(webp) : { w: 720, h: 1280 };
     items.push({
       id: m.id, placeholder: false, permalink: m.permalink, timestamp: m.timestamp,
-      caption: m.caption || '', lane: laneFor(m.caption, m.id, overrides.lanes || {}), has_video,
-      video_url: has_video ? `${OUT}/${m.id}.mp4` : null, poster_url: `${OUT}/${m.id}.webp`,
-      lqip: readFileSync(lqFile, 'utf8'), width: w, height: h, duration: Math.round(d * 10) / 10,
+      caption: m.caption || '', lane: laneFor(m.caption, m.id, overrides.lanes || {}),
+      visible: vis.status === 'shown' && has_video, status: vis.status, flag_reason: vis.reason,
+      has_video, video_url: has_video ? `${OUT}/${m.id}.mp4` : null, full_url: has_video ? `${OUT}/${m.id}.full.mp4` : null,
+      poster_url: existsSync(webp) ? `${OUT}/${m.id}.webp` : null, lqip: existsSync(lqFile) ? readFileSync(lqFile, 'utf8') : '',
+      width: p ? p.w : pw.w, height: p ? p.h : pw.h, duration: p ? Math.round(p.d * 10) / 10 : null,
       views: await viewsFor(m.id), likes: m.like_count ?? null,
     });
-    const kb = has_video ? Math.round(statSync(mp4).size / 1024) : 0;
-    console.log(`${String(items.length).padStart(2, '0')} ${m.timestamp.slice(0, 10)} ${has_video ? `${w}x${h} ${kb} KB` : 'poster only (no media_url)'}  ${(m.caption || '').split('\n')[0].slice(0, 50)}`);
+    const it = items.at(-1);
+    console.log(`${String(items.length).padStart(2, '0')} ${m.timestamp.slice(0, 10)} ${vis.status.padEnd(7)} ${has_video ? `${Math.round(statSync(prev).size / 1024)} KB preview, ${Math.round(statSync(full).size / 1024)} KB full` : '-'}  ${String(it.views ?? '-').padStart(7)} views  ${(m.caption || '').split('\n')[0].slice(0, 44)}`);
   }
 } finally {
   rmSync(tmp, { recursive: true, force: true });
 }
 
-// 4. Hero loops from the newest playable reels (or the override list).
-const playable = items.filter((i) => i.has_video);
+// 5. Hero loops from visible Reels only (override list first).
+const playable = items.filter((i) => i.visible);
 const heroIds = (overrides.hero || []).filter((id) => playable.some((i) => i.id === id));
 const heroSrc = (heroIds.length >= 3 ? heroIds.map((id) => playable.find((i) => i.id === id)) : playable).slice(0, 9).map((i) => i.video_url);
 const hero = heroSrc.length ? buildHeroLoops(heroSrc, OUT) : null;
 
-// Views across every video on the account (not only the transcoded ones).
-const viewsById = Object.fromEntries(items.map((i) => [i.id, i.views]));
-for (const m of videos) if (!(m.id in viewsById)) viewsById[m.id] = await viewsFor(m.id);
-const views = Object.values(viewsById).filter((v) => typeof v === 'number');
+const views = items.map((i) => i.views).filter((v) => typeof v === 'number');
+const top = playable.reduce((a, b) => ((b.views ?? -1) > (a?.views ?? -1) ? b : a), null);
 const manifest = {
   generated_at: new Date().toISOString(),
   placeholder: false,
@@ -144,6 +152,10 @@ const manifest = {
     total_views: views.length ? views.reduce((a, b) => a + b, 0) : null,
     views_counted_over: views.length,
     views_sample: views.length === 0,
+    top_visible_views: top?.views ?? null,
+    top_visible_id: top?.id ?? null,
+    shown: items.filter((i) => i.visible).length,
+    hidden: items.filter((i) => i.status === 'hidden').length,
     missing_media_url: missing.length,
     missing_media_url_pct: videos.length ? Math.round((missing.length / videos.length) * 1000) / 10 : 0,
   },
@@ -151,6 +163,7 @@ const manifest = {
   items,
 };
 writeFileSync(MANIFEST, JSON.stringify(manifest, null, 2) + '\n');
-console.log(`\nWrote ${MANIFEST}: ${items.length} items (${playable.length} playable), hero ${hero ? 'built' : 'not built'}.`);
-console.log(`Licensed-audio check: ${missing.length} of ${videos.length} videos returned no media_url (${manifest.stats.missing_media_url_pct}%).`);
-if (manifest.stats.missing_media_url_pct > 25) console.log('Over 25%: the masters-folder fallback from PLAN.md 4.6 is recommended.');
+const s = manifest.stats;
+console.log(`\nWrote ${MANIFEST}: ${items.length} Reels · ${s.shown} shown · ${s.hidden} hidden · hero ${hero ? 'built' : 'not built'}.`);
+console.log(`Licensed-audio check: ${missing.length} of ${videos.length} videos returned no media_url (${s.missing_media_url_pct}%).`);
+if (s.missing_media_url_pct > 25) console.log('Over 25%: the masters-folder fallback from PLAN.md 4.6 is recommended.');

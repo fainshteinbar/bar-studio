@@ -13,3 +13,5 @@ data/instagram.local.json
 .secrets/
 directions/references/**/*.jpg
 directions/references/**/*.png
+directions/shots/before/*.jpg
+directions/shots/after/*.jpg
