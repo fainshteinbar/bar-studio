@@ -81,16 +81,17 @@ html, body { width: 1080px; height: 1920px; overflow: clip; background: var(--vo
 const W = 1080, H = 1920, FPS = 30;
 const SITE = { w: 390, h: 844 };
 const SW = 556, SH = Math.round(SW * SITE.h / SITE.w), BZ = 17;   // phone screen 556x1203, bezel 17
+// Music: story/work/music (120 BPM, beats on every 0.5 s of story time, drop at 3.0, bars at 3, 5, 7, 9, 11, 13).
 // Hook cuts: clip index, start, end, frames available, zoom, number shown (views of that Reel).
 const HOOK = [
-  { c: 0, a: 0.00, b: 0.85, n: 28, z: 1.55, num: '211K', speed: 0.5 },  // ice-cream box (letterboxed: zoom into the band), half speed so the box holds
-  { c: 1, a: 0.85, b: 1.50, n: 22, z: 1, num: '81K' },
-  { c: 2, a: 1.50, b: 2.00, n: 18, z: 1, num: '57K' },
-  { c: 3, a: 2.00, b: 2.40, n: 15, z: 1, num: '38K' },
-  { c: 4, a: 2.40, b: 2.55, n: 8, z: 1 },
-  { c: 5, a: 2.55, b: 2.70, n: 8, z: 1 },
-  { c: 6, a: 2.70, b: 2.85, n: 8, z: 1 },
-  { c: 7, a: 2.85, b: 3.30, n: 8, z: 1 },
+  { c: 0, a: 0.000, b: 1.000, n: 28, z: 1.55, num: '211K', speed: 0.45 }, // ice-cream box (letterboxed: zoom into the band), slowed so the box holds
+  { c: 1, a: 1.000, b: 1.500, n: 22, z: 1, num: '81K' },
+  { c: 2, a: 1.500, b: 2.000, n: 18, z: 1, num: '57K' },
+  { c: 3, a: 2.000, b: 2.500, n: 15, z: 1, num: '38K' },
+  { c: 4, a: 2.500, b: 2.625, n: 8, z: 1 },                // 16th-note stutters into the drop
+  { c: 5, a: 2.625, b: 2.750, n: 8, z: 1 },
+  { c: 6, a: 2.750, b: 2.875, n: 8, z: 1 },
+  { c: 7, a: 2.875, b: 3.300, n: 8, z: 1 },
 ];
 const TOTAL_VIEWS = 430;          // K, from data/instagram.json (430,765 on 2026-10-12)
 const POSTERS = ['17943051837086700','18112796969467846','18115863469771345','17996145848834714','17957239818238876','17981987253079891','18130994455682363','18633783094026616','17901612813374816','18113922386100931','18105146096190451','17958556212232372','18127153129842174','18487666432129017','18110908592128454','18627196816008046','17939221510464202'];
@@ -158,15 +159,15 @@ window.ready = (async () => {
 })();
 
 // Site-recording time for story time t: rail playing, a 1.65x scroll, grid, tap, player.
-const siteTime = (t) => piece(t, [[3.0, 0.6], [4.4, 1.79], [6.0, 4.43], [6.8, 5.33], [8.2, 6.73]]);
-const TAP_T = 6.8;
+const siteTime = (t) => piece(t, [[3.0, 0.6], [4.5, 1.79], [6.0, 4.43], [7.0, 5.33], [8.2, 6.53]]);
+const TAP_T = 7.0;
 
 // Virtual camera on the phone: screen scale and centre on the canvas.
 const cam = (t) => {
   const tapX = (siteMeta.tap.x - 0.5) * SW, tapY = (siteMeta.tap.y - 0.5) * SH;
-  const lowK = 1 - eInOut(prog(t, 4.4, 4.9));                 // smaller and lower while "כולם כאן." is up
-  const push = eInOut(prog(t, 6.0, 6.8)) * (1 - eInOut(prog(t, 7.4, 8.0)));
-  const sc = lerp(1.0, 0.8, lowK) + 0.24 * eInOut(prog(t, 6.0, 6.8)) - 0.16 * eInOut(prog(t, 7.4, 8.0));
+  const lowK = 1 - eInOut(prog(t, 4.5, 5.0));                 // smaller and lower while "כולם כאן." is up
+  const push = eInOut(prog(t, 6.0, 7.0)) * (1 - eInOut(prog(t, 7.5, 8.0)));
+  const sc = lerp(1.0, 0.8, lowK) + 0.24 * eInOut(prog(t, 6.0, 7.0)) - 0.16 * eInOut(prog(t, 7.5, 8.0));
   let cx = 540 - tapX * sc * 0.55 * push, cy = lerp(950, 1080, lowK) - tapY * sc * 0.45 * push;
   cy += Math.sin(t * 1.5) * 6;                                  // float
   if (t > TAP_T && t < TAP_T + 0.22) { const k = (t - TAP_T) / 0.22; cx += Math.sin(k * 40) * 5 * (1 - k); } // haptic shake
@@ -240,33 +241,33 @@ window.render = async (t) => {
     const roll = eOut(prog(t, HOOK[h].a, HOOK[h].a + 0.16));
     set($('hNum'), { transform: `translateY(${(1 - roll) * 100}%)`, color: 'var(--cream)' });
   } else {
-    const k = eOut(prog(t, 2.4, 2.95));
+    const k = eOut(prog(t, 2.5, 2.95));
     $('hNum').textContent = `${Math.round(lerp(387, TOTAL_VIEWS, k))}K`;
     set($('hNum'), { transform: 'none', color: k >= 1 ? 'var(--cyan)' : 'var(--cream)' });
   }
   const hookOut = eInOut(prog(t, 2.95, 3.15));
   set($('hNumBox'), { opacity: 1 - hookOut });
   $('hSubText').textContent = h <= 3 ? 'ראו את זה.' : 'ועוד 13 ריילס';
-  words($('hSub'), t, h <= 3 ? 0.06 : 2.4, 0, 0.2);
+  words($('hSub'), t, h <= 3 ? 0.06 : 2.5, 0, 0.2);
   set($('hSub'), { opacity: 1 - hookOut });
   let flash = 0; for (const x of HOOK.slice(1)) flash = Math.max(flash, 1 - prog(t, x.a, x.a + 0.1));
   flash = t < 3.0 ? flash * 0.4 : 0;
   if (t >= 8.0) flash = Math.max(flash, (1 - prog(t, 8.0, 8.25)) * 0.5);
-  if (t >= 10.75) flash = Math.max(flash, (1 - prog(t, 10.75, 10.95)) * 0.22);
+  if (t >= 11.0) flash = Math.max(flash, (1 - prog(t, 11.0, 11.2)) * 0.22);
   set($('flash'), { opacity: flash });
 
   // "כולם כאן." while the phone lands
   words($('allHere'), t, 3.15, 0.12);
-  const ahOut = eInOut(prog(t, 4.35, 4.65));
-  set($('allHere'), { opacity: t < 3.1 ? 0 : 1 - ahOut, transform: `translateY(${-ahOut * 90}px)` });
+  const ahOut = eInOut(prog(t, 4.4, 4.7));
+  set($('allHere'), { opacity: t < 3.12 ? 0 : 1 - ahOut, transform: `translateY(${-ahOut * 90}px)` });
 
   // ---------- chips ----------
   const chip = (el, a, b, x, y, side) => {
     const k = env(t, a, b, 0.35, 0.25), pop = eBack(prog(t, a, a + 0.42));
     set(el, { opacity: k, top: y + 'px', [side]: x + 'px', transform: `scale(${lerp(0.7, 1, pop)})`, transformOrigin: side === 'right' ? '100% 50%' : '0% 50%' });
   };
-  chip($('chipB'), 4.95, 6.05, 36, 1180, 'left');
-  chip($('chipC'), 7.15, 8.05, 36, 520, 'right');
+  chip($('chipB'), 5.0, 6.05, 36, 1180, 'left');
+  chip($('chipC'), 7.25, 8.05, 36, 520, 'right');
 
   // ---------- tap ----------
   const tx = phone.x + siteMeta.tap.x * phone.w, ty = phone.y + siteMeta.tap.y * phone.h;
@@ -275,24 +276,24 @@ window.render = async (t) => {
   set($('tapRing'), { left: tx + 'px', top: ty + 'px', opacity: rel > 0 && rel < 1 ? 1 - rel : 0, transform: `scale(${lerp(0.6, 3, eOut(rel))})` });
 
   // ---------- end card ----------
-  const lk = eOut(prog(t, 10.35, 10.65));
-  set($('logo'), { opacity: lk, transform: `scale(${lerp(0.9, 1, eBack(prog(t, 10.35, 10.75)))})` });
+  const lk = eOut(prog(t, 10.5, 10.8));
+  set($('logo'), { opacity: lk, transform: `scale(${lerp(0.9, 1, eBack(prog(t, 10.5, 10.9)))})` });
   const dot = $('logo').querySelector('path:last-of-type');
-  if (dot) { dot.style.transformBox = 'fill-box'; dot.style.transform = `translateY(${(1 - bounce(prog(t, 10.35, 10.95))) * -26}px)`; }
-  for (const id of ['endA', 'endB']) $(id).style.opacity = t > 10.7 ? 1 : 0;
-  words($('endA'), t, 10.75, 0.08); words($('endB'), t, 10.95);
-  const sk = eOut(prog(t, 11.6, 11.95));
+  if (dot) { dot.style.transformBox = 'fill-box'; dot.style.transform = `translateY(${(1 - bounce(prog(t, 10.78, 11.38))) * -26}px)`; } // first impact on the 11.0 bar
+  for (const id of ['endA', 'endB']) $(id).style.opacity = t > 10.95 ? 1 : 0;
+  words($('endA'), t, 11.0, 0.08); words($('endB'), t, 11.25);
+  const sk = eOut(prog(t, 12.0, 12.35));
   set($('endSub'), { opacity: sk, transform: `translateY(${(1 - sk) * 24}px)` });
-  const ck = eOut(prog(t, 12.2, 12.55));
-  set($('cue'), { opacity: ck, transform: `translateY(${(1 - ck) * 24}px) scale(${lerp(0.94, 1, eBack(prog(t, 12.2, 12.6)))})` });
-  const sw = prog(t, 13.4, 13.85);
-  set($('sweep'), { opacity: sw > 0 ? 1 - prog(t, 13.85, 14.3) : 0, transform: `scaleX(${eOut(sw)})` });
+  const ck = eOut(prog(t, 12.5, 12.85));
+  set($('cue'), { opacity: ck, transform: `translateY(${(1 - ck) * 24}px) scale(${lerp(0.94, 1, eBack(prog(t, 12.5, 12.9)))})` });
+  const sw = prog(t, 13.5, 13.95);
+  set($('sweep'), { opacity: sw > 0 ? 1 - prog(t, 13.95, 14.4) : 0, transform: `scaleX(${eOut(sw)})` });
   [...$('arrows').children].forEach((a, i) => {
-    const ph = ((t - 12.4) * 1.6 - i * 0.22) % 1;
-    a.style.opacity = t > 12.4 ? 0.25 + 0.75 * Math.max(0, Math.sin(Math.PI * clamp(ph < 0 ? ph + 1 : ph))) : 0;
+    const ph = ((t - 12.6) * 2 - i * 0.25) % 1;   // two pulses per second = the beat
+    a.style.opacity = t > 12.6 ? 0.25 + 0.75 * Math.max(0, Math.sin(Math.PI * clamp(ph < 0 ? ph + 1 : ph))) : 0;
   });
-  set($('arrows'), { transform: `translateY(${Math.sin(Math.max(0, t - 12.4) * 5) * 6}px)` });
-  set($('zoneGlow'), { opacity: prog(t, 12.3, 12.9) * (0.75 + 0.25 * Math.sin((t - 12.3) * 4)) });
+  set($('arrows'), { transform: `translateY(${Math.sin(Math.max(0, t - 12.6) * Math.PI * 2) * 6}px)` });
+  set($('zoneGlow'), { opacity: prog(t, 12.5, 13.0) * (0.75 + 0.25 * Math.cos((t - 13.0) * Math.PI * 4)) }); // pulses on the beat
 };
 </script>
 </body>
