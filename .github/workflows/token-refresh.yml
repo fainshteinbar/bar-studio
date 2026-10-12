@@ -5,8 +5,6 @@ on:
   schedule:
     - cron: '41 5 * * 1' # Mondays
   workflow_dispatch:
-  push:
-    branches: [phase3] # first run before go-live; removed after the merge to main
 
 concurrency:
   group: token-refresh

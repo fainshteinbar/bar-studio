@@ -10,8 +10,6 @@ on:
         description: Reprocess and re-upload every Reel
         type: boolean
         default: false
-  push:
-    branches: [phase3] # first run before go-live; removed after the merge to main
 
 concurrency:
   group: ig-sync
