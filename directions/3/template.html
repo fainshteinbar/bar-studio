@@ -73,7 +73,7 @@
         <a href="{{it.href}}" target="_blank" rel="noopener"><span class="sr-only">{{it.title}}. {{t.grid.open}}.</span>
           {{{it.media}}}
           {{#if it.placeholder}}<span class="reel-badge">{{t.grid.badge}}</span>{{/if}}
-          <span class="views"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><span class="ltr">{{it.views_fmt}}</span></span>
+          {{#if it.views}}<span class="views"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><span class="ltr">{{it.views_fmt}}</span></span>{{/if}}
         </a>
       </li>
       {{/each}}

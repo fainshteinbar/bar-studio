@@ -157,5 +157,23 @@
   },
   "d5": {
     "studio": "AI video studio"
+  },
+  "d6": {
+    "eyebrow": "Bar Fainshtein · Creative director · AI video",
+    "work_eyebrow": "Selected work",
+    "count": "videos",
+    "lanes_eyebrow": "What I make",
+    "about_eyebrow": "Why me",
+    "process_eyebrow": "Process",
+    "latest": "Latest reel",
+    "view_work": "View work",
+    "marquee": [
+      "AI video",
+      "Same-day replies",
+      "Comedy reels",
+      "Ads",
+      "Sports & brand films"
+    ],
+    "cta_eyebrow": "Let's talk"
   }
 }

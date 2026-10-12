@@ -12,7 +12,11 @@ import { join } from 'node:path';
 
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
 const site = read('i18n/site.json');
-const manifest = read('data/instagram.json');
+// A local import (scripts/import-reels.mjs, gitignored) takes precedence over the committed fixture.
+const MANIFEST = existsSync('data/instagram.local.json') ? 'data/instagram.local.json' : 'data/instagram.json';
+const manifest = read(MANIFEST);
+const fixture = read('data/instagram.json');
+console.log(`manifest: ${MANIFEST}`);
 const langs = { he: read('i18n/he.json'), en: read('i18n/en.json') };
 
 const esc = (s) =>
@@ -55,7 +59,7 @@ function context(lang, root, base) {
 
   const items = manifest.items.map((it, i) => {
     const n = String(i + 1).padStart(2, '0');
-    const title = it.placeholder ? `${t.grid.sample_title} ${n}` : (it.caption || '').split('\n')[0].slice(0, 70);
+    const title = it.placeholder ? `${t.grid.sample_title} ${n}` : (it.caption || '').split('\n')[0].slice(0, 70) || `${t.lane_names[it.lane] || it.lane} ${n}`;
     const media =
       `<span class="reel-media" style="aspect-ratio:${it.width}/${it.height}">` +
       `<img class="reel-poster" src="${esc(url(it.poster_url))}" width="${it.width}" height="${it.height}" alt="" loading="lazy" decoding="async" style="background-image:url(${it.lqip})">` +
@@ -69,7 +73,8 @@ function context(lang, root, base) {
       title,
       media,
       lane_name: t.lane_names[it.lane] || it.lane,
-      views_fmt: compact.format(it.views || 0),
+      views_fmt: it.views == null ? '' : compact.format(it.views),
+      views_html: it.views == null ? '' : `<span class="ltr">${compact.format(it.views)}</span> ${esc(t.grid.views)}`,
       href: it.permalink,
     };
   });
@@ -111,7 +116,7 @@ function context(lang, root, base) {
     `<link rel="stylesheet" href="${root}assets/css/base.css">`,
   ].join('\n');
 
-  const sample = manifest.placeholder ? `<span class="sample-tag">${esc(t.proof.sample_tag)}</span>` : '';
+  const sample = manifest.placeholder || manifest.stats.views_sample ? `<span class="sample-tag">${esc(t.proof.sample_tag)}</span>` : '';
   return {
     t,
     site,
@@ -137,7 +142,7 @@ function context(lang, root, base) {
     sample,
     stats: {
       total_videos: manifest.stats.total_videos,
-      total_views_fmt: compact.format(manifest.stats.total_views),
+      total_views_fmt: compact.format(manifest.stats.total_views ?? fixture.stats.total_views),
     },
     skip: `<a class="skip-link" href="#main">${esc(t.a11y.skip)}</a>`,
     lang_toggle: `<a class="lang-toggle" href="${lang === 'he' ? en_url : he_url}" hreflang="${other}">${esc(t.nav.lang_switch)}<span class="sr-only" lang="${other}"> · ${esc(t.a11y.lang_switch_label)}</span></a>`,

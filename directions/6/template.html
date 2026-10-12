@@ -1,0 +1,163 @@
+<!doctype html>
+<!-- direction: Current site, evolved · bar.studio DNA -->
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+{{{head}}}
+{{#if he}}<link rel="preload" as="font" type="font/woff2" crossorigin href="{{root}}assets/fonts/noto-sans-hebrew-var-hebrew.woff2">{{/if}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{root}}assets/fonts/bebas-neue-latin-400.woff2">
+<link rel="stylesheet" href="{{base}}style.css">
+</head>
+<body>
+{{{skip}}}
+<header class="nav">
+  <a class="logo ltr" href="#top">BAR.STUDIO</a>
+  <nav aria-label="{{t.a11y.nav_label}}">
+    <a href="#work">{{t.nav.work}}</a>
+    <a href="#lanes">{{t.d6.lanes_eyebrow}}</a>
+    <a href="#about">{{t.nav.about}}</a>
+    {{{lang_toggle}}}
+  </nav>
+  <a class="pill pill-cyan nav-cta" href="{{wa_url}}" target="_blank" rel="noopener">{{t.nav.contact}}</a>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <span class="glow glow-a" aria-hidden="true"></span>
+    <svg class="bg-letter" viewBox="0 0 60 100" aria-hidden="true" focusable="false"><text x="0" y="88">B</text></svg>
+    <div class="hero-copy">
+      <p class="eyebrow">{{t.d6.eyebrow}}</p>
+      <h1 id="hero-title" class="headline">
+        <span class="hl">{{t.hero.title_a}}</span>
+        <span class="hl hl-cyan">{{t.hero.title_b}}<span class="bang" aria-hidden="true">!</span></span>
+      </h1>
+    </div>
+    <div class="hero-photo">
+      <img src="{{root}}assets/img/bar-760.webp" srcset="{{root}}assets/img/bar-560.webp 560w, {{root}}assets/img/bar-760.webp 760w, {{root}}assets/img/bar-1070.webp 1070w" sizes="(max-width: 860px) min(88vw, 420px), 460px" width="1070" height="1200" alt="{{t.about.photo_alt}}" fetchpriority="high" decoding="async">
+      <span class="photo-fade" aria-hidden="true"></span>
+      <figure class="reel-card">
+        {{{hero.portrait}}}
+        <figcaption><span class="live-dot" aria-hidden="true"></span>{{t.d6.latest}}</figcaption>
+      </figure>
+    </div>
+    <div class="hero-bottom">
+      <ul class="tags">
+        {{#each t.lanes.items}}<li class="tag">{{it.name}}</li>{{/each}}
+      </ul>
+      <div class="hero-actions">
+        <a class="pill pill-cyan pill-lg" href="{{wa_url}}" target="_blank" rel="noopener">{{{wa_icon}}}{{t.hero.cta}}</a>
+        <a class="scroll-link" href="#work">{{t.d6.view_work}} <span class="arrow" aria-hidden="true">→</span></a>
+        <span class="promise"><span class="dot" aria-hidden="true"></span>{{t.promise}}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" aria-labelledby="stats-title">
+    <h2 id="stats-title" class="sr-only">{{t.proof.title}}</h2>
+    <dl>
+      <div><dd class="ltr num">{{stats.total_views_fmt}}</dd><dt>{{t.proof.views_label}} {{{sample}}}</dt></div>
+      <div><dd class="ltr num">{{stats.total_videos}}</dd><dt>{{t.proof.videos_label}}</dt></div>
+      <div><dd class="ltr num">{{t.proof.years}}</dd><dt>{{t.proof.years_label}}</dt></div>
+    </dl>
+  </section>
+
+  <section class="work" id="work" aria-labelledby="work-title">
+    <header class="sec-head">
+      <div>
+        <p class="eyebrow">{{t.d6.work_eyebrow}}</p>
+        <h2 id="work-title" class="title">{{t.grid.title}}</h2>
+      </div>
+      <p class="count"><span class="ltr">{{stats.total_videos}}</span> {{t.d6.count}} · {{t.grid.sub}}</p>
+    </header>
+    <ul class="cards">
+      {{#each items 9}}
+      <li class="card">
+        <a href="{{it.href}}" target="_blank" rel="noopener"><span class="sr-only">{{it.title}}. {{t.grid.open}}.</span>
+          {{{it.media}}}
+          {{#if it.placeholder}}<span class="reel-badge">{{t.grid.badge}}</span>{{/if}}
+          <span class="card-meta">
+            <span class="card-lane">{{it.lane_name}}</span>
+            <span class="card-stat">{{{it.views_html}}}</span>
+          </span>
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+    <a class="scroll-link more" href="{{ig_url}}" target="_blank" rel="noopener">{{t.grid.more}} <span class="arrow" aria-hidden="true">→</span></a>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {{#each t.d6.marquee}}<span>{{it}}</span><i>◆</i>{{/each}}{{#each t.d6.marquee}}<span>{{it}}</span><i>◆</i>{{/each}}
+    </div>
+  </div>
+
+  <section class="lanes" id="lanes" aria-labelledby="lanes-title">
+    <p class="eyebrow">{{t.d6.lanes_eyebrow}}</p>
+    <h2 id="lanes-title" class="title">{{t.lanes.title}}</h2>
+    <ol>
+      {{#each t.lanes.items}}
+      <li><span class="lane-n ltr">{{n}}</span><h3>{{it.name}}</h3><p>{{it.desc}}</p></li>
+      {{/each}}
+    </ol>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="about-title">
+    <p class="eyebrow">{{t.d6.about_eyebrow}}</p>
+    <h2 id="about-title" class="sr-only">{{t.about.title}}</h2>
+    <p class="statement">{{t.about.lead}}</p>
+    <ul class="points">
+      {{#each t.about.points}}
+      <li><span class="lane-n ltr">{{n}}</span><h3>{{it.title}}</h3><p>{{it.body}}</p></li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <section class="process" id="process" aria-labelledby="process-title">
+    <p class="eyebrow">{{t.d6.process_eyebrow}}</p>
+    <h2 id="process-title" class="title">{{t.process.title}}</h2>
+    <ol>
+      {{#each t.process.steps}}
+      <li><span class="step-n ltr">{{n}}</span><h3>{{it.title}}</h3><p>{{it.body}}</p></li>
+      {{/each}}
+    </ol>
+  </section>
+
+  <section class="cta" id="contact" aria-labelledby="cta-title">
+    <div class="cta-card">
+      <div>
+        <p class="eyebrow eyebrow-dark">{{t.d6.cta_eyebrow}}</p>
+        <h2 id="cta-title" class="cta-headline">{{t.cta.title}}</h2>
+      </div>
+      <div class="cta-side">
+        <p>{{t.cta.sub}}</p>
+        <a class="pill pill-dark pill-lg" href="{{wa_url}}" target="_blank" rel="noopener">{{{wa_icon}}}{{t.cta.wa}}</a>
+        <p class="cta-promise"><span class="dot dot-dark" aria-hidden="true"></span>{{t.promise}}</p>
+        <p class="cta-alt">{{t.cta.email_label}}: <a href="{{mail_url}}">{{{email_ltr}}}</a></p>
+        <p class="cta-alt"><a href="{{ig_url}}" target="_blank" rel="noopener">{{t.cta.ig}}</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span class="logo ltr">BAR.STUDIO</span>
+  <span>{{t.footer.line}}</span>
+  <span>{{t.footer.copy}}</span>
+</footer>
+<span class="c-dot" aria-hidden="true"></span><span class="c-ring" aria-hidden="true"></span>
+{{{wa_float}}}
+{{{scripts}}}
+<script>
+/* The live site's cursor: cyan dot + trailing ring. Fine pointers only, off under reduced motion. */
+(() => {
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const dot = document.querySelector('.c-dot'), ring = document.querySelector('.c-ring');
+  let x = -100, y = -100, rx = -100, ry = -100;
+  document.documentElement.classList.add('has-cursor');
+  addEventListener('pointermove', (e) => { x = e.clientX; y = e.clientY; dot.style.transform = `translate(${x}px, ${y}px)`; }, { passive: true });
+  addEventListener('pointerover', (e) => ring.classList.toggle('is-link', !!e.target.closest('a, button')));
+  (function loop() { rx += (x - rx) * 0.18; ry += (y - ry) * 0.18; ring.style.transform = `translate(${rx}px, ${ry}px)`; requestAnimationFrame(loop); })();
+})();
+</script>
+</body>
+</html>
