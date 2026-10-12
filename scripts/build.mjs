@@ -285,15 +285,16 @@ function context(lang, root, base) {
     wa_float: `<a class="wa-float" href="${esc(wa_url)}" target="_blank" rel="noopener" aria-label="${esc(t.a11y.wa_float)}">${WA_ICON}<span class="wa-float-label">${esc(t.promise)}</span></a>`,
     email_ltr: `<bdi dir="ltr">${esc(site.email)}</bdi>`,
     scripts: `<script src="${root}assets/js/reels.js" defer></script>`,
-    // Adobe Fonts kit (Narkiss Hadash Condensed). Non-blocking: text paints in the width-matched
-    // fallback, then swaps (font-display: swap is set in the kit's project settings). The fallback is built
+    // Adobe Fonts kit (Narkiss Hadash Condensed). Text paints in the width-matched fallback, then swaps (font-display: swap is set in the kit's project settings). The fallback is built
     // from the site's own fonts, not local() ones, so it wraps the same on every OS (PageSpeed runs on Linux,
     // which has no Arial): bold Narkiss is 0.70x Noto Sans Hebrew and 0.62x DM Sans in width (measured).
     typekit: [
       '<link rel="preconnect" href="https://use.typekit.net" crossorigin>',
       '<link rel="preconnect" href="https://use.typekit.net">',
       '<link rel="preconnect" href="https://p.typekit.net">',
-      '<link rel="stylesheet" href="https://use.typekit.net/gce3kmw.css" media="print" onload="this.media=\'all\'">',
+      // Requested after the load event: PageSpeed's simulation charges any request that starts before first
+      // paint (here the kit CSS, p.typekit.net and two font files on two more origins) to FCP and LCP.
+      '<script>(function(){function k(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://use.typekit.net/gce3kmw.css";document.head.appendChild(l)}if(document.readyState==="complete")k();else addEventListener("load",k,{once:true})})()</script>',
       '<noscript><link rel="stylesheet" href="https://use.typekit.net/gce3kmw.css"></noscript>',
       `<style>@font-face{font-family:"Narkiss Fallback";font-weight:100 900;src:url("${root}assets/fonts/noto-sans-hebrew-var-hebrew.woff2") format("woff2");unicode-range:U+0590-05FF,U+FB1D-FB4F;size-adjust:70.5%;ascent-override:122%;descent-override:49%;line-gap-override:0%}` +
         `@font-face{font-family:"Narkiss Fallback";font-weight:100 900;src:url("${root}assets/fonts/dm-sans-latin-600.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212;size-adjust:62%;ascent-override:139%;descent-override:56%;line-gap-override:0%}</style>`,
