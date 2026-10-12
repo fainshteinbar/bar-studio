@@ -1,11 +1,12 @@
 {
   "lanes": {},
   "hero": [],
-  "_help": "Art direction. rail: media IDs for the four hero Reels, in order (falls back to the newest). hero: IDs for the generated hero loops. lanes: {id: comedy|ads|sport}.",
+  "_help": "Art direction and manual content. rail: media IDs for the four hero Reels, in order (falls back to the newest). hero: IDs for the generated hero loops. lanes: {id: comedy|ads|sport}. captions_en: {id: \"English pitch\"} or {id: {\"pitch\": \"...\", \"more\": \"...\"}}; always wins over the machine translation in data/translations.json.",
   "rail": [
     "17901612813374816",
     "17996145848834714",
     "17958556212232372",
     "18115863469771345"
-  ]
+  ],
+  "captions_en": {}
 }

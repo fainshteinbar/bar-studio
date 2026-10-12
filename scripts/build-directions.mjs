@@ -9,6 +9,7 @@
 //   {{#if path}}…{{/if}}  {{#unless path}}…{{/unless}}  (not nested in themselves)
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { pitchOf, englishPitch, readTranslations } from './lib/captions.mjs';
 
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
 const site = read('i18n/site.json');
@@ -17,6 +18,8 @@ const site = read('i18n/site.json');
 const MANIFEST = process.env.MANIFEST !== 'fixture' && existsSync('data/instagram.local.json') ? 'data/instagram.local.json' : 'data/instagram.json';
 const manifest = read(MANIFEST);
 const fixture = read('data/instagram.json');
+const translations = readTranslations();
+const overridesAll = existsSync('data/overrides.json') ? read('data/overrides.json') : {};
 console.log(`manifest: ${MANIFEST}`);
 const langs = { he: read('i18n/he.json'), en: read('i18n/en.json') };
 
@@ -63,10 +66,6 @@ function context(lang, root, base) {
   const mail_url = `mailto:${site.email}?subject=${encodeURIComponent(t.cta.email_subject)}`;
   const ig_url = `https://www.instagram.com/${site.instagram}/`;
 
-  // Caption lines without bidi isolates, tabs, hashtags or emoji: Bar's own first line is the card's pitch.
-  const captionLines = (c) =>
-    (c || '').replace(/[\u2066-\u2069\u200e\u200f\t]/g, '').replace(/#[^\s#]+/g, '')
-      .replace(/\p{Extended_Pictographic}|\uFE0F|\u200D/gu, '').split('\n').map((x) => x.replace(/\s+/g, ' ').trim()).filter(Boolean);
   const dateFmt = new Intl.DateTimeFormat(loc, { day: 'numeric', month: 'short', year: 'numeric' });
   const mediaHtml = (it, { eager = false, priority = false, railVideo = false } = {}) =>
     `<span class="reel-media" style="aspect-ratio:${it.width}/${it.height}">` +
@@ -82,9 +81,11 @@ function context(lang, root, base) {
 
   const items = manifest.items.filter((it) => it.visible !== false).map((it, i) => {
     const n = String(i + 1).padStart(2, '0');
-    const lines = captionLines(it.caption);
-    const title = it.placeholder ? `${t.grid.sample_title} ${n}` : lines[0]?.slice(0, 90) || `${t.lane_names[it.lane] || it.lane} ${n}`;
-    const pitchHe = /[\u0590-\u05FF]/.test(title);
+    // English pages never show Hebrew: manual override > cached translation > English original > no pitch.
+    const src = it.placeholder ? { pitch: `${t.grid.sample_title} ${n}`, more: '' } : lang === 'en' ? englishPitch(it, translations, overridesAll) : pitchOf(it.caption);
+    const fallbackLabel = `${t.lane_names[it.lane] || t.lane_names.reels} ${n}`;
+    const title = src.pitch || fallbackLabel; // accessible name: always present, always in the page language
+    const pitchHe = /[\u0590-\u05FF]/.test(src.pitch);
     const media =
       `<span class="reel-media" style="aspect-ratio:${it.width}/${it.height}">` +
       `<img class="reel-poster" src="${it.lqip || 'data:,'}" data-poster="${esc(url(it.poster_url))}" width="${it.width}" height="${it.height}" alt="" decoding="async">` +
@@ -101,8 +102,8 @@ function context(lang, root, base) {
       views_fmt: it.views == null ? '' : compact.format(it.views),
       views_html: it.views == null ? '' : `<span class="ltr">${compact.format(it.views)}</span> ${esc(t.grid.views)}`,
       href: it.permalink,
-      pitch: title,
-      pitch_more: lines.slice(1, 3).join(' ').slice(0, 160),
+      pitch: src.pitch,
+      pitch_more: src.more,
       pitch_lang: pitchHe ? 'he' : 'en',
       pitch_dir: pitchHe ? 'rtl' : 'ltr',
       full: esc(url(it.full_url || it.video_url || '')),
@@ -196,7 +197,7 @@ function context(lang, root, base) {
       total_views_fmt: compact.format(manifest.stats.total_views ?? fixture.stats.total_views),
     },
     skip: `<a class="skip-link" href="#main">${esc(t.a11y.skip)}</a>`,
-    lang_toggle: `<a class="lang-toggle" href="${lang === 'he' ? en_url : he_url}" hreflang="${other}">${esc(t.nav.lang_switch)}<span class="sr-only" lang="${other}"> · ${esc(t.a11y.lang_switch_label)}</span></a>`,
+    lang_toggle: `<a class="lang-toggle" href="${lang === 'he' ? en_url : he_url}" hreflang="${other}" lang="${other}">${esc(t.nav.lang_switch)}<span class="sr-only"> · ${esc(t.a11y.lang_switch_label)}</span></a>`,
     wa_float: `<a class="wa-float" href="${esc(wa_url)}" target="_blank" rel="noopener" aria-label="${esc(t.a11y.wa_float)}">${WA_ICON}<span class="wa-float-label">${esc(t.promise)}</span></a>`,
     email_ltr: `<bdi dir="ltr">${esc(site.email)}</bdi>`,
     scripts: `<script src="${root}assets/js/reels.js" defer></script>`,

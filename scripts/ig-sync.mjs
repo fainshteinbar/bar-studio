@@ -13,6 +13,8 @@ import { join } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { Readable } from 'node:stream';
 import { transcodeReel, transcodeFull, posterFrom, buildHeroLoops, laneFor, tempDir, probe, brightness } from './lib/media.mjs';
+import { readTranslations, writeTranslations } from './lib/captions.mjs';
+import { translateMissing } from './lib/translate.mjs';
 
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
@@ -145,7 +147,13 @@ try {
   rmSync(tmp, { recursive: true, force: true });
 }
 
-// 5. Hero loops from visible Reels only (override list first).
+// 5. English captions: translate new or edited Hebrew captions once (Claude API), cached in data/translations.json.
+const cache = readTranslations();
+const tr = await translateMissing(items, cache, overrides);
+if (tr.translated) writeTranslations(cache);
+console.log(`Translations: ${tr.translated} new, ${tr.failed} failed, ${tr.pending} still missing${tr.noCredentials ? ' (no ANTHROPIC_API_KEY: those English cards show no pitch until it is set)' : ''}.`);
+
+// 6. Hero loops from visible Reels only (override list first).
 const playable = items.filter((i) => i.visible);
 const heroIds = (overrides.hero || []).filter((id) => playable.some((i) => i.id === id));
 const heroSrc = (heroIds.length >= 3 ? heroIds.map((id) => playable.find((i) => i.id === id)) : playable).slice(0, 9).map((i) => i.video_url);

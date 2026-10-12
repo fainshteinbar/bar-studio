@@ -72,6 +72,23 @@ for (const d of dirs) {
             waFromConfig: waOk,
             floatSide: float && float.width ? (float.left + float.width / 2 < innerWidth / 2 ? 'left' : 'right') : 'hidden',
             h1: document.querySelector('h1')?.textContent.trim(),
+            // English pages: any Hebrew in text, attributes or meta that is not inside an element marked lang="he".
+            hebrewLeaks: document.documentElement.lang !== 'en' ? [] : (() => {
+              const he = /[\u0590-\u05FF]/, out = [];
+              const inHe = (el) => !!el?.closest?.('[lang="he"]');
+              const w = document.createTreeWalker(document.documentElement, NodeFilter.SHOW_TEXT);
+              for (let n; (n = w.nextNode()); ) {
+                const p = n.parentElement;
+                if (he.test(n.nodeValue) && !inHe(p) && !['SCRIPT', 'STYLE'].includes(p?.tagName)) out.push(`text: ${n.nodeValue.trim().slice(0, 40)}`);
+              }
+              for (const el of document.querySelectorAll('*')) {
+                for (const a of ['alt', 'title', 'aria-label', 'content', 'placeholder', 'data-pitch']) {
+                  const v = el.getAttribute(a);
+                  if (v && he.test(v) && !inHe(el)) out.push(`${el.tagName.toLowerCase()}[${a}]: ${v.slice(0, 40)}`);
+                }
+              }
+              return out;
+            })(),
           };
         }, { num: site.whatsapp_number, prefill: prefill[lang], vpw: vp.viewport.width })
       );
@@ -124,9 +141,10 @@ for (const d of dirs) {
       const flag = (b) => (b ? 'ok' : 'FAIL');
       console.log(
         `${key.padEnd(16)} fold:${r.firstScreen} overflow:${r.overflowX} dir:${r.dir} wa:${flag(r.waFromConfig)} float:${r.floatSide} ` +
-          `play:${r.videosPlaying ?? '-'} adv:${flag(r.videosAdvancing)} cap:${flag(r.capOk)} off:${r.offscreenStillPlaying ?? '-'} hero:${r.heroPlaying ?? '-'} errors:${errors.length}`
+          `leaks:${r.hebrewLeaks?.length ?? '-'} play:${r.videosPlaying ?? '-'} adv:${flag(r.videosAdvancing)} cap:${flag(r.capOk)} off:${r.offscreenStillPlaying ?? '-'} hero:${r.heroPlaying ?? '-'} errors:${errors.length}`
       );
       if (errors.length) console.log('   ', errors.slice(0, 5).join('\n    '));
+      if (r.hebrewLeaks?.length) console.log('    hebrew:', r.hebrewLeaks.slice(0, 8).join(' | '));
       await ctx.close();
     }
   }

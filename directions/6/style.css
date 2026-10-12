@@ -185,15 +185,26 @@ body { background: var(--void); color: var(--cream); font: 400 16px/1.6 var(--te
   .process h3 { margin-block: 4px 4px; }
 }
 
-/* About — Bar as the credit, small */
-.about { display: grid; grid-template-columns: auto 1fr; gap: clamp(24px, 5vw, 72px); align-items: start; padding: 0 var(--pad) clamp(64px, 9vw, 120px); }
-.about-photo { inline-size: clamp(120px, 14vw, 200px); aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 12%; border-radius: 16px; background: radial-gradient(circle at 50% 30%, rgb(0 194 255 / 0.3), var(--navy) 70%); }
-.about-lead { font-size: clamp(30px, 3.6vw, 56px); line-height: 1.02; font-weight: 700; max-inline-size: 22ch; }
-.points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-block-start: 32px; }
+/* About: the cutout portrait from the live homepage, free (no box), glow behind, head never cropped.
+   It rises past the section's top edge; the work above still comes first. */
+.about { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 1fr); grid-template-areas: "copy figure"; gap: clamp(24px, 4vw, 64px); align-items: end; padding: clamp(80px, 10vw, 140px) var(--pad) 0; margin-block-start: clamp(40px, 6vw, 96px); }
+.about-copy { grid-area: copy; align-self: center; padding-block-end: clamp(48px, 7vw, 112px); }
+.about-figure { grid-area: figure; position: relative; z-index: 1; margin: 0; margin-block-start: clamp(-340px, -22vw, -140px); justify-self: center; inline-size: min(100%, 760px); }
+.about-figure::before { content: ""; position: absolute; inset: 6% -18% 4%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(0 194 255 / 0.42), rgb(26 20 100 / 0.5) 55%, transparent 100%); filter: blur(28px); }
+.about-figure img { display: block; inline-size: 100%; block-size: auto;
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 24%); mask-image: linear-gradient(to top, transparent 0%, #000 24%); }
+.about-lead { font-size: clamp(34px, 4vw, 64px); line-height: 1.02; font-weight: 700; max-inline-size: 18ch; }
+.points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-block-start: 36px; }
 .points li { padding-block-start: 14px; border-block-start: 1px solid var(--line); }
 .points h3 { font: 700 1rem/1.3 var(--text); margin-block-end: 6px; }
 .points p { font-size: 0.92rem; color: var(--dim); }
-@media (max-width: 799px) { .about { grid-template-columns: 1fr; } .points { grid-template-columns: 1fr; } }
+@media (max-width: 899px) {
+  .about { grid-template-columns: 1fr; grid-template-areas: "figure" "copy"; padding-block-start: 56px; gap: 0; }
+  .about-figure { inline-size: min(100%, 480px); margin-block-start: -150px; }
+  .about-copy { margin-block-start: -12%; padding-block-end: 64px; position: relative; }
+  .points { grid-template-columns: 1fr; }
+}
 
 /* CTA */
 .cta { padding: 0 var(--pad) clamp(64px, 9vw, 120px); }

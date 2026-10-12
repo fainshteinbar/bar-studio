@@ -16,6 +16,7 @@ Phase 1 output (research, decisions, installed tooling, build plan). Written 202
 | 8 | Renditions (approved 2026-10-12, rules 7 + 14) | Two files per Reel: a silent grid preview (first 12 s, max 640 px wide, H.264 CRF 29, no audio, ≤ 2 MB) and a full rendition for the watch-with-sound overlay (full length, max 720 px, CRF 26, AAC 96 kbps), loaded only on tap. Replaces the single 720 px / CRF 28 file in 4.6. |
 | 9 | Visibility (2026-10-12) | All Reels are shown, including real players and club kits; no automatic hiding by content. `data/reels.json` holds a `hidden` map of Instagram media IDs that the sync and the build skip. It is empty today; Bar hides a Reel later by adding its ID. |
 | 10 | Display font (2026-10-12) | Narkiss Hadash Condensed from Adobe Fonts kit `gce3kmw` (Hebrew + English subset, font-display swap; no domain allowlist needed; self-hosting not allowed). Body: Noto Sans Hebrew (self-hosted variable) and DM Sans. Details: `directions/references/font-kit.md`. |
+| 12 | English captions (2026-10-12) | The sync translates each new or edited Hebrew caption to English once with the Claude API (`claude-haiku-5-5`, low effort, for meaning and humor), cached in `data/translations.json` by media ID + caption hash. `captions_en` in `data/overrides.json` always wins. If translation fails, the English card shows no pitch (never Hebrew). The first 15 were translated in the Claude Code session and written to the cache. Code: `scripts/lib/translate.mjs`, `scripts/lib/captions.mjs`. |
 | 11 | Token hygiene | The first long-lived token (generated 2026-10-12) was exposed in chat. Rotate it in phase 3 when the GitHub secrets are created, and revoke the old one. |
 
 ## 1. Current state of the repo (verified 2026-10-12)
@@ -178,7 +179,7 @@ Sources: developers.facebook.com/docs/instagram-platform (overview, instagram-ap
 2. Click "Generate token" in the app dashboard → long-lived 60-day token. Note the expiry date shown.
 3. Cloudflare: add the new domain as a free zone; R2 → create bucket `bar-studio-media`; connect custom domain `media.<domain>`; create an R2 API token with Object Read & Write scoped to that bucket → Access Key ID, Secret, Account ID.
 4. GitHub: fine-grained PAT for this repo only, permissions Secrets: read/write, Variables: read/write, Metadata: read; 366-day expiry; note the expiry date.
-5. Repo secrets: `IG_ACCESS_TOKEN`, `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `GH_SECRETS_PAT`.
+5. Repo secrets: `IG_ACCESS_TOKEN` (a fresh token; revoke the one exposed on 2026-10-12), `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `GH_SECRETS_PAT`, `ANTHROPIC_API_KEY` (Claude API key from console.anthropic.com, used by the sync to translate new captions to English with `claude-haiku-5-5`; cost is a few cents a month because each Reel is translated once and cached).
 6. Repo variables: `MEDIA_BASE_URL` (e.g. `https://media.<domain>`), `R2_BUCKET=bar-studio-media`, `IG_API_VERSION=v26.0`, `IG_TOKEN_EXPIRES_AT` (ISO date), `GH_PAT_EXPIRES_AT` (ISO date).
 7. Fill `WHATSAPP_NUMBER` in `i18n/site.json`.
 8. Run the "Instagram sync" workflow once by hand; read the run summary for the missing-`media_url` percentage.

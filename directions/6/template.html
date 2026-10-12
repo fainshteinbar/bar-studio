@@ -25,7 +25,7 @@
     <ul class="rail" aria-label="{{t.grid.title}}">
       {{#each rail}}
       <li class="rail-item">
-        <a href="{{it.href}}" target="_blank" rel="noopener" data-reel data-full="{{it.full}}" data-poster="{{it.poster}}" data-pitch="{{it.pitch}}" data-lang="{{it.pitch_lang}}" data-views="{{it.views_fmt}}"><span class="sr-only">{{it.pitch}}. {{t.d6.watch}}.</span>{{{it.media_rail}}}</a>
+        <a href="{{it.href}}" target="_blank" rel="noopener" data-reel data-full="{{it.full}}" data-poster="{{it.poster}}" data-pitch="{{it.pitch}}" data-lang="{{it.pitch_lang}}" data-views="{{it.views_fmt}}"><span class="sr-only">{{it.title}}. {{t.d6.watch}}.</span>{{{it.media_rail}}}</a>
       </li>
       {{/each}}
     </ul>
@@ -55,11 +55,11 @@
 
   {{#if featured}}
   <section class="featured" aria-labelledby="featured-title">
-    <a class="feat-media" href="{{featured.href}}" target="_blank" rel="noopener" data-reel data-full="{{featured.full}}" data-poster="{{featured.poster}}" data-pitch="{{featured.pitch}}" data-lang="{{featured.pitch_lang}}" data-views="{{featured.views_fmt}}"><span class="sr-only">{{featured.pitch}}. {{t.d6.watch}}.</span>{{{featured.media_big}}}<span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span></a>
+    <a class="feat-media" href="{{featured.href}}" target="_blank" rel="noopener" data-reel data-full="{{featured.full}}" data-poster="{{featured.poster}}" data-pitch="{{featured.pitch}}" data-lang="{{featured.pitch_lang}}" data-views="{{featured.views_fmt}}"><span class="sr-only">{{featured.title}}. {{t.d6.watch}}.</span>{{{featured.media_big}}}<span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span></a>
     <div class="feat-copy">
       <p class="eyebrow">{{t.d6.featured_eyebrow}}</p>
       <p class="feat-num"><span class="ltr">{{featured.views_fmt}}</span> <span class="feat-unit">{{t.grid.views}}</span></p>
-      <h2 id="featured-title" class="feat-pitch" lang="{{featured.pitch_lang}}" dir="{{featured.pitch_dir}}">{{featured.pitch}}</h2>
+      {{#if featured.pitch}}<h2 id="featured-title" class="feat-pitch" lang="{{featured.pitch_lang}}" dir="{{featured.pitch_dir}}">{{featured.pitch}}</h2>{{/if}}{{#unless featured.pitch}}<h2 id="featured-title" class="sr-only">{{featured.title}}</h2>{{/unless}}
       {{#if featured.pitch_more}}<p class="feat-more" lang="{{featured.pitch_lang}}" dir="{{featured.pitch_dir}}">{{featured.pitch_more}}</p>{{/if}}
       <div class="feat-actions">
         <button class="pill pill-ghost" type="button" data-open-featured><span class="pill-in"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>{{t.d6.watch}}</span></button>
@@ -80,7 +80,7 @@
         <a href="{{it.href}}" target="_blank" rel="noopener" data-reel data-full="{{it.full}}" data-poster="{{it.poster}}" data-pitch="{{it.pitch}}" data-lang="{{it.pitch_lang}}" data-views="{{it.views_fmt}}">
           <span class="card-media">{{{it.media}}}{{#if it.placeholder}}<span class="reel-badge">{{t.grid.badge}}</span>{{/if}}</span>
           <span class="card-meta">
-            <span class="card-pitch" lang="{{it.pitch_lang}}" dir="{{it.pitch_dir}}">{{it.pitch}}</span>
+            {{#if it.pitch}}<span class="card-pitch" lang="{{it.pitch_lang}}" dir="{{it.pitch_dir}}">{{it.pitch}}</span>{{/if}}
             <span class="card-stat">{{{it.views_html}}}</span>
           </span>
         </a>
@@ -105,7 +105,9 @@
   </section>
 
   <section class="about" id="about" aria-labelledby="about-title">
-    <img class="about-photo" src="{{root}}assets/img/bar-560.webp" width="560" height="628" alt="{{t.about.photo_alt}}" loading="lazy" decoding="async">
+    <figure class="about-figure">
+      <img src="{{root}}assets/img/bar-760.webp" srcset="{{root}}assets/img/bar-560.webp 560w, {{root}}assets/img/bar-760.webp 760w, {{root}}assets/img/bar-1070.webp 1070w" sizes="(max-width: 899px) 92vw, 600px" width="1070" height="1200" alt="{{t.about.photo_alt}}" loading="lazy" decoding="async">
+    </figure>
     <div class="about-copy">
       <p class="eyebrow">{{t.d6.about_eyebrow}}</p>
       <h2 id="about-title" class="about-lead">{{t.about.lead}}</h2>
