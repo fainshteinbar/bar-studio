@@ -14,6 +14,8 @@
 //   {{#if path}}…{{/if}}  {{#unless path}}…{{/unless}}  (nestable)
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
 import { pitchOf, englishPitch, readTranslations } from './lib/captions.mjs';
 
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
@@ -43,7 +45,16 @@ function pickRail(items, ov) {
   return { featured, others, rail };
 }
 
-// Same-origin copies of the first-screen posters (downloaded from the CDN when missing; stale ones removed).
+// Same-origin copies of the first-screen posters (downloaded from the CDN when missing; stale ones removed),
+// re-encoded at 432 px (they display about 190 CSS px wide on phones) when dwebp/cwebp are available.
+const shrinkPoster = (bytes, out) => {
+  const tmp = join(tmpdir(), `first-${process.pid}`);
+  writeFileSync(`${tmp}.webp`, bytes);
+  const ok = spawnSync('dwebp', ['-quiet', `${tmp}.webp`, '-o', `${tmp}.png`]).status === 0 &&
+    spawnSync('cwebp', ['-quiet', '-q', '70', '-m', '6', '-resize', '432', '0', `${tmp}.png`, '-o', out]).status === 0;
+  if (!ok) writeFileSync(out, bytes);
+  rmSync(`${tmp}.webp`, { force: true }); rmSync(`${tmp}.png`, { force: true });
+};
 const FIRST = 'assets/first';
 const firstLocal = {};
 {
@@ -57,9 +68,9 @@ const firstLocal = {};
       if (/^https?:/.test(it.poster_url)) {
         const r = await fetch(it.poster_url);
         if (!r.ok) { console.log(`   first-screen poster ${it.id}: HTTP ${r.status}, staying on the CDN`); continue; }
-        writeFileSync(file, Buffer.from(await r.arrayBuffer()));
+        shrinkPoster(Buffer.from(await r.arrayBuffer()), file);
       } else if (existsSync(it.poster_url)) {
-        writeFileSync(file, readFileSync(it.poster_url));
+        shrinkPoster(readFileSync(it.poster_url), file);
       } else continue;
     }
     firstLocal[it.id] = `${FIRST}/${it.id}.webp`;
@@ -155,9 +166,9 @@ function context(lang, root, base) {
       media_rail: mediaHtml(it, { eager: i < 2, priority: false }),
     };
   });
-  // The first rail poster is the LCP image.
+  // The two first-screen rail posters (either can be the LCP image) load at high priority.
   const { featured, others, rail: railSrc } = pickRail(items, overridesAll);
-  const rail = railSrc.map((x, i) => ({ ...x, media_rail: mediaHtml(x, { eager: i < 2, priority: i === 0, railVideo: true }) }));
+  const rail = railSrc.map((x, i) => ({ ...x, media_rail: mediaHtml(x, { eager: i < 2, priority: i < 2, railVideo: true }) }));
   const featuredCtx = featured && { ...featured, media_big: mediaHtml(featured, {}) };
   const words = (str) => str.split(' ').map((w, i) => `<span class="w"><span style="--i:${i}">${esc(w)}</span></span>`).join(' ');
 
@@ -274,16 +285,18 @@ function context(lang, root, base) {
     wa_float: `<a class="wa-float" href="${esc(wa_url)}" target="_blank" rel="noopener" aria-label="${esc(t.a11y.wa_float)}">${WA_ICON}<span class="wa-float-label">${esc(t.promise)}</span></a>`,
     email_ltr: `<bdi dir="ltr">${esc(site.email)}</bdi>`,
     scripts: `<script src="${root}assets/js/reels.js" defer></script>`,
-    // Adobe Fonts kit (Narkiss Hadash Condensed). Non-blocking: text paints in the size-matched
-    // fallback, then swaps (font-display: swap is set in the kit's project settings).
+    // Adobe Fonts kit (Narkiss Hadash Condensed). Non-blocking: text paints in the width-matched
+    // fallback, then swaps (font-display: swap is set in the kit's project settings). The fallback is built
+    // from the site's own fonts, not local() ones, so it wraps the same on every OS (PageSpeed runs on Linux,
+    // which has no Arial): bold Narkiss is 0.70x Noto Sans Hebrew and 0.62x DM Sans in width (measured).
     typekit: [
       '<link rel="preconnect" href="https://use.typekit.net" crossorigin>',
       '<link rel="preconnect" href="https://use.typekit.net">',
       '<link rel="preconnect" href="https://p.typekit.net">',
       '<link rel="stylesheet" href="https://use.typekit.net/gce3kmw.css" media="print" onload="this.media=\'all\'">',
       '<noscript><link rel="stylesheet" href="https://use.typekit.net/gce3kmw.css"></noscript>',
-      '<style>@font-face{font-family:"Narkiss Fallback";src:local("Arial"),local("ArialMT");size-adjust:70%;ascent-override:123%;descent-override:50%;line-gap-override:0%}' +
-        '@font-face{font-family:"Narkiss Fallback";font-weight:700 800;src:local("Arial Bold"),local("Arial-BoldMT");size-adjust:72%;ascent-override:120%;descent-override:48%;line-gap-override:0%}</style>',
+      `<style>@font-face{font-family:"Narkiss Fallback";font-weight:100 900;src:url("${root}assets/fonts/noto-sans-hebrew-var-hebrew.woff2") format("woff2");unicode-range:U+0590-05FF,U+FB1D-FB4F;size-adjust:70.5%;ascent-override:122%;descent-override:49%;line-gap-override:0%}` +
+        `@font-face{font-family:"Narkiss Fallback";font-weight:100 900;src:url("${root}assets/fonts/dm-sans-latin-600.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212;size-adjust:62%;ascent-override:139%;descent-override:56%;line-gap-override:0%}</style>`,
     ].join('\n'),
   };
 }
