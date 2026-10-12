@@ -133,7 +133,9 @@
   "wa_prefill": "Hi Bar, saw your site. I'm from [company] and I'm interested in an AI video for [goal].",
   "footer": {
     "copy": "© 2026 bfain.studio · Bar Fainshtein",
-    "line": "AI video for brands · Israel and worldwide"
+    "line": "AI video for brands · Israel and worldwide",
+    "shop": "Prompt packs shop",
+    "new_tab": "opens in a new tab"
   },
   "d1": {
     "live": "On air",
