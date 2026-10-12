@@ -292,9 +292,12 @@ function context(lang, root, base) {
     wa_float: `<a class="wa-float" href="${esc(wa_url)}" target="_blank" rel="noopener" aria-label="${esc(t.a11y.wa_float)}">${WA_ICON}<span class="wa-float-label">${esc(t.promise)}</span></a>`,
     email_ltr: `<bdi dir="ltr">${esc(site.email)}</bdi>`,
     scripts: `<script src="${root}assets/js/reels.js" defer></script>`,
-    // Adobe Fonts kit (Narkiss Hadash Condensed). Text paints in the width-matched fallback, then swaps (font-display: swap is set in the kit's project settings). The fallback is built
-    // from the site's own fonts, not local() ones, so it wraps the same on every OS (PageSpeed runs on Linux,
-    // which has no Arial): bold Narkiss is 0.70x Noto Sans Hebrew and 0.62x DM Sans in width (measured).
+    // Adobe Fonts kit (Narkiss Hadash Condensed). Text paints in the width-matched fallback, then swaps
+    // (font-display: swap is set in the kit's project settings). The fallback is built from the site's own
+    // fonts, not local() ones, so it wraps the same on every OS (PageSpeed runs on Linux, which has no Arial):
+    // bold Narkiss is 0.70x Noto Sans Hebrew and 0.62x DM Sans in width (measured). Until those two fallback
+    // files are in (about 0.1 s, at most 1.2 s), html.fl keeps the hero copy hidden: painted in a system font
+    // first, the bottom-aligned headline wrapped differently and the whole block jumped (desktop CLS 0.3).
     typekit: [
       '<link rel="preconnect" href="https://use.typekit.net" crossorigin>',
       '<link rel="preconnect" href="https://use.typekit.net">',
@@ -308,6 +311,8 @@ function context(lang, root, base) {
       '<noscript><link rel="stylesheet" href="https://use.typekit.net/gce3kmw.css"></noscript>',
       `<style>@font-face{font-family:"Narkiss Fallback";font-weight:100 900;src:url("${root}assets/fonts/noto-sans-hebrew-var-hebrew.woff2") format("woff2");unicode-range:U+0590-05FF,U+FB1D-FB4F;size-adjust:70.5%;ascent-override:122%;descent-override:49%;line-gap-override:0%}` +
         `@font-face{font-family:"Narkiss Fallback";font-weight:100 900;src:url("${root}assets/fonts/dm-sans-latin-600.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212;size-adjust:62%;ascent-override:139%;descent-override:56%;line-gap-override:0%}</style>`,
+      '<script>(function(){var d=document.documentElement,f=document.fonts,x=function(){d.classList.remove("fl")};d.classList.add("fl");setTimeout(x,1200);' +
+        'if(f&&f.load)Promise.all([f.load(\'800 1em "Narkiss Fallback"\',"AI"),f.load(\'800 1em "Narkiss Fallback"\',"\u05d0")]).then(x,x);else x()})()</script>',
     ].join('\n'),
   };
 }

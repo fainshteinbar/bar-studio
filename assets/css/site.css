@@ -86,6 +86,7 @@ body { background: var(--void); color: var(--cream); font: 400 16px/1.6 var(--te
     linear-gradient(to left, rgb(7 7 28 / 0.92) 0%, rgb(7 7 28 / 0.7) 38%, rgb(7 7 28 / 0) 72%),
     linear-gradient(to top, var(--void) 0%, rgb(7 7 28 / 0.88) 24%, rgb(7 7 28 / 0.25) 60%, rgb(7 7 28 / 0.05) 100%); }
 .hero-copy { padding: 0 var(--pad) clamp(28px, 4vw, 56px); max-inline-size: 1180px; }
+.fl .hero-copy { visibility: hidden; } /* until the headline's fallback fonts are in (build.mjs, typekit block) */
 .live { display: inline-flex; align-items: center; gap: 10px; margin-block-end: 18px; padding: 7px 14px; border-radius: 100px; background: rgb(7 7 28 / 0.6); backdrop-filter: blur(8px); font-size: 0.9rem; color: var(--dim); }
 .headline { font-size: clamp(48px, 13vw, 168px); line-height: 0.9; font-weight: 800; }
 .hl { display: block; }
