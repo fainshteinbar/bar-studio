@@ -1,9 +1,12 @@
-# Daily Instagram → Bunny CDN sync, caption translation, site rebuild and deploy (PLAN.md 4.6).
+# Hourly Instagram → Bunny CDN sync, caption translation, site rebuild and deploy (PLAN.md 4.6).
+# Each run first asks Instagram for the media list (two API calls) and stops there unless a Reel was added or
+# removed, a caption was edited, the hidden list changed, or an English caption is still pending
+# (scripts/ig-sync.mjs --detect). Runs with nothing new download, upload, translate and commit nothing.
 name: Instagram sync
 
 on:
   schedule:
-    - cron: '23 4 * * *' # daily, 07:23 Israel time
+    - cron: '17 * * * *' # hourly, at minute 17
   workflow_dispatch:
     inputs:
       force:
@@ -19,6 +22,7 @@ permissions:
   contents: write
   issues: write
   pages: write
+  actions: write
 
 jobs:
   sync:
@@ -27,11 +31,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check token and PAT expiry (fail early, 7-day warning)
+      - name: Check token and PAT expiry (7-day warning; scheduled runs check once a day)
         env:
           IG_EXP: ${{ vars.IG_TOKEN_EXPIRES_AT }}
           PAT_EXP: ${{ vars.GH_PAT_EXPIRES_AT }}
+          EVENT: ${{ github.event_name }}
         run: |
+          # Only the 04:17 UTC scheduled run checks, so a warning fails one run a day, not 24.
+          if [ "$EVENT" = "schedule" ] && [ "$(date -u +%H)" != "04" ]; then echo "Expiry check runs at 04 UTC."; exit 0; fi
           check() {
             if [ -z "$2" ]; then echo "::warning::$1 is not set"; return 0; fi
             left=$(( ( $(date -u -d "$2" +%s) - $(date -u +%s) ) / 86400 ))
@@ -41,14 +48,33 @@ jobs:
           check "Instagram token" "$IG_EXP"
           check "GitHub PAT" "$PAT_EXP"
 
+      - name: Keep the schedules alive (once a day)
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # GitHub disables scheduled workflows after 60 days without repository activity, and runs with nothing
+          # new commit nothing, so the 04:17 UTC run re-enables both workflows through the API.
+          if [ "$(date -u +%H)" != "04" ]; then exit 0; fi
+          for wf in sync.yml token-refresh.yml; do gh api -X PUT "repos/${GITHUB_REPOSITORY}/actions/workflows/$wf/enable" >/dev/null || echo "::warning::could not re-enable $wf"; done
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
 
+      - name: Look for new or changed Reels
+        id: detect
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_API_VERSION: ${{ vars.IG_API_VERSION }}
+        run: node scripts/ig-sync.mjs --upload --detect ${{ inputs.force && '--force' || '' }}
+
       - name: Install ffmpeg and cwebp (the scripts themselves have no npm dependencies)
+        if: steps.detect.outputs.changed == 'true'
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg webp >/dev/null
 
       - name: Sync Reels to Bunny and translate captions
+        if: steps.detect.outputs.changed == 'true'
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_API_VERSION: ${{ vars.IG_API_VERSION }}
@@ -61,29 +87,31 @@ jobs:
         run: node scripts/ig-sync.mjs --upload ${{ inputs.force && '--force' || '' }}
 
       - name: Build
-        env:
-          MANIFEST: committed
+        if: steps.detect.outputs.changed == 'true'
         run: node scripts/build.mjs
 
       - name: Commit and publish
+        if: steps.detect.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           git add -A data/instagram.json data/translations.json index.html en/index.html sitemap.xml robots.txt assets/first
           if git diff --cached --quiet; then echo "No changes."; exit 0; fi
-          git -c user.name="bfain-sync" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -q -m "Sync Instagram Reels ($(date -u +%F))"
+          git -c user.name="bfain-sync" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -q -m "Sync Instagram Reels ($(date -u +'%F %H:%M') UTC)"
           git push
           # Pushes made with GITHUB_TOKEN may not start a Pages build on their own; request one.
           if [ "${GITHUB_REF_NAME}" = "main" ]; then gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" >/dev/null || echo "::warning::Pages build request failed"; fi
 
-      - name: Open an issue on failure
+      - name: Open an issue on failure (at most one comment a day)
         if: failure()
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           title="Site automation needs attention: Instagram sync"
-          existing=$(gh issue list --state open --search "\"$title\" in:title" --json number -q '.[0].number')
-          body="The daily sync failed: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          read -r existing updated <<< "$(gh issue list --state open --search "\"$title\" in:title" --json number,updatedAt -q '.[0] | "\(.number) \(.updatedAt)"')"
+          body="The Instagram sync failed: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
 
           Common causes: the Instagram token expired or was revoked (regenerate it in the Meta app dashboard, then run gh secret set IG_ACCESS_TOKEN), the GitHub PAT expired (create a new one, gh secret set GH_SECRETS_PAT, update the GH_PAT_EXPIRES_AT variable), or Bunny rejected the upload (check BUNNY_STORAGE_PASSWORD). See PLAN.md section 5."
-          if [ -n "$existing" ]; then gh issue comment "$existing" --body "$body"; else gh issue create --title "$title" --body "$body"; fi
+          if [ -z "$existing" ] || [ "$existing" = "null" ]; then gh issue create --title "$title" --body "$body"; exit 0; fi
+          if [ $(( $(date -u +%s) - $(date -u -d "$updated" +%s) )) -lt 72000 ]; then echo "Issue #$existing was updated in the last 20 h; not commenting again."; exit 0; fi
+          gh issue comment "$existing" --body "$body"

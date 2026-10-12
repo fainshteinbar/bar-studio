@@ -189,7 +189,7 @@ Secrets never go into a chat. They are copied in the browser and stored with `pb
 | `GH_PAT_EXPIRES_AT` | variable | The PAT's expiry date (GitHub shows it on creation); both workflows fail with a 7-day warning before it | Claude Code from Bar's date |
 
 Workflows (`.github/workflows/`):
-- `sync.yml`, daily 04:23 UTC: token/PAT expiry check → `ig-sync.mjs --upload` (new Reels → 3 renditions + poster → Bunny; views refreshed; new captions translated with Gemini) → `build.mjs` → commit → Pages build. Manual run: Actions → Instagram sync → Run workflow (tick "force" to reprocess everything).
+- `sync.yml`, hourly at minute 17: `ig-sync.mjs --upload --detect` asks Instagram for the media list (two API calls) and the run stops there unless a Reel was added or removed, a caption was edited, the hidden list in `data/reels.json` changed, or an English caption is still pending. Only then: ffmpeg install → `ig-sync.mjs --upload` (new Reels → 3 renditions + poster → Bunny; views refreshed; new captions translated with Gemini) → `build.mjs` → commit → Pages build. View counts alone never trigger a commit; they refresh whenever a run does. The expiry check and a keep-alive (re-enabling both workflows, since GitHub disables schedules after 60 days without commits) run once a day at 04:17 UTC; a failure issue gets at most one comment a day. Manual run: Actions → Instagram sync → Run workflow (tick "force" to reprocess everything).
 - `token-refresh.yml`, Mondays 05:41 UTC: checks the PAT, refreshes the Instagram token (once it is at least 24 h old), writes the new secret and expiry variables.
 - On any failure GitHub emails Bar and the workflow opens (or comments on) an issue "Site automation needs attention: …" with the fix.
 

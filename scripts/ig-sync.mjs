@@ -5,26 +5,32 @@
 //   node scripts/ig-sync.mjs --upload [--force]   production (CI): media to Bunny Storage, manifest data/instagram.json
 //   node scripts/ig-sync.mjs --local              local preview: media/ig/ + data/instagram.local.json (both gitignored)
 //   node scripts/ig-sync.mjs --check              token + account check only
+//   node scripts/ig-sync.mjs --upload --detect     hourly gate: is there anything to do? (writes changed=true|false
+//                                                 to GITHUB_OUTPUT; two API calls, no downloads)
 //
-// Upload mode is incremental against the committed manifest: Reels already on the CDN only get fresh
-// views/likes/captions; new Reels (or --force) are downloaded, transcoded and uploaded.
+// Upload mode is incremental against the committed manifest. It exits before any download, upload,
+// translation or manifest write unless a Reel was added or removed, a caption was edited, the hidden list
+// changed, a Reel's media became available, or an English caption is still pending (or --force). View
+// counts alone never trigger a run; they refresh whenever one of those happens. New Reels (or --force) are
+// downloaded, transcoded and uploaded; Reels already on the CDN are reused.
 //
 // Env: IG_ACCESS_TOKEN (else .secrets/ig-token locally), IG_API_VERSION (default v26.0),
 //      upload mode: BUNNY_STORAGE_PASSWORD (secret), BUNNY_STORAGE_ZONE, BUNNY_STORAGE_HOST, MEDIA_BASE_URL,
 //      translation: GEMINI_API_KEY (Gemini free tier; without it new English captions stay empty, never Hebrew).
 // Secrets are never printed; any URL that appears in an error is redacted.
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync, createWriteStream, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync, appendFileSync, createWriteStream, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { Readable } from 'node:stream';
 import { transcodeReel, transcodeFull, posterFrom, laneFor, tempDir, probe, brightness } from './lib/media.mjs';
-import { readTranslations, writeTranslations } from './lib/captions.mjs';
+import { readTranslations, writeTranslations, captionHash, isHebrew, pitchOf } from './lib/captions.mjs';
 import { translateMissing } from './lib/translate.mjs';
 
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
 const UPLOAD = has('--upload');
 const LOCAL = has('--local');
+const DETECT = has('--detect');
 const API = `https://graph.instagram.com/${process.env.IG_API_VERSION || 'v26.0'}`;
 const PREVIEW_SECONDS = 12; // rule 14: grid previews are the first 12 s
 const MANIFEST = UPLOAD ? 'data/instagram.json' : 'data/instagram.local.json';
@@ -38,7 +44,7 @@ const BUNNY = {
   host: (process.env.BUNNY_STORAGE_HOST || 'storage.bunnycdn.com').replace(/^https?:\/\//, '').replace(/\/$/, ''),
   base: (process.env.MEDIA_BASE_URL || '').replace(/\/$/, ''),
 };
-if (UPLOAD && (!BUNNY.password || !BUNNY.zone || !BUNNY.base)) {
+if (UPLOAD && !DETECT && (!BUNNY.password || !BUNNY.zone || !BUNNY.base)) {
   console.error('Upload mode needs BUNNY_STORAGE_PASSWORD, BUNNY_STORAGE_ZONE and MEDIA_BASE_URL.');
   process.exit(2);
 }
@@ -94,6 +100,34 @@ const videos = all.filter((m) => m.media_type === 'VIDEO');
 const missing = videos.filter((m) => !m.media_url);
 console.log(`Media: ${all.length} total, ${videos.length} videos, ${missing.length} without media_url.`);
 
+const hiddenCfg = (existsSync('data/reels.json') ? JSON.parse(readFileSync('data/reels.json', 'utf8')) : {}).hidden || {};
+const overrides = existsSync('data/overrides.json') ? JSON.parse(readFileSync('data/overrides.json', 'utf8')) : {};
+const previous = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : { items: [] };
+const prevById = Object.fromEntries((previous.items || []).filter((i) => !i.placeholder).map((i) => [i.id, i]));
+
+// 1b. Early exit (hourly schedule): stop here unless something a visitor would see has changed.
+const reasons = [];
+if (UPLOAD && !has('--force')) {
+  const cache = readTranslations();
+  const ids = new Set(videos.map((m) => m.id));
+  for (const m of videos) {
+    const prev = prevById[m.id], hidden = !!hiddenCfg[m.id];
+    if (!prev) { reasons.push(`new Reel ${m.id}`); continue; }
+    if ((m.caption || '') !== (prev.caption || '')) reasons.push(`caption edited ${m.id}`);
+    if ((prev.status === 'hidden') !== hidden) reasons.push(`visibility changed ${m.id}`);
+    if (!hidden && !prev.has_video && m.media_url) reasons.push(`media now available ${m.id}`);
+    if (!hidden && prev.has_video && !overrides.captions_en?.[m.id]) {
+      const src = pitchOf(m.caption);
+      if ((isHebrew(src.pitch) || isHebrew(src.more)) && cache.items?.[m.id]?.hash !== captionHash(m.caption)) reasons.push(`English caption pending ${m.id}`);
+    }
+  }
+  for (const id of Object.keys(prevById)) if (!ids.has(id)) reasons.push(`Reel removed ${id}`);
+}
+const changed = !UPLOAD || has('--force') || reasons.length > 0;
+console.log(has('--force') ? 'Forced run.' : reasons.length ? `Work to do: ${reasons.join('; ')}.` : 'No new or changed Reels: nothing to download, upload, translate or commit.');
+if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `changed=${changed}\n`);
+if (DETECT || !changed) process.exit(0);
+
 // 2. Views (instagram_business_manage_insights); skipped if not granted.
 let insightsOk = true;
 async function viewsFor(id) {
@@ -107,11 +141,7 @@ async function viewsFor(id) {
   }
 }
 
-// 3. Visibility: data/reels.json lists media IDs Bar has hidden.
-const hiddenCfg = (existsSync('data/reels.json') ? JSON.parse(readFileSync('data/reels.json', 'utf8')) : {}).hidden || {};
-const overrides = existsSync('data/overrides.json') ? JSON.parse(readFileSync('data/overrides.json', 'utf8')) : {};
-const previous = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : { items: [] };
-const prevById = Object.fromEntries((previous.items || []).filter((i) => !i.placeholder).map((i) => [i.id, i]));
+// 3. Visibility (data/reels.json, read above): media IDs Bar has hidden.
 
 // 4. Renditions + poster for each visible Reel that is new (or --force); reuse everything else.
 const OUT = LOCAL ? 'media/ig' : tempDir('igsync-out');
