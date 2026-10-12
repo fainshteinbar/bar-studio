@@ -227,6 +227,12 @@ directions/1..5/        phase 2 only
 
 **Phase 3 status (2026-10-12):** owner setup done. All four secrets are set: Bunny password, Gemini key, the PAT (expires 2027-10-11) and a new Instagram token (issued 2026-10-12, expires 2026-12-11; the weekly refresh extends it). The token pasted in chat during phase 2 was not revoked by removing the app in Instagram, so it lapses on its own around 2026-12-11. First runs on `phase3`: token refresh green (skipped, token under 24 h old), sync green (17 Reels, 429K views, all media on `bfain-media.b-cdn.net`).
 
+**Live (2026-10-12):** merged to `main`; https://fainshteinbar.github.io/bar-studio/ is bfain.studio. Sync and token refresh also green on `main` (dispatch). Final PageSpeed Insights, mobile: Hebrew 98 / 100 / 100 / 100 (LCP 1.7 s, CLS 0.001), English 100 / 100 / 100 / 100 (LCP 1.7 s, CLS 0.001); desktop 100 in both. What it took after go-live, since the first live PageSpeed run said LCP 2.7 s and desktop CLS 0.22-0.30:
+- The two first-screen rail posters are served from `assets/first/` (same origin), re-encoded at 432 px, both `fetchpriority=high`; the build keeps them in sync with the rail.
+- CSS is inlined; the Adobe kit, the poster swaps and video start all wait for the load event and the first paint (PageSpeed's slow host painted after load, and work started at load competed with that first frame).
+- "Narkiss Fallback" is built from the site's own Noto Sans Hebrew and DM Sans 600 with measured `size-adjust` (70.5% / 62%), not local Arial (absent on Linux and Android), and `html.fl` hides the hero copy until those two files are in (cap 1.2 s), so the bottom-aligned headline never reflows in view.
+- Measuring: the keyless PageSpeed API hits its shared daily quota; the pagespeed.web.dev UI works, and a Lighthouse run from a GitHub runner (US, Linux) reproduces it closely. Local runs from Thailand are skewed by distance to the CDN edges.
+
 ### 6.3 Phase 3: build (after Bar's choice)
 
 1. Remove Sporta material listed in section 1. Leave thin redirect stubs for the deleted case URLs (they are linked from LinkedIn and the resume) pointing to `/`.
