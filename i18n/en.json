@@ -2,9 +2,10 @@
   "lang": "en",
   "dir": "ltr",
   "meta": {
-    "title": "Bar Fainshtein | AI video for brands",
-    "description": "Creative director making AI video for brands, agencies and sports clubs: comedy reels, ads, and sports and brand films. Same-day replies on WhatsApp.",
-    "og_locale": "en_US"
+    "title": "bfain.studio | AI videos that stop the scroll",
+    "description": "bfain.studio makes AI video for brands, agencies and sports clubs: comedy reels, ads, and sports and brand films by Bar Fainshtein. Same-day replies on WhatsApp.",
+    "og_locale": "en_US",
+    "og_alt": "bfain.studio: AI videos that stop the scroll"
   },
   "a11y": {
     "skip": "Skip to content",
@@ -13,7 +14,7 @@
     "nav_label": "Main navigation",
     "hero_video": "Clips from Bar's AI videos",
     "play": "Play video",
-    "logo_home": "Bfain Studio, home"
+    "logo_home": "bfain.studio, home"
   },
   "nav": {
     "work": "Work",
@@ -80,7 +81,7 @@
   "about": {
     "title": "Why me",
     "lead": "A creative director with 7+ years in branding and campaigns, now making video with AI.",
-    "photo_alt": "Bar Fainshtein",
+    "photo_alt": "Bar Fainshtein, the creator behind bfain.studio",
     "points": [
       {
         "title": "Idea before tool",
@@ -131,7 +132,7 @@
   },
   "wa_prefill": "Hi Bar, saw your site. I'm from [company] and I'm interested in an AI video for [goal].",
   "footer": {
-    "copy": "© 2026 Bar Fainshtein",
+    "copy": "© 2026 bfain.studio · Bar Fainshtein",
     "line": "AI video for brands · Israel and worldwide"
   },
   "d1": {

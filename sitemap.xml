@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://fainshteinbar.github.io/bar-studio/</loc><priority>1.0</priority></url>
-  <url><loc>https://fainshteinbar.github.io/bar-studio/about.html</loc><priority>0.8</priority></url>
-  <url><loc>https://fainshteinbar.github.io/bar-studio/la-liga.html</loc><priority>0.7</priority></url>
-  <url><loc>https://fainshteinbar.github.io/bar-studio/ifa.html</loc><priority>0.7</priority></url>
-  <url><loc>https://fainshteinbar.github.io/bar-studio/special-olympics.html</loc><priority>0.5</priority></url>
-  <url><loc>https://fainshteinbar.github.io/bar-studio/paralympics.html</loc><priority>0.5</priority></url>
-  <url><loc>https://fainshteinbar.github.io/bar-studio/ai-production.html</loc><priority>0.5</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://fainshteinbar.github.io/bar-studio/</loc><lastmod>2026-10-12</lastmod><xhtml:link rel="alternate" hreflang="he" href="https://fainshteinbar.github.io/bar-studio/"/><xhtml:link rel="alternate" hreflang="en" href="https://fainshteinbar.github.io/bar-studio/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://fainshteinbar.github.io/bar-studio/"/></url>
+  <url><loc>https://fainshteinbar.github.io/bar-studio/en/</loc><lastmod>2026-10-12</lastmod><xhtml:link rel="alternate" hreflang="he" href="https://fainshteinbar.github.io/bar-studio/"/><xhtml:link rel="alternate" hreflang="en" href="https://fainshteinbar.github.io/bar-studio/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://fainshteinbar.github.io/bar-studio/"/></url>
 </urlset>
