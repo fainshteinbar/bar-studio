@@ -5,3 +5,6 @@ node_modules/
 !assets/placeholders/*.mp4
 .env
 .env.*
+directions/shots/*.jpg
+directions/shots/report.json
+directions/shots/lighthouse/

@@ -1,0 +1,114 @@
+<!doctype html>
+<!-- direction: Manifest · type-led brutalism -->
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+{{{head}}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{root}}assets/fonts/secular-one-{{subset}}-400.woff2">
+<link rel="stylesheet" href="{{base}}style.css">
+</head>
+<body>
+{{{skip}}}
+<header class="rule-bar">
+  <a href="#top" class="who">{{t.name}}</a>
+  <nav aria-label="{{t.a11y.nav_label}}">
+    <a href="#work">{{t.nav.work}}</a>
+    <a href="#about">{{t.nav.about}}</a>
+    <a href="#process">{{t.nav.process}}</a>
+    <a href="#contact">{{t.nav.contact}}</a>
+  </nav>
+  {{{lang_toggle}}}
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="knock">
+      {{{hero.responsive}}}
+      <h1 id="hero-title"><span>{{t.hero.title_a}}</span> <span>{{t.hero.title_b}}</span></h1>
+    </div>
+    <div class="hero-meta">
+      <p class="tag">{{t.hero.eyebrow}}</p>
+      <p class="sub">{{t.hero.sub}}</p>
+      <div class="go">
+        <a class="btn" href="{{wa_url}}" target="_blank" rel="noopener">{{{wa_icon}}}{{t.hero.cta}}</a>
+        <span class="promise">{{t.promise}}</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true"><span>{{#each t.d4.words}}{{it}} {{/each}}</span><span>{{#each t.d4.words}}{{it}} {{/each}}</span></div>
+
+  <section class="index" id="work" aria-labelledby="work-title">
+    <header class="head"><h2 id="work-title">{{t.d4.index}}</h2><p>{{t.grid.sub}}</p></header>
+    <ol class="rows">
+      {{#each items 9}}
+      <li>
+        <a href="{{it.href}}" target="_blank" rel="noopener"><span class="sr-only">{{it.title}}. {{t.grid.open}}.</span>
+          <span class="r-n ltr">{{n}}</span>
+          <span class="r-title">{{it.title}}{{#if it.placeholder}} <span class="r-badge">{{t.grid.badge}}</span>{{/if}}</span>
+          <span class="r-lane">{{it.lane_name}}</span>
+          <span class="r-views"><span class="ltr">{{it.views_fmt}}</span> {{t.grid.views}}</span>
+          <span class="r-thumb">{{{it.media}}}</span>
+        </a>
+      </li>
+      {{/each}}
+    </ol>
+    <a class="more" href="{{ig_url}}" target="_blank" rel="noopener">{{t.grid.more}} <span class="arrow" aria-hidden="true">→</span></a>
+  </section>
+
+  <section class="big-number" aria-labelledby="proof-title">
+    <h2 id="proof-title" class="sr-only">{{t.proof.title}}</h2>
+    <p class="giant ltr">{{stats.total_views_fmt}}</p>
+    <p class="giant-label">{{t.proof.views_label}} {{{sample}}}</p>
+    <dl>
+      <div><dt>{{t.proof.videos_label}}</dt><dd class="ltr">{{stats.total_videos}}</dd></div>
+      <div><dt>{{t.proof.years_label}}</dt><dd class="ltr">{{t.proof.years}}</dd></div>
+    </dl>
+  </section>
+
+  <section class="lanes" aria-labelledby="lanes-title">
+    <h2 id="lanes-title" class="kicker">{{t.lanes.title}}</h2>
+    <ol>
+      {{#each t.lanes.items}}
+      <li><h3>{{it.name}}</h3><p>{{it.desc}}</p></li>
+      {{/each}}
+    </ol>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="about-title">
+    <h2 id="about-title" class="kicker">{{t.about.title}}</h2>
+    <div class="about-grid">
+      <p class="manifesto">{{t.about.lead}}</p>
+      <figure class="mug"><img src="{{root}}assets/img/bar-560.webp" width="560" height="628" alt="{{t.about.photo_alt}}" loading="lazy" decoding="async"></figure>
+    </div>
+    <ol class="notes">
+      {{#each t.about.points}}
+      <li><span class="fn ltr">[{{n}}]</span><h3>{{it.title}}</h3><p>{{it.body}}</p></li>
+      {{/each}}
+    </ol>
+  </section>
+
+  <section class="process" id="process" aria-labelledby="process-title">
+    <h2 id="process-title" class="kicker">{{t.process.title}}</h2>
+    <ol>
+      {{#each t.process.steps}}
+      <li><span class="ltr">{{n}}</span><h3>{{it.title}}</h3><p>{{it.body}}</p></li>
+      {{/each}}
+    </ol>
+  </section>
+
+  <section class="cta" id="contact" aria-labelledby="cta-title">
+    <h2 id="cta-title" class="kicker">{{t.cta.title}}</h2>
+    <a class="giant-link" href="{{wa_url}}" target="_blank" rel="noopener">{{t.cta.wa}} <span class="arrow" aria-hidden="true">→</span></a>
+    <div class="cta-meta">
+      <span class="promise">{{t.promise}}</span>
+      <span>{{t.cta.email_label}}: <a href="{{mail_url}}">{{{email_ltr}}}</a></span>
+      <a href="{{ig_url}}" target="_blank" rel="noopener">{{t.cta.ig}}</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot"><span>{{t.footer.copy}}</span><span>{{t.footer.line}}</span></footer>
+{{{wa_float}}}
+{{{scripts}}}
+</body>
+</html>

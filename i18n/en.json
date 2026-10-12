@@ -1,0 +1,161 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "meta": {
+    "title": "Bar Fainshtein | AI video for brands",
+    "description": "Creative director making AI video for brands, agencies and sports clubs: comedy reels, ads, and sports and brand films. Same-day replies on WhatsApp.",
+    "og_locale": "en_US"
+  },
+  "a11y": {
+    "skip": "Skip to content",
+    "lang_switch_label": "לאתר בעברית",
+    "wa_float": "Message on WhatsApp",
+    "nav_label": "Main navigation",
+    "hero_video": "Clips from Bar's AI videos",
+    "play": "Play video"
+  },
+  "nav": {
+    "work": "Work",
+    "about": "Why me",
+    "process": "Process",
+    "contact": "Let's talk",
+    "lang_switch": "עב"
+  },
+  "name": "Bar Fainshtein",
+  "role": "Creative director · AI video",
+  "hero": {
+    "eyebrow": "Creative director · AI video",
+    "title": "AI videos that stop the scroll",
+    "title_a": "AI videos",
+    "title_b": "that stop the scroll",
+    "sub": "I turn a brand's idea into an AI video. A comedy reel, an ad or a sports film, ready for the feed.",
+    "cta": "Start a project",
+    "secondary": "See the work"
+  },
+  "promise": "Same-day replies",
+  "lanes": {
+    "title": "Three kinds of video",
+    "items": [
+      {
+        "key": "comedy",
+        "name": "Comedy reels",
+        "desc": "Humor people send to friends. That's how a brand gets into the conversation."
+      },
+      {
+        "key": "ads",
+        "name": "Ads",
+        "desc": "Product spots and campaign films without a shoot day, a location or a crew."
+      },
+      {
+        "key": "sport",
+        "name": "Sports & brand films",
+        "desc": "Match moments, launches and brand films with matchday energy."
+      }
+    ]
+  },
+  "lane_names": {
+    "comedy": "Comedy",
+    "ads": "Ad",
+    "sport": "Sports & brand",
+    "reels": "Reel"
+  },
+  "grid": {
+    "title": "Latest work",
+    "sub": "Synced from Instagram automatically",
+    "sample_title": "Sample reel",
+    "badge": "Sample",
+    "views": "views",
+    "more": "More work on Instagram",
+    "open": "Watch with sound on Instagram"
+  },
+  "proof": {
+    "title": "By the numbers",
+    "sample_tag": "Sample data",
+    "views_label": "video views",
+    "videos_label": "videos published",
+    "years": "7+",
+    "years_label": "years in creative & branding"
+  },
+  "about": {
+    "title": "Why me",
+    "lead": "A creative director with 7+ years in branding and campaigns, now making video with AI.",
+    "photo_alt": "Bar Fainshtein",
+    "points": [
+      {
+        "title": "Idea before tool",
+        "body": "AI is the tool. The work is the idea, the script and the timing of the punchline."
+      },
+      {
+        "title": "A brand eye",
+        "body": "Years of building brand systems. Every frame stays in your brand's language."
+      },
+      {
+        "title": "Built for the feed",
+        "body": "Vertical format, captions and pacing built for Instagram and TikTok from the first second."
+      }
+    ]
+  },
+  "process": {
+    "title": "How it works",
+    "steps": [
+      {
+        "title": "Brief",
+        "body": "A short WhatsApp chat: the goal, the audience, where it runs."
+      },
+      {
+        "title": "Concept & script",
+        "body": "An idea, a first-second hook and a second-by-second script for you to approve."
+      },
+      {
+        "title": "Generation",
+        "body": "Produced in Seedance and other tools, with every shot checked."
+      },
+      {
+        "title": "Edit & sound",
+        "body": "Edit, music, voiceover and captions."
+      },
+      {
+        "title": "Delivery",
+        "body": "Files ready for every platform, vertical and horizontal."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Got an idea? Let's turn it into a video.",
+    "sub": "Send a WhatsApp message with a few words about your brand and your goal.",
+    "wa": "Message me on WhatsApp",
+    "email_label": "Or by email",
+    "ig": "More work on Instagram",
+    "email_subject": "AI video for [brand]"
+  },
+  "wa_prefill": "Hi Bar, saw your site. I'm from [company] and I'm interested in an AI video for [goal].",
+  "footer": {
+    "copy": "© 2026 Bar Fainshtein",
+    "line": "AI video for brands · Israel and worldwide"
+  },
+  "d1": {
+    "live": "On air",
+    "channel": "CH",
+    "scoreboard": "Scoreboard"
+  },
+  "d2": {
+    "scroll": "Scroll"
+  },
+  "d3": {
+    "chat_status": "Usually replies the same day",
+    "you": "Your message",
+    "send": "Send on WhatsApp"
+  },
+  "d4": {
+    "words": [
+      "Idea.",
+      "Script.",
+      "AI.",
+      "Feed."
+    ],
+    "index": "Work index"
+  },
+  "d5": {
+    "studio": "AI video studio"
+  }
+}

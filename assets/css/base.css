@@ -1,0 +1,64 @@
+/* Shared base for every direction: reset, a11y helpers, reel media, WhatsApp float.
+   Logical properties only, so RTL and LTR mirror without overrides. */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html { overflow-x: clip; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; min-height: 100dvh; overflow-x: clip; }
+img, video, svg, picture { display: block; max-inline-size: 100%; }
+a { color: inherit; }
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+button { font: inherit; color: inherit; }
+:where(h1, h2, h3) { text-wrap: balance; }
+:where(p) { text-wrap: pretty; }
+bdi[dir="ltr"], .ltr { unicode-bidi: isolate; direction: ltr; }
+
+.skip-link {
+  position: absolute; inset-inline-start: 12px; inset-block-start: -100px; z-index: 100;
+  padding: 10px 16px; background: #F4F0E8; color: #07071C; border-radius: 6px; font-weight: 600;
+}
+.skip-link:focus { inset-block-start: 12px; }
+.sr-only {
+  position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+:focus-visible { outline: 2px solid #00C2FF; outline-offset: 3px; }
+
+/* Reel media: poster image underneath, video fades in once it is actually playing. */
+.reel-media { position: relative; display: block; overflow: hidden; background: #07071C; isolation: isolate; }
+.reel-poster, .reel-video, .reel-media picture {
+  position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover;
+}
+.reel-poster { background-size: cover; background-position: center; }
+.reel-media picture img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+.reel-video { opacity: 0; transition: opacity 400ms cubic-bezier(0.23, 1, 0.32, 1); }
+.reel-video.is-playing { opacity: 1; }
+
+.sample-tag {
+  display: inline-block; padding: 2px 8px; border: 1px dashed currentColor; border-radius: 4px;
+  font-size: 0.75rem; letter-spacing: 0.02em; vertical-align: middle;
+}
+.reel-badge {
+  position: absolute; inset-block-start: 8px; inset-inline-start: 8px; z-index: 2;
+  padding: 2px 7px; border-radius: 3px; background: rgb(7 7 28 / 0.72); color: #F4F0E8;
+  font: 600 11px/1.4 system-ui, sans-serif; letter-spacing: 0.04em; text-transform: uppercase;
+}
+
+/* WhatsApp float: inline-end corner, so it sits left in Hebrew and right in English. */
+.wa-float {
+  position: fixed; inset-block-end: max(16px, env(safe-area-inset-bottom)); inset-inline-end: 16px; z-index: 50;
+  display: inline-flex; align-items: center; gap: 8px; min-block-size: 52px; padding-block: 10px; padding-inline: 14px 18px;
+  border-radius: 999px; background: #25D366; color: #07071C; text-decoration: none;
+  font: 600 15px/1 system-ui, sans-serif; box-shadow: 0 8px 24px rgb(7 7 28 / 0.35);
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.wa-float:active { transform: scale(0.97); }
+.wa-float .wa-icon { inline-size: 26px; block-size: 26px; }
+@media (min-width: 900px) { .wa-float-label { display: inline; } }
+@media (max-width: 899px) { .wa-float { padding-inline: 13px; } .wa-float-label { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
