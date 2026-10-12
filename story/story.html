@@ -1,0 +1,236 @@
+<!doctype html>
+<!-- bfain.studio launch Story, 1080x1920. Deterministic: window.render(t) draws the frame at t seconds.
+     Captured frame by frame by story/render.mjs. Footage: story/work/hook (Reel cuts), story/work/site (site recording). -->
+<html lang="he">
+<head>
+<meta charset="utf-8">
+<title>bfain.studio launch Story</title>
+<link rel="stylesheet" href="https://use.typekit.net/gce3kmw.css">
+<style>
+@font-face { font-family: "Hebrew"; font-weight: 100 900; src: url("../assets/fonts/noto-sans-hebrew-var-hebrew.woff2") format("woff2"); }
+:root { --void: #07071C; --navy: #1A1464; --cyan: #00C2FF; --cream: #F4F0E8; --display: "narkiss-hadash-condensed", "Hebrew", sans-serif; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1080px; height: 1920px; overflow: clip; background: var(--void); color: var(--cream); font-family: "Hebrew", sans-serif; }
+.layer { position: absolute; inset: 0; }
+#bg { background: radial-gradient(900px 700px at 50% 42%, rgb(26 20 100 / 0.95), transparent 70%), radial-gradient(600px 420px at 50% 78%, rgb(0 194 255 / 0.16), transparent 70%), var(--void); }
+#cols { position: absolute; inset: -200px -160px; display: flex; gap: 22px; justify-content: center; transform: rotate(-9deg); opacity: 0.2; filter: blur(1.5px) saturate(0.8); }
+.col { display: flex; flex-direction: column; gap: 22px; width: 300px; }
+.col img { width: 300px; height: 533px; object-fit: cover; border-radius: 22px; display: block; }
+#vignette { background: radial-gradient(120% 80% at 50% 45%, transparent 40%, rgb(7 7 28 / 0.85) 100%); }
+#screen { position: absolute; overflow: hidden; background: #000; }
+#screen canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#bezel { position: absolute; border-radius: 82px; background: linear-gradient(160deg, #23234a, #0b0b1d 40%, #16163a); box-shadow: 0 70px 140px rgb(0 0 0 / 0.65), 0 0 140px rgb(0 194 255 / 0.18), inset 0 0 0 2px rgb(255 255 255 / 0.09); }
+#island { position: absolute; width: 150px; height: 42px; border-radius: 30px; background: #000; }
+#shade { position: absolute; inset: 0; pointer-events: none; }
+.big, .chip, .sub, #cue { direction: rtl; }
+.big { position: absolute; inset-inline: 0; text-align: center; font-family: var(--display); font-weight: 800; line-height: 0.9; }
+.w { display: inline-block; overflow: clip; padding-block: 0.08em; margin-block: -0.08em; vertical-align: top; }
+.w > span { display: inline-block; }
+.cyan { color: var(--cyan); }
+.chip { position: absolute; display: inline-flex; align-items: center; gap: 16px; padding: 20px 34px; border-radius: 100px; background: rgb(7 7 28 / 0.78); border: 1.5px solid rgb(244 240 232 / 0.16); backdrop-filter: blur(14px); font: 700 54px/1 var(--display); white-space: nowrap; box-shadow: 0 20px 50px rgb(0 0 0 / 0.45); }
+.chip .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 8px rgb(0 194 255 / 0.18); }
+#tapDot, #tapRing { position: absolute; border-radius: 50%; translate: -50% -50%; }
+#tapDot { width: 74px; height: 74px; background: rgb(244 240 232 / 0.92); box-shadow: 0 6px 24px rgb(0 0 0 / 0.5); }
+#tapRing { width: 74px; height: 74px; border: 6px solid var(--cyan); }
+#logo { position: absolute; left: 50%; translate: -50% 0; width: 300px; }
+#logo svg { width: 100%; height: auto; display: block; }
+.sub { position: absolute; inset-inline: 0; text-align: center; font: 500 46px/1.3 "Hebrew", sans-serif; color: rgb(244 240 232 / 0.78); }
+#cue { position: absolute; inset-inline: 0; text-align: center; font: 700 78px/1 var(--display); }
+#arrows { position: absolute; left: 50%; translate: -50% 0; display: flex; flex-direction: column; align-items: center; }
+#arrows svg { display: block; margin-block-start: -14px; }
+#zoneGlow { position: absolute; left: 540px; top: 1430px; width: 900px; height: 380px; translate: -50% -50%; border-radius: 50%; background: radial-gradient(closest-side, rgb(0 194 255 / 0.32), rgb(0 194 255 / 0.08) 60%, transparent); }
+#endShade { background: radial-gradient(75% 55% at 50% 52%, rgb(7 7 28 / 0.88), rgb(7 7 28 / 0.55) 70%, rgb(7 7 28 / 0.7)); }
+#flash { background: var(--cream); mix-blend-mode: overlay; }
+</style>
+</head>
+<body>
+<div id="bg" class="layer"><div id="cols"></div></div>
+<div id="vignette" class="layer"></div>
+<div id="endShade" class="layer"></div>
+<div id="zoneGlow"></div>
+
+<div id="bezel"></div>
+<div id="screen"><canvas id="cv" width="1080" height="1920"></canvas><div id="island"></div><div id="shade"></div></div>
+<div id="flash" class="layer"></div>
+
+<!-- hook -->
+<div id="hookQ1" class="big" style="top:690px;font-size:200px"><span class="w"><span>איזה</span></span> <span class="w"><span>מהם</span></span></div>
+<div id="hookQ2" class="big cyan" style="top:880px;font-size:250px"><span class="w"><span>ראיתם?</span></span></div>
+<div id="hookA" class="big" style="top:700px;font-size:200px"><span class="w"><span>כולם</span></span></div>
+<div id="hookB" class="big cyan" style="top:890px;font-size:260px"><span class="w"><span>כאן.</span></span></div>
+
+<!-- phone section -->
+<div id="chipA" class="chip"><span class="dot"></span><span><bdi dir="ltr">430K</bdi> צפיות. במקום אחד.</span></div>
+<div id="chipB" class="chip"><span class="dot"></span>בלי לחפור בפיד</div>
+<div id="chipC" class="chip"><span class="dot"></span>עם סאונד, במסך מלא</div>
+<div id="tapRing"></div><div id="tapDot"></div>
+
+<!-- end card -->
+<div id="logo"></div>
+<div id="endA" class="big" style="top:612px;font-size:190px"><span class="w"><span>האתר</span></span> <span class="w"><span>החדש</span></span></div>
+<div id="endB" class="big cyan" style="top:792px;font-size:230px"><span class="w"><span>באוויר!</span></span></div>
+<div id="endSub" class="sub" style="top:1040px">וגם: איך מזמינים סרטון כזה</div>
+<div id="cue" style="top:1146px"><bdi dir="ltr">17</bdi> ריילס מחכים בקישור</div>
+<div id="arrows" style="top:1252px"></div>
+
+<script>
+const W = 1080, H = 1920, FPS = 30;
+const SITE = { w: 390, h: 844 };                   // recorded viewport (frames are 2x)
+const P = { sw: 556, x: 540, top: 338 };           // phone screen width, centre x, screen top
+P.sh = Math.round(P.sw * SITE.h / SITE.w);         // 1203
+P.left = P.x - P.sw / 2;
+const BZ = 17;                                     // bezel thickness
+const HOOK = [0, 0.4, 0.8, 1.2, 1.6, 2.0];         // cut times (clip i starts at HOOK[i])
+const SITE_START = 2.45;                            // story time of site frame 0
+let siteMeta = null;
+
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const eOut = (k) => 1 - (1 - k) ** 3;
+const eInOut = (k) => (k < 0.5 ? 4 * k * k * k : 1 - (-2 * k + 2) ** 3 / 2);
+const eBack = (k) => { const c = 1.6; return 1 + (c + 1) * (k - 1) ** 3 + c * (k - 1) ** 2; };
+const set = (el, css) => Object.assign(el.style, css);
+// in/out envelope: rises over [a, a+ri], falls over [b-fo, b]
+const env = (t, a, b, ri = 0.3, fo = 0.3) => Math.min(eOut(prog(t, a, a + ri)), 1 - eInOut(prog(t, b - fo, b)));
+
+// background poster columns
+const posters = ['17901612813374816','17943051837086700','17958556212232372','18112796969467846','18115863469771345','17996145848834714','18130994455682363','18113922386100931','17957239818238876','18110908592128454','18105146096190451','17981987253079891'];
+for (let c = 0; c < 4; c++) {
+  const col = document.createElement('div'); col.className = 'col';
+  for (let r = 0; r < 6; r++) { const im = document.createElement('img'); im.src = `../media/ig/${posters[(c * 3 + r * 5) % posters.length]}.webp`; col.append(im); }
+  $('cols').append(col);
+}
+// logo and arrows
+fetch('work/logo.svg').then((r) => r.text()).then((s) => { $('logo').innerHTML = s.replace(/<metadata>[\s\S]*?<\/metadata>/, ''); });
+$('arrows').innerHTML = [0, 1].map(() => '<svg width="70" height="44" viewBox="0 0 70 44"><path d="M6 6 L35 34 L64 6" fill="none" stroke="#00C2FF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>').join('');
+
+// image loading (decoded on demand, small cache)
+const cache = new Map();
+const img = (url) => {
+  if (!cache.has(url)) {
+    const im = new Image(); im.src = url;
+    cache.set(url, im.decode().then(() => im));
+    if (cache.size > 12) cache.delete(cache.keys().next().value);
+  }
+  return cache.get(url);
+};
+const cv = $('cv'), ctx = cv.getContext('2d');
+const drawCover = (im, alpha = 1) => {
+  const cw = cv.width, ch = cv.height, s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight);
+  const w = im.naturalWidth * s, h = im.naturalHeight * s;
+  ctx.globalAlpha = alpha; ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h); ctx.globalAlpha = 1;
+};
+const pad = (n, l) => String(n).padStart(l, '0');
+
+// word-up reveal for .w > span groups
+const words = (el, t, start, gap = 0.07, dur = 0.42) => el.querySelectorAll('.w > span').forEach((s, i) => {
+  const k = eOut(prog(t, start + i * gap, start + i * gap + dur));
+  s.style.transform = `translateY(${(1 - k) * 108}%)`;
+});
+
+window.ready = (async () => {
+  siteMeta = await (await fetch('work/site.json')).json();
+  await document.fonts.load('800 100px narkiss-hadash-condensed', 'אבגK');
+  await document.fonts.load('500 40px Hebrew', 'א');
+  await document.fonts.ready;
+  await Promise.all([...document.images].map((i) => i.decode().catch(() => {})));
+  return document.fonts.check('800 100px narkiss-hadash-condensed', 'א');
+})();
+
+window.render = async (t) => {
+  // ---------- screen rect: full-bleed during the hook, then shrinks into the phone ----------
+  const m = eInOut(prog(t, 2.25, 2.95));
+  const rect = { x: lerp(0, P.left, m), y: lerp(0, P.top, m), w: lerp(W, P.sw, m), h: lerp(H, P.sh, m), r: lerp(0, 64, m) };
+  // phone sway (3D) during the site section, exit into the end card
+  const sway = prog(t, 2.9, 10.6);
+  const exit = eInOut(prog(t, 10.45, 11.15));
+  const ry = lerp(9, -7, eInOut(sway)) * (1 - exit), rx = lerp(3, -2, sway) * (1 - exit);
+  const floatY = Math.sin(t * 1.4) * 7 * m * (1 - exit) - exit * 160;
+  const pscale = lerp(1, 0.78, exit);
+  const phoneTf = `translateY(${floatY}px) perspective(2600px) rotateY(${ry * m}deg) rotateX(${rx * m}deg) scale(${pscale})`;
+  const phoneOp = 1 - exit;
+  set($('screen'), { left: rect.x + 'px', top: rect.y + 'px', width: rect.w + 'px', height: rect.h + 'px', borderRadius: rect.r + 'px', transform: phoneTf, opacity: phoneOp, filter: exit ? `blur(${exit * 14}px)` : 'none', transformOrigin: `${P.x - rect.x}px ${P.top + P.sh / 2 - rect.y}px` });
+  set($('bezel'), { left: P.left - BZ + 'px', top: P.top - BZ + 'px', width: P.sw + BZ * 2 + 'px', height: P.sh + BZ * 2 + 'px', opacity: eOut(prog(t, 2.55, 2.95)) * phoneOp, transform: phoneTf, transformOrigin: '50% 50%', filter: exit ? `blur(${exit * 14}px)` : 'none' });
+  set($('island'), { left: rect.w / 2 - 75 + 'px', top: 16 + 'px', opacity: prog(t, 2.6, 2.9) });
+
+  // canvas backing size follows the rect (crisp at both sizes)
+  const cw = Math.round(rect.w * (m > 0.5 ? 1.4 : 1)), ch = Math.round(rect.h * (m > 0.5 ? 1.4 : 1));
+  if (cv.width !== cw || cv.height !== ch) { cv.width = cw; cv.height = ch; }
+  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, cw, ch);
+
+  // ---------- footage ----------
+  const siteK = prog(t, SITE_START, SITE_START + 0.22);
+  if (siteK < 1) {
+    let ci = HOOK.length - 1; while (ci > 0 && t < HOOK[ci]) ci--;
+    const fi = Math.min(29, Math.floor((t - HOOK[ci]) * FPS));
+    const im = await img(`work/hook/c${ci}_${pad(fi + 1, 2)}.jpg`);
+    // punch-in on every cut
+    const z = lerp(1.14, 1, eOut(prog(t, HOOK[ci], HOOK[ci] + 0.4)));
+    ctx.save(); ctx.translate(cw / 2, ch / 2); ctx.scale(z, z); ctx.translate(-cw / 2, -ch / 2); drawCover(im); ctx.restore();
+  }
+  if (siteK > 0) {
+    const fi = clamp(Math.floor((t - SITE_START) * FPS), 0, siteMeta.frames - 1);
+    drawCover(await img(`work/site/${pad(fi, 4)}.jpg`), eOut(siteK));
+  }
+  // hook darkening, fades as the screen becomes the phone
+  const dark = (1 - prog(t, 2.2, 2.55)) * 0.64;
+  set($('shade'), { background: `linear-gradient(180deg, rgb(7 7 28 / ${dark * 0.8}) 0%, rgb(7 7 28 / ${dark}) 45%, rgb(7 7 28 / ${dark * 1.2}) 100%)` });
+  // white flash on each cut (subtle)
+  let flash = 0; for (const c of HOOK.slice(1)) flash = Math.max(flash, 1 - prog(t, c, c + 0.12));
+  set($('flash'), { opacity: t < 2.2 ? flash * 0.35 : 0 });
+
+  // ---------- background ----------
+  set($('cols'), { transform: `rotate(-9deg) translateY(${-t * 38}px)` });
+  set($('bg'), { opacity: prog(t, 2.2, 2.7) });
+  set($('vignette'), { opacity: prog(t, 2.2, 2.7) });
+  set($('endShade'), { opacity: eOut(prog(t, 10.5, 11.2)) });
+
+  // ---------- hook type ----------
+  // "איזה מהם ראיתם?" (which of these have you seen?) over the cuts, then "כולם כאן." (they're all here)
+  const qOut = eInOut(prog(t, 1.12, 1.34));
+  words($('hookQ1'), t, 0.06, 0.09); words($('hookQ2'), t, 0.26);
+  for (const id of ['hookQ1', 'hookQ2']) set($(id), { opacity: 1 - qOut, transform: `translateY(${-qOut * 80}px)` });
+  const hookOut = eInOut(prog(t, 2.18, 2.4));
+  words($('hookA'), t, 1.3); words($('hookB'), t, 1.45, 0.12);
+  set($('hookA'), { opacity: t < 1.2 ? 0 : 1 - hookOut, transform: `translateY(${-hookOut * 60}px)` });
+  set($('hookB'), { opacity: t < 1.2 ? 0 : 1 - hookOut, transform: `translateY(${-hookOut * 60}px)` });
+
+  // ---------- chips ----------
+  const chip = (el, a, b, x, y, side) => {
+    const k = env(t, a, b, 0.4, 0.3);
+    const pop = eBack(prog(t, a, a + 0.45));
+    set(el, { opacity: k, top: y + floatY * 0.6 + 'px', [side]: x + 'px', transform: `scale(${lerp(0.7, 1, pop)})`, transformOrigin: side === 'right' ? '100% 50%' : '0% 50%' });
+  };
+  chip($('chipA'), 3.05, 5.0, 40, 470, 'right');
+  chip($('chipB'), 5.25, 7.45, 40, 1130, 'left');
+  chip($('chipC'), 8.1, 10.35, 40, 640, 'right');
+
+  // ---------- tap ----------
+  const tapT = SITE_START + siteMeta.tap.t;
+  const tx = P.left + siteMeta.tap.x * P.sw, ty = P.top + siteMeta.tap.y * P.sh + floatY;
+  const press = prog(t, tapT - 0.28, tapT), rel = prog(t, tapT, tapT + 0.5);
+  set($('tapDot'), { left: tx + 'px', top: ty + 'px', opacity: t < tapT - 0.28 ? 0 : (1 - rel) * eOut(press), transform: `scale(${lerp(1.25, 0.82, eOut(press))})` });
+  set($('tapRing'), { left: tx + 'px', top: ty + 'px', opacity: rel > 0 && rel < 1 ? 1 - rel : 0, transform: `scale(${lerp(0.6, 3, eOut(rel))})` });
+
+  // ---------- end card ----------
+  const lk = eOut(prog(t, 10.85, 11.35));
+  set($('logo'), { top: 418 + 'px', opacity: lk, transform: `translateY(${(1 - lk) * 30}px) scale(${lerp(0.85, 1, eBack(prog(t, 10.85, 11.4)))})` });
+  for (const id of ['endA', 'endB']) $(id).style.opacity = t > 10.9 ? 1 : 0;
+  words($('endA'), t, 11.0, 0.08); words($('endB'), t, 11.2);
+  const sk = eOut(prog(t, 11.55, 11.95));
+  set($('endSub'), { opacity: sk, transform: `translateY(${(1 - sk) * 24}px)` });
+  const ck = eOut(prog(t, 11.85, 12.25));
+  set($('cue'), { opacity: ck, transform: `translateY(${(1 - ck) * 24}px)` });
+  [...$('arrows').children].forEach((a, i) => {
+    const ph = ((t - 12.1) * 1.6 - i * 0.22) % 1; const on = t > 12.1;
+    a.style.opacity = on ? 0.25 + 0.75 * Math.max(0, Math.sin(Math.PI * clamp(ph < 0 ? ph + 1 : ph))) : 0;
+  });
+  set($('arrows'), { transform: `translateY(${Math.sin(Math.max(0, t - 12.1) * 5) * 6}px)` });
+  const g = prog(t, 12.0, 12.6);
+  set($('zoneGlow'), { opacity: g * (0.75 + 0.25 * Math.sin((t - 12) * 4)) });
+};
+</script>
+</body>
+</html>
