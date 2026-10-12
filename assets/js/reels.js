@@ -6,6 +6,16 @@
 // - Observation starts after the load event, so video never competes with LCP.
 // - prefers-reduced-motion or Save-Data: nothing autoplays, posters stay.
 (() => {
+  // Deferred posters (below the first screen): real poster replaces the inline LQIP after load, near the viewport.
+  const lazyPosters = [...document.querySelectorAll('img[data-poster]')];
+  const loadPoster = (img) => { if (img.dataset.poster) { img.src = img.dataset.poster; delete img.dataset.poster; } };
+  const startPosters = () => {
+    if (!('IntersectionObserver' in window)) return lazyPosters.forEach(loadPoster);
+    const pio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { loadPoster(e.target); pio.unobserve(e.target); } }), { rootMargin: '800px 0px' });
+    lazyPosters.forEach((img) => pio.observe(img));
+  };
+  if (document.readyState === 'complete') startPosters(); else addEventListener('load', startPosters, { once: true });
+
   const vids = [...document.querySelectorAll('video[data-src], video[data-src-landscape]')];
   if (!vids.length) return;
 
@@ -20,6 +30,8 @@
   const portrait = matchMedia('(max-aspect-ratio: 1/1)');
   const cap = () => (narrow.matches ? 2 : 4);
   const visible = new Set();
+  let preferred = null; // set by window.reels.prefer(video), e.g. on card hover
+  let suspended = false; // set while an overlay player is open
   const isHero = (v) => 'hero' in v.dataset;
   const srcFor = (v) => v.dataset.src || (portrait.matches ? v.dataset.srcPortrait : v.dataset.srcLandscape);
 
@@ -35,9 +47,9 @@
   // Decide from the current visible set, never from individual entries: an observer
   // batch can hold stale entries from intermediate scroll positions.
   function reconcile() {
-    if (document.hidden) { vids.forEach((v) => v.pause()); return; }
+    if (document.hidden || suspended) { vids.forEach((v) => v.pause()); return; }
     const grid = [...visible].filter((v) => !isHero(v))
-      .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)
+      .sort((a, b) => (b === preferred) - (a === preferred) || a.getBoundingClientRect().top - b.getBoundingClientRect().top)
       .slice(0, cap());
     const want = new Set([...grid, ...[...visible].filter(isHero)]);
     vids.forEach((v) => (want.has(v) ? play(v) : v.paused || v.pause()));
@@ -66,6 +78,8 @@
   portrait.addEventListener('change', schedule);
   narrow.addEventListener('change', schedule);
   document.addEventListener('visibilitychange', schedule);
+
+  window.reels = { prefer(v) { preferred = v && visible.has(v) ? v : null; schedule(); }, suspend(on) { suspended = !!on; schedule(); } };
 
   const begin = () => vids.forEach((v) => io.observe(v));
   if (document.readyState === 'complete') setTimeout(begin, 0);

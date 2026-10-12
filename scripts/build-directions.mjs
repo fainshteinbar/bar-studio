@@ -31,9 +31,12 @@ function render(tpl, ctx) {
     if (lim) arr = arr.slice(0, +lim);
     return arr.map((it, i) => render(inner, { ...ctx, it, i, n: String(i + 1).padStart(2, '0') })).join('');
   });
-  tpl = tpl.replace(/\{\{#(if|unless) ([\w.]+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, kind, path, inner) =>
-    truthy(get(ctx, path)) === (kind === 'if') ? render(inner, ctx) : ''
-  );
+  // Innermost first (the body may not contain another opening if/unless), repeated until stable, so blocks nest.
+  const block = /\{\{#(if|unless) ([\w.]+)\}\}((?:(?!\{\{#(?:if|unless) )[\s\S])*?)\{\{\/\1\}\}/g;
+  for (let prev = null; prev !== tpl; ) {
+    prev = tpl;
+    tpl = tpl.replace(block, (_, kind, path, inner) => (truthy(get(ctx, path)) === (kind === 'if') ? inner : ''));
+  }
   tpl = tpl.replace(/\{\{\{([\w.]+)\}\}\}/g, (_, p) => String(get(ctx, p) ?? ''));
   tpl = tpl.replace(/\{\{([\w.@]+)\}\}/g, (m, p) => {
     const v = get(ctx, p);
@@ -50,7 +53,9 @@ function context(lang, root, base) {
   const t = langs[lang];
   const other = lang === 'he' ? 'en' : 'he';
   const loc = lang === 'he' ? 'he-IL' : 'en-US';
-  const compact = new Intl.NumberFormat(loc, { notation: 'compact', maximumFractionDigits: 1 });
+  const c0 = new Intl.NumberFormat(loc, { notation: 'compact', maximumFractionDigits: 0 });
+  const c1 = new Intl.NumberFormat(loc, { notation: 'compact', maximumFractionDigits: 1 });
+  const compact = { format: (n) => (n >= 1e4 && n < 1e6 ? c0 : c1).format(n) };
   const url = (p) => (/^https?:/.test(p) ? p : root + p);
   const he_url = lang === 'he' ? './' : '../';
   const en_url = lang === 'he' ? 'en/' : './';
@@ -58,12 +63,31 @@ function context(lang, root, base) {
   const mail_url = `mailto:${site.email}?subject=${encodeURIComponent(t.cta.email_subject)}`;
   const ig_url = `https://www.instagram.com/${site.instagram}/`;
 
+  // Caption lines without bidi isolates, tabs, hashtags or emoji: Bar's own first line is the card's pitch.
+  const captionLines = (c) =>
+    (c || '').replace(/[\u2066-\u2069\u200e\u200f\t]/g, '').replace(/#[^\s#]+/g, '')
+      .replace(/\p{Extended_Pictographic}|\uFE0F|\u200D/gu, '').split('\n').map((x) => x.replace(/\s+/g, ' ').trim()).filter(Boolean);
+  const dateFmt = new Intl.DateTimeFormat(loc, { day: 'numeric', month: 'short', year: 'numeric' });
+  const mediaHtml = (it, { eager = false, priority = false, railVideo = false } = {}) =>
+    `<span class="reel-media" style="aspect-ratio:${it.width}/${it.height}">` +
+    (eager
+      ? `<img class="reel-poster" src="${esc(url(it.poster_url))}" width="${it.width}" height="${it.height}" alt="" decoding="async" fetchpriority="${priority ? 'high' : 'low'}" style="background-image:url(${it.lqip})">`
+      : `<img class="reel-poster" src="${it.lqip || 'data:,'}" data-poster="${esc(url(it.poster_url))}" width="${it.width}" height="${it.height}" alt="" decoding="async">`) +
+    (it.has_video
+      ? (railVideo && it.rail_url
+        ? `<video class="reel-video" muted loop playsinline preload="none" data-src-portrait="${esc(url(it.rail_url))}" data-src-landscape="${esc(url(it.video_url))}" aria-hidden="true" tabindex="-1"></video>`
+        : `<video class="reel-video" muted loop playsinline preload="none" data-src="${esc(url(it.video_url))}" aria-hidden="true" tabindex="-1"></video>`)
+      : '') +
+    `</span>`;
+
   const items = manifest.items.filter((it) => it.visible !== false).map((it, i) => {
     const n = String(i + 1).padStart(2, '0');
-    const title = it.placeholder ? `${t.grid.sample_title} ${n}` : (it.caption || '').split('\n')[0].slice(0, 70) || `${t.lane_names[it.lane] || it.lane} ${n}`;
+    const lines = captionLines(it.caption);
+    const title = it.placeholder ? `${t.grid.sample_title} ${n}` : lines[0]?.slice(0, 90) || `${t.lane_names[it.lane] || it.lane} ${n}`;
+    const pitchHe = /[\u0590-\u05FF]/.test(title);
     const media =
       `<span class="reel-media" style="aspect-ratio:${it.width}/${it.height}">` +
-      `<img class="reel-poster" src="${esc(url(it.poster_url))}" width="${it.width}" height="${it.height}" alt="" loading="lazy" decoding="async" style="background-image:url(${it.lqip})">` +
+      `<img class="reel-poster" src="${it.lqip || 'data:,'}" data-poster="${esc(url(it.poster_url))}" width="${it.width}" height="${it.height}" alt="" decoding="async">` +
       (it.has_video
         ? `<video class="reel-video" muted loop playsinline preload="none" data-src="${esc(url(it.video_url))}" aria-hidden="true" tabindex="-1"></video>`
         : '') +
@@ -77,8 +101,25 @@ function context(lang, root, base) {
       views_fmt: it.views == null ? '' : compact.format(it.views),
       views_html: it.views == null ? '' : `<span class="ltr">${compact.format(it.views)}</span> ${esc(t.grid.views)}`,
       href: it.permalink,
+      pitch: title,
+      pitch_more: lines.slice(1, 3).join(' ').slice(0, 160),
+      pitch_lang: pitchHe ? 'he' : 'en',
+      pitch_dir: pitchHe ? 'rtl' : 'ltr',
+      full: esc(url(it.full_url || it.video_url || '')),
+      poster: esc(url(it.poster_url)),
+      date_fmt: it.timestamp ? dateFmt.format(new Date(it.timestamp)) : '',
+      media_rail: mediaHtml(it, { eager: i < 2, priority: false }),
     };
   });
+  // Featured = most-watched visible Reel; rail = the newest four others (first poster is the LCP image).
+  const featured = items.reduce((a, b) => ((b.views ?? -1) > (a?.views ?? -1) ? b : a), null);
+  const others = items.filter((x) => x !== featured);
+  const ov = existsSync('data/overrides.json') ? read('data/overrides.json') : {};
+  const picked = (ov.rail || []).map((id) => others.find((x) => x.id === id)).filter(Boolean);
+  const railSrc = picked.length >= 2 ? picked.concat(others.filter((x) => !picked.includes(x))).slice(0, 4) : others.slice(0, 4);
+  const rail = railSrc.map((x, i) => ({ ...x, media_rail: mediaHtml(x, { eager: i < 2, priority: i === 0, railVideo: true }) }));
+  const featuredCtx = featured && { ...featured, media_big: mediaHtml(featured, {}) };
+  const words = (str) => str.split(' ').map((w, i) => `<span class="w"><span style="--i:${i}">${esc(w)}</span></span>`).join(' ');
 
   const h = manifest.hero;
   const heroImg = (v, prio) =>
@@ -141,7 +182,16 @@ function context(lang, root, base) {
     hero,
     placeholder: !!manifest.placeholder,
     sample,
+    rail,
+    featured: featuredCtx,
+    others,
+    hero_words_a: words(t.hero.title_a),
+    hero_words_b: words(t.hero.title_b),
+    updated_fmt: manifest.generated_at ? dateFmt.format(new Date(manifest.generated_at)) : '',
     stats: {
+      top_views_fmt: featured?.views != null ? compact.format(featured.views) : '',
+      top_views: featured?.views ?? 0,
+      total_views: manifest.stats.total_views ?? fixture.stats.total_views,
       total_videos: manifest.stats.total_videos,
       total_views_fmt: compact.format(manifest.stats.total_views ?? fixture.stats.total_views),
     },

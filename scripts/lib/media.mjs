@@ -32,12 +32,20 @@ export function transcodeFull(src, outMp4) {
 }
 
 // Poster (WebP q72) + 24 px LQIP data URI, from a video frame or from an image file.
-export function posterFrom(input, outWebp, { isImage = false, at = '0.3' } = {}) {
+// Average brightness 0–255 of an image or video frame (1×1 downscale).
+export function brightness(file) {
+  const buf = execFileSync('ffmpeg', ['-v', 'error', '-i', file, '-frames:v', '1', '-vf', 'scale=1:1', '-f', 'rawvideo', '-pix_fmt', 'gray', '-']);
+  return buf[0] ?? 0;
+}
+
+export function posterFrom(input, outWebp, { isImage = false, at = '0.3', width = 540, pick = false } = {}) {
   const tmp = tempDir('poster');
   try {
     const png = join(tmp, 'p.png');
-    run('ffmpeg', ['-v', 'error', '-y', ...(isImage ? [] : ['-ss', at]), '-i', input, '-frames:v', '1', png]);
-    run('cwebp', ['-quiet', '-q', '72', png, '-o', outWebp]);
+    // pick: let ffmpeg choose the most representative frame of the first 8 s instead of a fixed time.
+    if (pick) run('ffmpeg', ['-v', 'error', '-y', '-t', '8', '-i', input, '-vf', 'thumbnail=120', '-frames:v', '1', png]);
+    else run('ffmpeg', ['-v', 'error', '-y', ...(isImage ? [] : ['-ss', at]), '-i', input, '-frames:v', '1', png]);
+    run('cwebp', ['-quiet', '-q', '70', '-resize', String(width), '0', png, '-o', outWebp]);
     run('cwebp', ['-quiet', '-resize', '24', '0', '-q', '40', png, '-o', join(tmp, 'lq.webp')]);
     return `data:image/webp;base64,${readFileSync(join(tmp, 'lq.webp')).toString('base64')}`;
   } finally {

@@ -4,6 +4,7 @@
 import { createServer } from 'node:http';
 import { createReadStream, statSync } from 'node:fs';
 import { extname, join, normalize, resolve } from 'node:path';
+import { createGzip } from 'node:zlib';
 
 const ROOT = resolve(process.argv[2] || '.');
 const PORT = +(process.env.PORT || 4173);
@@ -38,6 +39,13 @@ export function serve(port = PORT, root = ROOT) {
       const end = range[1] && range[2] ? Math.min(+range[2], st.size - 1) : st.size - 1;
       res.writeHead(206, { 'Content-Type': type, 'Content-Range': `bytes ${start}-${end}/${st.size}`, 'Accept-Ranges': 'bytes', 'Content-Length': end - start + 1 });
       createReadStream(file, { start, end }).pipe(res);
+      return;
+    }
+    // Compress text like GitHub Pages / Cloudflare do, so local Lighthouse runs match production.
+    if (/^(text\/|application\/json|image\/svg)/.test(type) && /\bgzip\b/.test(req.headers['accept-encoding'] || '')) {
+      res.writeHead(200, { 'Content-Type': type, 'Content-Encoding': 'gzip', 'Vary': 'Accept-Encoding', 'Cache-Control': 'no-cache' });
+      if (req.method === 'HEAD') res.end();
+      else createReadStream(file).pipe(createGzip()).pipe(res);
       return;
     }
     res.writeHead(200, { 'Content-Type': type, 'Content-Length': st.size, 'Accept-Ranges': 'bytes', 'Cache-Control': 'no-cache' });

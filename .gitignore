@@ -15,3 +15,6 @@ directions/references/**/*.jpg
 directions/references/**/*.png
 directions/shots/before/*.jpg
 directions/shots/after/*.jpg
+directions/shots/before/
+directions/shots/after/
+directions/shots/compare/

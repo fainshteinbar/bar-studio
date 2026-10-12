@@ -46,8 +46,14 @@ for (const d of dirs) {
       await page.evaluate(() => document.fonts.ready);
       await sleep(1800);
       await page.screenshot({ path: `${OUT}/${key}-fold.jpg`, type: 'jpeg', quality: 72 });
+      // Rule 1: videos actually playing inside the first viewport, before any scroll.
+      await sleep(1200);
+      const firstScreen = await page.evaluate(() => [...document.querySelectorAll('video')].filter((v) => {
+        const b = v.getBoundingClientRect();
+        return !v.paused && v.currentTime > 0 && b.bottom > 0 && b.top < innerHeight && b.width > 0;
+      }).length);
 
-      const r = { url, errors };
+      const r = { url, errors, firstScreen };
       Object.assign(
         r,
         await page.evaluate(({ num, prefill, vpw }) => {
@@ -64,7 +70,7 @@ for (const d of dirs) {
             overflowX: Math.max(document.documentElement.scrollWidth, innerWidth) - vpw,
             waLinks: wa.length,
             waFromConfig: waOk,
-            floatSide: float ? (float.left + float.width / 2 < innerWidth / 2 ? 'left' : 'right') : 'none',
+            floatSide: float && float.width ? (float.left + float.width / 2 < innerWidth / 2 ? 'left' : 'right') : 'hidden',
             h1: document.querySelector('h1')?.textContent.trim(),
           };
         }, { num: site.whatsapp_number, prefill: prefill[lang], vpw: vp.viewport.width })
@@ -117,7 +123,7 @@ for (const d of dirs) {
       report[key] = r;
       const flag = (b) => (b ? 'ok' : 'FAIL');
       console.log(
-        `${key.padEnd(16)} overflow:${r.overflowX} dir:${r.dir} wa:${flag(r.waFromConfig)} float:${r.floatSide} ` +
+        `${key.padEnd(16)} fold:${r.firstScreen} overflow:${r.overflowX} dir:${r.dir} wa:${flag(r.waFromConfig)} float:${r.floatSide} ` +
           `play:${r.videosPlaying ?? '-'} adv:${flag(r.videosAdvancing)} cap:${flag(r.capOk)} off:${r.offscreenStillPlaying ?? '-'} hero:${r.heroPlaying ?? '-'} errors:${errors.length}`
       );
       if (errors.length) console.log('   ', errors.slice(0, 5).join('\n    '));

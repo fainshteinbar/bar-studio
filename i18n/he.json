@@ -159,14 +159,19 @@
     "studio": "סטודיו לוידאו AI"
   },
   "d6": {
-    "eyebrow": "בר פאינשטיין · קריאייטיב דיירקטור · וידאו AI",
-    "work_eyebrow": "עבודות נבחרות",
-    "count": "סרטונים",
-    "lanes_eyebrow": "מה אני עושה",
-    "about_eyebrow": "למה אני",
-    "process_eyebrow": "תהליך",
-    "latest": "הסרטון האחרון",
-    "view_work": "לעבודות",
+    "credit": "בר פאינשטיין · קריאייטיב דיירקטור · וידאו AI",
+    "live": "חי מהאינסטגרם",
+    "reels_word": "ריילס",
+    "views_word": "צפיות",
+    "proof_views": "צפיות בסך הכול",
+    "proof_reels": "ריילס באוויר",
+    "proof_top": "צפיות בריל אחד",
+    "proof_note": "המספרים מתעדכנים אוטומטית מהאינסטגרם",
+    "featured_eyebrow": "הכי נצפה",
+    "watch": "צפו עם סאונד",
+    "open_ig": "לריל באינסטגרם",
+    "close": "סגירה",
+    "work_eyebrow": "העבודות",
     "marquee": [
       "סרטוני AI",
       "עונה באותו יום",
@@ -174,6 +179,10 @@
       "פרסומות",
       "ספורט ומותג"
     ],
-    "cta_eyebrow": "בואו נדבר"
+    "about_eyebrow": "מי מאחורי זה",
+    "process_eyebrow": "תהליך",
+    "cta_eyebrow": "בואו נדבר",
+    "updated": "עודכן",
+    "player_label": "נגן ריל"
   }
 }

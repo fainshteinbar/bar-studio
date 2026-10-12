@@ -159,14 +159,19 @@
     "studio": "AI video studio"
   },
   "d6": {
-    "eyebrow": "Bar Fainshtein · Creative director · AI video",
-    "work_eyebrow": "Selected work",
-    "count": "videos",
-    "lanes_eyebrow": "What I make",
-    "about_eyebrow": "Why me",
-    "process_eyebrow": "Process",
-    "latest": "Latest reel",
-    "view_work": "View work",
+    "credit": "Bar Fainshtein · Creative director · AI video",
+    "live": "Live from Instagram",
+    "reels_word": "Reels",
+    "views_word": "views",
+    "proof_views": "total views",
+    "proof_reels": "Reels live",
+    "proof_top": "views on one Reel",
+    "proof_note": "Numbers update automatically from Instagram",
+    "featured_eyebrow": "Most watched",
+    "watch": "Watch with sound",
+    "open_ig": "Open on Instagram",
+    "close": "Close",
+    "work_eyebrow": "The work",
     "marquee": [
       "AI video",
       "Same-day replies",
@@ -174,6 +179,10 @@
       "Ads",
       "Sports & brand films"
     ],
-    "cta_eyebrow": "Let's talk"
+    "about_eyebrow": "Who's behind it",
+    "process_eyebrow": "Process",
+    "cta_eyebrow": "Let's talk",
+    "updated": "Updated",
+    "player_label": "Reel player"
   }
 }

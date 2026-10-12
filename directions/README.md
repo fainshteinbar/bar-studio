@@ -166,3 +166,60 @@ Each rule has a test that `scripts/shots.mjs`, Lighthouse or a grep can check.
     - Reduced motion means no autoplay, no magnetic effect and no reveals.
     - Logical properties only, with every horizontal motion mirrored under `:dir(rtl)`.
     - No horizontal scroll at 390 px in either language.
+
+---
+
+# Rebuild of direction 6: result (step 5)
+
+Built on the 14 confirmed rules with all 17 real Reels from the Instagram sync. View it locally after a sync: `node scripts/ig-sync.mjs --local && node scripts/build-directions.mjs && node scripts/serve.mjs`, then http://localhost:4173/directions/6/ (committed pages are built from the placeholder fixture, so real media never enters git).
+
+## How each rule is met
+
+| Rule | Implementation | Verified by |
+|---|---|---|
+| 1 Work from the first frame | Desktop: full-bleed rail of 4 Reels with the headline over a directional scrim. Mobile: 2 Reels above the headline. No loader. | `shots.mjs` first-screen check: 4 playing at 1440, 2 at 390, both languages |
+| 2 Bar is the credit | Credit line under the headline; portrait moved to a small About block | screenshots |
+| 3 Real proof | Live line in the hero (17 Reels · 420K views) and a count-up row (420K / 17 / 211K) from the API | manifest stats |
+| 4 One loud CTA | Sticky header pill on desktop, pinned button on mobile, hero CTA, closing CTA card; the number comes only from `i18n/site.json` | `shots.mjs` wa check |
+| 5 Big work | Most-watched Reel featured at up to 86vh; grid cards 9:16 at about 430 px wide on desktop; each card shows the Reel's own caption line and its views | screenshots |
+| 6 Order | Featured = most watched (211K), then newest first; the hero rail is art-directed in `data/overrides.json` (`rail`) and falls back to newest | build |
+| 7 Watch with sound | Native `<dialog>` player with the full rendition and sound; Esc, back button and ✕ close it; focus returns to the card; background previews pause | `interact` run: playing, unmuted, focus restored |
+| 8 Type | Narkiss Hadash Condensed (Adobe kit, Hebrew + English) for all display type, non-blocking with a size-matched fallback; Noto Sans Hebrew and DM Sans (static 400/600 subsets, 11 KB each) for text | network log |
+| 9–10 Colour, character | Void/navy, cream, cyan only as accent; two-tone headline, pills, blinking "!" | screenshots |
+| 11 Motion system | 0.3/0.5/0.7 s; `--ease-move` and `--ease-ui` only | CSS |
+| 12 Hover and press | Magnetic CTAs (0.2× pull, label at half, overshoot on release), cursor label "watch with sound" with eased follow, card lift and pitch colour, press scale 0.97, underline drawn from inline-start | `interact` run |
+| 13 Reveals | Headline words rise from a mask once; sections enter on scroll via CSS `view()` timelines; the LCP element is the first rail poster | Lighthouse LCP element |
+| 14 Limits | See the table below. Reduced motion: 0 videos autoplay, no magnetic, no cursor label, headline visible. RTL mirrored; no horizontal scroll | Lighthouse, reduced-motion run, `shots.mjs` |
+
+## Design-director passes (what was wrong, what changed)
+
+1. **Mobile showed no Reels on the first screen.** The rail collapsed to 40 px wide, and it sat below the copy. Fixed the flex alignment and moved the rail above the headline. Added a first-screen check to `shots.mjs` so rule 1 is measured, not assumed.
+2. **The headline fought the burned-in captions inside the Reels.** Added a directional scrim (mirrored for RTL) under the headline side.
+3. **The automatic rail picked the weakest images** (a black frame with app UI). The rail is now art-directed in `data/overrides.json`.
+4. **Posters were black frames or hands.** Posters now use the cover Bar chose on Instagram. Near-black covers fall back to the most representative video frame.
+5. **The process section was five identical boxed cards**, the template pattern the redesign skill flags. Replaced with an outlined-number typographic sequence.
+6. **There was no signature interaction.** Added the cursor label that follows over any Reel (fine pointers only).
+7. **Performance.** LCP went from 5.6 s to 1.8 s by:
+   - 540 px posters (1080 px before);
+   - a 360 px / 6 s first-screen rendition for portrait screens;
+   - deferring below-the-fold posters until after load;
+   - DM Sans subset to static weights;
+   - one Narkiss weight dropped;
+   - gzip on the local server to match production.
+8. **Accessibility dipped to 96.** The proof numbers were being measured mid-entrance; they no longer animate.
+
+## Numbers (Lighthouse mobile, local server with gzip, real Reels)
+
+| | Perf he / en | LCP he / en | CLS | A11y | Bytes before scroll |
+|---|---|---|---|---|---|
+| Before (portrait-led direction 6, same pipeline) | 99 / 99 | 2.03 s / 2.03 s | 0 | 100 | 622 KB |
+| After (work-first rebuild) | 100 / 100 | 1.88 s / 1.73 s | ≤ 0.02 | 100 | 701 KB |
+
+These are local runs; phase 3 re-measures on the deployed URL with PageSpeed Insights.
+
+## Open items
+
+- **English pages show the Reels' Hebrew captions** (marked `lang="he"`). An optional `captions_en` map in `data/overrides.json` could translate the pitches.
+- **The kit's Hebrew subset has no gershayim (״).** Where a caption uses one, that single character comes from the fallback font.
+- **The fallback font metrics were measured on macOS.** Android has no Arial, so a Noto-based fallback should be measured in phase 3.
+- **The grid shows every visible Reel.** As the account grows, cap it (for example the newest 15) and rely on "more on Instagram".

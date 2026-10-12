@@ -12,7 +12,7 @@ import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync, createWri
 import { join } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { Readable } from 'node:stream';
-import { transcodeReel, transcodeFull, posterFrom, buildHeroLoops, laneFor, tempDir, probe } from './lib/media.mjs';
+import { transcodeReel, transcodeFull, posterFrom, buildHeroLoops, laneFor, tempDir, probe, brightness } from './lib/media.mjs';
 
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
@@ -107,12 +107,23 @@ try {
       await download(m.media_url, raw);
       transcodeReel(raw, prev, { maxSeconds: PREVIEW_SECONDS });
       transcodeFull(raw, full);
-      writeFileSync(lqFile, posterFrom(prev, webp));
       rmSync(raw, { force: true });
+    }
+    // Poster: the cover Bar chose on Instagram; a frame from the preview only if there is no cover.
+    if (!existsSync(webp) && !m.thumbnail_url && existsSync(prev)) {
+      writeFileSync(lqFile, posterFrom(prev, webp));
     } else if (!existsSync(webp) && m.thumbnail_url) {
       const jpg = join(tmp, `${m.id}.jpg`);
       await download(m.thumbnail_url, jpg);
       writeFileSync(lqFile, posterFrom(jpg, webp, { isImage: true }));
+    }
+    // Small rendition for the first screen on portrait screens: 360 px, first 6 s (keeps LCP bandwidth free).
+    const railMp4 = join(OUT, `${m.id}.rail.mp4`);
+    if (vis.status === 'shown' && existsSync(prev) && !existsSync(railMp4)) transcodeReel(prev, railMp4, { maxSeconds: 6, width: 360, crf: 31 });
+    // A near-black cover (some Reels have one) is replaced by the most representative frame of the video.
+    if (existsSync(webp) && existsSync(prev) && brightness(webp) < 12) {
+      writeFileSync(lqFile, posterFrom(prev, webp, { pick: true }));
+      console.log(`   ${m.id}: cover is near-black, using a frame from the video instead`);
     }
     const has_video = !!want && existsSync(prev) && existsSync(full);
     if (has_video) transcoded++;
@@ -122,7 +133,7 @@ try {
       id: m.id, placeholder: false, permalink: m.permalink, timestamp: m.timestamp,
       caption: m.caption || '', lane: laneFor(m.caption, m.id, overrides.lanes || {}),
       visible: vis.status === 'shown' && has_video, status: vis.status, flag_reason: vis.reason,
-      has_video, video_url: has_video ? `${OUT}/${m.id}.mp4` : null, full_url: has_video ? `${OUT}/${m.id}.full.mp4` : null,
+      has_video, video_url: has_video ? `${OUT}/${m.id}.mp4` : null, full_url: has_video ? `${OUT}/${m.id}.full.mp4` : null, rail_url: has_video && existsSync(railMp4) ? `${OUT}/${m.id}.rail.mp4` : null,
       poster_url: existsSync(webp) ? `${OUT}/${m.id}.webp` : null, lqip: existsSync(lqFile) ? readFileSync(lqFile, 'utf8') : '',
       width: p ? p.w : pw.w, height: p ? p.h : pw.h, duration: p ? Math.round(p.d * 10) / 10 : null,
       views: await viewsFor(m.id), likes: m.like_count ?? null,
