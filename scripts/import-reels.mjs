@@ -11,10 +11,8 @@
 // - Optional <folder>/reels.json: { "file name.mp4": { "title": "...", "lane": "comedy|ads|sport", "permalink": "https://..." } }
 // - There are no view counts in local files, so per-video views are left empty and the proof row keeps
 //   the labelled sample figure until the API supplies real numbers.
-import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { basename, extname, join } from 'node:path';
-import { tmpdir } from 'node:os';
 
 const args = process.argv.slice(2);
 const OUT = 'media/local';
@@ -34,11 +32,7 @@ if (!folder || !existsSync(folder)) {
   process.exit(1);
 }
 
-const run = (cmd, a) => execFileSync(cmd, a, { stdio: ['ignore', 'pipe', 'pipe'] }).toString();
-const probe = (f) => {
-  const j = JSON.parse(run('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height:format=duration', '-of', 'json', f]));
-  return { w: j.streams[0].width, h: j.streams[0].height, d: +j.format.duration };
-};
+import { probe, transcodeReel, posterFrom, buildHeroLoops } from './lib/media.mjs';
 const meta = existsSync(join(folder, 'reels.json')) ? JSON.parse(readFileSync(join(folder, 'reels.json'), 'utf8')) : {};
 const files = readdirSync(folder)
   .filter((f) => /\.(mp4|mov|m4v|webm)$/i.test(f))
@@ -49,52 +43,27 @@ if (!files.length) { console.error(`No video files in ${folder}`); process.exit(
 
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
-const tmp = join(tmpdir(), `reels-${process.pid}`);
-mkdirSync(tmp, { recursive: true });
 
 const items = [];
-for (const [i, { f, p }] of files.entries()) {
+for (const [i, { f, p, t }] of files.entries()) {
   const n = String(i + 1).padStart(2, '0');
   const id = `local-${n}`;
   const src = probe(p);
-  const trim = MAX > 0 ? ['-t', String(MAX)] : [];
-  run('ffmpeg', ['-v', 'error', '-y', '-i', p, ...trim, '-vf', "scale='min(720,iw)':-2", '-c:v', 'libx264', '-preset', 'slow', '-crf', '28', '-an', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', join(OUT, `${id}.mp4`)]);
-  const out = probe(join(OUT, `${id}.mp4`));
-  run('ffmpeg', ['-v', 'error', '-y', '-ss', '0.3', '-i', join(OUT, `${id}.mp4`), '-frames:v', '1', join(tmp, `${id}.png`)]);
-  run('cwebp', ['-quiet', '-q', '72', join(tmp, `${id}.png`), '-o', join(OUT, `${id}.webp`)]);
-  run('cwebp', ['-quiet', '-resize', '24', '0', '-q', '40', join(tmp, `${id}.png`), '-o', join(tmp, `${id}-lq.webp`)]);
+  const out = transcodeReel(p, join(OUT, `${id}.mp4`), { maxSeconds: MAX });
+  const lqip = posterFrom(join(OUT, `${id}.mp4`), join(OUT, `${id}.webp`));
   const m = meta[f] || {};
   const kb = (x) => Math.round(statSync(x).size / 1024);
   items.push({
     id, placeholder: false, source_file: f,
     permalink: m.permalink || 'https://www.instagram.com/barfainshtein/',
-    timestamp: new Date(files[i].t).toISOString(),
+    timestamp: new Date(t).toISOString(),
     caption: m.title || '', lane: m.lane || 'reels', has_video: true,
-    video_url: `${OUT}/${id}.mp4`, poster_url: `${OUT}/${id}.webp`,
-    lqip: `data:image/webp;base64,${readFileSync(join(tmp, `${id}-lq.webp`)).toString('base64')}`,
+    video_url: `${OUT}/${id}.mp4`, poster_url: `${OUT}/${id}.webp`, lqip,
     width: out.w, height: out.h, duration: Math.round(out.d * 10) / 10, views: null, likes: null,
   });
   console.log(`${n}  ${src.w}x${src.h} ${src.d.toFixed(1)}s -> ${out.w}x${out.h}  ${kb(p)} KB -> ${kb(join(OUT, `${id}.mp4`))} KB  ${f.slice(0, 70)}`);
 }
-
-// Hero loops (PLAN.md 4.7): 3-up 16:9 from the newest reels, plus a one-at-a-time portrait loop.
-const pick = (k) => items[k % items.length].video_url;
-const seg = (a, b, c, name) =>
-  run('ffmpeg', ['-v', 'error', '-y', '-i', pick(a), '-i', pick(b), '-i', pick(c), '-filter_complex',
-    '[0]scale=428:-2,crop=428:720[a];[1]scale=428:-2,crop=428:720[b];[2]scale=428:-2,crop=428:720[c];[a][b][c]hstack=3,crop=1280:720,format=yuv420p',
-    '-t', '3.4', '-c:v', 'libx264', '-preset', 'slow', '-crf', '20', '-an', '-r', '30', join(tmp, `${name}.mp4`)]);
-seg(0, 1, 2, 'a'); seg(3, 4, 5, 'b'); seg(6, 7, 8, 'c');
-run('ffmpeg', ['-v', 'error', '-y', '-i', join(tmp, 'a.mp4'), '-i', join(tmp, 'b.mp4'), '-i', join(tmp, 'c.mp4'), '-filter_complex',
-  '[0][1]xfade=transition=fade:duration=0.4:offset=3[ab];[ab][2]xfade=transition=fade:duration=0.4:offset=6',
-  '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an', `${OUT}/hero-loop.mp4`]);
-run('ffmpeg', ['-v', 'error', '-y', '-i', pick(0), '-i', pick(1), '-i', pick(2), '-filter_complex',
-  '[0]scale=720:-2,crop=720:1280,trim=0:2.5,setpts=PTS-STARTPTS,fps=30[a];[1]scale=720:-2,crop=720:1280,trim=0:2.5,setpts=PTS-STARTPTS,fps=30[b];[2]scale=720:-2,crop=720:1280,trim=0:2.5,setpts=PTS-STARTPTS,fps=30[c];[a][b]xfade=transition=fade:duration=0.4:offset=2.1[ab];[ab][c]xfade=transition=fade:duration=0.4:offset=4.2,scale=480:854,format=yuv420p',
-  '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-movflags', '+faststart', '-an', `${OUT}/hero-loop-portrait.mp4`]);
-for (const h of ['hero-loop', 'hero-loop-portrait']) {
-  run('ffmpeg', ['-v', 'error', '-y', '-ss', '0.5', '-i', `${OUT}/${h}.mp4`, '-frames:v', '1', join(tmp, `${h}.png`)]);
-  run('cwebp', ['-quiet', '-q', '70', join(tmp, `${h}.png`), '-o', `${OUT}/${h}.webp`]);
-}
-rmSync(tmp, { recursive: true, force: true });
+const hero = buildHeroLoops(items.map((i) => i.video_url), OUT);
 
 const manifest = {
   generated_at: new Date().toISOString(),
@@ -102,11 +71,7 @@ const manifest = {
   source: `local import from ${basename(folder)}`,
   media_base_url: '',
   stats: { total_videos: items.length, total_views: null, views_sample: true, missing_media_url: 0, missing_media_url_pct: 0 },
-  hero: {
-    landscape: { video_url: `${OUT}/hero-loop.mp4`, poster_url: `${OUT}/hero-loop.webp`, width: 1280, height: 720 },
-    portrait: { video_url: `${OUT}/hero-loop-portrait.mp4`, poster_url: `${OUT}/hero-loop-portrait.webp`, width: 480, height: 854 },
-    showreel: null,
-  },
+  hero,
   items,
 };
 writeFileSync(MANIFEST, JSON.stringify(manifest, null, 2) + '\n');

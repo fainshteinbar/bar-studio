@@ -10,3 +10,6 @@ directions/shots/report.json
 directions/shots/lighthouse/
 media/
 data/instagram.local.json
+.secrets/
+directions/references/**/*.jpg
+directions/references/**/*.png
