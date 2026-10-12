@@ -13,7 +13,8 @@ import { join } from 'node:path';
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
 const site = read('i18n/site.json');
 // A local import (scripts/import-reels.mjs, gitignored) takes precedence over the committed fixture.
-const MANIFEST = existsSync('data/instagram.local.json') ? 'data/instagram.local.json' : 'data/instagram.json';
+// MANIFEST=fixture forces the committed placeholder fixture (used before commits, so built pages never point at gitignored media).
+const MANIFEST = process.env.MANIFEST !== 'fixture' && existsSync('data/instagram.local.json') ? 'data/instagram.local.json' : 'data/instagram.json';
 const manifest = read(MANIFEST);
 const fixture = read('data/instagram.json');
 console.log(`manifest: ${MANIFEST}`);
@@ -149,6 +150,17 @@ function context(lang, root, base) {
     wa_float: `<a class="wa-float" href="${esc(wa_url)}" target="_blank" rel="noopener" aria-label="${esc(t.a11y.wa_float)}">${WA_ICON}<span class="wa-float-label">${esc(t.promise)}</span></a>`,
     email_ltr: `<bdi dir="ltr">${esc(site.email)}</bdi>`,
     scripts: `<script src="${root}assets/js/reels.js" defer></script>`,
+    // Adobe Fonts kit (Narkiss Hadash Condensed). Non-blocking: text paints in the size-matched
+    // fallback, then swaps (font-display: swap is set in the kit's project settings).
+    typekit: [
+      '<link rel="preconnect" href="https://use.typekit.net" crossorigin>',
+      '<link rel="preconnect" href="https://use.typekit.net">',
+      '<link rel="preconnect" href="https://p.typekit.net">',
+      '<link rel="stylesheet" href="https://use.typekit.net/gce3kmw.css" media="print" onload="this.media=\'all\'">',
+      '<noscript><link rel="stylesheet" href="https://use.typekit.net/gce3kmw.css"></noscript>',
+      '<style>@font-face{font-family:"Narkiss Fallback";src:local("Arial"),local("ArialMT");size-adjust:70%;ascent-override:123%;descent-override:50%;line-gap-override:0%}' +
+        '@font-face{font-family:"Narkiss Fallback";font-weight:700 800;src:local("Arial Bold"),local("Arial-BoldMT");size-adjust:72%;ascent-override:120%;descent-override:48%;line-gap-override:0%}</style>',
+    ].join('\n'),
   };
 }
 

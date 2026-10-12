@@ -1,0 +1,10 @@
+# Adobe Fonts kit gce3kmw — findings (2026-10-12)
+
+- Kit CSS: https://use.typekit.net/gce3kmw.css (4,837 B, `cache-control: private, max-age=600`), starts with `@import` of p.typekit.net tracking CSS (render-blocking chain, required by licence).
+- One family: **Narkiss Hadash Condensed** (Fontef, design Zvi Narkiss), CSS name `narkiss-hadash-condensed`, weights 300 400 500 600 700 800, normal only, `font-display: auto`, no `unicode-range`. Woff2 ≈ 22 KB per weight.
+- **Hebrew: the family supports it, the kit does not serve it.** The served files contain 212 Latin-1 codepoints and zero in U+0590–05FF (character set is "Default"). Measured: Hebrew rendered at fallback width (284.8 px vs 290.1 fallback; the real font is 179.8 px). `document.fonts.check()` returns a false positive here.
+- **Domains:** none to allowlist. Adobe no longer uses domain lists for web projects; the files served 200 to localhost, 127.0.0.1, github.io and any other referer.
+- **Owner to change in fonts.adobe.com → Web Projects → this project:** character set → Language Subsetting with Hebrew + English (or All Characters, ≈ 32 KB per weight); font-display → `swap`; keep only the weights the site uses.
+- Self-hosting is not permitted by the licence (Adobe FAQ), so the embed stays on use.typekit.net.
+- Embed plan: preconnect use.typekit.net (with and without crossorigin) and p.typekit.net; load the kit CSS non-blocking (media=print swap + noscript); metric-matched fallback `Narkiss Fallback` (Arial with size-adjust 70% / ascent 123% / descent 50% at 400, 72% / 120% / 48% at 700, measured on macOS Chrome) so the swap causes no layout shift. Android has no Arial; a Noto Sans Hebrew fallback still needs measuring.
+- Sources: helpx.adobe.com/fonts/web/web-design-and-development/{domains,develop-locally,font-display-settings,embed-codes,content-security-policy}.html, helpx.adobe.com/fonts/web/language-support-and-opentype-features/language-support-subsetting.html, helpx.adobe.com/fonts/web/font-licensing/webfont-licensing.html, fonts.adobe.com/fonts/narkiss-hadash.
