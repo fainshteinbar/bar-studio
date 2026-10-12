@@ -11,7 +11,7 @@
 //
 // Env: IG_ACCESS_TOKEN (else .secrets/ig-token locally), IG_API_VERSION (default v26.0),
 //      upload mode: BUNNY_STORAGE_PASSWORD (secret), BUNNY_STORAGE_ZONE, BUNNY_STORAGE_HOST, MEDIA_BASE_URL,
-//      translation: ANTHROPIC_API_KEY (optional; without it new English captions stay empty).
+//      translation: GEMINI_API_KEY (Gemini free tier; without it new English captions stay empty, never Hebrew).
 // Secrets are never printed; any URL that appears in an error is redacted.
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync, createWriteStream, rmSync } from 'node:fs';
 import { join } from 'node:path';
@@ -42,7 +42,7 @@ if (UPLOAD && (!BUNNY.password || !BUNNY.zone || !BUNNY.base)) {
   console.error('Upload mode needs BUNNY_STORAGE_PASSWORD, BUNNY_STORAGE_ZONE and MEDIA_BASE_URL.');
   process.exit(2);
 }
-const SECRETS = [TOKEN, BUNNY.password, process.env.ANTHROPIC_API_KEY].filter(Boolean);
+const SECRETS = [TOKEN, BUNNY.password, process.env.GEMINI_API_KEY].filter(Boolean);
 const redact = (s) => SECRETS.reduce((acc, x) => acc.split(x).join('[secret]'), String(s)).replace(/access_token=[^&\s"]+/g, 'access_token=[secret]');
 
 async function api(path, params = {}) {
@@ -177,11 +177,11 @@ try {
   if (UPLOAD) rmSync(OUT, { recursive: true, force: true });
 }
 
-// 5. English captions: translate new or edited Hebrew captions once (Claude API), cached in data/translations.json.
+// 5. English captions: translate new or edited Hebrew captions once (Gemini free tier), cached in data/translations.json.
 const cache = readTranslations();
 const tr = await translateMissing(items, cache, overrides);
 if (tr.translated) writeTranslations(cache);
-console.log(`Translations: ${tr.translated} new, ${tr.failed} failed, ${tr.pending} still missing${tr.noCredentials ? ' (no ANTHROPIC_API_KEY)' : ''}.`);
+console.log(`Translations: ${tr.translated} new, ${tr.failed} failed, ${tr.pending} still missing${tr.noCredentials ? ' (no usable GEMINI_API_KEY)' : ''}.`);
 
 const playable = items.filter((i) => i.visible);
 const views = items.map((i) => i.views).filter((v) => typeof v === 'number');

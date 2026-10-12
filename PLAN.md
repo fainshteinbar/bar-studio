@@ -16,7 +16,7 @@ Phase 1 output (research, decisions, installed tooling, build plan). Written 202
 | 8 | Renditions (approved 2026-10-12, rules 7 + 14) | Two files per Reel: a silent grid preview (first 12 s, max 640 px wide, H.264 CRF 29, no audio, ≤ 2 MB) and a full rendition for the watch-with-sound overlay (full length, max 720 px, CRF 26, AAC 96 kbps), loaded only on tap. Replaces the single 720 px / CRF 28 file in 4.6. |
 | 9 | Visibility (2026-10-12) | All Reels are shown, including real players and club kits; no automatic hiding by content. `data/reels.json` holds a `hidden` map of Instagram media IDs that the sync and the build skip. It is empty today; Bar hides a Reel later by adding its ID. |
 | 10 | Display font (2026-10-12) | Narkiss Hadash Condensed from Adobe Fonts kit `gce3kmw` (Hebrew + English subset, font-display swap; no domain allowlist needed; self-hosting not allowed). Body: Noto Sans Hebrew (self-hosted variable) and DM Sans. Details: `directions/references/font-kit.md`. |
-| 12 | English captions (2026-10-12) | The sync translates each new or edited Hebrew caption to English once with the Claude API (`claude-haiku-5-5`, low effort, for meaning and humor), cached in `data/translations.json` by media ID + caption hash. `captions_en` in `data/overrides.json` always wins. If translation fails, the English card shows no pitch (never Hebrew). The first 15 were translated in the Claude Code session and written to the cache. Code: `scripts/lib/translate.mjs`, `scripts/lib/captions.mjs`. |
+| 12 | English captions (2026-10-12, provider changed in phase 3) | The sync translates each new or edited Hebrew caption to English once with Google's **Gemini API free tier** (newest flash model, falling back to flash-lite on quota; Bar declined paid API credits; GitHub Models was retired in July 2026), for meaning and humor, cached in `data/translations.json` by media ID + caption hash. `captions_en` in `data/overrides.json` always wins. If translation fails, the English card shows no pitch (never Hebrew). The first 15 were translated in the Claude Code session and written to the cache. Code: `scripts/lib/translate.mjs`, `scripts/lib/captions.mjs`. Free-tier prompts may be used by Google to improve its models; the captions are public Instagram text. |
 | 11 | Token hygiene | The first long-lived token (generated 2026-10-12) was exposed in chat. Rotate it in phase 3 when the GitHub secrets are created, and revoke the old one. |
 | 13 | Brand (2026-10-12) | The site is **bfain.studio**: title, meta, OG, JSON-LD, header/footer, copy and alt text. Hosted on GitHub Pages at https://fainshteinbar.github.io/bar-studio/ (Hebrew at `/`, English at `/en/`), no custom domain yet. |
 
@@ -182,14 +182,14 @@ Secrets are only ever typed into `gh secret set NAME --repo fainshteinbar/bar-st
 |---|---|---|---|
 | `IG_ACCESS_TOKEN` | secret | Long-lived Instagram token (Meta app → Instagram → API setup with Instagram business login → Generate token) | Bar once; then the weekly refresh workflow rewrites it |
 | `BUNNY_STORAGE_PASSWORD` | secret | Bunny → Storage → bfain-media → Access → Password (read/write) | Bar |
-| `ANTHROPIC_API_KEY` | secret | console.anthropic.com → API keys (caption translation, cents per month) | Bar |
+| `GEMINI_API_KEY` | secret | aistudio.google.com/apikey, free tier, no billing (caption translation; Bar chose a free provider over the paid Claude API) | Bar |
 | `GH_SECRETS_PAT` | secret | Fine-grained PAT, this repo only, Secrets + Variables read/write, 1-year expiry; lets the refresh workflow rewrite `IG_ACCESS_TOKEN` | Bar |
 | `BUNNY_STORAGE_ZONE`, `BUNNY_STORAGE_HOST`, `MEDIA_BASE_URL`, `IG_API_VERSION` | variables | `bfain-media`, `storage.bunnycdn.com`, `https://bfain-media.b-cdn.net`, `v26.0` | Claude Code |
 | `IG_TOKEN_ISSUED_AT`, `IG_TOKEN_EXPIRES_AT` | variables | When the Instagram token was issued / expires; the refresh workflow keeps them current | Claude Code, then automatic |
 | `GH_PAT_EXPIRES_AT` | variable | The PAT's expiry date (GitHub shows it on creation); both workflows fail with a 7-day warning before it | Claude Code from Bar's date |
 
 Workflows (`.github/workflows/`):
-- `sync.yml`, daily 04:23 UTC: token/PAT expiry check → `ig-sync.mjs --upload` (new Reels → 3 renditions + poster → Bunny; views refreshed; new captions translated) → `build.mjs` → commit → Pages build. Manual run: Actions → Instagram sync → Run workflow (tick "force" to reprocess everything).
+- `sync.yml`, daily 04:23 UTC: token/PAT expiry check → `ig-sync.mjs --upload` (new Reels → 3 renditions + poster → Bunny; views refreshed; new captions translated with Gemini) → `build.mjs` → commit → Pages build. Manual run: Actions → Instagram sync → Run workflow (tick "force" to reprocess everything).
 - `token-refresh.yml`, Mondays 05:41 UTC: checks the PAT, refreshes the Instagram token (once it is at least 24 h old), writes the new secret and expiry variables.
 - On any failure GitHub emails Bar and the workflow opens (or comments on) an issue "Site automation needs attention: …" with the fix.
 
