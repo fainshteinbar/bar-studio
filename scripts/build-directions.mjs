@@ -18,6 +18,14 @@ const site = read('i18n/site.json');
 const MANIFEST = process.env.MANIFEST !== 'fixture' && existsSync('data/instagram.local.json') ? 'data/instagram.local.json' : 'data/instagram.json';
 const manifest = read(MANIFEST);
 const fixture = read('data/instagram.json');
+// Logo for inlining: the delivered dark-background SVG, colours untouched; only the C2PA provenance block
+// (kept in the file itself) is dropped from the inline copy, and the <svg> is made decorative inside its link.
+// Defined once as a <symbol> (logo_defs) and referenced by header and footer (logo), so the paths ship once.
+const LOGO_SRC = readFileSync('assets/img/bfain-logo-dark-bg.svg', 'utf8').replace(/<metadata>[\s\S]*?<\/metadata>/, '');
+const LOGO_VIEWBOX = LOGO_SRC.match(/viewBox="([^"]+)"/)[1];
+const LOGO_PATHS = LOGO_SRC.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '').trim();
+const LOGO_DEFS = `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="bfain-logo" viewBox="${LOGO_VIEWBOX}">${LOGO_PATHS}</symbol></svg>`;
+const LOGO = `<svg class="logo-svg" viewBox="${LOGO_VIEWBOX}" aria-hidden="true" focusable="false"><use href="#bfain-logo"/></svg>`;
 const translations = readTranslations();
 const overridesAll = existsSync('data/overrides.json') ? read('data/overrides.json') : {};
 console.log(`manifest: ${MANIFEST}`);
@@ -197,6 +205,9 @@ function context(lang, root, base) {
       total_views_fmt: compact.format(manifest.stats.total_views ?? fixture.stats.total_views),
     },
     skip: `<a class="skip-link" href="#main">${esc(t.a11y.skip)}</a>`,
+    logo: LOGO,
+    logo_defs: LOGO_DEFS,
+    home_url: lang === 'he' ? he_url : en_url,
     lang_toggle: `<a class="lang-toggle" href="${lang === 'he' ? en_url : he_url}" hreflang="${other}" lang="${other}">${esc(t.nav.lang_switch)}<span class="sr-only"> · ${esc(t.a11y.lang_switch_label)}</span></a>`,
     wa_float: `<a class="wa-float" href="${esc(wa_url)}" target="_blank" rel="noopener" aria-label="${esc(t.a11y.wa_float)}">${WA_ICON}<span class="wa-float-label">${esc(t.promise)}</span></a>`,
     email_ltr: `<bdi dir="ltr">${esc(site.email)}</bdi>`,

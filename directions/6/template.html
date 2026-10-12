@@ -9,8 +9,9 @@
 </head>
 <body>
 {{{skip}}}
+{{{logo_defs}}}
 <header class="nav">
-  <a class="logo" href="#top"><span class="ltr">BAR.STUDIO</span></a>
+  <a class="logo" href="{{home_url}}" aria-label="{{t.a11y.logo_home}}">{{{logo}}}</a>
   <nav aria-label="{{t.a11y.nav_label}}">
     <a class="ul" href="#work">{{t.nav.work}}</a>
     <a class="ul" href="#process">{{t.nav.process}}</a>
@@ -133,7 +134,7 @@
 </main>
 
 <footer class="foot">
-  <span class="logo"><span class="ltr">BAR.STUDIO</span></span>
+  <a class="logo logo-foot" href="{{home_url}}" aria-label="{{t.a11y.logo_home}}">{{{logo}}}</a>
   <span>{{t.footer.line}}</span>
   <span>{{t.footer.copy}}</span>
 </footer>

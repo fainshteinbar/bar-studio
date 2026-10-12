@@ -28,10 +28,10 @@ body { background: var(--void); color: var(--cream); font: 400 16px/1.6 var(--te
 .arrow:dir(rtl) { transform: scaleX(-1); }
 
 /* Type roles */
-.headline, .title, .num, .feat-num, .feat-pitch, .card-pitch, .cta-headline, .logo, .step-n, .marquee-track, .about-lead {
+.headline, .title, .num, .feat-num, .feat-pitch, .card-pitch, .cta-headline, .step-n, .marquee-track, .about-lead {
   font-family: var(--display); font-weight: 700; letter-spacing: 0;
 }
-:lang(en) :is(.headline, .title, .cta-headline, .marquee-track, .logo) { text-transform: uppercase; }
+:lang(en) :is(.headline, .title, .cta-headline, .marquee-track) { text-transform: uppercase; }
 .eyebrow { font: 600 0.75rem/1.4 var(--text); letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-block-end: 14px; }
 :lang(he) .eyebrow { font-size: 0.9rem; letter-spacing: 0.02em; }
 
@@ -63,12 +63,14 @@ body { background: var(--void); color: var(--cream); font: 400 16px/1.6 var(--te
 
 /* Header: sticky, never hides */
 .nav { position: sticky; inset-block-start: 0; z-index: 40; block-size: var(--nav-h); display: flex; align-items: center; gap: 28px; padding-inline: var(--pad); background: rgb(7 7 28 / 0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-block-end: 1px solid var(--line); }
-.logo { font-size: 1.6rem; font-weight: 800; letter-spacing: 0.04em; text-decoration: none; color: var(--cream); margin-inline-end: auto; }
+.logo { display: inline-flex; align-items: center; text-decoration: none; color: var(--cream); margin-inline-end: auto; padding-block: 6px; border-radius: 6px; }
+.logo-svg { display: block; block-size: 34px; inline-size: auto; }
+@media (hover: hover) and (pointer: fine) { .logo .logo-svg { transition: transform var(--d1) var(--ease-ui); } .logo:hover .logo-svg { transform: scale(1.04); } }
 .nav nav { display: flex; gap: 28px; font-size: 0.95rem; color: var(--dim); }
 :lang(en) .nav nav { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
 .nav nav a:hover { color: var(--cream); }
 .lang-toggle { font-weight: 700; font-size: 0.85rem; text-decoration: none; padding: 7px 12px; border-radius: 100px; box-shadow: inset 0 0 0 1px var(--line); }
-@media (max-width: 899px) { .nav nav, .nav-cta { display: none; } :root { --nav-h: 58px; } .logo { font-size: 1.35rem; } }
+@media (max-width: 899px) { .nav nav, .nav-cta { display: none; } :root { --nav-h: 58px; } .logo-svg { block-size: 30px; } }
 
 /* HERO — the work is the first thing you see */
 .hero { position: relative; isolation: isolate; overflow: hidden; block-size: calc(100dvh - var(--nav-h)); min-block-size: 620px; max-block-size: 1000px; display: grid; align-items: end; }
@@ -219,7 +221,8 @@ body { background: var(--void); color: var(--cream); font: 400 16px/1.6 var(--te
 @media (max-width: 599px) { .cta-row .pill { inline-size: 100%; } .pill-xl .pill-in { inline-size: 100%; } }
 
 .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 28px; padding: 28px var(--pad) 104px; border-block-start: 1px solid var(--line); font-size: 0.85rem; color: var(--dim); }
-.foot .logo { margin: 0; font-size: 1.3rem; }
+.foot .logo { margin: 0; }
+.foot .logo-svg { block-size: 44px; }
 
 /* Mobile: pinned WhatsApp button. Desktop: the header pill is the always-visible CTA. */
 @media (min-width: 900px) { .wa-float { display: none; } }

@@ -227,5 +227,5 @@ directions/1..5/        phase 2 only
 ## 7. Suggestions outside the brief (not planned)
 
 - The Thai `tel:` link on the live site should go regardless of the WhatsApp decision; a phone number without a WhatsApp wrapper gets fewer taps and leaks the personal number.
-- `Bfain Logo.jpg` (3 MB) and the two hero PNGs (1.2 MB each) are committed at full size; phase 3 can drop or compress them when the hero changes.
+- The two hero PNGs (1.2 MB each) are committed at full size; phase 3 can drop or compress them. (`Bfain Logo.jpg` was removed on 2026-10-12; the logo now lives as vector SVG in `assets/img/bfain-logo-dark-bg.svg` and `bfain-logo-light-bg.svg`, inlined in the header and footer.)
 - Once the custom domain exists, move the whole site to it (CNAME in the repo) so the Instagram bio link and the media host share one brand.
