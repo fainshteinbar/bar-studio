@@ -1,9 +1,11 @@
 <!doctype html>
-<!-- bfain.studio launch Story v2, 1080x1920. Deterministic: window.render(t) draws the frame at t seconds.
-     Captured frame by frame by story/render.mjs. Footage in story/work: hook/ (Reel cuts, most-viewed first),
-     site/ + site.json (live-site recording), pop/ (full-res frames of the Reel the tap opens).
-     Edit rules (Bar's playbook / ai-video skill): a beat changes every 0.15-1.1 s, each with new information;
-     viewer-first hook with a specific number; the closing beat is an action (the logo dot drops), not a freeze. -->
+<!-- bfain.studio launch Story v3 "נסה לא לעצור.", 1080x1920, 12 s. Deterministic: window.render(t) draws the frame
+     at t seconds; story/render.mjs captures it frame by frame and mixes the audio.
+     Concept: a challenge to the viewer. The views counter is "already stopped"; the freeze says they stopped too;
+     the end card dares them to get through every Reel without stopping, and taps the link-sticker zone.
+     Every number is read from data/instagram.json at render time. Music: 120 BPM, a beat every 0.5 s, silence
+     3.0-3.5, drop at 3.5. Safe zones: nothing important above y 270 or below y 1536. Footage in story/work:
+     hook/ (six Reels at their peak moments), site/ + site.json (live-site recording), pop/ (the payoff). -->
 <html lang="he">
 <head>
 <meta charset="utf-8">
@@ -15,35 +17,33 @@
 * { box-sizing: border-box; margin: 0; }
 html, body { width: 1080px; height: 1920px; overflow: clip; background: var(--void); color: var(--cream); font-family: "Hebrew", sans-serif; }
 .layer { position: absolute; inset: 0; }
-.big, .chip, .sub, #cue { direction: rtl; }
+.big, .chip, .small { direction: rtl; }
 #bg { background: radial-gradient(900px 760px at 50% 46%, rgb(26 20 100 / 0.95), transparent 70%), radial-gradient(640px 460px at 50% 80%, rgb(0 194 255 / 0.14), transparent 70%), var(--void); }
 #wall { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
-.card { position: absolute; width: 300px; height: 533px; margin: -266px 0 0 -150px; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 60px rgb(0 0 0 / 0.5); }
+.card { position: absolute; width: 300px; height: 533px; margin: -266px 0 0 -150px; border-radius: 24px; overflow: hidden; }
 .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-#endShade { background: radial-gradient(75% 55% at 50% 52%, rgb(7 7 28 / 0.9), rgb(7 7 28 / 0.6) 70%, rgb(7 7 28 / 0.74)); }
-#zoneGlow { position: absolute; left: 540px; top: 1430px; width: 900px; height: 380px; translate: -50% -50%; border-radius: 50%; background: radial-gradient(closest-side, rgb(0 194 255 / 0.32), rgb(0 194 255 / 0.08) 60%, transparent); }
+#endShade { background: radial-gradient(80% 60% at 50% 50%, rgb(7 7 28 / 0.9), rgb(7 7 28 / 0.75) 70%, rgb(7 7 28 / 0.85)); }
+#zoneGlow { position: absolute; left: 540px; top: 1462px; width: 860px; height: 300px; translate: -50% -50%; border-radius: 50%; background: radial-gradient(closest-side, rgb(0 194 255 / 0.34), rgb(0 194 255 / 0.08) 60%, transparent); }
 #bezel { position: absolute; background: linear-gradient(160deg, #23234a, #0b0b1d 40%, #16163a); box-shadow: 0 70px 140px rgb(0 0 0 / 0.65), 0 0 160px rgb(0 194 255 / 0.2), inset 0 0 0 2px rgb(255 255 255 / 0.09); }
 #screen, #pop { position: absolute; overflow: hidden; background: #000; }
 #screen canvas, #pop canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 #island { position: absolute; border-radius: 30px; background: #000; translate: -50% 0; }
 #shade { position: absolute; inset: 0; }
-.big { position: absolute; inset-inline: 0; text-align: center; font-family: var(--display); font-weight: 800; line-height: 0.9; }
+.big { position: absolute; inset-inline: 0; text-align: center; font-family: var(--display); font-weight: 800; line-height: 0.92; }
+.small { position: absolute; inset-inline: 0; text-align: center; font: 600 64px/1.15 "Hebrew", sans-serif; }
 .w { display: inline-block; overflow: clip; padding-block: 0.08em; margin-block: -0.08em; vertical-align: top; }
 .w > span { display: inline-block; }
 .cyan { color: var(--cyan); }
-#hNumBox { position: absolute; inset-inline: 0; top: 1300px; height: 270px; overflow: clip; text-align: center; }
-#hNum { display: inline-block; font: 800 300px/0.9 var(--display); }
-.chip { position: absolute; display: inline-flex; align-items: center; gap: 16px; padding: 20px 34px; border-radius: 100px; background: rgb(7 7 28 / 0.8); border: 1.5px solid rgb(244 240 232 / 0.16); backdrop-filter: blur(14px); font: 700 56px/1 var(--display); white-space: nowrap; box-shadow: 0 20px 50px rgb(0 0 0 / 0.45); }
+#numBox { position: absolute; inset-inline: 0; top: 1218px; height: 210px; overflow: clip; text-align: center; }
+#num { display: inline-block; font: 800 200px/1 var(--display); }
+.chip { position: absolute; display: inline-flex; align-items: center; gap: 16px; padding: 20px 34px; border-radius: 100px; background: rgb(7 7 28 / 0.82); border: 1.5px solid rgb(244 240 232 / 0.16); backdrop-filter: blur(14px); font: 700 64px/1 var(--display); white-space: nowrap; box-shadow: 0 20px 50px rgb(0 0 0 / 0.45); }
 .chip .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 8px rgb(0 194 255 / 0.18); }
-#tapDot, #tapRing { position: absolute; border-radius: 50%; translate: -50% -50%; }
-#tapDot { width: 74px; height: 74px; background: rgb(244 240 232 / 0.92); box-shadow: 0 6px 24px rgb(0 0 0 / 0.5); }
-#tapRing { width: 74px; height: 74px; border: 6px solid var(--cyan); }
-#logo { position: absolute; left: 50%; translate: -50% 0; width: 300px; top: 418px; }
+.ripple { position: absolute; border-radius: 50%; translate: -50% -50%; }
+#tapDot, #endDot { width: 78px; height: 78px; background: rgb(244 240 232 / 0.92); box-shadow: 0 6px 24px rgb(0 0 0 / 0.5); }
+#tapRing, #endRing { width: 78px; height: 78px; border: 6px solid var(--cyan); }
+#logo { position: absolute; left: 50%; translate: -50% 0; width: 250px; top: 330px; }
 #logo svg { width: 100%; height: auto; display: block; overflow: visible; }
-.sub { position: absolute; inset-inline: 0; text-align: center; font: 500 46px/1.3 "Hebrew", sans-serif; color: rgb(244 240 232 / 0.8); }
-#cue { position: absolute; inset-inline: 0; text-align: center; font: 700 78px/1 var(--display); }
-#sweep { position: absolute; left: 270px; width: 540px; top: 1240px; height: 7px; border-radius: 4px; background: linear-gradient(90deg, transparent, var(--cyan) 30%, var(--cyan) 70%, transparent); transform-origin: 100% 50%; }
-#arrows { position: absolute; left: 50%; translate: -50% 0; top: 1262px; display: flex; flex-direction: column; align-items: center; }
+#arrows { position: absolute; left: 50%; translate: -50% 0; top: 1268px; display: flex; flex-direction: column; align-items: center; }
 #arrows svg { display: block; margin-block-start: -14px; }
 #flash { background: var(--cream); mix-blend-mode: overlay; }
 </style>
@@ -58,44 +58,44 @@ html, body { width: 1080px; height: 1920px; overflow: clip; background: var(--vo
 <div id="screen"><canvas id="cv"></canvas><div id="island"></div><div id="shade"></div></div>
 <div id="pop"><canvas id="pv"></canvas></div>
 
-<!-- hook: views of each Reel, most-viewed first -->
-<div id="hSub" class="big cyan" style="top:1196px;font-size:104px"><span class="w"><span id="hSubText">ראו את זה.</span></span></div>
-<div id="hNumBox"><bdi dir="ltr" id="hNum">211K</bdi></div>
-<div id="allHere" class="big" style="top:318px;font-size:200px"><span class="w"><span>כולם</span></span> <span class="w"><span class="cyan">כאן.</span></span></div>
+<!-- hook: the challenge, and the counter of people who already stopped -->
+<div id="tryTop" class="big" style="top:300px;font-size:150px"><span class="w"><span>נסה</span></span> <span class="w"><span>לא</span></span> <span class="w"><span class="cyan">לעצור.</span></span></div>
+<div id="numLabel" class="small cyan" style="top:1138px">כבר עצרו:</div>
+<div id="numBox"><bdi dir="ltr" id="num">0</bdi></div>
+<div id="numUnit" class="small" style="top:1430px">צפיות</div>
 
-<div id="chipB" class="chip"><span class="dot"></span>בלי לחפור בפיד</div>
-<div id="chipC" class="chip"><span class="dot"></span>עם סאונד, במסך מלא</div>
-<div id="tapRing"></div><div id="tapDot"></div>
+<!-- the reversal -->
+<div id="stopped" class="big" style="top:640px;font-size:330px">עצרת.</div>
+<div id="likeOthers" class="small" style="top:470px"></div>
+
+<div id="chipLive" class="chip"><span class="dot"></span>מתעדכן כל שעה</div>
+<div id="tapRing" class="ripple"></div><div id="tapDot" class="ripple"></div>
 
 <!-- end card -->
 <div id="logo"></div>
-<div id="endA" class="big" style="top:612px;font-size:190px"><span class="w"><span>האתר</span></span> <span class="w"><span>החדש</span></span></div>
-<div id="endB" class="big cyan" style="top:792px;font-size:230px"><span class="w"><span>באוויר!</span></span></div>
-<div id="endSub" class="sub" style="top:1040px">וגם: איך מזמינים סרטון כזה</div>
-<div id="cue" style="top:1146px"><bdi dir="ltr">17</bdi> ריילס מחכים בקישור</div>
-<div id="sweep"></div>
+<div id="endA" class="big" style="top:520px;font-size:200px"><span class="w"><span id="endCount">18</span></span> <span class="w"><span>סרטונים.</span></span></div>
+<div id="endB" class="big" style="top:740px;font-size:150px"><span class="w"><span>נסה</span></span> <span class="w"><span>לעבור</span></span> <span class="w"><span>את</span></span> <span class="w"><span>כולם</span></span></div>
+<div id="endC" class="big cyan" style="top:900px;font-size:200px"><span class="w"><span>בלי</span></span> <span class="w"><span>לעצור.</span></span></div>
 <div id="arrows"></div>
+<div id="endRing" class="ripple"></div><div id="endDot" class="ripple"></div>
 <div id="flash" class="layer"></div>
 
 <script>
 const W = 1080, H = 1920, FPS = 30;
 const SITE = { w: 390, h: 844 };
-const SW = 556, SH = Math.round(SW * SITE.h / SITE.w), BZ = 17;   // phone screen 556x1203, bezel 17
-// Music: story/work/music (120 BPM, beats on every 0.5 s of story time, drop at 3.0, bars at 3, 5, 7, 9, 11, 13).
-// Hook cuts: clip index, start, end, frames available, zoom, number shown (views of that Reel).
+const SW = 528, SH = Math.round(SW * SITE.h / SITE.w), BZ = 17;     // phone screen 528x1143
+const ZONE = { x: 540, y: 1462 };                                    // link-sticker centre
+// Hook: six Reels at their peak moments, one per beat; c = frame folder index, z = zoom (letterboxed Reel).
 const HOOK = [
-  { c: 0, a: 0.000, b: 1.000, n: 28, z: 1.55, num: '211K', speed: 0.45 }, // ice-cream box (letterboxed: zoom into the band), slowed so the box holds
-  { c: 1, a: 1.000, b: 1.500, n: 22, z: 1, num: '81K' },
-  { c: 2, a: 1.500, b: 2.000, n: 18, z: 1, num: '57K' },
-  { c: 3, a: 2.000, b: 2.500, n: 15, z: 1, num: '38K' },
-  { c: 4, a: 2.500, b: 2.625, n: 8, z: 1 },                // 16th-note stutters into the drop
-  { c: 5, a: 2.625, b: 2.750, n: 8, z: 1 },
-  { c: 6, a: 2.750, b: 2.875, n: 8, z: 1 },
-  { c: 7, a: 2.875, b: 3.300, n: 8, z: 1 },
+  { c: 0, id: '17943051837086700', a: 0.0, z: 2.0 },   // letterboxed: 2x pushes its burned-in title off the top
+  { c: 1, id: '18112796969467846', a: 0.5, z: 1 },
+  { c: 2, id: '18115863469771345', a: 1.0, z: 1 },
+  { c: 3, id: '17996145848834714', a: 1.5, z: 1 },
+  { c: 4, id: '18130994455682363', a: 2.0, z: 1 },   // red-carpet parking (the stadium Reel's subtitles sat on the counter)
+  { c: 5, id: '17901612813374816', a: 2.5, z: 1 },
 ];
-const TOTAL_VIEWS = 430;          // K, from data/instagram.json (430,765 on 2026-10-12)
-const POSTERS = ['17943051837086700','18112796969467846','18115863469771345','17996145848834714','17957239818238876','17981987253079891','18130994455682363','18633783094026616','17901612813374816','18113922386100931','18105146096190451','17958556212232372','18127153129842174','18487666432129017','18110908592128454','18627196816008046','17939221510464202'];
-let siteMeta = null;
+const POSTERS = ['17943051837086700','18112796969467846','18115863469771345','17996145848834714','17957239818238876','17981987253079891','18130994455682363','18633783094026616','17901612813374816','18113922386100931','18105146096190451','17958556212232372','18127153129842174','18487666432129017','18110908592128454','18627196816008046','18118270045962443'];
+let D = null, siteMeta = null;           // live data and the site recording's marks
 
 const $ = (id) => document.getElementById(id);
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
@@ -104,196 +104,168 @@ const prog = (t, a, b) => clamp((t - a) / (b - a));
 const eOut = (k) => 1 - (1 - k) ** 3;
 const eInOut = (k) => (k < 0.5 ? 4 * k * k * k : 1 - (-2 * k + 2) ** 3 / 2);
 const eBack = (k) => { const c = 1.7; return 1 + (c + 1) * (k - 1) ** 3 + c * (k - 1) ** 2; };
-const bounce = (k) => { // drop with decaying bounces, 0..1
-  const n = 7.5625, d = 2.75;
-  if (k < 1 / d) return n * k * k;
-  if (k < 2 / d) return n * (k -= 1.5 / d) * k + 0.75;
-  if (k < 2.5 / d) return n * (k -= 2.25 / d) * k + 0.9375;
-  return n * (k -= 2.625 / d) * k + 0.984375;
-};
+const bounce = (k) => { const n = 7.5625, d = 2.75;
+  if (k < 1 / d) return n * k * k; if (k < 2 / d) return n * (k -= 1.5 / d) * k + 0.75;
+  if (k < 2.5 / d) return n * (k -= 2.25 / d) * k + 0.9375; return n * (k -= 2.625 / d) * k + 0.984375; };
 const set = (el, css) => Object.assign(el.style, css);
 const env = (t, a, b, ri = 0.3, fo = 0.3) => Math.min(eOut(prog(t, a, a + ri)), 1 - eInOut(prog(t, b - fo, b)));
 const pad = (n, l) => String(n).padStart(l, '0');
-const piece = (t, pts) => { // piecewise-linear map [[t, v], ...]
-  if (t <= pts[0][0]) return pts[0][1];
+const piece = (t, pts) => { if (t <= pts[0][0]) return pts[0][1];
   for (let i = 1; i < pts.length; i++) if (t <= pts[i][0]) return lerp(pts[i - 1][1], pts[i][1], (t - pts[i - 1][0]) / (pts[i][0] - pts[i - 1][0]));
-  return pts[pts.length - 1][1];
-};
-const words = (el, t, start, gap = 0.07, dur = 0.38) => el.querySelectorAll('.w > span').forEach((s, i) => {
-  const k = eOut(prog(t, start + i * gap, start + i * gap + dur));
-  s.style.transform = `translateY(${(1 - k) * 108}%)`;
-});
+  return pts[pts.length - 1][1]; };
+const words = (el, t, start, gap = 0.07, dur = 0.34) => el.querySelectorAll('.w > span').forEach((s, i) => {
+  const k = eOut(prog(t, start + i * gap, start + i * gap + dur)); s.style.transform = `translateY(${(1 - k) * 108}%)`; });
+const fmt = new Intl.NumberFormat('he-IL');
 
-// ---- the wall: 5 columns x 4 rows, tilted; the 17 posters, cycled ----
+// wall (end-card background)
 const SLOTS = [];
 for (let c = 0; c < 5; c++) for (let r = 0; r < 4; r++) {
-  const x = (c - 2) * 322, y = (r - 1.5) * 555 + (c % 2 ? 140 : -60);
   const el = document.createElement('div'); el.className = 'card';
   el.innerHTML = `<img src="../media/ig/${POSTERS[(c * 4 + r * 3) % POSTERS.length]}.webp" alt="">`;
   $('wall').append(el);
-  SLOTS.push({ el, x, y, d: ((c * 7 + r * 5) % 11) / 11 });
+  SLOTS.push({ el, x: (c - 2) * 322, y: (r - 1.5) * 555 + (c % 2 ? 140 : -60), d: ((c * 7 + r * 5) % 11) / 11 });
 }
 fetch('work/logo.svg').then((r) => r.text()).then((s) => { $('logo').innerHTML = s.replace(/<metadata>[\s\S]*?<\/metadata>/, ''); });
 $('arrows').innerHTML = [0, 1].map(() => '<svg width="70" height="44" viewBox="0 0 70 44"><path d="M6 6 L35 34 L64 6" fill="none" stroke="#00C2FF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>').join('');
 
-// ---- image loading ----
 const cache = new Map();
-const img = (url) => {
-  if (!cache.has(url)) { const im = new Image(); im.src = url; cache.set(url, im.decode().then(() => im)); if (cache.size > 16) cache.delete(cache.keys().next().value); }
-  return cache.get(url);
-};
-const cover = (ctx, im, cw, ch, z = 1, alpha = 1) => {
-  const s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight) * z, w = im.naturalWidth * s, h = im.naturalHeight * s;
-  ctx.globalAlpha = alpha; ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h); ctx.globalAlpha = 1;
-};
+const img = (url) => { if (!cache.has(url)) { const im = new Image(); im.src = url; cache.set(url, im.decode().then(() => im)); if (cache.size > 16) cache.delete(cache.keys().next().value); } return cache.get(url); };
+const cover = (ctx, im, cw, ch, z = 1, alpha = 1) => { const s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight) * z, w = im.naturalWidth * s, h = im.naturalHeight * s;
+  ctx.globalAlpha = alpha; ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h); ctx.globalAlpha = 1; };
 const cv = $('cv'), ctx = cv.getContext('2d'), pv = $('pv'), pctx = pv.getContext('2d');
 const size = (c, w, h) => { w = Math.max(2, Math.round(w)); h = Math.max(2, Math.round(h)); if (c.width !== w || c.height !== h) { c.width = w; c.height = h; } };
 
 window.ready = (async () => {
-  siteMeta = await (await fetch('work/site.json')).json();
-  await document.fonts.load('800 100px narkiss-hadash-condensed', 'אבגK');
-  await document.fonts.load('500 40px Hebrew', 'א');
+  const m = await (await fetch('../data/instagram.json', { cache: 'no-store' })).json();
+  const views = Object.fromEntries(m.items.map((i) => [i.id, i.views || 0]));
+  let cum = 0;
+  D = { total: m.stats.total_views, reels: m.stats.shown, cum: HOOK.map((h) => (cum += views[h.id])) };
+  $('likeOthers').textContent = `כמו עוד ${fmt.format(D.total)} צפיות.`;
+  $('endCount').textContent = D.reels;
+  siteMeta = await (await fetch('work/site.json', { cache: 'no-store' })).json();
+  await document.fonts.load('800 100px narkiss-hadash-condensed', 'אבג0');
+  await document.fonts.load('600 40px Hebrew', 'א');
   await document.fonts.ready;
   await Promise.all([...document.images].map((i) => i.decode().catch(() => {})));
-  return document.fonts.check('800 100px narkiss-hadash-condensed', 'א');
+  return document.fonts.check('800 100px narkiss-hadash-condensed', 'א') && { total: D.total, reels: D.reels, cum: D.cum };
 })();
 
-// Site-recording time for story time t: rail playing, a 1.65x scroll, grid, tap, player.
-const siteTime = (t) => piece(t, [[3.0, 0.6], [4.5, 1.79], [6.0, 4.43], [7.0, 5.33], [8.2, 6.53]]);
+// Site recording time for story time t (marks from story/record-site.mjs).
+const siteTime = (t) => { const k = siteMeta.marks; return piece(t, [[3.5, 0.2], [4.1, k.proofScroll], [4.6, k.holdStart], [6.1, k.holdStart + 1.5], [6.25, k.holdEnd], [6.75, k.gridEnd], [7.0, k.tap], [7.3, k.tap + 0.3]]); };
 const TAP_T = 7.0;
 
-// Virtual camera on the phone: screen scale and centre on the canvas.
+// Virtual camera on the phone: small and low under the reversal text, then full size.
 const cam = (t) => {
-  const tapX = (siteMeta.tap.x - 0.5) * SW, tapY = (siteMeta.tap.y - 0.5) * SH;
-  const lowK = 1 - eInOut(prog(t, 4.5, 5.0));                 // smaller and lower while "כולם כאן." is up
-  const push = eInOut(prog(t, 6.0, 7.0)) * (1 - eInOut(prog(t, 7.5, 8.0)));
-  const sc = lerp(1.0, 0.8, lowK) + 0.24 * eInOut(prog(t, 6.0, 7.0)) - 0.16 * eInOut(prog(t, 7.5, 8.0));
-  let cx = 540 - tapX * sc * 0.55 * push, cy = lerp(950, 1080, lowK) - tapY * sc * 0.45 * push;
-  cy += Math.sin(t * 1.5) * 6;                                  // float
-  if (t > TAP_T && t < TAP_T + 0.22) { const k = (t - TAP_T) / 0.22; cx += Math.sin(k * 40) * 5 * (1 - k); } // haptic shake
+  const lowK = 1 - eInOut(prog(t, 4.6, 5.0));
+  const sc = lerp(1.0, 0.74, lowK);
+  let cx = 540, cy = lerp(903, 1060, lowK) + Math.sin(t * 1.5) * 5;
+  if (t > TAP_T && t < TAP_T + 0.2) { const k = (t - TAP_T) / 0.2; cx += Math.sin(k * 40) * 5 * (1 - k); }
   return { sc, cx, cy };
 };
 
 window.render = async (t) => {
-  // ---------- screen rect: full-bleed in the hook, shrinks into the phone at 3.0 ----------
+  // ---------- phone / full-bleed screen ----------
   const c = cam(t);
-  const phone = { x: c.cx - SW * c.sc / 2, y: c.cy - SH * c.sc / 2, w: SW * c.sc, h: SH * c.sc, r: 64 * c.sc };
-  const m = eInOut(prog(t, 3.0, 3.55));
+  const phone = { x: c.cx - SW * c.sc / 2, y: c.cy - SH * c.sc / 2, w: SW * c.sc, h: SH * c.sc, r: 60 * c.sc };
+  const m = eInOut(prog(t, 3.5, 3.95));                          // shrink into the phone on the drop
   const rect = { x: lerp(0, phone.x, m), y: lerp(0, phone.y, m), w: lerp(W, phone.w, m), h: lerp(H, phone.h, m), r: lerp(0, phone.r, m) };
-  const sway = prog(t, 3.4, 8.0);
-  const ry = lerp(10, -6, eInOut(sway)) * m, rx = lerp(3, -2, sway) * m;
-  const popK = eInOut(prog(t, 8.0, 8.45));                      // the Reel breaks out of the phone
-  const phoneGone = eOut(prog(t, 8.05, 8.4));
-  const tf = `perspective(2600px) rotateY(${ry * (1 - popK)}deg) rotateX(${rx * (1 - popK)}deg) scale(${1 + phoneGone * 0.25})`;
-  const phoneShown = t <= 8.45 ? 'block' : 'none';
-  set($('screen'), { left: rect.x + 'px', top: rect.y + 'px', width: rect.w + 'px', height: rect.h + 'px', borderRadius: rect.r + 'px', transform: tf, opacity: 1 - phoneGone, display: phoneShown });
-  set($('bezel'), { left: phone.x - BZ * c.sc + 'px', top: phone.y - BZ * c.sc + 'px', width: phone.w + 2 * BZ * c.sc + 'px', height: phone.h + 2 * BZ * c.sc + 'px', borderRadius: 82 * c.sc + 'px', opacity: eOut(prog(t, 3.2, 3.55)) * (1 - phoneGone), transform: tf, display: phoneShown });
-  set($('island'), { left: rect.w / 2 + 'px', top: 16 * c.sc + 'px', width: 150 * c.sc + 'px', height: 42 * c.sc + 'px', opacity: prog(t, 3.3, 3.55) });
+  const ry = lerp(9, -5, eInOut(prog(t, 3.9, 7.0))) * m, rx = lerp(3, -2, prog(t, 3.9, 7.0)) * m;
+  const popK = eInOut(prog(t, 7.0, 7.3));
+  const gone = eOut(prog(t, 7.02, 7.28));
+  const tf = `perspective(2600px) rotateY(${ry * (1 - popK)}deg) rotateX(${rx * (1 - popK)}deg) scale(${1 + gone * 0.25})`;
+  const shown = t < 7.3 ? 'block' : 'none';
+  const frozen = t >= 3.0 && t < 3.5;
+  set($('screen'), { left: rect.x + 'px', top: rect.y + 'px', width: rect.w + 'px', height: rect.h + 'px', borderRadius: rect.r + 'px', transform: tf, opacity: 1 - gone, display: shown,
+    filter: frozen ? 'grayscale(0.7) brightness(0.45) contrast(1.1)' : 'none' });
+  set($('bezel'), { left: phone.x - BZ * c.sc + 'px', top: phone.y - BZ * c.sc + 'px', width: phone.w + 2 * BZ * c.sc + 'px', height: phone.h + 2 * BZ * c.sc + 'px', borderRadius: 80 * c.sc + 'px', opacity: eOut(prog(t, 3.65, 3.95)) * (1 - gone), transform: tf, display: shown });
+  set($('island'), { left: rect.w / 2 + 'px', top: 15 * c.sc + 'px', width: 140 * c.sc + 'px', height: 40 * c.sc + 'px', opacity: prog(t, 3.75, 3.95) });
 
-  // ---------- phone screen content ----------
-  if (t <= 8.45) {
-    const hi = m > 0.5 ? 1.4 : 1;
+  if (t < 7.3) {
+    const hi = m > 0.5 ? 1.45 : 1;
     size(cv, rect.w * hi, rect.h * hi);
     ctx.fillStyle = '#000'; ctx.fillRect(0, 0, cv.width, cv.height);
-    const siteK = prog(t, 3.0, 3.15);
+    const siteK = prog(t, 3.5, 3.62);
     if (siteK < 1) {
       let h = HOOK.length - 1; while (h > 0 && t < HOOK[h].a) h--;
-      const hk = HOOK[h], fi = Math.min(hk.n - 1, Math.floor((t - hk.a) * FPS * (hk.speed || 1)));
-      const punch = lerp(hk.z > 1 ? 1.06 : 1.14, 1, eOut(prog(t, hk.a, hk.a + 0.4)));
+      const hk = HOOK[h], fi = t >= 3.0 ? 14 : Math.min(14, Math.floor((t - hk.a) * FPS));   // freeze on the last frame
+      const punch = t >= 3.0 ? 1.0 : lerp(hk.z > 1 ? 1.06 : 1.12, 1, eOut(prog(t, hk.a, hk.a + 0.45)));
       cover(ctx, await img(`work/hook/c${hk.c}_${pad(fi + 1, 2)}.jpg`), cv.width, cv.height, hk.z * punch);
+      if (hk.c === 0) { ctx.fillStyle = '#05050d'; ctx.fillRect(0, 0, cv.width, cv.height * 0.172); } // hide the letterbox's burned-in title
     }
     if (siteK > 0) {
       const fi = clamp(Math.floor(siteTime(t) * FPS), 0, siteMeta.frames - 1);
       cover(ctx, await img(`work/site/${pad(fi, 4)}.jpg`), cv.width, cv.height, 1, eOut(siteK));
     }
   }
-  const dark = 1 - prog(t, 2.95, 3.25);
-  set($('shade'), { background: `linear-gradient(180deg, rgb(7 7 28 / ${dark * 0.35}) 0%, rgb(7 7 28 / ${dark * 0.25}) 35%, rgb(7 7 28 / ${dark * 0.85}) 70%, rgb(7 7 28 / ${dark * 0.92}) 100%)` });
+  const dark = t < 3.0 ? 1 : 0;
+  set($('shade'), { background: `linear-gradient(180deg, rgb(7 7 28 / ${dark * 0.55}) 0%, rgb(7 7 28 / ${dark * 0.15}) 30%, rgb(7 7 28 / ${dark * 0.25}) 50%, rgb(7 7 28 / ${dark * 0.9}) 72%, rgb(7 7 28 / ${dark * 0.95}) 100%)` });
 
-  // ---------- pop-out: the opened Reel goes full screen, then becomes a card in the wall ----------
-  const shrink = eInOut(prog(t, 9.5, 10.15));
-  if (t >= 8.0 && t < 10.4) {
-    const card = { x: 540 - 150, y: 960 - 266, w: 300, h: 533 };
-    const r = t < 9.5
-      ? { x: lerp(phone.x, 0, popK), y: lerp(phone.y, 0, popK), w: lerp(phone.w, W, popK), h: lerp(phone.h, H, popK), rad: lerp(phone.r, 0, popK) }
-      : { x: lerp(0, card.x, shrink), y: lerp(0, card.y, shrink), w: lerp(W, card.w, shrink), h: lerp(H, card.h, shrink), rad: lerp(0, 24, shrink) };
-    set($('pop'), { display: 'block', left: r.x + 'px', top: r.y + 'px', width: r.w + 'px', height: r.h + 'px', borderRadius: r.rad + 'px',
-      opacity: eOut(prog(t, 8.0, 8.12)) * (1 - prog(t, 10.15, 10.4)), transform: `rotate(${-9 * shrink}deg)`, boxShadow: shrink ? '0 30px 60px rgb(0 0 0 / .5)' : 'none' });
+  // ---------- payoff: the opened Reel, full screen with its own audio ----------
+  if (t >= 7.0 && t < 9.75) {
+    const r = { x: lerp(phone.x, 0, popK), y: lerp(phone.y, 0, popK), w: lerp(phone.w, W, popK), h: lerp(phone.h, H, popK), rad: lerp(phone.r, 0, popK) };
+    set($('pop'), { display: 'block', left: r.x + 'px', top: r.y + 'px', width: r.w + 'px', height: r.h + 'px', borderRadius: r.rad + 'px', opacity: 1 - eInOut(prog(t, 9.5, 9.75)) });
     size(pv, r.w, r.h);
-    const fi = clamp(Math.floor((t - 8.0) * FPS), 0, 74);
-    cover(pctx, await img(`work/pop/${pad(fi + 1, 2)}.jpg`), pv.width, pv.height);
+    cover(pctx, await img(`work/pop/${pad(clamp(Math.floor((t - 7.0) * FPS), 0, 74) + 1, 2)}.jpg`), pv.width, pv.height);
   } else set($('pop'), { display: 'none' });
 
-  // ---------- background and the wall ----------
-  set($('bg'), { opacity: prog(t, 2.95, 3.3) });
-  set($('wall'), { transform: `rotate(-9deg) translateY(${-Math.max(0, t - 9.6) * 26}px)` });
-  for (const s of SLOTS) {
-    const a = 9.6 + s.d * 0.55, k = prog(t, a, a + 0.45);
-    const fromY = (s.x < 0 ? -1 : 1) * 900;
-    set(s.el, { opacity: eOut(k), transform: `translate(${s.x}px, ${s.y + (1 - eBack(k)) * fromY * 0.35}px) scale(${lerp(1.35, 1, eOut(k))})` });
-  }
-  set($('endShade'), { opacity: eOut(prog(t, 10.2, 10.8)) });
+  // ---------- backgrounds ----------
+  set($('bg'), { opacity: prog(t, 3.45, 3.7) });
+  set($('wall'), { opacity: t >= 9.5 ? 1 : 0, transform: `rotate(-9deg) translateY(${-Math.max(0, t - 9.5) * 26}px)` });
+  for (const s of SLOTS) { const a = 9.5 + s.d * 0.4, k = prog(t, a, a + 0.4);
+    set(s.el, { opacity: eOut(k), transform: `translate(${s.x}px, ${s.y + (1 - eBack(k)) * (s.x < 0 ? -1 : 1) * 260}px) scale(${lerp(1.3, 1, eOut(k))})` }); }
+  set($('endShade'), { opacity: eOut(prog(t, 9.5, 9.9)) });
 
   // ---------- hook type ----------
+  const hookOn = t < 3.0;
+  words($('tryTop'), t, -1, 0, 0.01);                    // fully on screen from frame 0
+  set($('tryTop'), { opacity: hookOn ? 1 : 0 });
   let h = 0; while (h + 1 < HOOK.length && t >= HOOK[h + 1].a) h++;
-  if (h <= 3) {
-    $('hNum').textContent = HOOK[h].num;
-    const roll = eOut(prog(t, HOOK[h].a, HOOK[h].a + 0.16));
-    set($('hNum'), { transform: `translateY(${(1 - roll) * 100}%)`, color: 'var(--cream)' });
-  } else {
-    const k = eOut(prog(t, 2.5, 2.95));
-    $('hNum').textContent = `${Math.round(lerp(387, TOTAL_VIEWS, k))}K`;
-    set($('hNum'), { transform: 'none', color: k >= 1 ? 'var(--cyan)' : 'var(--cream)' });
-  }
-  const hookOut = eInOut(prog(t, 2.95, 3.15));
-  set($('hNumBox'), { opacity: 1 - hookOut });
-  $('hSubText').textContent = h <= 3 ? 'ראו את זה.' : 'ועוד 13 ריילס';
-  words($('hSub'), t, h <= 3 ? 0.06 : 2.5, 0, 0.2);
-  set($('hSub'), { opacity: 1 - hookOut });
-  let flash = 0; for (const x of HOOK.slice(1)) flash = Math.max(flash, 1 - prog(t, x.a, x.a + 0.1));
-  flash = t < 3.0 ? flash * 0.4 : 0;
-  if (t >= 8.0) flash = Math.max(flash, (1 - prog(t, 8.0, 8.25)) * 0.5);
-  if (t >= 11.0) flash = Math.max(flash, (1 - prog(t, 11.0, 11.2)) * 0.22);
+  let v;
+  if (h < 5) { const from = h ? D.cum[h - 1] : 0; v = lerp(from, D.cum[h], eOut(prog(t, HOOK[h].a, HOOK[h].a + 0.3))); }
+  else v = lerp(D.cum[4], D.total, eOut(prog(t, 2.5, 2.95)));            // the last beat runs on to the total of every Reel
+  $('num').textContent = fmt.format(Math.round(v));
+  const settle = prog(t, HOOK[h].a, HOOK[h].a + 0.12);
+  set($('num'), { transform: `scale(${lerp(1.08, 1, eOut(settle))})`, color: h === 5 && t >= 2.95 ? 'var(--cyan)' : 'var(--cream)' });
+  $('numUnit').textContent = t >= 2.95 ? `צפיות, בכל ${D.reels} הריילס` : 'צפיות';   // only once the counter shows the real total
+  for (const id of ['numLabel', 'numBox', 'numUnit']) $(id).style.opacity = hookOn && t > 0.04 ? 1 : 0;
+  let flash = 0; for (const x of HOOK.slice(1)) flash = Math.max(flash, 1 - prog(t, x.a, x.a + 0.09));
+  flash = hookOn ? flash * 0.4 : 0;
+  if (t >= 7.0) flash = Math.max(flash, (1 - prog(t, 7.0, 7.22)) * 0.5);
+  if (t >= 10.0) flash = Math.max(flash, (1 - prog(t, 10.0, 10.18)) * 0.2);
   set($('flash'), { opacity: flash });
 
-  // "כולם כאן." while the phone lands
-  words($('allHere'), t, 3.15, 0.12);
-  const ahOut = eInOut(prog(t, 4.4, 4.7));
-  set($('allHere'), { opacity: t < 3.12 ? 0 : 1 - ahOut, transform: `translateY(${-ahOut * 90}px)` });
+  // ---------- reversal: "עצרת." on the freeze, "כמו עוד N צפיות." on the drop ----------
+  const st = prog(t, 3.0, 3.18);
+  const up = eInOut(prog(t, 3.5, 3.9));
+  const out = eInOut(prog(t, 4.55, 4.85));
+  set($('stopped'), { opacity: t < 3.0 ? 0 : 1 - out, top: lerp(640, 290, up) + 'px', fontSize: lerp(330, 170, up) + 'px', transform: `translateY(${-out * 80}px) scale(${lerp(1.18, 1, eBack(st))})` });
+  set($('likeOthers'), { opacity: eOut(prog(t, 3.55, 3.8)) * (1 - out), transform: `translateY(${(1 - eOut(prog(t, 3.55, 3.8))) * 24 - out * 80}px)` });
 
-  // ---------- chips ----------
-  const chip = (el, a, b, x, y, side) => {
-    const k = env(t, a, b, 0.35, 0.25), pop = eBack(prog(t, a, a + 0.42));
-    set(el, { opacity: k, top: y + 'px', [side]: x + 'px', transform: `scale(${lerp(0.7, 1, pop)})`, transformOrigin: side === 'right' ? '100% 50%' : '0% 50%' });
-  };
-  chip($('chipB'), 5.0, 6.05, 36, 1180, 'left');
-  chip($('chipC'), 7.25, 8.05, 36, 520, 'right');
+  // ---------- chip during the stats hold ----------
+  const ck = env(t, 5.0, 6.1, 0.35, 0.25);
+  set($('chipLive'), { opacity: ck, top: '1180px', left: '40px', transform: `scale(${lerp(0.7, 1, eBack(prog(t, 5.0, 5.42)))})`, transformOrigin: '0% 50%' });
 
-  // ---------- tap ----------
+  // ---------- tap on the card ----------
   const tx = phone.x + siteMeta.tap.x * phone.w, ty = phone.y + siteMeta.tap.y * phone.h;
-  const press = prog(t, TAP_T - 0.28, TAP_T), rel = prog(t, TAP_T, TAP_T + 0.5);
-  set($('tapDot'), { left: tx + 'px', top: ty + 'px', opacity: t < TAP_T - 0.28 || t > 8 ? 0 : (1 - rel) * eOut(press), transform: `scale(${lerp(1.25, 0.82, eOut(press))})` });
+  const press = prog(t, TAP_T - 0.26, TAP_T), rel = prog(t, TAP_T, TAP_T + 0.45);
+  set($('tapDot'), { left: tx + 'px', top: ty + 'px', opacity: t < TAP_T - 0.26 || t > 7.3 ? 0 : (1 - rel) * eOut(press), transform: `scale(${lerp(1.25, 0.82, eOut(press))})` });
   set($('tapRing'), { left: tx + 'px', top: ty + 'px', opacity: rel > 0 && rel < 1 ? 1 - rel : 0, transform: `scale(${lerp(0.6, 3, eOut(rel))})` });
 
   // ---------- end card ----------
-  const lk = eOut(prog(t, 10.5, 10.8));
-  set($('logo'), { opacity: lk, transform: `scale(${lerp(0.9, 1, eBack(prog(t, 10.5, 10.9)))})` });
+  const lk = eOut(prog(t, 9.5, 9.8));
+  set($('logo'), { opacity: lk, transform: `scale(${lerp(0.9, 1, eBack(prog(t, 9.5, 9.9)))})` });
   const dot = $('logo').querySelector('path:last-of-type');
-  if (dot) { dot.style.transformBox = 'fill-box'; dot.style.transform = `translateY(${(1 - bounce(prog(t, 10.78, 11.38))) * -26}px)`; } // first impact on the 11.0 bar
-  for (const id of ['endA', 'endB']) $(id).style.opacity = t > 10.95 ? 1 : 0;
-  words($('endA'), t, 11.0, 0.08); words($('endB'), t, 11.25);
-  const sk = eOut(prog(t, 12.0, 12.35));
-  set($('endSub'), { opacity: sk, transform: `translateY(${(1 - sk) * 24}px)` });
-  const ck = eOut(prog(t, 12.5, 12.85));
-  set($('cue'), { opacity: ck, transform: `translateY(${(1 - ck) * 24}px) scale(${lerp(0.94, 1, eBack(prog(t, 12.5, 12.9)))})` });
-  const sw = prog(t, 13.5, 13.95);
-  set($('sweep'), { opacity: sw > 0 ? 1 - prog(t, 13.95, 14.4) : 0, transform: `scaleX(${eOut(sw)})` });
-  [...$('arrows').children].forEach((a, i) => {
-    const ph = ((t - 12.6) * 2 - i * 0.25) % 1;   // two pulses per second = the beat
-    a.style.opacity = t > 12.6 ? 0.25 + 0.75 * Math.max(0, Math.sin(Math.PI * clamp(ph < 0 ? ph + 1 : ph))) : 0;
-  });
-  set($('arrows'), { transform: `translateY(${Math.sin(Math.max(0, t - 12.6) * Math.PI * 2) * 6}px)` });
-  set($('zoneGlow'), { opacity: prog(t, 12.5, 13.0) * (0.75 + 0.25 * Math.cos((t - 13.0) * Math.PI * 4)) }); // pulses on the beat
+  if (dot) { dot.style.transformBox = 'fill-box'; dot.style.transform = `translateY(${(1 - bounce(prog(t, 9.78, 10.38))) * -26}px)`; } // lands on the 10.0 beat
+  for (const id of ['endA', 'endB', 'endC']) $(id).style.opacity = t > 9.6 ? 1 : 0;
+  words($('endA'), t, 9.65, 0.08); words($('endB'), t, 10.0, 0.06); words($('endC'), t, 10.25, 0.08);
+  [...$('arrows').children].forEach((a, i) => { const ph = ((t - 10.5) * 2 - i * 0.25) % 1;
+    a.style.opacity = t > 10.5 ? 0.25 + 0.75 * Math.max(0, Math.sin(Math.PI * clamp(ph < 0 ? ph + 1 : ph))) : 0; });
+  set($('arrows'), { transform: `translateY(${Math.sin(Math.max(0, t - 10.5) * Math.PI * 2) * 6}px)` });
+  set($('zoneGlow'), { opacity: prog(t, 10.5, 10.9) * (0.75 + 0.25 * Math.cos((t - 11.0) * Math.PI * 4)) + (t >= 11.5 ? (1 - prog(t, 11.5, 11.9)) * 0.5 : 0) });
+  // the final event: a tap on the sticker zone at 11.5 (on the beat)
+  const ep = prog(t, 11.24, 11.5), er = prog(t, 11.5, 11.95);
+  set($('endDot'), { left: ZONE.x + 'px', top: ZONE.y + 'px', opacity: t < 11.24 ? 0 : (1 - er) * eOut(ep), transform: `scale(${lerp(1.25, 0.82, eOut(ep))})` });
+  set($('endRing'), { left: ZONE.x + 'px', top: ZONE.y + 'px', opacity: er > 0 && er < 1 ? 1 - er : 0, transform: `scale(${lerp(0.6, 4, eOut(er))})` });
 };
 </script>
 </body>
