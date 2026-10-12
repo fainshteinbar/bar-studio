@@ -77,6 +77,12 @@ const firstLocal = {};
   }
 }
 
+// Stylesheets are inlined: the page is one document, and an extra HTML -> CSS -> font hop before first paint
+// cost about as much as the CSS itself in PageSpeed's mobile simulation. url("../x") is rebased per page.
+const minCss = (css) => css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s*([{}:;,>])\s*/g, '$1').replace(/;}/g, '}').trim();
+const CSS = { base: minCss(readFileSync('assets/css/base.css', 'utf8')), site: minCss(readFileSync('assets/css/site.css', 'utf8')) };
+const inlineCss = (css, root) => `<style>${css.replace(/url\("\.\.\//g, `url("${root}assets/`)}</style>`;
+
 const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const get = (ctx, path) => path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), ctx);
@@ -236,7 +242,7 @@ function context(lang, root, base) {
     `<link rel="icon" href="${root}favicon.ico" sizes="any">`,
     `<link rel="icon" type="image/png" sizes="32x32" href="${root}favicon-32x32.png">`,
     `<link rel="apple-touch-icon" href="${root}apple-touch-icon.png">`,
-    `<link rel="stylesheet" href="${root}assets/css/base.css">`,
+    inlineCss(CSS.base, root),
     `<script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, '\\u003c')}</script>`,
   ].filter(Boolean).join('\n');
 
@@ -277,6 +283,7 @@ function context(lang, root, base) {
       total_videos: manifest.stats.total_videos,
       total_views_fmt: compact.format(manifest.stats.total_views ?? fixture.stats.total_views),
     },
+    site_css: inlineCss(CSS.site, root),
     skip: `<a class="skip-link" href="#main">${esc(t.a11y.skip)}</a>`,
     logo: LOGO,
     logo_defs: LOGO_DEFS,
