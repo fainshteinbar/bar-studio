@@ -10,13 +10,14 @@
 //
 // Upload mode is incremental against the committed manifest. Every run reads the media list and every Reel's
 // views, then picks one of three modes:
-//   full   a Reel was added or removed, a caption edited, the hidden list changed, a Reel's media became
-//          available, or an English caption is pending (or --force): new Reels are downloaded, transcoded,
-//          uploaded and translated; Reels already on the CDN are reused.
-//   stats  only view counts moved, and at least one number a visitor sees changed (the compact formats in
-//          scripts/lib/display.mjs, e.g. 211K -> 212K, or the proof-row total): the manifest is rewritten with
-//          fresh stats, no downloads, uploads or translation.
-//   none   nothing a visitor would see changed: exit before writing anything.
+//   full   a Reel was added or removed, a caption edited, the hidden list changed, or a Reel's media became
+//          available (or --force): new Reels are downloaded, transcoded, uploaded and translated; Reels already
+//          on the CDN are reused.
+//   stats  no media work: a number a visitor sees changed (the compact formats in scripts/lib/display.mjs,
+//          e.g. 211K -> 212K, or the proof-row total) and/or an English caption is still pending (retried here).
+//          No downloads or uploads; if nothing ends up translated and no displayed number changed, the run
+//          exits without writing anything.
+//   none   nothing to do: exit before writing anything.
 //
 // Env: IG_ACCESS_TOKEN (else .secrets/ig-token locally), IG_API_VERSION (default v26.0),
 //      upload mode: BUNNY_STORAGE_PASSWORD (secret), BUNNY_STORAGE_ZONE, BUNNY_STORAGE_HOST, MEDIA_BASE_URL,
@@ -128,7 +129,7 @@ async function viewsFor(id) {
 }
 
 // 1b. Early exit (hourly schedule): stop here unless something a visitor would see has changed.
-const reasons = [];
+const reasons = [], pending = [];   // media/content changes; English captions still to translate
 if (UPLOAD && !has('--force')) {
   const cache = readTranslations();
   const ids = new Set(videos.map((m) => m.id));
@@ -140,7 +141,7 @@ if (UPLOAD && !has('--force')) {
     if (!hidden && !prev.has_video && m.media_url) reasons.push(`media now available ${m.id}`);
     if (!hidden && prev.has_video && !overrides.captions_en?.[m.id]) {
       const src = pitchOf(m.caption);
-      if ((isHebrew(src.pitch) || isHebrew(src.more)) && cache.items?.[m.id]?.hash !== captionHash(m.caption)) reasons.push(`English caption pending ${m.id}`);
+      if ((isHebrew(src.pitch) || isHebrew(src.more)) && cache.items?.[m.id]?.hash !== captionHash(m.caption)) pending.push(`English caption pending ${m.id}`);
     }
   }
   for (const id of Object.keys(prevById)) if (!ids.has(id)) reasons.push(`Reel removed ${id}`);
@@ -156,9 +157,9 @@ if (UPLOAD && !has('--force') && !reasons.length) {
   statsChanged = displaySignature(fresh) !== displaySignature(previous);
   console.log(`Stats: ${fresh.stats.total_views ?? 'n/a'} views (was ${previous.stats?.total_views ?? 'n/a'}); displayed numbers ${statsChanged ? 'changed' : 'unchanged'}.`);
 }
-const mode = !UPLOAD || has('--force') || reasons.length ? 'full' : statsChanged ? 'stats' : 'none';
+const mode = !UPLOAD || has('--force') || reasons.length ? 'full' : statsChanged || pending.length ? 'stats' : 'none';
 console.log(has('--force') ? 'Forced run.' : reasons.length ? `Work to do: ${reasons.join('; ')}.`
-  : mode === 'stats' ? 'Only displayed view counts changed: refresh stats, no downloads, uploads or translation.'
+  : mode === 'stats' ? `No media work: ${[statsChanged && 'displayed view counts changed', ...pending].filter(Boolean).join('; ')}.`
   : 'Nothing a visitor would see changed: nothing to download, upload, translate or commit.');
 if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `mode=${mode}\nchanged=${mode !== 'none'}\n`);
 if (DETECT || mode === 'none') process.exit(0);
@@ -238,6 +239,9 @@ console.log(`Translations: ${tr.translated} new, ${tr.failed} failed, ${tr.pendi
 const playable = items.filter((i) => i.visible);
 const views = items.map((i) => i.views).filter((v) => typeof v === 'number');
 const top = playable.reduce((a, b) => ((b.views ?? -1) > (a?.views ?? -1) ? b : a), null);
+// A stats-mode run (no media work) that translated nothing and changed no displayed number writes nothing,
+// so a translation service that is down does not turn every hourly run into a commit.
+const nextSig = (m) => displaySignature(m);
 const manifest = {
   generated_at: new Date().toISOString(),
   placeholder: false,
@@ -258,6 +262,10 @@ const manifest = {
   hero: null,
   items,
 };
+if (UPLOAD && mode === 'stats' && !tr.translated && nextSig(manifest) === nextSig(previous)) {
+  console.log('Nothing a visitor would see changed (no new translation, same displayed numbers): not writing the manifest.');
+  process.exit(0);
+}
 writeFileSync(MANIFEST, JSON.stringify(manifest, null, 2) + '\n');
 const s = manifest.stats;
 const summary = [
