@@ -1,7 +1,9 @@
 # Hourly Instagram → Bunny CDN sync, caption translation, site rebuild and deploy (PLAN.md 4.6).
-# Each run first asks Instagram for the media list (two API calls) and stops there unless a Reel was added or
-# removed, a caption was edited, the hidden list changed, or an English caption is still pending
-# (scripts/ig-sync.mjs --detect). Runs with nothing new download, upload, translate and commit nothing.
+# Each run reads the media list and every Reel's views (scripts/ig-sync.mjs --detect) and picks a mode:
+#   full  - a Reel added/removed, caption edited, hidden list changed, or an English caption pending:
+#           ffmpeg, download, transcode, upload, translate, build, commit
+#   stats - only a number a visitor sees changed (e.g. 211K -> 212K, the proof-row total): build and commit
+#   none  - nothing visible changed: stop, nothing downloaded, uploaded, translated or committed
 name: Instagram sync
 
 on:
@@ -62,19 +64,19 @@ jobs:
         with:
           node-version: 22
 
-      - name: Look for new or changed Reels
+      - name: Look for new or changed Reels and changed view counts
         id: detect
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_API_VERSION: ${{ vars.IG_API_VERSION }}
         run: node scripts/ig-sync.mjs --upload --detect ${{ inputs.force && '--force' || '' }}
 
-      - name: Install ffmpeg and cwebp (the scripts themselves have no npm dependencies)
-        if: steps.detect.outputs.changed == 'true'
+      - name: Install ffmpeg and cwebp (new or changed Reels only)
+        if: steps.detect.outputs.mode == 'full'
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg webp >/dev/null
 
-      - name: Sync Reels to Bunny and translate captions
-        if: steps.detect.outputs.changed == 'true'
+      - name: Sync (full - Reels to Bunny, translation; stats - fresh view counts only)
+        if: steps.detect.outputs.mode != 'none'
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_API_VERSION: ${{ vars.IG_API_VERSION }}
@@ -87,17 +89,18 @@ jobs:
         run: node scripts/ig-sync.mjs --upload ${{ inputs.force && '--force' || '' }}
 
       - name: Build
-        if: steps.detect.outputs.changed == 'true'
+        if: steps.detect.outputs.mode != 'none'
         run: node scripts/build.mjs
 
       - name: Commit and publish
-        if: steps.detect.outputs.changed == 'true'
+        if: steps.detect.outputs.mode != 'none'
         env:
           GH_TOKEN: ${{ github.token }}
+          MODE: ${{ steps.detect.outputs.mode == 'full' && 'new or changed Reels' || 'view counts' }}
         run: |
           git add -A data/instagram.json data/translations.json index.html en/index.html sitemap.xml robots.txt assets/first
           if git diff --cached --quiet; then echo "No changes."; exit 0; fi
-          git -c user.name="bfain-sync" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -q -m "Sync Instagram Reels ($(date -u +'%F %H:%M') UTC)"
+          git -c user.name="bfain-sync" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -q -m "Sync Instagram Reels, ${MODE} ($(date -u +'%F %H:%M') UTC)"
           git push
           # Pushes made with GITHUB_TOKEN may not start a Pages build on their own; request one.
           if [ "${GITHUB_REF_NAME}" = "main" ]; then gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" >/dev/null || echo "::warning::Pages build request failed"; fi

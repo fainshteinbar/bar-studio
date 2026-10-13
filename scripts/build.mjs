@@ -17,6 +17,7 @@ import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { pitchOf, englishPitch, readTranslations } from './lib/captions.mjs';
+import { compactFor } from './lib/display.mjs';
 
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
 const site = read('i18n/site.json');
@@ -116,9 +117,7 @@ function context(lang, root, base) {
   const t = langs[lang];
   const other = lang === 'he' ? 'en' : 'he';
   const loc = lang === 'he' ? 'he-IL' : 'en-US';
-  const c0 = new Intl.NumberFormat(loc, { notation: 'compact', maximumFractionDigits: 0 });
-  const c1 = new Intl.NumberFormat(loc, { notation: 'compact', maximumFractionDigits: 1 });
-  const compact = { format: (n) => (n >= 1e4 && n < 1e6 ? c0 : c1).format(n) };
+  const compact = { format: compactFor(loc) };   // the same formatter the sync uses to decide whether to commit
   const url = (p) => (/^https?:/.test(p) ? p : root + p);
   const he_url = lang === 'he' ? './' : '../';
   const en_url = lang === 'he' ? 'en/' : './';
