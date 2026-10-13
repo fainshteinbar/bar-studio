@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-10-13T22:17:21.267Z",
+  "generated_at": "2026-10-13T23:17:25.270Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 20,
-    "total_views": 463758,
+    "total_views": 463857,
     "views_counted_over": 20,
     "views_sample": false,
-    "top_visible_views": 215456,
+    "top_visible_views": 215462,
     "top_visible_id": "17943051837086700",
     "shown": 20,
     "hidden": 0,
@@ -36,7 +36,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 173,
+      "views": 175,
       "likes": 0
     },
     {
@@ -58,7 +58,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1645,
+      "views": 1684,
       "likes": 18
     },
     {
@@ -102,8 +102,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 101062,
-      "likes": 4445
+      "views": 101091,
+      "likes": 4452
     },
     {
       "has_video": true,
@@ -124,7 +124,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4291,
+      "views": 4292,
       "likes": 100
     },
     {
@@ -146,8 +146,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 40425,
-      "likes": 905
+      "views": 40433,
+      "likes": 907
     },
     {
       "has_video": true,
@@ -168,7 +168,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4341,
+      "views": 4343,
       "likes": 46
     },
     {
@@ -190,7 +190,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 215456,
+      "views": 215462,
       "likes": 4637
     },
     {
@@ -212,7 +212,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1055,
+      "views": 1057,
       "likes": 11
     },
     {
@@ -388,7 +388,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 57404,
+      "views": 57414,
       "likes": 2059
     },
     {
