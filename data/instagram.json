@@ -1,22 +1,44 @@
 {
-  "generated_at": "2026-10-12T13:55:29.609Z",
+  "generated_at": "2026-10-13T14:06:21.500Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 18,
-    "total_views": 444576,
-    "views_counted_over": 18,
+    "total_videos": 19,
+    "total_views": 459550,
+    "views_counted_over": 19,
     "views_sample": false,
-    "top_visible_views": 211990,
+    "top_visible_views": 214464,
     "top_visible_id": "17943051837086700",
-    "shown": 18,
+    "shown": 19,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/17951840157273477.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/17951840157273477.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/17951840157273477.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/17951840157273477.webp",
+      "lqip": "data:image/webp;base64,UklGRigBAABXRUJQVlA4IBwBAAAQBwCdASoYACsAPu1sq1GppaOipWzJMB2JQBWGb3y4xMA6C3S9b5ELwxMRFC1qokjGK+vdnpuOnzkIZcnsBM5bAAD+JpxYUMQvbYLbPB3J2JDSbUrgiyPw6CTPaXWWkKjZobnR43BIUz1CGCJey+32QsUNWWnf8Q9DayG+/U0xytep4z+9Nq39nLiTtCg7AXPqwDTYjHoVo1IliANzStwzS/A8//9k3n8c+UPPQXY/T++k6qoh22gnZYz6tDRcEeANeWyvC57a8UD6EVVJee3AbCklZyfPYs7wQJ0SBirA/dchQY4Z9mATPcJp4G7tI5cW11XjWLLJyPcAOFuTYWME2KGb4ZQxaSiwNgrv1aFJgzCi11eslTQMTdAAAA==",
+      "width": 720,
+      "height": 1280,
+      "duration": 29.9,
+      "id": "17951840157273477",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DebyQhRyvjk/",
+      "timestamp": "2026-10-13T12:16:05+0000",
+      "caption": "שתי דקות בסופר־פארם. כמה זה כבר יכול לקחת?\nתשלחו למי שתמיד “רק קופץ לשנייה” 😅\n\nוידאו שנוצר ב-AI, הדמויות סינתטיות. לא פרסומת ולא שיתוף פעולה עם סופר־פארם.\n#סופרפארם #זוגיות #הומור #AIvideo",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "flag_reason": "",
+      "views": 181,
+      "likes": 1
+    },
     {
       "has_video": true,
       "video_url": "https://bfain-media.b-cdn.net/reels/18118270045962443.mp4",
@@ -36,8 +58,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1229,
-      "likes": 8
+      "views": 3002,
+      "likes": 21
     },
     {
       "has_video": true,
@@ -58,8 +80,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 91372,
-      "likes": 4105
+      "views": 100001,
+      "likes": 4414
     },
     {
       "has_video": true,
@@ -80,8 +102,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4220,
-      "likes": 98
+      "views": 4280,
+      "likes": 100
     },
     {
       "has_video": true,
@@ -102,8 +124,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 38834,
-      "likes": 867
+      "views": 40115,
+      "likes": 896
     },
     {
       "has_video": true,
@@ -124,7 +146,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4308,
+      "views": 4330,
       "likes": 46
     },
     {
@@ -146,8 +168,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 211990,
-      "likes": 4572
+      "views": 214464,
+      "likes": 4621
     },
     {
       "has_video": true,
@@ -168,7 +190,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1038,
+      "views": 1048,
       "likes": 11
     },
     {
@@ -190,7 +212,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 872,
+      "views": 885,
       "likes": 13
     },
     {
@@ -212,7 +234,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 3080,
+      "views": 3084,
       "likes": 21
     },
     {
@@ -234,7 +256,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1632,
+      "views": 1637,
       "likes": 18
     },
     {
@@ -256,7 +278,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4385,
+      "views": 4388,
       "likes": 50
     },
     {
@@ -278,7 +300,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 14859,
+      "views": 14861,
       "likes": 118
     },
     {
@@ -300,7 +322,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 6070,
+      "views": 6087,
       "likes": 88
     },
     {
@@ -344,8 +366,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 56785,
-      "likes": 2044
+      "views": 57284,
+      "likes": 2057
     },
     {
       "has_video": true,
@@ -388,7 +410,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2418,
+      "views": 2419,
       "likes": 11
     },
     {
