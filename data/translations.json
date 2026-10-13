@@ -102,6 +102,12 @@
       "pitch": "Two minutes at Super-Pharm. How long could it possibly take?",
       "more": "Send this AI-generated video to anyone who is always just running in for a second. The characters are synthetic. Not an ad and not a collab with Super-Pharm.",
       "source": "gemini-3.5-flash-lite (Gemini), 2026-10-13"
+    },
+    "18015568241751054": {
+      "hash": "31331d5443d83612",
+      "pitch": "This is what a Save the Date looks like when time stops before sending out the invites.",
+      "more": "A short film with your story, family, and wedding date at the end. Getting married soon? DM me \"Date\" and let's build your video.",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-10-13"
     }
   }
 }
