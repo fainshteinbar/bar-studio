@@ -104,7 +104,7 @@ jobs:
         if: steps.detect.outputs.mode != 'none'
         env:
           GH_TOKEN: ${{ github.token }}
-          MODE: ${{ steps.detect.outputs.mode == 'full' && 'new or changed Reels' || 'view counts' }}
+          MODE: ${{ steps.detect.outputs.mode == 'full' && 'new or changed Reels' || 'view counts or English captions' }}
         run: |
           git add -A data/instagram.json data/translations.json index.html en/index.html sitemap.xml robots.txt assets/first
           if git diff --cached --quiet; then echo "No changes."; exit 0; fi
