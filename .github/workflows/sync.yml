@@ -6,15 +6,21 @@
 #   none  - nothing visible changed: stop, nothing downloaded, uploaded, translated or committed
 name: Instagram sync
 
+# Hourly trigger: cron-job.org calls the workflow_dispatch API at minute 17 with source=cron (GitHub's own
+# scheduler dropped most hourly slots); GitHub's schedule at minute 47 stays as a backup.
 on:
   schedule:
-    - cron: '17 * * * *' # hourly, at minute 17
+    - cron: '47 * * * *' # backup, hourly at minute 47
   workflow_dispatch:
     inputs:
       force:
         description: Reprocess and re-upload every Reel
         type: boolean
         default: false
+      source:
+        description: Who started the run (cron-job.org sends "cron")
+        type: string
+        default: manual
 
 concurrency:
   group: ig-sync
@@ -37,10 +43,11 @@ jobs:
         env:
           IG_EXP: ${{ vars.IG_TOKEN_EXPIRES_AT }}
           PAT_EXP: ${{ vars.GH_PAT_EXPIRES_AT }}
-          EVENT: ${{ github.event_name }}
+          CRON_EXP: ${{ vars.CRON_PAT_EXPIRES_AT }}
+          AUTOMATIC: ${{ github.event_name == 'schedule' || inputs.source == 'cron' }}
         run: |
-          # Only the 04:17 UTC scheduled run checks, so a warning fails one run a day, not 24.
-          if [ "$EVENT" = "schedule" ] && [ "$(date -u +%H)" != "04" ]; then echo "Expiry check runs at 04 UTC."; exit 0; fi
+          # Automatic runs check only at 04 UTC, so a warning fails one run a day, not 24; manual runs always check.
+          if [ "$AUTOMATIC" = "true" ] && [ "$(date -u +%H)" != "04" ]; then echo "Expiry check runs at 04 UTC."; exit 0; fi
           check() {
             if [ -z "$2" ]; then echo "::warning::$1 is not set"; return 0; fi
             left=$(( ( $(date -u -d "$2" +%s) - $(date -u +%s) ) / 86400 ))
@@ -49,14 +56,15 @@ jobs:
           }
           check "Instagram token" "$IG_EXP"
           check "GitHub PAT" "$PAT_EXP"
+          check "cron-job.org token" "$CRON_EXP"
 
       - name: Keep the schedules alive (once a day)
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || inputs.source == 'cron'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           # GitHub disables scheduled workflows after 60 days without repository activity, and runs with nothing
-          # new commit nothing, so the 04:17 UTC run re-enables both workflows through the API.
+          # new commit nothing, so the 04 UTC run re-enables both workflows through the API.
           if [ "$(date -u +%H)" != "04" ]; then exit 0; fi
           for wf in sync.yml token-refresh.yml; do gh api -X PUT "repos/${GITHUB_REPOSITORY}/actions/workflows/$wf/enable" >/dev/null || echo "::warning::could not re-enable $wf"; done
 
