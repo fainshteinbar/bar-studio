@@ -1,22 +1,44 @@
 {
-  "generated_at": "2026-10-13T14:06:21.500Z",
+  "generated_at": "2026-10-13T14:22:13.722Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 19,
-    "total_views": 459550,
-    "views_counted_over": 19,
+    "total_videos": 20,
+    "total_views": 459681,
+    "views_counted_over": 20,
     "views_sample": false,
-    "top_visible_views": 214464,
+    "top_visible_views": 214508,
     "top_visible_id": "17943051837086700",
-    "shown": 19,
+    "shown": 20,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/18015568241751054.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/18015568241751054.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/18015568241751054.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/18015568241751054.webp",
+      "lqip": "data:image/webp;base64,UklGRv4AAABXRUJQVlA4IPIAAADwBgCdASoYACsAPu1urVCppqQiqqgBMB2JQBfJMYxPIilHtUtFKR01099sbpyXDulrKcJ6li0QA/IpfqBtkL0gAP7k/+/YHWiJTut+Sa/kZdOzbPkt2+Wb11C9ZW6qJvaIEzRQPafsdoDJ9ekJt8+wkBOpDd5+Q2BzRRl9s3QQdKwG5jxxXvG/FHByhfSPY292FI1LI0W1GplaGslINZ7c3ejnsD3ncGnEPJL+BlMtLZ/kqWty8tYW1nMlQUUeQaooVFzQh0y9C1ixTxin2xIPZmingWL0Op04eAn6nk2Astco61GmBdjkOkKU9HVDPQAAAA==",
+      "width": 720,
+      "height": 1280,
+      "duration": 28.7,
+      "id": "18015568241751054",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Deb_2f5SQLj/",
+      "timestamp": "2026-10-13T14:14:43+0000",
+      "caption": "ככה נראה Save the Date כשהזמן עוצר בדרך לחלק את ההזמנות.\nסרט קצר עם הסיפור, המשפחה והתאריך שלכם על ההזמנה בסוף.\nמתחתנים בקרוב? שלחו לי בפרטי ״תאריך״ ונבנה את הסרט שלכם.\n\nהדמויות והסצנה נוצרו ב-AI.\n#savethedate #חתונה #הזמנהלחתונה #סייבדהדייט",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": true,
       "video_url": "https://bfain-media.b-cdn.net/reels/17951840157273477.mp4",
@@ -36,7 +58,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 181,
+      "views": 203,
       "likes": 1
     },
     {
@@ -80,7 +102,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 100001,
+      "views": 100046,
       "likes": 4414
     },
     {
@@ -102,7 +124,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4280,
+      "views": 4282,
       "likes": 100
     },
     {
@@ -124,7 +146,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 40115,
+      "views": 40131,
       "likes": 896
     },
     {
@@ -146,7 +168,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4330,
+      "views": 4332,
       "likes": 46
     },
     {
@@ -168,8 +190,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 214464,
-      "likes": 4621
+      "views": 214508,
+      "likes": 4622
     },
     {
       "has_video": true,
