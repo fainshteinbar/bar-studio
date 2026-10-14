@@ -108,6 +108,12 @@
       "pitch": "This is what a Save the Date looks like when time stops before sending out the invites.",
       "more": "A short film with your story, family, and wedding date at the end. Getting married soon? DM me \"Date\" and let's build your video.",
       "source": "gemini-3.5-flash-lite (Gemini), 2026-10-13"
+    },
+    "17992231761067519": {
+      "hash": "1940e8f199ce8a7a",
+      "pitch": "POV: The world stops on the way to your wedding",
+      "more": "Send to a couple getting married this year. Video made with AI, the couple is synthetic.",
+      "source": "gemini-3.8-flash (Gemini), 2026-10-14"
     }
   }
 }

@@ -1,22 +1,44 @@
 {
-  "generated_at": "2026-10-14T10:39:40.215Z",
+  "generated_at": "2026-10-14T11:20:30.857Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 21,
-    "total_views": 465631,
-    "views_counted_over": 21,
+    "total_videos": 22,
+    "total_views": 466060,
+    "views_counted_over": 22,
     "views_sample": false,
-    "top_visible_views": 215903,
+    "top_visible_views": 215970,
     "top_visible_id": "17943051837086700",
-    "shown": 21,
+    "shown": 22,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/17992231761067519.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/17992231761067519.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/17992231761067519.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/17992231761067519.webp",
+      "lqip": "data:image/webp;base64,UklGRgABAABXRUJQVlA4IPQAAACwBgCdASoYACsAPu1urVCppqQiqqgBMB2JQBfJMY7PIilHtUtFKR01099sbpyXDulrKcJ6li0rq6sNbTYYAAD+5P/v2B1oiU7vhJRINd9f/WZz8frRBvgt4lNeBo8m0klgYIi65R07QfVtVblqW2Stc2CKleIx0Jz4cLOBlQn7vofEDTi1NCLLSuNZ1eZ5P8GBEfksrfMERAWUjgQDNz5kwU3GhLc9Hg53yWQtlmaR5CbTwO6uIOOD0aMHVIzTdFpaos85oqbcvHdYqCWfZ4JIq4vPvVJLLpQkfAJYSsUmcAqZm4wy9BTM+feZ+koEv3HBAAAA",
+      "width": 720,
+      "height": 1280,
+      "duration": 28.7,
+      "id": "17992231761067519",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DeeOjnRSOnD/",
+      "timestamp": "2026-10-14T11:02:34+0000",
+      "caption": "POV: העולם עוצר בדרך לחתונה שלכם ⏸️\nשלחו לזוג שמתחתן השנה 💍\n\nהסרטון נוצר ב-AI, הזוג סינתטי.\n#חתונה #מתחתנים #SaveTheDate #סייבדהדייט #AIvideo",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": true,
       "video_url": "https://bfain-media.b-cdn.net/reels/18118207847060225.mp4",
@@ -36,7 +58,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 0,
+      "views": 211,
       "likes": 0
     },
     {
@@ -58,7 +80,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 232,
+      "views": 238,
       "likes": 0
     },
     {
@@ -80,8 +102,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2183,
-      "likes": 21
+      "views": 2252,
+      "likes": 23
     },
     {
       "has_video": true,
@@ -124,8 +146,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 101563,
-      "likes": 4468
+      "views": 101600,
+      "likes": 4471
     },
     {
       "has_video": true,
@@ -168,8 +190,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 40661,
-      "likes": 912
+      "views": 40694,
+      "likes": 914
     },
     {
       "has_video": true,
@@ -212,8 +234,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 215903,
-      "likes": 4642
+      "views": 215970,
+      "likes": 4643
     },
     {
       "has_video": true,
@@ -410,7 +432,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 57475,
+      "views": 57481,
       "likes": 2060
     },
     {
