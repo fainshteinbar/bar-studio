@@ -1,22 +1,44 @@
 {
-  "generated_at": "2026-10-14T11:20:30.857Z",
+  "generated_at": "2026-10-14T12:18:31.606Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 22,
-    "total_views": 466060,
-    "views_counted_over": 22,
+    "total_videos": 23,
+    "total_views": 469216,
+    "views_counted_over": 23,
     "views_sample": false,
-    "top_visible_views": 215970,
+    "top_visible_views": 216067,
     "top_visible_id": "17943051837086700",
-    "shown": 22,
+    "shown": 23,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/18118118183222130.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/18118118183222130.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/18118118183222130.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/18118118183222130.webp",
+      "lqip": "data:image/webp;base64,UklGRiYBAABXRUJQVlA4IBoBAADwBgCdASoYACsAPu1sq1GppaOipWzJMB2JQBOmZpS5hMA6C3S9b5ELwxMRFDD2O4hSAMjdjofTk1gew37/7iNQAP4mnFhRY2r2dmbI/z+TUP3vE5nWbJw1Hkwh9D8GlhfQs1jj5G32eoQwOfn8VT7fH+1FKFvBIxPeun+iOmOVsFNq734qzo3XOjxedkUMs3VPJDQWOEdDE3pzv4HLwxD86ZkSRnk2d9R33a118UYW5zfLAfvhVhZIMU8oRUCSk4GDeAgGJguKvw5hRbKarqIHQHyNxcdROW9Ze4rO1XBTXkV9DJXPqxDEzP3dwJmjH2QLbp5SH95kMiTA9tc4xMboP78LXwGayldZ6tOyFCxrEFTtfAb5guFAYAA=",
+      "width": 720,
+      "height": 1280,
+      "duration": 29.9,
+      "id": "18118118183222130",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DeeSh3OS5YJ/",
+      "timestamp": "2026-10-14T11:36:35+0000",
+      "caption": "“I’ll just be 2 minutes.” 🕰️\nSend this to the one who always says it.\n\nAI-generated. Characters are synthetic.\n#relationships #couplehumor #waiting #aivideo",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "flag_reason": "",
+      "views": 122,
+      "likes": 0
+    },
     {
       "has_video": true,
       "video_url": "https://bfain-media.b-cdn.net/reels/17992231761067519.mp4",
@@ -36,7 +58,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 0,
+      "views": 141,
       "likes": 0
     },
     {
@@ -58,8 +80,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 211,
-      "likes": 0
+      "views": 2757,
+      "likes": 33
     },
     {
       "has_video": true,
@@ -80,7 +102,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 238,
+      "views": 244,
       "likes": 0
     },
     {
@@ -102,7 +124,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2252,
+      "views": 2364,
       "likes": 23
     },
     {
@@ -124,7 +146,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 3037,
+      "views": 3041,
       "likes": 21
     },
     {
@@ -146,8 +168,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 101600,
-      "likes": 4471
+      "views": 101655,
+      "likes": 4472
     },
     {
       "has_video": true,
@@ -168,7 +190,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4299,
+      "views": 4304,
       "likes": 100
     },
     {
@@ -190,7 +212,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 40694,
+      "views": 40735,
       "likes": 914
     },
     {
@@ -234,8 +256,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 215970,
-      "likes": 4643
+      "views": 216067,
+      "likes": 4644
     },
     {
       "has_video": true,
@@ -278,7 +300,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 887,
+      "views": 889,
       "likes": 13
     },
     {
@@ -300,7 +322,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 3091,
+      "views": 3095,
       "likes": 21
     },
     {
@@ -344,7 +366,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4391,
+      "views": 4392,
       "likes": 50
     },
     {
@@ -366,7 +388,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 14869,
+      "views": 14870,
       "likes": 118
     },
     {
@@ -388,7 +410,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 6095,
+      "views": 6097,
       "likes": 88
     },
     {
@@ -410,7 +432,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 815,
+      "views": 817,
       "likes": 9
     },
     {
@@ -432,7 +454,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 57481,
+      "views": 57492,
       "likes": 2060
     },
     {
@@ -454,7 +476,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 670,
+      "views": 671,
       "likes": 10
     },
     {
@@ -476,7 +498,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2419,
+      "views": 2422,
       "likes": 11
     },
     {
