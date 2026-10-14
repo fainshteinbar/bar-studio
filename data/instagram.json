@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-10-14T04:17:26.034Z",
+  "generated_at": "2026-10-14T05:17:23.361Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 20,
-    "total_views": 464175,
+    "total_views": 464470,
     "views_counted_over": 20,
     "views_sample": false,
-    "top_visible_views": 215494,
+    "top_visible_views": 215535,
     "top_visible_id": "17943051837086700",
     "shown": 20,
     "hidden": 0,
@@ -36,7 +36,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 179,
+      "views": 184,
       "likes": 0
     },
     {
@@ -58,8 +58,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1814,
-      "likes": 19
+      "views": 1943,
+      "likes": 20
     },
     {
       "has_video": true,
@@ -102,8 +102,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 101179,
-      "likes": 4457
+      "views": 101235,
+      "likes": 4459
     },
     {
       "has_video": true,
@@ -146,8 +146,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 40483,
-      "likes": 909
+      "views": 40531,
+      "likes": 910
     },
     {
       "has_video": true,
@@ -190,8 +190,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 215494,
-      "likes": 4637
+      "views": 215535,
+      "likes": 4638
     },
     {
       "has_video": true,
@@ -388,7 +388,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 57425,
+      "views": 57441,
       "likes": 2059
     },
     {
