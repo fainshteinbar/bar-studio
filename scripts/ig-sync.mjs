@@ -98,7 +98,12 @@ if (has('--check')) {
 if (!UPLOAD && !LOCAL) { console.error('Choose --upload (CI) or --local (preview).'); process.exit(2); }
 
 // 1. All media, newest first; Reels are the VIDEO items.
-const fields = 'id,caption,media_type,media_product_type,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count';
+const fields = 'id,caption,media_type,media_product_type,is_shared_to_feed,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count';
+// Trial Reels (shown only to non-followers) come back from /media like any Reel, with is_shared_to_feed false; they
+// are not on the profile grid. Verified 2026-10-14 against the profile: every REELS item with false was missing from
+// it (5 of 5), every one with true was there (17 of 17). There is no trial field in the API. A Trial Reel later
+// shared to followers flips to true and is shown from then on.
+const isTrial = (m) => m.media_product_type === 'REELS' && m.is_shared_to_feed === false;
 let page = await api(`/${me.user_id || me.id}/media`, { fields, limit: '50' });
 const all = [...page.data];
 while (page.paging?.next) { page = await api(page.paging.next); all.push(...page.data); }
@@ -107,6 +112,10 @@ const missing = videos.filter((m) => !m.media_url);
 console.log(`Media: ${all.length} total, ${videos.length} videos, ${missing.length} without media_url.`);
 
 const hiddenCfg = (existsSync('data/reels.json') ? JSON.parse(readFileSync('data/reels.json', 'utf8')) : {}).hidden || {};
+// What the site does with each Reel: shown, hidden (data/reels.json, manual) or excluded-trial (automatic).
+const statusOf = (m) => (hiddenCfg[m.id] ? 'hidden' : isTrial(m) ? 'excluded-trial' : 'shown');
+const trials = videos.filter(isTrial);
+if (trials.length) console.log(`Trial Reels (not on the profile grid, excluded): ${trials.map((m) => m.id).join(', ')}.`);
 const overrides = existsSync('data/overrides.json') ? JSON.parse(readFileSync('data/overrides.json', 'utf8')) : {};
 const previous = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : { items: [] };
 const prevById = Object.fromEntries((previous.items || []).filter((i) => !i.placeholder).map((i) => [i.id, i]));
@@ -129,17 +138,18 @@ async function viewsFor(id) {
 }
 
 // 1b. Early exit (hourly schedule): stop here unless something a visitor would see has changed.
-const reasons = [], pending = [];   // media/content changes; English captions still to translate
+const reasons = [], pending = [], light = [];   // media work; English captions to translate; data-only changes
 if (UPLOAD && !has('--force')) {
   const cache = readTranslations();
   const ids = new Set(videos.map((m) => m.id));
   for (const m of videos) {
-    const prev = prevById[m.id], hidden = !!hiddenCfg[m.id];
-    if (!prev) { reasons.push(`new Reel ${m.id}`); continue; }
+    const prev = prevById[m.id], status = statusOf(m), shown = status === 'shown';
+    if (!prev) { shown ? reasons.push(`new Reel ${m.id}`) : light.push(`new ${status} Reel ${m.id} (kept in the data, not shown)`); continue; }
+    if ((prev.status || 'shown') !== status) (shown && !prev.has_video ? reasons : light).push(`${prev.status || 'shown'} -> ${status} ${m.id}`);
+    if (!shown) continue;
     if ((m.caption || '') !== (prev.caption || '')) reasons.push(`caption edited ${m.id}`);
-    if ((prev.status === 'hidden') !== hidden) reasons.push(`visibility changed ${m.id}`);
-    if (!hidden && !prev.has_video && m.media_url) reasons.push(`media now available ${m.id}`);
-    if (!hidden && prev.has_video && !overrides.captions_en?.[m.id]) {
+    if (!prev.has_video && m.media_url) reasons.push(`media now available ${m.id}`);
+    if (prev.has_video && !overrides.captions_en?.[m.id]) {
       const src = pitchOf(m.caption);
       if ((isHebrew(src.pitch) || isHebrew(src.more)) && cache.items?.[m.id]?.hash !== captionHash(m.caption)) pending.push(`English caption pending ${m.id}`);
     }
@@ -151,15 +161,18 @@ if (UPLOAD && !has('--force')) {
 let statsChanged = false;
 if (UPLOAD && !has('--force') && !reasons.length) {
   const fresh = { ...previous, items: [] };
-  for (const m of videos) fresh.items.push({ ...prevById[m.id], views: await viewsFor(m.id), likes: m.like_count ?? null });
-  const views = fresh.items.map((i) => i.views).filter((v) => typeof v === 'number');
-  fresh.stats = { ...previous.stats, total_videos: videos.length, total_views: views.length ? views.reduce((a, b) => a + b, 0) : null };
+  for (const m of videos) {
+    const prev = prevById[m.id] || {}, status = statusOf(m);
+    fresh.items.push({ ...prev, status, visible: status === 'shown' && !!prev.has_video, views: await viewsFor(m.id), likes: m.like_count ?? null });
+  }
+  const views = fresh.items.filter((i) => i.visible).map((i) => i.views).filter((v) => typeof v === 'number');
+  fresh.stats = { ...previous.stats, total_videos: fresh.items.filter((i) => i.visible).length, total_views: views.length ? views.reduce((a, b) => a + b, 0) : null };
   statsChanged = displaySignature(fresh) !== displaySignature(previous);
   console.log(`Stats: ${fresh.stats.total_views ?? 'n/a'} views (was ${previous.stats?.total_views ?? 'n/a'}); displayed numbers ${statsChanged ? 'changed' : 'unchanged'}.`);
 }
-const mode = !UPLOAD || has('--force') || reasons.length ? 'full' : statsChanged || pending.length ? 'stats' : 'none';
+const mode = !UPLOAD || has('--force') || reasons.length ? 'full' : statsChanged || pending.length || light.length ? 'stats' : 'none';
 console.log(has('--force') ? 'Forced run.' : reasons.length ? `Work to do: ${reasons.join('; ')}.`
-  : mode === 'stats' ? `No media work: ${[statsChanged && 'displayed view counts changed', ...pending].filter(Boolean).join('; ')}.`
+  : mode === 'stats' ? `No media work: ${[statsChanged && 'displayed view counts changed', ...pending, ...light].filter(Boolean).join('; ')}.`
   : 'Nothing a visitor would see changed: nothing to download, upload, translate or commit.');
 if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `mode=${mode}\nchanged=${mode !== 'none'}\n`);
 if (DETECT || mode === 'none') process.exit(0);
@@ -175,13 +188,14 @@ const items = [];
 let processed = 0, reused = 0;
 try {
   for (const m of videos) {
-    const hidden = !!hiddenCfg[m.id];
+    const status = statusOf(m), hidden = status !== 'shown';   // hidden by hand or an excluded Trial Reel
     const prev = prevById[m.id];
     const reusable = UPLOAD && !has('--force') && prev?.has_video && prev.video_url?.startsWith(BUNNY.base);
     const localReady = LOCAL && existsSync(join(OUT, `${m.id}.mp4`)) && existsSync(join(OUT, `${m.id}.full.mp4`)) && existsSync(join(OUT, `${m.id}.rail.mp4`)) && existsSync(join(OUT, `${m.id}.webp`));
     let entry;
     if (hidden) {
-      entry = { has_video: false };
+      // never downloaded or uploaded; media already on the CDN stays referenced, so un-hiding is instant
+      entry = prev?.has_video ? { ...prev } : { has_video: false };
     } else if (reusable || localReady) {
       entry = reusable ? { ...prev } : JSON.parse(readFileSync(join(OUT, `${m.id}.json`), 'utf8'));
       reused++;
@@ -221,7 +235,8 @@ try {
       ...entry,
       id: m.id, placeholder: false, permalink: m.permalink, timestamp: m.timestamp,
       caption: m.caption || '', lane: laneFor(m.caption, m.id, overrides.lanes || {}),
-      visible: !hidden && !!entry.has_video, status: hidden ? 'hidden' : 'shown', flag_reason: hidden ? String(hiddenCfg[m.id]) : '',
+      visible: !hidden && !!entry.has_video, status, excluded: status === 'excluded-trial' ? 'trial' : undefined,
+      is_shared_to_feed: m.is_shared_to_feed ?? null, flag_reason: status === 'hidden' ? String(hiddenCfg[m.id]) : '',
       views: await viewsFor(m.id), likes: m.like_count ?? null,
     });
   }
@@ -236,8 +251,9 @@ const tr = await translateMissing(items, cache, overrides);
 if (tr.translated) writeTranslations(cache);
 console.log(`Translations: ${tr.translated} new, ${tr.failed} failed, ${tr.pending} still missing${tr.noCredentials ? ' (no usable GEMINI_API_KEY)' : ''}.`);
 
+// Every number on the site comes from visible Reels only; the raw data keeps the excluded ones.
 const playable = items.filter((i) => i.visible);
-const views = items.map((i) => i.views).filter((v) => typeof v === 'number');
+const views = playable.map((i) => i.views).filter((v) => typeof v === 'number');
 const top = playable.reduce((a, b) => ((b.views ?? -1) > (a?.views ?? -1) ? b : a), null);
 // A stats-mode run (no media work) that translated nothing and changed no displayed number writes nothing,
 // so a translation service that is down does not turn every hourly run into a commit.
@@ -248,7 +264,9 @@ const manifest = {
   source: UPLOAD ? 'instagram api → bunny cdn' : 'instagram api (local preview)',
   media_base_url: UPLOAD ? BUNNY.base : '',
   stats: {
-    total_videos: videos.length,
+    total_videos: playable.length,
+    all_videos: videos.length,
+    excluded_trial: items.filter((i) => i.status === 'excluded-trial').length,
     total_views: views.length ? views.reduce((a, b) => a + b, 0) : null,
     views_counted_over: views.length,
     views_sample: views.length === 0,

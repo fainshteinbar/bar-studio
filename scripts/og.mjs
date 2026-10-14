@@ -9,8 +9,9 @@ import { serve } from './serve.mjs';
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
 const manifest = read(process.env.MANIFEST === 'local' && existsSync('data/instagram.local.json') ? 'data/instagram.local.json' : 'data/instagram.json');
 const overrides = existsSync('data/overrides.json') ? read('data/overrides.json') : {};
-const byId = Object.fromEntries(manifest.items.map((i) => [i.id, i]));
-const picks = [...(overrides.rail || []).map((id) => byId[id]).filter(Boolean), ...manifest.items].filter((x, i, a) => x.poster_url && a.indexOf(x) === i).slice(0, 4);
+const shown = manifest.items.filter((i) => i.visible !== false);   // never a hidden or Trial Reel's cover
+const byId = Object.fromEntries(shown.map((i) => [i.id, i]));
+const picks = [...(overrides.rail || []).map((id) => byId[id]).filter(Boolean), ...shown].filter((x, i, a) => x.poster_url && a.indexOf(x) === i).slice(0, 4);
 const logo = readFileSync('assets/img/bfain-logo-dark-bg.svg', 'utf8').replace(/<metadata>[\s\S]*?<\/metadata>/, '');
 const posterSrc = (p) => (/^https?:/.test(p) ? p : `/${p}`);
 

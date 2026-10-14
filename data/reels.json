@@ -1,4 +1,4 @@
 {
-  "_help": "Instagram media IDs listed under hidden are skipped by the sync and the build. Add an ID to hide a Reel from the site, remove it to show the Reel again. The value is a note for yourself.",
+  "_help": "Instagram media IDs listed under hidden are skipped by the sync and the build. Add an ID to hide a Reel from the site, remove it to show the Reel again. The value is a note for yourself. Trial Reels (is_shared_to_feed false in the API, not on the profile grid) are excluded automatically and kept in data/instagram.json as status excluded-trial; list one here only if the automatic check ever misses it.",
   "hidden": {}
 }
