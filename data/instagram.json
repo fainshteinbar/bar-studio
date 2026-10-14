@@ -1,22 +1,44 @@
 {
-  "generated_at": "2026-10-14T10:17:17.904Z",
+  "generated_at": "2026-10-14T10:39:40.215Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 20,
-    "total_views": 465527,
-    "views_counted_over": 20,
+    "total_videos": 21,
+    "total_views": 465631,
+    "views_counted_over": 21,
     "views_sample": false,
-    "top_visible_views": 215862,
+    "top_visible_views": 215903,
     "top_visible_id": "17943051837086700",
-    "shown": 20,
+    "shown": 21,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/18118207847060225.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/18118207847060225.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/18118207847060225.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/18118207847060225.webp",
+      "lqip": "data:image/webp;base64,UklGRkABAABXRUJQVlA4IDQBAABQBwCdASoYACsAPu1urlCppqQiqqgBMB2JYwCzs76nMDlgu4qr9A89OeMYRG3Qj3IjVHrgryKk8tfv+bNGDwmtFNhgAP2etVSSFR/D+Qk8LYYPrK7QrGhBdwbOFy54BN8epqQV4nOGG3pVa6MfsEr9BvdUKwZEFv7Ea0eeRuSrRkYzFGI9ZZPO5lruYqaIxyvAibYjKwOKZCD0CG/UblJR7xSsvQCrp244WROYnbfdWE12CPhdwXZGYaTdPBykkr9B9BaLF8U9w7K33AgMF1sUczfLe6LWmsEu/kBpZXCSsPNPbDFDe/ewDb7jllgW/TBUZraf8oaW+vRdhueE3/SfxNSqXlxJRitoYxs9U3BLBCQyJL1O3V1xgERzHE8EYvu7gMzrAWPq5Vijj4nTWxXur6AAAA==",
+      "width": 720,
+      "height": 1280,
+      "duration": 30.9,
+      "id": "18118207847060225",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DeeLLQCSA5V/",
+      "timestamp": "2026-10-14T10:33:35+0000",
+      "caption": "The day we lost Paradise. 🍎🐍\nSend this to someone who always says “just one bite.”\n\nAI-generated. Not real footage.\n#bible #genesis #adamandeve #80snostalgia #aivideo",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": true,
       "video_url": "https://bfain-media.b-cdn.net/reels/18015568241751054.mp4",
@@ -36,7 +58,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 229,
+      "views": 232,
       "likes": 0
     },
     {
@@ -58,7 +80,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2169,
+      "views": 2183,
       "likes": 21
     },
     {
@@ -102,7 +124,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 101528,
+      "views": 101563,
       "likes": 4468
     },
     {
@@ -124,7 +146,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4298,
+      "views": 4299,
       "likes": 100
     },
     {
@@ -146,7 +168,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 40655,
+      "views": 40661,
       "likes": 912
     },
     {
@@ -190,8 +212,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 215862,
-      "likes": 4641
+      "views": 215903,
+      "likes": 4642
     },
     {
       "has_video": true,
@@ -388,7 +410,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 57471,
+      "views": 57475,
       "likes": 2060
     },
     {
