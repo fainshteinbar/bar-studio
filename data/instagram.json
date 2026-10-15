@@ -1,24 +1,47 @@
 {
-  "generated_at": "2026-10-15T05:17:55.175Z",
+  "generated_at": "2026-10-15T08:20:30.446Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 18,
-    "all_videos": 24,
+    "total_videos": 19,
+    "all_videos": 25,
     "excluded_trial": 6,
-    "total_views": 465892,
-    "views_counted_over": 18,
+    "total_views": 466233,
+    "views_counted_over": 19,
     "views_sample": false,
-    "top_visible_views": 216999,
+    "top_visible_views": 217157,
     "top_visible_id": "17943051837086700",
-    "shown": 18,
+    "shown": 19,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/17950188216301567.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/17950188216301567.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/17950188216301567.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/17950188216301567.webp",
+      "lqip": "data:image/webp;base64,UklGRiQBAABXRUJQVlA4IBgBAABwBwCdASoYACsAPu1qqU4ppqOiMBVaqTAdiWQApd+FCqBAcQAtf/OvBqXF38hztHznyw2nji2vbAiRCZnr/l5P2IkxAAD+OvXiaWvl9bPzfY3CGOFw3/4I/nwgQKbOSDaLRBi4wCC8NmRPMXPtuSlnhMS2mr9jPMR7ZFgN0Bq8l8Gw0V9x8LpdSVgeZajRnrcNoDTr7Vq+CtBlYdCSd9BJNwOTTg5z+fawLfpthLFbl0QGd1JJdvzM6mrVD1b77ITGo3r7RURe+1+fas+qMX2Hwaz3RQybbdRMmyzlGtg6tJklEMmuDV563Hec3Wdf00O2L6lOBvT3VlBDrE5zeH7zTw0taKP0iBNKRmE0A7v2FpFVHabhxKAA",
+      "width": 720,
+      "height": 1280,
+      "duration": 29.8,
+      "id": "17950188216301567",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Degf3GQSN93/",
+      "timestamp": "2026-10-15T08:11:20+0000",
+      "caption": "אמא שלי עשתה אותי מנהל אחרי 8 דקות 🙄\nמשמרת ראשונה בגולדה טיילת אילת: כפפה קרועה, כדור על השיש, וסבתא עם כל החברות.\nהסניף מגייס מגיל 17. מכירים מישהו באילת שמחפש עבודה? תייגו אותו 👇\nהדמויות בסרטון נוצרו ב-AI.\n#אילת #גולדה #עבודה_באילת #דרושים_אילת",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
+      "flag_reason": "",
+      "views": 26,
+      "likes": 1
+    },
     {
       "has_video": false,
       "id": "17971735026159999",
@@ -32,8 +55,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 749,
-      "likes": 4
+      "views": 3431,
+      "likes": 47
     },
     {
       "has_video": false,
@@ -48,7 +71,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2115,
+      "views": 2186,
       "likes": 4
     },
     {
@@ -70,7 +93,7 @@
       "visible": false,
       "status": "excluded-trial",
       "flag_reason": "",
-      "views": 191,
+      "views": 199,
       "likes": 0,
       "excluded": "trial",
       "is_shared_to_feed": false
@@ -94,8 +117,8 @@
       "visible": false,
       "status": "excluded-trial",
       "flag_reason": "",
-      "views": 22468,
-      "likes": 288,
+      "views": 22621,
+      "likes": 291,
       "excluded": "trial",
       "is_shared_to_feed": false
     },
@@ -166,7 +189,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 3074,
+      "views": 3078,
       "likes": 21,
       "is_shared_to_feed": true
     },
@@ -189,8 +212,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 102200,
-      "likes": 4497,
+      "views": 102267,
+      "likes": 4502,
       "is_shared_to_feed": true
     },
     {
@@ -212,7 +235,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4327,
+      "views": 4329,
       "likes": 100,
       "is_shared_to_feed": true
     },
@@ -235,7 +258,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 41291,
+      "views": 41359,
       "likes": 927,
       "is_shared_to_feed": true
     },
@@ -258,7 +281,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4358,
+      "views": 4359,
       "likes": 46,
       "is_shared_to_feed": true
     },
@@ -281,7 +304,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 216999,
+      "views": 217157,
       "likes": 4666,
       "is_shared_to_feed": true
     },
@@ -419,7 +442,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 14879,
+      "views": 14880,
       "likes": 118,
       "is_shared_to_feed": true
     },
@@ -488,7 +511,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 57615,
+      "views": 57627,
       "likes": 2063,
       "is_shared_to_feed": true
     },
@@ -534,7 +557,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2428,
+      "views": 2430,
       "likes": 11,
       "is_shared_to_feed": true
     },
