@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-10-15T13:17:39.764Z",
+  "generated_at": "2026-10-15T14:17:42.217Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 20,
-    "all_videos": 24,
+    "total_videos": 19,
+    "all_videos": 23,
     "excluded_trial": 4,
-    "total_views": 491770,
-    "views_counted_over": 20,
+    "total_views": 492305,
+    "views_counted_over": 19,
     "views_sample": false,
-    "top_visible_views": 217533,
+    "top_visible_views": 217612,
     "top_visible_id": "17943051837086700",
-    "shown": 20,
+    "shown": 19,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
@@ -39,8 +39,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1583,
-      "likes": 19
+      "views": 1880,
+      "likes": 22
     },
     {
       "has_video": false,
@@ -55,7 +55,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2315,
+      "views": 2335,
       "likes": 5
     },
     {
@@ -101,8 +101,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23008,
-      "likes": 304,
+      "views": 23070,
+      "likes": 305,
       "is_shared_to_feed": true
     },
     {
@@ -195,8 +195,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 102482,
-      "likes": 4511,
+      "views": 102517,
+      "likes": 4513,
       "is_shared_to_feed": true
     },
     {
@@ -241,7 +241,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 41625,
+      "views": 41682,
       "likes": 936,
       "is_shared_to_feed": true
     },
@@ -287,7 +287,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 217533,
+      "views": 217612,
       "likes": 4672,
       "is_shared_to_feed": true
     },
@@ -448,7 +448,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 6110,
+      "views": 6111,
       "likes": 88,
       "is_shared_to_feed": true
     },
@@ -494,8 +494,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 57653,
-      "likes": 2063,
+      "views": 57657,
+      "likes": 2064,
       "is_shared_to_feed": true
     },
     {
@@ -543,29 +543,6 @@
       "views": 2434,
       "likes": 11,
       "is_shared_to_feed": true
-    },
-    {
-      "has_video": true,
-      "video_url": "https://bfain-media.b-cdn.net/reels/17939221510464202.mp4",
-      "full_url": "https://bfain-media.b-cdn.net/reels/17939221510464202.full.mp4",
-      "rail_url": "https://bfain-media.b-cdn.net/reels/17939221510464202.rail.mp4",
-      "poster_url": "https://bfain-media.b-cdn.net/reels/17939221510464202.webp",
-      "lqip": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAQBACdASoYAA4APu1iqU2ppaOiMAgBMB2JQBWABER/S6N+dy3HxxHN0AD+iYpcjBRZaCEKch56lvc+UwBlX2bqRjbUtdU8XGRBwmbA9coKtG48F9G1Yj2OsO9itiCSScjiAn8X1GGGeGxvGR9kclVQfJQGAA==",
-      "width": 720,
-      "height": 408,
-      "duration": 54.6,
-      "id": "17939221510464202",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/p/CMeMyFglVCi/",
-      "timestamp": "2021-03-16T07:53:13+0000",
-      "caption": "Real Manager's app by Funatix reveals new clip about their new features 🤩\nWhen Funatix introduced new features, we got the opportunity to help build a new video effect graphics for them that represents the real values of the company: vision, energetics, mystery, accuracy and data - these inspired the main elements of the video based on mystery book story.\nSound on 🔈🔈🔈\n\n--------------------------------------------------\n\nאפליקצית Real Manager של Funatix חושפת קליפ חדש על הפיצ'רים החדשים שלהם 🤩\nכש- Funatix הציגה פיצ'רים חדשים, קיבלנו את ההזדמנות לעזור לבנות עבורם סרטון אפקטים המייצג את הערכים האמיתיים של החברה: חזון, אנרגטיות, מסתורין, דיוק ונתונים - אלה היוו השראה למרכיביה העיקריים של הסרטון המבוססים על סיפור אגדות מסתורי.\nהפעילו סאונד 🔈🔈🔈\n\n@dribble @behance @logosix @welovebranding @thebrandingcollective @motion.aep @motiondesigners @motionmate\n#muzli #dribbble #behance #creativebloq #thedesigntip #creativeprocess #dribbblers #designspiration #simplycooldesign #welovedesign #aigadesign #graphicdesignblg #graphicdesign #design #logo #logodesign #brandidentity #visualidentity #branddesign #graphicgang #weloveanimations #responsive #motion #2d #motiondesign #motionlovers #aftereffects #motionmate #renderzone #dailyrender  @one.co.il  @realmanagerclub",
-      "lane": "reels",
-      "visible": true,
-      "status": "shown",
-      "flag_reason": "",
-      "views": 0,
-      "likes": 9,
-      "is_shared_to_feed": null
     }
   ]
 }
