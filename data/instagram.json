@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-15T04:18:02.756Z",
+  "generated_at": "2026-10-15T05:17:55.175Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 18,
-    "all_videos": 25,
-    "excluded_trial": 7,
-    "total_views": 465767,
+    "all_videos": 24,
+    "excluded_trial": 6,
+    "total_views": 465892,
     "views_counted_over": 18,
     "views_sample": false,
-    "top_visible_views": 216964,
+    "top_visible_views": 216999,
     "top_visible_id": "17943051837086700",
     "shown": 18,
     "hidden": 0,
@@ -32,8 +32,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 0,
-      "likes": 0
+      "views": 749,
+      "likes": 4
     },
     {
       "has_video": false,
@@ -48,32 +48,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2068,
+      "views": 2115,
       "likes": 4
-    },
-    {
-      "has_video": true,
-      "video_url": "https://bfain-media.b-cdn.net/reels/18118118183222130.mp4",
-      "full_url": "https://bfain-media.b-cdn.net/reels/18118118183222130.full.mp4",
-      "rail_url": "https://bfain-media.b-cdn.net/reels/18118118183222130.rail.mp4",
-      "poster_url": "https://bfain-media.b-cdn.net/reels/18118118183222130.webp",
-      "lqip": "data:image/webp;base64,UklGRiYBAABXRUJQVlA4IBoBAADwBgCdASoYACsAPu1sq1GppaOipWzJMB2JQBOmZpS5hMA6C3S9b5ELwxMRFDD2O4hSAMjdjofTk1gew37/7iNQAP4mnFhRY2r2dmbI/z+TUP3vE5nWbJw1Hkwh9D8GlhfQs1jj5G32eoQwOfn8VT7fH+1FKFvBIxPeun+iOmOVsFNq734qzo3XOjxedkUMs3VPJDQWOEdDE3pzv4HLwxD86ZkSRnk2d9R33a118UYW5zfLAfvhVhZIMU8oRUCSk4GDeAgGJguKvw5hRbKarqIHQHyNxcdROW9Ze4rO1XBTXkV9DJXPqxDEzP3dwJmjH2QLbp5SH95kMiTA9tc4xMboP78LXwGayldZ6tOyFCxrEFTtfAb5guFAYAA=",
-      "width": 720,
-      "height": 1280,
-      "duration": 29.9,
-      "id": "18118118183222130",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DeeSh3OS5YJ/",
-      "timestamp": "2026-10-14T11:36:35+0000",
-      "caption": "“I’ll just be 2 minutes.” 🕰️\nSend this to the one who always says it.\n\nAI-generated. Characters are synthetic.\n#relationships #couplehumor #waiting #aivideo",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "flag_reason": "",
-      "views": 1075,
-      "likes": 4,
-      "excluded": "trial",
-      "is_shared_to_feed": false
     },
     {
       "has_video": true,
@@ -94,7 +70,7 @@
       "visible": false,
       "status": "excluded-trial",
       "flag_reason": "",
-      "views": 189,
+      "views": 191,
       "likes": 0,
       "excluded": "trial",
       "is_shared_to_feed": false
@@ -118,8 +94,8 @@
       "visible": false,
       "status": "excluded-trial",
       "flag_reason": "",
-      "views": 22415,
-      "likes": 287,
+      "views": 22468,
+      "likes": 288,
       "excluded": "trial",
       "is_shared_to_feed": false
     },
@@ -190,7 +166,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 3072,
+      "views": 3074,
       "likes": 21,
       "is_shared_to_feed": true
     },
@@ -213,8 +189,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 102176,
-      "likes": 4495,
+      "views": 102200,
+      "likes": 4497,
       "is_shared_to_feed": true
     },
     {
@@ -236,7 +212,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4326,
+      "views": 4327,
       "likes": 100,
       "is_shared_to_feed": true
     },
@@ -259,8 +235,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 41234,
-      "likes": 924,
+      "views": 41291,
+      "likes": 927,
       "is_shared_to_feed": true
     },
     {
@@ -305,7 +281,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 216964,
+      "views": 216999,
       "likes": 4666,
       "is_shared_to_feed": true
     },
@@ -328,7 +304,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1070,
+      "views": 1071,
       "likes": 11,
       "is_shared_to_feed": true
     },
@@ -512,7 +488,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 57610,
+      "views": 57615,
       "likes": 2063,
       "is_shared_to_feed": true
     },
