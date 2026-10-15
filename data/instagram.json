@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T22:17:20.056Z",
+  "generated_at": "2026-10-15T04:18:02.756Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
@@ -7,10 +7,10 @@
     "total_videos": 18,
     "all_videos": 25,
     "excluded_trial": 7,
-    "total_views": 465580,
+    "total_views": 465767,
     "views_counted_over": 18,
     "views_sample": false,
-    "top_visible_views": 216911,
+    "top_visible_views": 216964,
     "top_visible_id": "17943051837086700",
     "shown": 18,
     "hidden": 0,
@@ -19,6 +19,22 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "17971735026159999",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DegEkorypmV/",
+      "timestamp": "2026-10-15T04:12:56+0000",
+      "caption": "The day we lost Paradise. 🍎🐍\nWould you have taken the bite? Be honest.\n\nAI-generated. Not real footage.\n#bible #genesis #adamandeve #80snostalgia #aivideo",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": false,
       "id": "17986444614080641",
@@ -32,24 +48,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2035,
+      "views": 2068,
       "likes": 4
-    },
-    {
-      "has_video": false,
-      "id": "18140140534721596",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DeeYHJtSrNs/",
-      "timestamp": "2026-10-14T12:25:00+0000",
-      "caption": "139 שקל על עוגה?! תטעם, ואז תדבר 😏\nתייגו את מי שמתווכח על כל מחיר.\n\nסרטון שנוצר בבינה מלאכותית, באישור דניאל עמית. הדמויות והקולות סינתטיים.\n#דרים_קייק #עוגתלוטוס #ASMR #AIvideo",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 337,
-      "likes": 0
     },
     {
       "has_video": true,
@@ -70,7 +70,7 @@
       "visible": false,
       "status": "excluded-trial",
       "flag_reason": "",
-      "views": 874,
+      "views": 1075,
       "likes": 4,
       "excluded": "trial",
       "is_shared_to_feed": false
@@ -94,7 +94,7 @@
       "visible": false,
       "status": "excluded-trial",
       "flag_reason": "",
-      "views": 185,
+      "views": 189,
       "likes": 0,
       "excluded": "trial",
       "is_shared_to_feed": false
@@ -118,8 +118,8 @@
       "visible": false,
       "status": "excluded-trial",
       "flag_reason": "",
-      "views": 22039,
-      "likes": 269,
+      "views": 22415,
+      "likes": 287,
       "excluded": "trial",
       "is_shared_to_feed": false
     },
@@ -213,7 +213,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 102124,
+      "views": 102176,
       "likes": 4495,
       "is_shared_to_feed": true
     },
@@ -236,7 +236,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4322,
+      "views": 4326,
       "likes": 100,
       "is_shared_to_feed": true
     },
@@ -259,8 +259,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 41177,
-      "likes": 922,
+      "views": 41234,
+      "likes": 924,
       "is_shared_to_feed": true
     },
     {
@@ -282,7 +282,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4356,
+      "views": 4358,
       "likes": 46,
       "is_shared_to_feed": true
     },
@@ -305,7 +305,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 216911,
+      "views": 216964,
       "likes": 4666,
       "is_shared_to_feed": true
     },
@@ -328,7 +328,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1069,
+      "views": 1070,
       "likes": 11,
       "is_shared_to_feed": true
     },
@@ -512,8 +512,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 57592,
-      "likes": 2062,
+      "views": 57610,
+      "likes": 2063,
       "is_shared_to_feed": true
     },
     {
