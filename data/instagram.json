@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-10-15T12:10:15.955Z",
+  "generated_at": "2026-10-15T13:17:39.764Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 19,
-    "all_videos": 25,
-    "excluded_trial": 6,
-    "total_views": 468127,
-    "views_counted_over": 19,
+    "total_videos": 20,
+    "all_videos": 24,
+    "excluded_trial": 4,
+    "total_views": 491770,
+    "views_counted_over": 20,
     "views_sample": false,
-    "top_visible_views": 217430,
+    "top_visible_views": 217533,
     "top_visible_id": "17943051837086700",
-    "shown": 19,
+    "shown": 20,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
@@ -39,24 +39,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1218,
-      "likes": 18
-    },
-    {
-      "has_video": false,
-      "id": "17971735026159999",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DegEkorypmV/",
-      "timestamp": "2026-10-15T04:12:56+0000",
-      "caption": "The day we lost Paradise. 🍎🐍\nWould you have taken the bite? Be honest.\n\nAI-generated. Not real footage.\n#bible #genesis #adamandeve #80snostalgia #aivideo",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 3654,
-      "likes": 50
+      "views": 1583,
+      "likes": 19
     },
     {
       "has_video": false,
@@ -71,7 +55,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2290,
+      "views": 2315,
       "likes": 5
     },
     {
@@ -114,13 +98,12 @@
       "timestamp": "2026-10-14T10:33:35+0000",
       "caption": "The day we lost Paradise. 🍎🐍\nSend this to someone who always says “just one bite.”\n\nAI-generated. Not real footage.\n#bible #genesis #adamandeve #80snostalgia #aivideo",
       "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
+      "visible": true,
+      "status": "shown",
       "flag_reason": "",
-      "views": 22858,
-      "likes": 299,
-      "excluded": "trial",
-      "is_shared_to_feed": false
+      "views": 23008,
+      "likes": 304,
+      "is_shared_to_feed": true
     },
     {
       "has_video": true,
@@ -165,7 +148,7 @@
       "visible": false,
       "status": "excluded-trial",
       "flag_reason": "",
-      "views": 2407,
+      "views": 2409,
       "likes": 23,
       "excluded": "trial",
       "is_shared_to_feed": false
@@ -189,7 +172,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 3095,
+      "views": 3098,
       "likes": 21,
       "is_shared_to_feed": true
     },
@@ -212,8 +195,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 102417,
-      "likes": 4508,
+      "views": 102482,
+      "likes": 4511,
       "is_shared_to_feed": true
     },
     {
@@ -235,7 +218,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4338,
+      "views": 4342,
       "likes": 100,
       "is_shared_to_feed": true
     },
@@ -258,8 +241,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 41558,
-      "likes": 935,
+      "views": 41625,
+      "likes": 936,
       "is_shared_to_feed": true
     },
     {
@@ -281,7 +264,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4366,
+      "views": 4368,
       "likes": 46,
       "is_shared_to_feed": true
     },
@@ -304,8 +287,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 217430,
-      "likes": 4670,
+      "views": 217533,
+      "likes": 4672,
       "is_shared_to_feed": true
     },
     {
@@ -327,7 +310,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1078,
+      "views": 1080,
       "likes": 11,
       "is_shared_to_feed": true
     },
@@ -350,7 +333,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 898,
+      "views": 900,
       "likes": 13,
       "is_shared_to_feed": true
     },
@@ -373,7 +356,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 3107,
+      "views": 3109,
       "likes": 21,
       "is_shared_to_feed": true
     },
@@ -396,7 +379,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1653,
+      "views": 1655,
       "likes": 18,
       "is_shared_to_feed": true
     },
@@ -419,7 +402,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4401,
+      "views": 4403,
       "likes": 50,
       "is_shared_to_feed": true
     },
@@ -442,7 +425,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 14882,
+      "views": 14884,
       "likes": 118,
       "is_shared_to_feed": true
     },
@@ -465,7 +448,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 6108,
+      "views": 6110,
       "likes": 88,
       "is_shared_to_feed": true
     },
@@ -488,7 +471,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 822,
+      "views": 824,
       "likes": 9,
       "is_shared_to_feed": true
     },
@@ -511,7 +494,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 57647,
+      "views": 57653,
       "likes": 2063,
       "is_shared_to_feed": true
     },
@@ -534,7 +517,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 677,
+      "views": 679,
       "likes": 10,
       "is_shared_to_feed": true
     },
@@ -557,7 +540,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2432,
+      "views": 2434,
       "likes": 11,
       "is_shared_to_feed": true
     },
