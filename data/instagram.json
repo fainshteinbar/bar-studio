@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-10-16T08:17:17.720Z",
+  "generated_at": "2026-10-16T09:17:21.358Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 19,
+    "total_videos": 20,
     "all_videos": 23,
-    "excluded_trial": 4,
-    "total_views": 496234,
-    "views_counted_over": 19,
+    "excluded_trial": 3,
+    "total_views": 498965,
+    "views_counted_over": 20,
     "views_sample": false,
-    "top_visible_views": 218313,
+    "top_visible_views": 218388,
     "top_visible_id": "17943051837086700",
-    "shown": 19,
+    "shown": 20,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
@@ -39,7 +39,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3663,
+      "views": 3708,
       "likes": 36
     },
     {
@@ -101,7 +101,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23396,
+      "views": 23407,
       "likes": 312,
       "is_shared_to_feed": true
     },
@@ -145,13 +145,12 @@
       "timestamp": "2026-10-13T12:16:05+0000",
       "caption": "שתי דקות בסופר־פארם. כמה זה כבר יכול לקחת?\nתשלחו למי שתמיד “רק קופץ לשנייה” 😅\n\nוידאו שנוצר ב-AI, הדמויות סינתטיות. לא פרסומת ולא שיתוף פעולה עם סופר־פארם.\n#סופרפארם #זוגיות #הומור #AIvideo",
       "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
+      "visible": true,
+      "status": "shown",
       "flag_reason": "",
-      "views": 2439,
-      "likes": 23,
-      "excluded": "trial",
-      "is_shared_to_feed": false
+      "views": 2474,
+      "likes": 24,
+      "is_shared_to_feed": true
     },
     {
       "has_video": true,
@@ -172,7 +171,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 3115,
+      "views": 3117,
       "likes": 21,
       "is_shared_to_feed": true
     },
@@ -195,7 +194,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 102885,
+      "views": 102936,
       "likes": 4525,
       "is_shared_to_feed": true
     },
@@ -218,7 +217,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4347,
+      "views": 4352,
       "likes": 100,
       "is_shared_to_feed": true
     },
@@ -241,8 +240,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 42293,
-      "likes": 950,
+      "views": 42352,
+      "likes": 951,
       "is_shared_to_feed": true
     },
     {
@@ -264,7 +263,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4371,
+      "views": 4373,
       "likes": 46,
       "is_shared_to_feed": true
     },
@@ -287,8 +286,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 218313,
-      "likes": 4681,
+      "views": 218388,
+      "likes": 4684,
       "is_shared_to_feed": true
     },
     {
@@ -494,7 +493,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 57765,
+      "views": 57772,
       "likes": 2067,
       "is_shared_to_feed": true
     },
