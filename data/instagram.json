@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-10-18T07:17:39.955Z",
+  "generated_at": "2026-10-18T08:17:14.932Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 20,
+    "total_videos": 21,
     "all_videos": 21,
-    "excluded_trial": 1,
-    "total_views": 664259,
-    "views_counted_over": 20,
+    "excluded_trial": 0,
+    "total_views": 664594,
+    "views_counted_over": 21,
     "views_sample": false,
-    "top_visible_views": 221529,
+    "top_visible_views": 221569,
     "top_visible_id": "17943051837086700",
-    "shown": 20,
+    "shown": 21,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
@@ -39,7 +39,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4226,
+      "views": 4229,
       "likes": 37
     },
     {
@@ -58,13 +58,12 @@
       "timestamp": "2026-10-14T11:02:34+0000",
       "caption": "POV: העולם עוצר בדרך לחתונה שלכם ⏸️\nשלחו לזוג שמתחתן השנה 💍\n\nהסרטון נוצר ב-AI, הזוג סינתטי.\n#חתונה #מתחתנים #SaveTheDate #סייבדהדייט #AIvideo",
       "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
+      "visible": true,
+      "status": "shown",
       "flag_reason": "",
-      "views": 211,
+      "views": 229,
       "likes": 0,
-      "excluded": "trial",
-      "is_shared_to_feed": false
+      "is_shared_to_feed": true
     },
     {
       "has_video": true,
@@ -154,8 +153,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104209,
-      "likes": 4568,
+      "views": 104231,
+      "likes": 4570,
       "is_shared_to_feed": true
     },
     {
@@ -177,7 +176,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4459,
+      "views": 4462,
       "likes": 103,
       "is_shared_to_feed": true
     },
@@ -200,7 +199,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 44159,
+      "views": 44184,
       "likes": 1006,
       "is_shared_to_feed": true
     },
@@ -246,7 +245,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 221529,
+      "views": 221569,
       "likes": 4733,
       "is_shared_to_feed": true
     },
@@ -407,7 +406,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 6144,
+      "views": 6145,
       "likes": 88,
       "is_shared_to_feed": true
     },
@@ -453,7 +452,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 58279,
+      "views": 58290,
       "likes": 2080,
       "is_shared_to_feed": true
     },
@@ -499,7 +498,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2450,
+      "views": 2451,
       "likes": 11,
       "is_shared_to_feed": true
     }
