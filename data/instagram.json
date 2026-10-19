@@ -1,24 +1,63 @@
 {
-  "generated_at": "2026-10-19T15:17:25.090Z",
+  "generated_at": "2026-10-19T15:54:28.361Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 21,
-    "all_videos": 23,
-    "excluded_trial": 2,
-    "total_views": 667776,
-    "views_counted_over": 21,
+    "total_videos": 22,
+    "all_videos": 25,
+    "excluded_trial": 3,
+    "total_views": 667872,
+    "views_counted_over": 22,
     "views_sample": false,
-    "top_visible_views": 223103,
+    "top_visible_views": 223146,
     "top_visible_id": "17943051837086700",
-    "shown": 21,
+    "shown": 22,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/18190448545363511.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/18190448545363511.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/18190448545363511.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/18190448545363511.webp",
+      "lqip": "data:image/webp;base64,UklGRggBAABXRUJQVlA4IPwAAADwBgCdASoYACsAPu1sq1EppaOiqrgKATAdiWgAnTlBWYIICOdNW6ekA/DkP60wa8HTlS2pr2c83ol7cdtvcQTMAPrtbkB0rh7PIHaiSFT326oL5oRyoYr6FqSlf5H8Egdw5Re1ceZTh8Zg+d0q8CNMA1k7bfc3kiWuOMNmEZvWslbEPjCLFAxN9Hf/PrkLeqUmiGKQVwITnw0yxMMfsViGJjQ168NEcEX5meEJ1gg/Vv4wegmA5eQBiMlsPOto9+CGKBD46eYt/owAyI/9sJcUkOqux74aSiQRs4bUFblV4lt7o7qx+ZZfGBtUud/sqSx/ByjKZZB7SDTWAAA=",
+      "width": 720,
+      "height": 1280,
+      "duration": 36,
+      "id": "18190448545363511",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DerlJ9ByQFS/",
+      "timestamp": "2026-10-19T15:29:51+0000",
+      "caption": "I counted. Forty-seven times a day, the same five questions. Staging URL, who’s on call, where the design files live.\n\nSo I described the site I needed in Base44, refined it, published it, and posted one link in Slack. Now the ticket machine has nobody to serve.\n\nIf you’re the “ask Dan” of your team, this one’s for you. (Priya from design already built hers.)\n\n#base44 #internaltools #devlife #vibecoding #aivideo",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
+      "flag_reason": "",
+      "views": 33,
+      "likes": 1
+    },
+    {
+      "has_video": false,
+      "id": "18117418802009137",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DerkJtUSlLr/",
+      "timestamp": "2026-10-19T15:20:22+0000",
+      "caption": "Everyone who played The Sims knows exactly what happens next 💀\nThe Sims, but live action. Send this to whoever removed the pool ladder.\n\nAI-generated video.\n#TheSims #Sims4 #liveaction #nostalgia #AIvideo",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 83,
+      "likes": 1
+    },
     {
       "has_video": false,
       "id": "18010417736962793",
@@ -32,7 +71,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 123,
+      "views": 184,
       "likes": 0
     },
     {
@@ -48,8 +87,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 196,
-      "likes": 0
+      "views": 212,
+      "likes": 1
     },
     {
       "has_video": true,
@@ -71,7 +110,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4337,
+      "views": 4340,
       "likes": 38
     },
     {
@@ -116,7 +155,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23789,
+      "views": 23793,
       "likes": 323,
       "is_shared_to_feed": true
     },
@@ -185,7 +224,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104561,
+      "views": 104564,
       "likes": 4579,
       "is_shared_to_feed": true
     },
@@ -231,7 +270,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 44838,
+      "views": 44847,
       "likes": 1026,
       "is_shared_to_feed": true
     },
@@ -277,7 +316,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 223103,
+      "views": 223146,
       "likes": 4762,
       "is_shared_to_feed": true
     },
@@ -484,7 +523,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 58479,
+      "views": 58480,
       "likes": 2086,
       "is_shared_to_feed": true
     },
