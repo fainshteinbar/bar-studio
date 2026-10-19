@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-19T14:17:21.555Z",
+  "generated_at": "2026-10-19T15:17:25.090Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 21,
-    "all_videos": 22,
-    "excluded_trial": 1,
-    "total_views": 667660,
+    "all_videos": 23,
+    "excluded_trial": 2,
+    "total_views": 667776,
     "views_counted_over": 21,
     "views_sample": false,
-    "top_visible_views": 223037,
+    "top_visible_views": 223103,
     "top_visible_id": "17943051837086700",
     "shown": 21,
     "hidden": 0,
@@ -19,6 +19,22 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18010417736962793",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Dere0y_Sm48/",
+      "timestamp": "2026-10-19T14:34:19+0000",
+      "caption": "Everyone who played The Sims knows exactly what happens next 💀\nThe Sims, but live action. Send this to whoever removed the pool ladder.\n\nAI-generated video.\n#TheSims #Sims4 #liveaction #nostalgia #AIvideo",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 123,
+      "likes": 0
+    },
     {
       "has_video": false,
       "id": "18602531257064816",
@@ -32,7 +48,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 122,
+      "views": 196,
       "likes": 0
     },
     {
@@ -55,7 +71,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4336,
+      "views": 4337,
       "likes": 38
     },
     {
@@ -77,7 +93,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 376,
+      "views": 377,
       "likes": 1,
       "is_shared_to_feed": true
     },
@@ -100,8 +116,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23782,
-      "likes": 322,
+      "views": 23789,
+      "likes": 323,
       "is_shared_to_feed": true
     },
     {
@@ -123,7 +139,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2808,
+      "views": 2810,
       "likes": 29,
       "is_shared_to_feed": true
     },
@@ -169,7 +185,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104550,
+      "views": 104561,
       "likes": 4579,
       "is_shared_to_feed": true
     },
@@ -192,7 +208,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4490,
+      "views": 4494,
       "likes": 104,
       "is_shared_to_feed": true
     },
@@ -215,7 +231,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 44818,
+      "views": 44838,
       "likes": 1026,
       "is_shared_to_feed": true
     },
@@ -261,8 +277,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 223037,
-      "likes": 4759,
+      "views": 223103,
+      "likes": 4762,
       "is_shared_to_feed": true
     },
     {
@@ -468,7 +484,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 58475,
+      "views": 58479,
       "likes": 2086,
       "is_shared_to_feed": true
     },
