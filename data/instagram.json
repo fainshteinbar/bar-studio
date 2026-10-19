@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T21:16:16.764Z",
+  "generated_at": "2026-10-19T23:17:20.043Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
@@ -7,10 +7,10 @@
     "total_videos": 22,
     "all_videos": 25,
     "excluded_trial": 3,
-    "total_views": 670283,
+    "total_views": 670402,
     "views_counted_over": 22,
     "views_sample": false,
-    "top_visible_views": 223533,
+    "top_visible_views": 223556,
     "top_visible_id": "17943051837086700",
     "shown": 22,
     "hidden": 0,
@@ -39,7 +39,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1785,
+      "views": 1839,
       "likes": 31
     },
     {
@@ -55,8 +55,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 484,
-      "likes": 2
+      "views": 848,
+      "likes": 6
     },
     {
       "has_video": false,
@@ -71,8 +71,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 883,
-      "likes": 10
+      "views": 1600,
+      "likes": 27
     },
     {
       "has_video": false,
@@ -87,8 +87,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1915,
-      "likes": 14
+      "views": 2145,
+      "likes": 16
     },
     {
       "has_video": true,
@@ -110,7 +110,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4347,
+      "views": 4350,
       "likes": 38
     },
     {
@@ -132,7 +132,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 381,
+      "views": 382,
       "likes": 1,
       "is_shared_to_feed": true
     },
@@ -155,7 +155,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23797,
+      "views": 23798,
       "likes": 323,
       "is_shared_to_feed": true
     },
@@ -178,7 +178,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2819,
+      "views": 2823,
       "likes": 29,
       "is_shared_to_feed": true
     },
@@ -201,7 +201,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 160277,
+      "views": 160279,
       "likes": 138,
       "is_shared_to_feed": true
     },
@@ -224,7 +224,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104603,
+      "views": 104608,
       "likes": 4580,
       "is_shared_to_feed": true
     },
@@ -247,7 +247,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4501,
+      "views": 4503,
       "likes": 104,
       "is_shared_to_feed": true
     },
@@ -270,8 +270,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 45002,
-      "likes": 1030,
+      "views": 45022,
+      "likes": 1031,
       "is_shared_to_feed": true
     },
     {
@@ -293,7 +293,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4425,
+      "views": 4426,
       "likes": 48,
       "is_shared_to_feed": true
     },
@@ -316,7 +316,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 223533,
+      "views": 223556,
       "likes": 4773,
       "is_shared_to_feed": true
     },
@@ -339,7 +339,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1119,
+      "views": 1120,
       "likes": 11,
       "is_shared_to_feed": true
     },
@@ -362,7 +362,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 922,
+      "views": 923,
       "likes": 13,
       "is_shared_to_feed": true
     },
@@ -408,7 +408,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1692,
+      "views": 1693,
       "likes": 18,
       "is_shared_to_feed": true
     },
