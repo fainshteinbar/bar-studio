@@ -15,8 +15,9 @@ const TYPES = {
   '.mp4': 'video/mp4', '.woff2': 'font/woff2', '.pdf': 'application/pdf', '.txt': 'text/plain; charset=utf-8',
 };
 
-export function serve(port = PORT, root = ROOT) {
-  const server = createServer((req, res) => {
+// The request handler on its own, so other dev servers can serve the same files.
+export function staticHandler(root = ROOT) {
+  return (req, res) => {
     let path = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     let file = normalize(join(root, path));
     if (!file.startsWith(root)) { res.writeHead(403).end(); return; }
@@ -51,10 +52,14 @@ export function serve(port = PORT, root = ROOT) {
     res.writeHead(200, { 'Content-Type': type, 'Content-Length': st.size, 'Accept-Ranges': 'bytes', 'Cache-Control': 'no-cache' });
     if (req.method === 'HEAD') res.end();
     else createReadStream(file).pipe(res);
-  });
+  };
+}
+
+export function serve(port = PORT, root = ROOT) {
+  const server = createServer(staticHandler(root));
   return new Promise((ok) => server.listen(port, () => ok(server)));
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  serve().then(() => console.log(`Serving ${ROOT} at http://localhost:${PORT}/directions/`));
+  serve().then(() => console.log(`Serving ${ROOT} at http://localhost:${PORT}/ (documents app: http://localhost:${PORT}/invoices/)`));
 }

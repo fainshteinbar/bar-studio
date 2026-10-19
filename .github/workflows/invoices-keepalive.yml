@@ -1,0 +1,32 @@
+# Weekly call to the documents app's Supabase project (bfain-docs), so the free plan does not pause it
+# after a week without use. Uses only the public URL and publishable key from invoices/config.js; the
+# requests are refused by the database (the key alone reads nothing), which still counts as activity.
+# GitHub turns scheduled workflows off after 60 days without commits; see invoices/README.md to turn it back on.
+name: Documents keepalive
+
+on:
+  schedule:
+    - cron: '23 3 * * 1'   # Mondays 03:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: invoices/config.js
+          sparse-checkout-cone-mode: false
+      - name: Call the project
+        run: |
+          URL=$(sed -n "s/^export const SUPABASE_URL = [\"']\(.*\)[\"'];$/\1/p" invoices/config.js)
+          KEY=$(sed -n "s/^export const SUPABASE_ANON_KEY = [\"']\(.*\)[\"'];$/\1/p" invoices/config.js)
+          if [ -z "$URL" ] || [ -z "$KEY" ]; then echo "::error::invoices/config.js has no URL or key"; exit 1; fi
+          auth=$(curl -s -o /dev/null -w '%{http_code}' "$URL/auth/v1/settings" -H "apikey: $KEY")
+          rest=$(curl -s -o /dev/null -w '%{http_code}' "$URL/rest/v1/settings?select=id" -H "apikey: $KEY")
+          echo "auth: $auth, rest: $rest (401 is expected: the public key alone reads nothing)"
+          if [ "$auth" != "200" ]; then echo "::error::Supabase did not answer (auth $auth). The project may be paused: open supabase.com and restore it."; exit 1; fi

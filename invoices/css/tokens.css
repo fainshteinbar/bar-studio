@@ -1,0 +1,45 @@
+/* bfain.studio app tokens: the site's palette, type and motion, with a light and a dark theme.
+   Dark follows the site (void ground, cream text); light is cream paper with void ink. */
+@font-face { font-family: "Hebrew"; font-weight: 100 900; font-stretch: 62.5% 100%; font-display: swap;
+  src: url("../assets/fonts/noto-sans-hebrew-var-hebrew.woff2") format("woff2-variations"), url("../assets/fonts/noto-sans-hebrew-var-hebrew.woff2") format("woff2");
+  unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: "DM Sans"; font-weight: 100 500; font-display: swap;
+  src: url("../assets/fonts/dm-sans-latin-400.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2212; }
+@font-face { font-family: "DM Sans"; font-weight: 501 900; font-display: swap;
+  src: url("../assets/fonts/dm-sans-latin-600.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2212; }
+
+:root {
+  --void: #07071C; --surface: #0F0E2F; --navy: #1A1464; --cream: #F4F0E8; --cyan: #00C2FF;
+  --display: "narkiss-hadash-condensed", "Hebrew", sans-serif;
+  --text: "Hebrew", "DM Sans", -apple-system, sans-serif;
+  --latin: "DM Sans", "Hebrew", -apple-system, sans-serif;
+  --ease-ui: cubic-bezier(0.23, 1, 0.32, 1);
+  --d1: 0.3s;
+  --radius: 16px;
+
+  /* light (default) */
+  --bg: var(--cream);
+  --panel: #FFFFFF;
+  --ink: var(--void);
+  --ink-2: rgb(7 7 28 / 0.68);
+  --ink-3: rgb(7 7 28 / 0.46);
+  --line: rgb(7 7 28 / 0.12);
+  --field: #FFFFFF;
+  --accent-ink: var(--void); /* text on a cyan button */
+  --danger: #B42318;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: var(--void); --panel: var(--surface); --ink: var(--cream);
+    --ink-2: rgb(244 240 232 / 0.68); --ink-3: rgb(244 240 232 / 0.46); --line: rgb(244 240 232 / 0.12);
+    --field: rgb(244 240 232 / 0.04); --danger: #FF8A80;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: var(--void); --panel: var(--surface); --ink: var(--cream);
+  --ink-2: rgb(244 240 232 / 0.68); --ink-3: rgb(244 240 232 / 0.46); --line: rgb(244 240 232 / 0.12);
+  --field: rgb(244 240 232 / 0.04); --danger: #FF8A80;
+  color-scheme: dark;
+}

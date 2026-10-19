@@ -1,0 +1,171 @@
+/* bfain.studio document kit · A4, print first. Shared by Invoice, Payment Receipt, Credit Note, Quote.
+   The site's family on paper: Narkiss Hadash Condensed display, Noto Sans Hebrew and DM Sans text,
+   void ink, cream panel, cyan only as an accent (logo dot, outlined sequence number, brand dot),
+   hairline grid like the site's process section. Logical properties throughout; numbers isolated LTR. */
+
+@font-face { font-family: "Hebrew"; font-weight: 100 900; font-stretch: 62.5% 100%; font-display: block;
+  src: url("../assets/fonts/noto-sans-hebrew-var-hebrew.woff2") format("woff2-variations"), url("../assets/fonts/noto-sans-hebrew-var-hebrew.woff2") format("woff2");
+  unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: "DM Sans"; font-weight: 100 500; font-display: block;
+  src: url("../assets/fonts/dm-sans-latin-400.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2212; }
+@font-face { font-family: "DM Sans"; font-weight: 501 900; font-display: block;
+  src: url("../assets/fonts/dm-sans-latin-600.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2212; }
+
+:root {
+  --ink: #07071C;
+  --ink-2: rgb(7 7 28 / 0.68);
+  --ink-3: rgb(7 7 28 / 0.46);
+  --rule: rgb(7 7 28 / 0.14);
+  --cyan: #00C2FF;
+  --cream: #F4F0E8;
+  --paper: #FFFFFF;
+  --display: "narkiss-hadash-condensed", "Hebrew", sans-serif;
+  --text: "Hebrew", "DM Sans", sans-serif;
+  --latin: "DM Sans", "Hebrew", sans-serif;
+  --page-x: 16mm;
+  --page-y: 14mm;
+}
+
+/* Zero page margin: Chrome prints its header and footer (date, title, URL, page number) inside the page
+   margin, so with no margin there is nowhere to put them, even when "Headers and footers" is ticked.
+   The visible margins live inside the sheet as padding instead (see .doc and @media print). */
+@page { size: A4; margin: 0; }
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; }
+p, h1, dl, dd { margin: 0; }
+bdi.num, .num { unicode-bidi: isolate; direction: ltr; font-family: var(--latin); font-variant-numeric: tabular-nums lining-nums; }
+.display { font-family: var(--display); font-weight: 800; font-stretch: 75%; letter-spacing: 0; }
+.muted { color: var(--ink-3); }
+
+/* ---------- Sheet ---------- */
+.doc {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column;
+  inline-size: 210mm; min-block-size: 297mm; padding: var(--page-y) var(--page-x);
+  background: var(--paper); color: var(--ink);
+  font: 400 9pt/1.5 var(--text); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+
+/* Bilingual labels: Hebrew leads, English follows in small tracked caps */
+.lbl { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 0.35mm; }
+.lbl-he { font: 600 7.2pt/1.25 var(--text); color: var(--ink-2); }
+.lbl-en { font: 600 5.6pt/1.25 var(--latin); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); }
+.lbl-value .lbl-he { font: 500 9.5pt/1.3 var(--text); color: var(--ink); }
+.lbl-value .lbl-en { font-size: 5.8pt; }
+
+/* ---------- Header ---------- */
+.head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10mm; }
+.logo { display: block; block-size: 11mm; inline-size: auto; }
+.supplier { font: 400 7.4pt/1.55 var(--latin); color: var(--ink-2); font-style: normal; text-align: left; display: flex; flex-direction: column; }
+.supplier strong { font-weight: 600; font-size: 8.6pt; color: var(--ink); letter-spacing: 0.01em; }
+
+/* ---------- Title ---------- */
+.title { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 8mm; margin-block-start: 17mm; }
+.eyebrow { display: inline-flex; align-items: center; gap: 2mm; font: 600 6.6pt/1 var(--latin); letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-3); margin-block-end: 3.2mm; }
+.eyebrow::after { content: ""; inline-size: 1.6mm; block-size: 1.6mm; border-radius: 50%; background: var(--cyan); }
+.h1 { font-size: 50pt; line-height: 0.86; color: var(--ink); }
+.docno { margin-block-start: 3.6mm; font: 600 10.5pt/1 var(--latin); letter-spacing: 0.05em; }
+.draft-tag { display: inline-block; padding: 1.2mm 3mm; border: 0.8pt solid var(--ink); border-radius: 100px; font: 600 8pt/1 var(--text); letter-spacing: 0.04em; }
+.seq { font-size: 112pt; line-height: 0.74; color: transparent; -webkit-text-stroke: 1.1pt var(--cyan); direction: ltr; margin-block-end: -1mm; }
+
+/* ---------- Parties and dates: the site's process grid on paper ---------- */
+.meta { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; align-items: start; margin-block-start: 9mm; border-block-start: 1.2pt solid var(--ink); }
+.cell { display: flex; flex-direction: column; gap: 2.4mm; padding: 3.4mm 4mm 0; border-inline-start: 0.6pt solid var(--rule); min-inline-size: 0; }
+.cell:first-child { padding-inline-start: 0; border-inline-start: 0; }
+.cell-value { font: 500 9.5pt/1.3 var(--text); }
+.cell-value .num { font-weight: 500; font-size: 9.5pt; }
+.party-name { font: 650 12pt/1.2 var(--text); margin-block-start: 0.4mm; }
+.party-lines { display: flex; flex-direction: column; font-size: 7.8pt; line-height: 1.5; color: var(--ink-2); }
+.party-lines > span { text-align: right; }
+
+/* ---------- Lines ---------- */
+.items { inline-size: 100%; border-collapse: collapse; margin-block-start: 13mm; }
+.items th { text-align: start; vertical-align: bottom; padding: 0 0 2.2mm; border-block-end: 0.9pt solid var(--ink); font-weight: inherit; }
+.items td { vertical-align: top; padding: 3.6mm 0 3.4mm; border-block-end: 0.5pt solid var(--rule); }
+.items tr { break-inside: avoid; }
+.items .c-idx { inline-size: 9mm; }
+.items td.c-idx .num { font-size: 7.2pt; font-weight: 600; color: var(--ink-3); letter-spacing: 0.04em; }
+.items .c-desc { padding-inline-end: 6mm; }
+.items .c-num { text-align: end; white-space: nowrap; inline-size: 25mm; padding-inline-start: 3mm; }
+.items .c-qty { inline-size: 12mm; }
+.items th.c-num .lbl { align-items: flex-end; }
+.items td.c-num .num { font-size: 9pt; }
+.items td.c-amount .num { font-weight: 600; }
+.desc-he { display: block; font: 500 9.6pt/1.45 var(--text); text-wrap: pretty; }
+.desc-en { display: block; margin-block-start: 0.8mm; font: 400 7.6pt/1.45 var(--latin); color: var(--ink-3); text-align: right; text-wrap: pretty; hyphens: manual; }
+
+/* ---------- Total ---------- */
+.total { display: flex; justify-content: space-between; align-items: flex-end; gap: 6mm;
+  inline-size: 58%; margin-inline-start: auto; margin-block-start: 6mm; padding: 5mm 6mm 4.6mm;
+  background: var(--cream); border-radius: 4mm; }
+.lbl-total .lbl-he { font-size: 9pt; color: var(--ink); }
+.lbl-total .lbl-en { font-size: 6pt; }
+.total-amount { font-size: 34pt; line-height: 0.85; }
+.total-amount .num { font-family: var(--display); font-variant-numeric: normal; }
+
+/* ---------- Receipt ---------- */
+.paid { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; margin-block-start: 13mm; padding: 7mm 7mm 6.4mm; background: var(--cream); border-radius: 4mm; }
+.paid-main { display: flex; flex-direction: column; align-items: flex-start; gap: 3mm; }
+.pill { display: inline-flex; align-items: center; gap: 1.8mm; padding: 1.5mm 3.4mm; border-radius: 100px; background: var(--ink); color: var(--paper); font: 600 7.6pt/1.2 var(--text); margin-block-end: 2mm; }
+.pill span[lang="en"] { font-family: var(--latin); font-weight: 500; opacity: 0.8; }
+.pill-sep { opacity: 0.5; }
+.paid-amount { font-size: 50pt; line-height: 0.82; }
+.paid-amount .num { font-family: var(--display); font-variant-numeric: normal; }
+.paid-ref { display: flex; align-items: baseline; gap: 1.6mm; margin-block-start: 1.4mm; font-size: 8pt; color: var(--ink-2); }
+.paid-ref .num { font-weight: 600; color: var(--ink); }
+.lbl-inline { flex-direction: row; align-items: baseline; gap: 1.4mm; }
+.lbl-inline .lbl-he { font-size: 8pt; font-weight: 500; }
+.ledger { align-self: end; display: flex; flex-direction: column; }
+.ledger-row { display: flex; justify-content: space-between; align-items: center; gap: 4mm; padding-block: 2.2mm; border-block-end: 0.5pt solid rgb(7 7 28 / 0.12); }
+.ledger-row dd .num { font-size: 9pt; }
+.ledger-row.is-strong { border-block-start: 1.1pt solid var(--ink); border-block-end: 0; padding-block-start: 3mm; margin-block-start: 1mm; }
+.ledger-row.is-strong .lbl-he { color: var(--ink); font-size: 8.4pt; }
+.ledger-row.is-strong dd .num { font-weight: 600; font-size: 12pt; }
+
+/* ---------- Notes ---------- */
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(48mm, 1fr)); gap: 6mm 10mm; margin-block-start: 11mm; }
+.note { display: flex; flex-direction: column; gap: 1.8mm; break-inside: avoid; }
+.note p { font-size: 8.2pt; line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
+.note .note-en { font-family: var(--latin); font-size: 7.6pt; color: var(--ink-3); text-align: right; }
+.note-sub { display: flex; align-items: baseline; gap: 1.6mm; margin-block-start: 0.6mm; }
+.note-sub .num { color: var(--ink); font-weight: 600; }
+
+/* ---------- Footer ---------- */
+.foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 10mm;
+  margin-block-start: auto; padding-block-start: 4mm; border-block-start: 0.6pt solid var(--rule); }
+.foot-legal { max-inline-size: 150mm; font: 400 7pt/1.5 var(--latin); color: var(--ink-2); text-align: left; order: 2; }
+.foot-brand { display: inline-flex; align-items: center; gap: 1.4mm; font: 600 8pt/1 var(--latin); letter-spacing: 0.02em; order: 1; }
+.dot { display: inline-block; inline-size: 1.8mm; block-size: 1.8mm; border-radius: 50%; background: var(--cyan); }
+
+/* ---------- Draft ---------- */
+.watermark { position: absolute; inset: 0; z-index: -1; display: grid; place-items: center; pointer-events: none;
+  font: 800 190pt/1 var(--display); color: transparent; -webkit-text-stroke: 1.2pt rgb(7 7 28 / 0.08); transform: rotate(-22deg); }
+
+/* ---------- Screen preview around the sheet (not printed) ---------- */
+@media screen {
+  body.print-page { min-block-size: 100dvh; background: #E7E4DD; padding: 64px 16px 48px; }
+  body.print-page .doc { margin-inline: auto; box-shadow: 0 1px 2px rgb(7 7 28 / 0.08), 0 24px 60px -24px rgb(7 7 28 / 0.28); }
+  .screen-bar { position: fixed; inset-block-start: 0; inset-inline: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    block-size: 48px; padding-inline: 16px; background: #07071C; color: #F4F0E8; font: 500 14px/1 var(--text); }
+  .screen-bar button { font: 600 14px/1 var(--text); padding: 10px 18px; border: 0; border-radius: 100px; background: #00C2FF; color: #07071C; cursor: pointer; }
+  .screen-bar button:disabled { opacity: 0.5; cursor: progress; }
+  .screen-tag { padding: 4px 10px; border: 1px dashed currentColor; border-radius: 4px; font-size: 12px; }
+}
+@media screen and (max-width: 840px) {
+  /* Phones: scale the A4 sheet down to the screen width instead of scrolling sideways. */
+  body.print-page { padding-inline: 0; overflow-x: hidden; }
+  body.print-page .doc { zoom: var(--fit, 0.45); }
+}
+
+@media print {
+  .screen-only { display: none !important; }
+  /* Black-and-white printers turn #00C2FF into a light gray: a heavier, slightly deeper outline keeps
+     the sequence number clear on paper while still reading as the brand cyan in a colour PDF. */
+  .seq { -webkit-text-stroke: 1.9pt #00A3DB; }
+  /* The same 14 x 16 mm margins as on screen, as padding; repeated on every page if a document runs long. */
+  .doc { inline-size: 210mm; min-block-size: 296.5mm; padding: var(--page-y) var(--page-x); overflow: visible;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  html, body { background: #fff; }
+}

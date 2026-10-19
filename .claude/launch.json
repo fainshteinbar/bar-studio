@@ -4,8 +4,19 @@
     {
       "name": "directions",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["scripts/serve.mjs"],
+      "runtimeArgs": [
+        "scripts/serve.mjs"
+      ],
       "port": 4173
+    },
+    {
+      "name": "invoices-dev",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "scripts/invoices-dev-server.mjs",
+        "4180"
+      ],
+      "port": 4180
     }
   ]
 }

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>bfain.studio</title>
+<link rel="icon" type="image/png" href="assets/img/favicon-32.png">
+<link rel="preconnect" href="https://use.typekit.net" crossorigin>
+<link rel="preconnect" href="https://p.typekit.net" crossorigin>
+<link rel="stylesheet" href="https://use.typekit.net/gce3kmw.css">
+<link rel="stylesheet" href="css/document.css">
+<script src="vendor/supabase.js"></script>
+</head>
+<body class="print-page">
+<div class="screen-bar screen-only">
+  <span id="bar-label"></span>
+  <button type="button" id="print-btn" disabled>שמירה כ-PDF</button>
+</div>
+<main id="sheet" aria-live="polite"></main>
+<script type="module">
+  // One document, rendered for print. ?demo=invoice|receipt|quote|credit_note shows sample data
+  // (add &draft=1 for the draft look). ?id=<uuid> loads a real document from Supabase under the signed-in session.
+  // ?print=1 opens the print dialog once fonts are in, so "Save as PDF" gives a vector PDF.
+  import { renderDocument, documentTitle } from './js/document.js';
+
+  const q = new URLSearchParams(location.search);
+  const sheet = document.getElementById('sheet');
+  const btn = document.getElementById('print-btn');
+  let doc = null;
+
+  if (q.get('demo')) {
+    const { DEMO } = await import('./js/demo-data.js');
+    doc = structuredClone(DEMO[q.get('demo')] || DEMO.invoice);
+    if (q.get('draft') === '1') { doc.status = 'draft'; doc.number = null; }
+    document.getElementById('bar-label').innerHTML = '<span class="screen-tag">נתוני דמה</span>';
+  }
+
+  if (!doc && q.get('id')) {
+    const message = (html) => { sheet.innerHTML = `<p style="padding:24px;font:16px/1.6 sans-serif">${html}</p>`; };
+    const { currentSession } = await import('./js/auth.js');
+    if (!(await currentSession())) {
+      message('צריך להיכנס כדי לראות את המסמך. <a href="./">לכניסה</a>');
+    } else {
+      try {
+        const api = await import('./js/api.js');
+        const row = await api.getDocument(q.get('id'));
+        const items = await api.getItems(row.id);
+        doc = { ...row, items };
+        if (row.status !== 'issued') {
+          // A draft prints with live details (and the DRAFT watermark), exactly as the editor previews it.
+          const { liveSnapshot } = await import('./js/snapshot.js');
+          const [settings, client, project, parent, source] = await Promise.all([
+            api.getSettings(), api.getClient(row.client_id),
+            row.project_id ? api.getProject(row.project_id) : null,
+            row.parent_id ? api.getDocument(row.parent_id) : null,
+            row.source_id ? api.getDocument(row.source_id).catch(() => null) : null,
+          ]);
+          const parentBalance = parent ? await api.invoiceBalance(parent.id) : null;
+          doc.snapshot = liveSnapshot({ kind: row.kind, settings, client, project, parent, parentBalance, source, amount: row.amount });
+        }
+      } catch (err) {
+        message('המסמך לא נמצא, או שאין הרשאה לראות אותו.');
+      }
+    }
+  }
+
+  if (doc) {
+    sheet.innerHTML = renderDocument(doc, { assets: 'assets/' });
+    document.title = documentTitle(doc);
+  } else if (!sheet.innerHTML) {
+    sheet.innerHTML = '<p style="padding:24px">לא נבחר מסמך.</p>';
+  }
+
+  // Phones: fit the 210mm sheet to the screen width.
+  const fit = () => document.documentElement.style.setProperty('--fit', String(Math.min(1, innerWidth / (210 * 96 / 25.4))));
+  fit(); addEventListener('resize', fit);
+
+  // Wait for every face, including the Adobe display font, before printing or capturing.
+  try { await Promise.all([document.fonts.load('800 40px "narkiss-hadash-condensed"', 'אב09'), document.fonts.ready]); } catch {}
+  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  document.documentElement.dataset.ready = '1';
+  btn.disabled = !doc;
+  btn.addEventListener('click', () => window.print());
+  if (doc && q.get('print') === '1') window.print();
+</script>
+</body>
+</html>
