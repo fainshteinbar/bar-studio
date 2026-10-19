@@ -17,7 +17,13 @@ const VIEWPORTS = {
   desktop: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 },
 };
 const site = JSON.parse(readFileSync('i18n/site.json', 'utf8'));
-const prefill = { he: JSON.parse(readFileSync('i18n/he.json', 'utf8')).wa_prefill, en: JSON.parse(readFileSync('i18n/en.json', 'utf8')).wa_prefill };
+const i18n = { he: JSON.parse(readFileSync('i18n/he.json', 'utf8')), en: JSON.parse(readFileSync('i18n/en.json', 'utf8')) };
+// Pages: the home page (keys he-mobile, ...) and the free guide (keys guide-he-mobile, ...), each with its own WhatsApp prefill.
+const PAGES = [
+  { name: '', path: () => '', prefill: (lang) => i18n[lang].wa_prefill },
+  { name: 'guide-', path: (lang) => `${i18n[lang].guide.slug}/`, prefill: (lang) => i18n[lang].guide.wa_prefill },
+];
+const ONLY = process.env.PAGES ? process.env.PAGES.split(',') : null; // e.g. PAGES=guide
 
 const dirs = ['site'];
 const BASE = LIVE ? LIVE.replace(/\/?$/, '/') : `http://localhost:${PORT}/`;
@@ -30,9 +36,10 @@ const reportPath = `${OUT}/report.json`;
 const report = existsSync(reportPath) ? JSON.parse(readFileSync(reportPath, 'utf8')) : {};
 
 for (const d of dirs) {
+ for (const pg of PAGES.filter((x) => !ONLY || ONLY.includes(x.name.replace(/-$/, '') || 'home'))) {
   for (const lang of ['he', 'en']) {
     for (const [vpName, vp] of Object.entries(VIEWPORTS)) {
-      const key = `${lang}-${vpName}`;
+      const key = `${pg.name}${lang}-${vpName}`;
       const ctx = await browser.newContext({ ...vp, reducedMotion: 'no-preference', locale: lang === 'he' ? 'he-IL' : 'en-US' });
       const page = await ctx.newPage();
       const errors = [];
@@ -41,7 +48,7 @@ for (const d of dirs) {
       page.on('requestfailed', (r) => !/\.mp4/.test(r.url()) && errors.push(`failed: ${r.url()}`));
       page.on('response', (r) => r.status() >= 400 && errors.push(`${r.status()}: ${r.url()}`));
 
-      const url = `${BASE}${lang === 'en' ? 'en/' : ''}`;
+      const url = `${BASE}${lang === 'en' ? 'en/' : ''}${pg.path(lang)}`;
       await page.goto(url, { waitUntil: 'load' });
       await page.evaluate(() => document.fonts.ready);
       await sleep(1800);
@@ -90,7 +97,7 @@ for (const d of dirs) {
               return out;
             })(),
           };
-        }, { num: site.whatsapp_number, prefill: prefill[lang], vpw: vp.viewport.width })
+        }, { num: site.whatsapp_number, prefill: pg.prefill(lang), vpw: vp.viewport.width })
       );
 
       // Walk the page so scroll-driven reveals fire and lazy media loads.
@@ -148,6 +155,7 @@ for (const d of dirs) {
       await ctx.close();
     }
   }
+ }
 }
 
 writeFileSync(reportPath, JSON.stringify(report, null, 2) + '\n');

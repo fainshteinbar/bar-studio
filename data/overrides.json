@@ -8,5 +8,29 @@
     "17958556212232372",
     "18115863469771345"
   ],
-  "captions_en": {}
+  "captions_en": {},
+  "guide": {
+    "_help": "Examples in /guide/, by Reel media ID. Views, posters and videos come from the manifest at build time. hide_views: sector keys whose card shows no view count. og: covers for og-guide-*.jpg.",
+    "icecream": "17943051837086700",
+    "rules": [
+      "17943051837086700",
+      "17996145848834714",
+      "18118270045962443"
+    ],
+    "sectors": {
+      "food": "18118270045962443",
+      "realestate": "18487666432129017",
+      "events": "17981987253079891",
+      "sport": "18112796969467846"
+    },
+    "og": [
+      "17943051837086700",
+      "17996145848834714",
+      "18487666432129017",
+      "17981987253079891"
+    ],
+    "hide_views": [
+      "realestate"
+    ]
+  }
 }

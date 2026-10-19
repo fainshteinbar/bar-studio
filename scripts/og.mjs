@@ -2,6 +2,7 @@
 //   assets/img/og-he.jpg, assets/img/og-en.jpg
 // Uses the logo, the headline in Narkiss Hadash Condensed (Adobe kit) and four Reel covers.
 // Run locally after a sync:  node scripts/og.mjs  (posters load from the media CDN)
+// Guide cards only (assets/img/og-guide-{he,en}.jpg, covers from overrides.guide.og):  OG=guide node scripts/og.mjs
 import { chromium } from 'playwright';
 import { readFileSync, writeFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
 import { serve } from './serve.mjs';
@@ -15,8 +16,13 @@ const picks = [...(overrides.rail || []).map((id) => byId[id]).filter(Boolean), 
 const logo = readFileSync('assets/img/bfain-logo-dark-bg.svg', 'utf8').replace(/<metadata>[\s\S]*?<\/metadata>/, '');
 const posterSrc = (p) => (/^https?:/.test(p) ? p : `/${p}`);
 
+const GUIDE = process.env.OG === 'guide';
+const guidePicks = (overrides.guide?.og || []).map((id) => byId[id]).filter((x) => x?.poster_url);
+
 const page = (lang) => {
   const t = read(`i18n/${lang}.json`);
+  const rail = GUIDE ? guidePicks : picks;
+  const head = GUIDE ? [t.guide.hero.title_a, `${t.guide.hero.title_b}?`] : [t.hero.title_a, `${t.hero.title_b}!`];
   const views = new Intl.NumberFormat(lang === 'he' ? 'he-IL' : 'en-US', { notation: 'compact', maximumFractionDigits: 0 }).format(manifest.stats.total_views || 0);
   return `<!doctype html><html lang="${lang}" dir="${t.dir}"><head><meta charset="utf-8">
 <link rel="stylesheet" href="https://use.typekit.net/gce3kmw.css">
@@ -30,15 +36,15 @@ body{position:relative;font-family:"narkiss-hadash-condensed",sans-serif}
 .copy{position:absolute;inset-block:56px;inset-inline-start:64px;width:640px;display:flex;flex-direction:column;justify-content:space-between}
 .logo svg{height:64px;width:auto;display:block}
 h1{font-weight:800;font-size:104px;line-height:.92;${lang === 'en' ? 'text-transform:uppercase;' : ''}}
-h1 span{display:block}.c{color:#00C2FF}
+h1 span{display:block}.c{color:#00C2FF}h1.g{font-size:78px}
 .meta{font:600 24px/1.3 system-ui,sans-serif;color:rgba(244,240,232,.75);display:flex;gap:18px;align-items:center}
 .dot{width:10px;height:10px;border-radius:50%;background:#00C2FF}
 </style></head><body>
-<div class="rail">${picks.map((p) => `<img src="${posterSrc(p.poster_url)}" alt="">`).join('')}</div>
+<div class="rail">${rail.map((p) => `<img src="${posterSrc(p.poster_url)}" alt="">`).join('')}</div>
 <div class="copy">
   <div class="logo">${logo}</div>
-  <h1><span>${t.hero.title_a}</span><span class="c">${t.hero.title_b}!</span></h1>
-  <p class="meta"><span class="dot"></span><span><bdi>bfain.studio</bdi> · <bdi>${manifest.stats.total_videos}</bdi> ${t.d6.reels_word} · <bdi>${views}</bdi> ${t.d6.views_word}</span></p>
+  <h1${GUIDE ? ' class="g"' : ''}><span>${head[0]}</span><span class="c">${head[1]}</span></h1>
+  <p class="meta"><span class="dot"></span><span>${GUIDE ? `${t.guide.hero.eyebrow.split(' · ')[0]} · <bdi>bfain.studio</bdi>` : `<bdi>bfain.studio</bdi> · <bdi>${manifest.stats.total_videos}</bdi> ${t.d6.reels_word} · <bdi>${views}</bdi> ${t.d6.views_word}`}</span></p>
 </div></body></html>`;
 };
 
@@ -51,9 +57,10 @@ for (const lang of ['he', 'en']) {
   await p.goto(`http://localhost:4191/.og-tmp/${lang}.html`, { waitUntil: 'networkidle' });
   await p.evaluate(() => document.fonts.ready);
   await p.waitForTimeout(400);
-  await p.screenshot({ path: `assets/img/og-${lang}.jpg`, type: 'jpeg', quality: 84 });
+  const out = `assets/img/og-${GUIDE ? 'guide-' : ''}${lang}.jpg`;
+  await p.screenshot({ path: out, type: 'jpeg', quality: 84 });
   await p.close();
-  console.log(`assets/img/og-${lang}.jpg`);
+  console.log(out);
 }
 await browser.close();
 server.close();

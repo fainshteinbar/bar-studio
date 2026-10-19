@@ -188,5 +188,86 @@
     "cta_eyebrow": "Let's talk",
     "updated": "Updated",
     "player_label": "Reel player"
+  },
+  "guide": {
+    "slug": "guide",
+    "meta": {
+      "title": "Which AI video will bring customers to your business · Free guide | bfain.studio",
+      "description": "A short guide for business owners: 3 rules for the first second of an AI video, and which video fits restaurants, real estate, music and events, and brands and sport. With real examples and numbers.",
+      "og_alt": "Free guide: which AI video will bring customers to your business"
+    },
+    "home_entry": "New · Free guide: which AI video will bring customers to your business",
+    "hero": {
+      "eyebrow": "Free guide · 3-minute read",
+      "title_a": "Which AI video",
+      "title_b": "brings you customers",
+      "lead": "Most business AI videos open on a logo, and viewers scroll past before they know what they're watching. On my page, a video that opens on an ice cream tub from the freezer reached {icecream} views, {ratio} times the median Reel on this site. Films that open on a logo get, on average, a small fraction of that.",
+      "stat_icecream": "A video that opens on an ice cream tub from the freezer",
+      "stat_ratio": "the median Reel on this site",
+      "after": "The difference isn't budget or tools. It's what the viewer sees in the first second."
+    },
+    "rules": {
+      "eyebrow": "What works",
+      "title": "3 rules for the first second",
+      "example_label": "In the example",
+      "items": [
+        {
+          "title": "Open on something your customer knows, not your logo",
+          "body": "Viewers decide within a second whether to stay. A logo tells them nothing. Something they know from home, the supermarket line or their phone tells them: this is about me.",
+          "example": "An ice cream tub that's in almost every Israeli freezer, right in the first frame."
+        },
+        {
+          "title": "The twist lands in the first second",
+          "body": "Once they recognize it, surprise them, and fast. A surprise at second five arrives when they're already on the next video.",
+          "example": "It opens on the ending: a guy walks out of a 7-Eleven with half a shelf. Only then do you learn he went in for a bottle of water."
+        },
+        {
+          "title": "Your brand comes in after you've hooked them",
+          "body": "Your product isn't the hook. It's the answer. Once the viewer is curious, the brand closes the story instead of opening it.",
+          "example": "First the face of someone hearing \"139 shekels?!\". Only then does the cake box open."
+        }
+      ]
+    },
+    "sectors": {
+      "eyebrow": "By industry",
+      "title": "Which video fits your business",
+      "what_label": "The video",
+      "gets_label": "What it's for",
+      "items": [
+        {
+          "key": "food",
+          "name": "Restaurants and food",
+          "what": "A moment every customer has had with the dish or the price: the argument over the price, the first bite, what's left in the box.",
+          "gets": "Shares and tags: people sending it to the friend who argues over every price, so your dish joins the conversation."
+        },
+        {
+          "key": "realestate",
+          "name": "Real estate",
+          "what": "The moment everyone who has hunted for an apartment knows: apartment number 15, and the argument over what you'll give up this time.",
+          "gets": "People hunting for an apartment right now see themselves in it, and the project stays with them when they reach the next step."
+        },
+        {
+          "key": "events",
+          "name": "Music and events",
+          "what": "A look at what happens before the audience arrives: rehearsals, backstage, the moment something went wrong.",
+          "gets": "Buzz before the event: the audience feeling they're seeing something that isn't out yet."
+        },
+        {
+          "key": "sport",
+          "name": "Brands and sport",
+          "what": "The team's or the brand's news moment, on the day it happens: a signing, a launch, a win.",
+          "gets": "Fans sharing it, because it's theirs. In this example, {likes_pct} of viewers liked it{likes_top}.",
+          "likes_top": ", the highest rate of any Reel on this site"
+        }
+      ]
+    },
+    "cta": {
+      "eyebrow": "Let's talk",
+      "title": "Which video will work for your business?",
+      "sub": "Tell me in a few words what the business is and what you want the video to do.",
+      "wa": "Message me on WhatsApp"
+    },
+    "wa_prefill": "Hi Bar, I read the guide and I want an AI video for...",
+    "back_home": "All the work"
   }
 }

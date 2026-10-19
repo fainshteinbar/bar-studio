@@ -128,6 +128,9 @@ body { background: var(--void); color: var(--cream); font: 400 16px/1.6 var(--te
 .num { margin: 0; font-size: clamp(56px, 8.4vw, 132px); line-height: 0.9; font-weight: 800; color: var(--cyan); }
 .proof dt { margin-block-start: 8px; color: var(--dim); font-size: 0.95rem; }
 .proof-note { margin-block-start: 22px; font-size: 0.85rem; color: var(--dim); text-wrap: balance; }
+.guide-entry { display: inline-flex; align-items: baseline; gap: 10px; margin-block-start: 14px; font-size: 0.95rem; font-weight: 600; color: var(--cream); }
+.guide-entry .arrow { color: var(--cyan); }
+@media (hover: hover) and (pointer: fine) { .guide-entry:hover .arrow { transform: translateX(calc(var(--s) * 4px)) scaleX(var(--s)); } }
 @media (max-width: 699px) { .proof dl { grid-template-columns: 1fr 1fr; row-gap: 28px; } .proof dl > div:first-child { grid-column: 1 / -1; } .proof dl > div:nth-child(2) { padding-inline-start: 0; border-inline-start: 0; } }
 
 /* FEATURED — the most-watched Reel, big */

@@ -81,7 +81,7 @@ const firstLocal = {};
 // Stylesheets are inlined: the page is one document, and an extra HTML -> CSS -> font hop before first paint
 // cost about as much as the CSS itself in PageSpeed's mobile simulation. url("../x") is rebased per page.
 const minCss = (css) => css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s*([{}:;,>])\s*/g, '$1').replace(/;}/g, '}').trim();
-const CSS = { base: minCss(readFileSync('assets/css/base.css', 'utf8')), site: minCss(readFileSync('assets/css/site.css', 'utf8')) };
+const CSS = { base: minCss(readFileSync('assets/css/base.css', 'utf8')), site: minCss(readFileSync('assets/css/site.css', 'utf8')), guide: minCss(readFileSync('assets/css/guide.css', 'utf8')) };
 const inlineCss = (css, root) => `<style>${css.replace(/url\("\.\.\//g, `url("${root}assets/`)}</style>`;
 
 const esc = (s) =>
@@ -110,18 +110,64 @@ function render(tpl, ctx) {
   return tpl;
 }
 
+// /guide/: copy from i18n/<lang>.json "guide", example Reels from data/overrides.json "guide". Every number is read
+// from the manifest at build time, so the hourly sync keeps the guide current. A Reel that is no longer on the site
+// drops out of the guide with a warning instead of failing the build (the sync must keep publishing).
+const wordsHtml = (str) => str.split(' ').map((w, i) => `<span class="w"><span style="--i:${i}">${esc(w)}</span></span>`).join(' ');
+function guideContext(t, lang, items, compact) {
+  const g = t.guide;
+  const cfg = overridesAll.guide || {};
+  const byId = Object.fromEntries(items.map((x) => [x.id, x]));
+  const pick = (id, where) => byId[id] || (console.warn(`   guide: Reel ${id} (${where}) is not on the site; skipped`), null);
+  const fill = (str, vars) => str.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
+  const views = items.map((x) => x.views).filter((v) => v != null).sort((a, b) => a - b);
+  const median = views.length % 2 ? views[(views.length - 1) / 2] : (views[views.length / 2 - 1] + views[views.length / 2]) / 2;
+  const ice = pick(cfg.icecream, 'icecream');
+  const hasNumbers = !!(ice?.views && median);
+  const nums = hasNumbers ? { icecream: compact.format(ice.views), ratio: String(Math.round(ice.views / median)) } : {};
+  const rate = (x) => (x?.views ? (x.likes ?? 0) / x.views : 0);
+  const topRate = Math.max(...items.map(rate));
+  const pct = new Intl.NumberFormat(lang === 'he' ? 'he-IL' : 'en-US', { style: 'percent', maximumFractionDigits: 1 });
+  const rules = g.rules.items.map((r, i) => ({ ...r, reel: pick(cfg.rules?.[i], `rules[${i}]`) })).filter((r) => r.reel);
+  const sectors = g.sectors.items.map((sct) => {
+    const reel = pick(cfg.sectors?.[sct.key], `sectors.${sct.key}`);
+    if (!reel) return null;
+    const likes = { likes_pct: pct.format(rate(reel)), likes_top: rate(reel) === topRate ? sct.likes_top || '' : '' };
+    const shown = (cfg.hide_views || []).includes(sct.key) ? { ...reel, views_fmt: '', views_html: '' } : reel;
+    return { ...sct, reel: shown, gets: fill(sct.gets, likes) };
+  }).filter(Boolean);
+  return {
+    t: g,
+    title_a: wordsHtml(g.hero.title_a),
+    title_b: wordsHtml(g.hero.title_b),
+    lead: hasNumbers ? fill(g.hero.lead, nums) : g.hero.lead.split('. ')[0] + '.',
+    has_numbers: hasNumbers,
+    icecream_fmt: nums.icecream || '',
+    ratio: nums.ratio || '',
+    rules,
+    sectors,
+  };
+}
+
 const WA_ICON =
   '<svg class="wa-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2Z"/></svg>';
 
-function context(lang, root, base) {
+// page: 'home' (/, /en/) or 'guide' (/guide/, /en/guide/). root is the path back to the site root.
+function context(lang, root, base, page = 'home') {
   const t = langs[lang];
+  const guidePage = page === 'guide';
+  const pagePath = guidePage ? `${t.guide.slug}/` : '';
   const other = lang === 'he' ? 'en' : 'he';
   const loc = lang === 'he' ? 'he-IL' : 'en-US';
   const compact = { format: compactFor(loc) };   // the same formatter the sync uses to decide whether to commit
   const url = (p) => (/^https?:/.test(p) ? p : root + p);
-  const he_url = lang === 'he' ? './' : '../';
-  const en_url = lang === 'he' ? 'en/' : './';
-  const wa_url = `https://wa.me/${site.whatsapp_number}?text=${encodeURIComponent(t.wa_prefill)}`;
+  const he_home = lang === 'he' ? (guidePage ? '../' : './') : (guidePage ? '../../' : '../');
+  const en_home = lang === 'he' ? (guidePage ? '../en/' : 'en/') : (guidePage ? '../' : './');
+  const he_url = he_home;
+  const en_url = en_home;
+  const guide_url = guidePage ? './' : `${t.guide.slug}/`;
+  const alt_page = guidePage ? (lang === 'he' ? `../en/${t.guide.slug}/` : `../../${t.guide.slug}/`) : (lang === 'he' ? 'en/' : '../');
+  const wa_url = `https://wa.me/${site.whatsapp_number}?text=${encodeURIComponent(guidePage ? t.guide.wa_prefill : t.wa_prefill)}`;
   const mail_url = `mailto:${site.email}?subject=${encodeURIComponent(t.cta.email_subject)}`;
   const ig_url = `https://www.instagram.com/${site.instagram}/`;
 
@@ -197,8 +243,9 @@ function context(lang, root, base) {
   };
 
   const SITE = site.site_url;
-  const pageUrl = lang === 'he' ? SITE : `${SITE}en/`;
-  const ogImage = `${SITE}assets/img/og-${lang}.jpg`;
+  const pageUrl = `${SITE}${lang === 'he' ? '' : 'en/'}${pagePath}`;
+  const ogImage = `${SITE}assets/img/og-${guidePage ? 'guide-' : ''}${lang}.jpg`;
+  const meta = guidePage ? t.guide.meta : t.meta;
   const mediaOrigin = (() => { try { return new URL(manifest.media_base_url || '').origin; } catch { return ''; } })();
   const jsonld = {
     '@context': 'https://schema.org',
@@ -211,28 +258,28 @@ function context(lang, root, base) {
         sameAs: [`https://www.instagram.com/${site.instagram}/`],
       },
       { '@type': 'WebSite', '@id': `${SITE}#site`, url: SITE, name: site.brand, inLanguage: ['he', 'en'], publisher: { '@id': `${SITE}#studio` } },
-      { '@type': 'WebPage', url: pageUrl, name: t.meta.title, inLanguage: lang, isPartOf: { '@id': `${SITE}#site` }, about: { '@id': `${SITE}#studio` } },
+      { '@type': 'WebPage', url: pageUrl, name: meta.title, inLanguage: lang, isPartOf: { '@id': `${SITE}#site` }, about: { '@id': `${SITE}#studio` } },
     ],
   };
   const head = [
     '<meta charset="utf-8">',
     '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">',
-    `<title>${esc(t.meta.title)}</title>`,
-    `<meta name="description" content="${esc(t.meta.description)}">`,
+    `<title>${esc(meta.title)}</title>`,
+    `<meta name="description" content="${esc(meta.description)}">`,
     `<link rel="canonical" href="${pageUrl}">`,
-    `<link rel="alternate" hreflang="he" href="${SITE}">`,
-    `<link rel="alternate" hreflang="en" href="${SITE}en/">`,
-    `<link rel="alternate" hreflang="x-default" href="${SITE}">`,
+    `<link rel="alternate" hreflang="he" href="${SITE}${pagePath}">`,
+    `<link rel="alternate" hreflang="en" href="${SITE}en/${pagePath}">`,
+    `<link rel="alternate" hreflang="x-default" href="${SITE}${pagePath}">`,
     mediaOrigin ? `<link rel="preconnect" href="${mediaOrigin}">` : '',
     `<meta property="og:type" content="website">`,
     `<meta property="og:site_name" content="${esc(site.brand)}">`,
     `<meta property="og:url" content="${pageUrl}">`,
-    `<meta property="og:title" content="${esc(t.meta.title)}">`,
-    `<meta property="og:description" content="${esc(t.meta.description)}">`,
+    `<meta property="og:title" content="${esc(meta.title)}">`,
+    `<meta property="og:description" content="${esc(meta.description)}">`,
     `<meta property="og:image" content="${ogImage}">`,
     '<meta property="og:image:width" content="1200">',
     '<meta property="og:image:height" content="630">',
-    `<meta property="og:image:alt" content="${esc(t.meta.og_alt)}">`,
+    `<meta property="og:image:alt" content="${esc(meta.og_alt)}">`,
     `<meta property="og:locale" content="${t.meta.og_locale}">`,
     `<meta property="og:locale:alternate" content="${langs[other].meta.og_locale}">`,
     '<meta name="twitter:card" content="summary_large_image">',
@@ -286,8 +333,11 @@ function context(lang, root, base) {
     skip: `<a class="skip-link" href="#main">${esc(t.a11y.skip)}</a>`,
     logo: LOGO,
     logo_defs: LOGO_DEFS,
-    home_url: lang === 'he' ? he_url : en_url,
-    lang_toggle: `<a class="lang-toggle" href="${lang === 'he' ? en_url : he_url}" hreflang="${other}" lang="${other}">${esc(t.nav.lang_switch)}<span class="sr-only"> · ${esc(t.a11y.lang_switch_label)}</span></a>`,
+    home_url: lang === 'he' ? he_home : en_home,
+    guide_url,
+    guide_css: guidePage ? inlineCss(CSS.guide, root) : '',
+    g: guidePage ? guideContext(t, lang, items, compact) : null,
+    lang_toggle: `<a class="lang-toggle" href="${alt_page}" hreflang="${other}" lang="${other}">${esc(t.nav.lang_switch)}<span class="sr-only"> · ${esc(t.a11y.lang_switch_label)}</span></a>`,
     wa_float: `<a class="wa-float" href="${esc(wa_url)}" target="_blank" rel="noopener" aria-label="${esc(t.a11y.wa_float)}">${WA_ICON}<span class="wa-float-label">${esc(t.promise)}</span></a>`,
     email_ltr: `<bdi dir="ltr">${esc(site.email)}</bdi>`,
     scripts: `<script src="${root}assets/js/reels.js" defer></script>`,
@@ -321,14 +371,25 @@ writeFileSync('index.html', render(tpl, context('he', '', '')));
 mkdirSync('en', { recursive: true });
 writeFileSync(join('en', 'index.html'), render(tpl, context('en', '../', '../')));
 
+const guideTpl = readFileSync('src/guide.html', 'utf8');
+for (const lang of ['he', 'en']) {
+  const dir = lang === 'he' ? langs.he.guide.slug : join('en', langs.en.guide.slug);
+  const root = lang === 'he' ? '../' : '../../';
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, 'index.html'), render(guideTpl, context(lang, root, root, 'guide')));
+}
+
 const SITE = site.site_url;
 const today = new Date().toISOString().slice(0, 10);
 const alt = `<xhtml:link rel="alternate" hreflang="he" href="${SITE}"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}en/"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}"/>`;
+const altGuide = `<xhtml:link rel="alternate" hreflang="he" href="${SITE}${langs.he.guide.slug}/"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}en/${langs.en.guide.slug}/"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${langs.he.guide.slug}/"/>`;
 writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>${SITE}</loc><lastmod>${today}</lastmod>${alt}</url>
   <url><loc>${SITE}en/</loc><lastmod>${today}</lastmod>${alt}</url>
+  <url><loc>${SITE}${langs.he.guide.slug}/</loc><lastmod>${today}</lastmod>${altGuide}</url>
+  <url><loc>${SITE}en/${langs.en.guide.slug}/</loc><lastmod>${today}</lastmod>${altGuide}</url>
 </urlset>
 `);
 writeFileSync('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}sitemap.xml\n`);
-console.log(`built index.html (he) + en/index.html, sitemap.xml, robots.txt from ${MANIFEST}`);
+console.log(`built index.html (he) + en/index.html, guide/ + en/guide/, sitemap.xml, robots.txt from ${MANIFEST}`);

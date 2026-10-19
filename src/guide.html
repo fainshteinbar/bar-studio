@@ -1,0 +1,130 @@
+<!doctype html>
+<!-- bfain.studio free guide for business owners. Built by scripts/build.mjs into /guide/ (he) and /en/guide/ (en). -->
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+{{{head}}}
+{{{typekit}}}
+{{#if he}}<link rel="preload" as="font" type="font/woff2" crossorigin href="{{root}}assets/fonts/noto-sans-hebrew-var-hebrew.woff2">{{/if}}
+{{#unless he}}<link rel="preload" as="font" type="font/woff2" crossorigin href="{{root}}assets/fonts/dm-sans-latin-600.woff2">{{/unless}}
+{{{site_css}}}
+{{{guide_css}}}
+</head>
+<body>
+{{{skip}}}
+{{{logo_defs}}}
+<header class="nav">
+  <a class="logo" href="{{home_url}}" aria-label="{{t.a11y.logo_home}}">{{{logo}}}</a>
+  <nav aria-label="{{t.a11y.nav_label}}">
+    <a class="ul" href="{{home_url}}#work">{{t.nav.work}}</a>
+    <a class="ul" href="{{home_url}}#process">{{t.nav.process}}</a>
+    <a class="ul" href="{{home_url}}#about">{{t.nav.about}}</a>
+  </nav>
+  {{{lang_toggle}}}
+  <a class="pill pill-cyan nav-cta" href="{{wa_url}}" target="_blank" rel="noopener" data-magnetic><span class="pill-in">{{{wa_icon}}}{{t.nav.contact}}</span></a>
+</header>
+
+<main id="main" class="guide">
+  <section class="g-hero" aria-labelledby="g-title">
+    <p class="eyebrow">{{g.t.hero.eyebrow}}</p>
+    <h1 id="g-title" class="headline g-headline">
+      <span class="hl">{{{g.title_a}}}</span>
+      <span class="hl hl-cyan">{{{g.title_b}}}<span class="bang" aria-hidden="true">?</span></span>
+    </h1>
+    <p class="g-lead">{{g.lead}}</p>
+    {{#if g.has_numbers}}<dl class="g-stats">
+      <div><dd class="num"><span class="ltr">{{g.icecream_fmt}}</span></dd><dt>{{g.t.hero.stat_icecream}}</dt></div>
+      <div><dd class="num"><span class="ltr">{{g.ratio}}×</span></dd><dt>{{g.t.hero.stat_ratio}}</dt></div>
+    </dl>{{/if}}
+    <p class="g-after">{{g.t.hero.after}}</p>
+  </section>
+
+  <section class="g-rules" aria-labelledby="g-rules-title">
+    <header class="sec-head">
+      <p class="eyebrow">{{g.t.rules.eyebrow}}</p>
+      <h2 id="g-rules-title" class="title">{{g.t.rules.title}}</h2>
+    </header>
+    <ol>
+      {{#each g.rules}}
+      <li class="g-rule">
+        <span class="step-n ltr" aria-hidden="true">{{n}}</span>
+        <div class="g-rule-copy">
+          <h3>{{it.title}}</h3>
+          <p>{{it.body}}</p>
+        </div>
+        <a class="g-ex" href="{{it.reel.href}}" target="_blank" rel="noopener" data-reel data-full="{{it.reel.full}}" data-poster="{{it.reel.poster}}" data-pitch="{{it.reel.pitch}}" data-lang="{{it.reel.pitch_lang}}" data-views="{{it.reel.views_fmt}}">
+          <span class="g-ex-media">{{{it.reel.media}}}<span class="g-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="g-ex-copy">
+            <span class="g-ex-label">{{g.t.rules.example_label}}</span>
+            <span class="g-ex-text">{{it.example}}</span>
+            <span class="card-stat">{{{it.reel.views_html}}}</span>
+          </span>
+        </a>
+      </li>
+      {{/each}}
+    </ol>
+  </section>
+
+  <section class="g-sectors" aria-labelledby="g-sectors-title">
+    <header class="sec-head">
+      <p class="eyebrow">{{g.t.sectors.eyebrow}}</p>
+      <h2 id="g-sectors-title" class="title">{{g.t.sectors.title}}</h2>
+    </header>
+    <ul class="g-sector-list">
+      {{#each g.sectors}}
+      <li class="g-sector">
+        <div class="card g-sector-media">
+          <a href="{{it.reel.href}}" target="_blank" rel="noopener" data-reel data-full="{{it.reel.full}}" data-poster="{{it.reel.poster}}" data-pitch="{{it.reel.pitch}}" data-lang="{{it.reel.pitch_lang}}" data-views="{{it.reel.views_fmt}}">
+            <span class="sr-only">{{it.reel.title}}. {{t.d6.watch}}.</span>
+            <span class="card-media">{{{it.reel.media}}}</span>
+            <span class="card-meta"><span class="card-stat">{{{it.reel.views_html}}}</span></span>
+          </a>
+        </div>
+        <div class="g-sector-copy">
+          <h3 class="g-sector-name">{{it.name}}</h3>
+          <dl>
+            <dt>{{g.t.sectors.what_label}}</dt><dd>{{it.what}}</dd>
+            <dt>{{g.t.sectors.gets_label}}</dt><dd>{{it.gets}}</dd>
+          </dl>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <section class="cta" id="contact" aria-labelledby="cta-title">
+    <div class="cta-card">
+      <p class="eyebrow eyebrow-dark">{{g.t.cta.eyebrow}}</p>
+      <h2 id="cta-title" class="cta-headline">{{g.t.cta.title}}</h2>
+      <p class="g-cta-sub">{{g.t.cta.sub}}</p>
+      <div class="cta-row">
+        <a class="pill pill-dark pill-xl" href="{{wa_url}}" target="_blank" rel="noopener" data-magnetic><span class="pill-in">{{{wa_icon}}}{{g.t.cta.wa}}</span></a>
+        <p class="cta-promise"><span class="dot dot-dark" aria-hidden="true"></span>{{t.promise}}</p>
+      </div>
+    </div>
+    <a class="ul more g-back" href="{{home_url}}">{{g.t.back_home}} <span class="arrow" aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<footer class="foot">
+  <a class="logo logo-foot" href="{{home_url}}" aria-label="{{t.a11y.logo_home}}">{{{logo}}}</a>
+  <span>{{t.footer.line}}</span>
+  <span>{{t.footer.copy}}</span>
+</footer>
+
+<dialog class="player" aria-label="{{t.d6.player_label}}">
+  <div class="player-box">
+    <video class="player-video" controls playsinline preload="none"></video>
+    <div class="player-meta">
+      <p class="player-pitch"></p>
+      <p class="player-views"><span class="ltr"></span> {{t.grid.views}}</p>
+      <a class="ul player-ig" href="#" target="_blank" rel="noopener">{{t.d6.open_ig}}</a>
+    </div>
+    <button class="player-close" type="button" aria-label="{{t.d6.close}}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+</dialog>
+
+{{{wa_float}}}
+{{{scripts}}}
+<script src="{{root}}assets/js/app.js" defer></script>
+</body>
+</html>

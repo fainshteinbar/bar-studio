@@ -1,0 +1,64 @@
+/* /guide/ only (inlined after site.css by build.mjs). Same tokens, type roles and components as the home page;
+   this file only lays them out for a reading page. Mobile first: written for 390 px, widened at 700 / 1100 px. */
+
+.guide { --measure: 62ch; }
+
+/* Hero: text first, then the three real numbers */
+.g-hero { padding: clamp(28px, 6vw, 88px) var(--pad) clamp(40px, 6vw, 80px); border-block-end: 1px solid var(--line); }
+.g-headline { font-size: clamp(46px, 12.5vw, 150px); }
+.g-lead { margin-block-start: 22px; max-inline-size: var(--measure); font-size: 1.08rem; line-height: 1.6; }
+.g-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 0; margin: 34px 0 0; }
+.g-stats > div { padding-inline-end: 16px; }
+.g-stats > div + div { padding-inline-start: clamp(16px, 3vw, 40px); border-inline-start: 1px solid var(--line); }
+.g-stats .num { font-size: clamp(54px, 16vw, 132px); }
+.g-stats dt { margin-block-start: 8px; color: var(--dim); font-size: 0.92rem; max-inline-size: 26ch; }
+.g-after { margin-block-start: 30px; max-inline-size: var(--measure); font-weight: 700; font-size: 1.15rem; line-height: 1.45; }
+
+/* Rules: outline numeral, copy, then the real example as a small Reel that opens the player */
+.g-rules { padding: clamp(48px, 8vw, 120px) var(--pad) clamp(24px, 4vw, 48px); }
+.g-rules ol { display: grid; border-block-start: 1px solid var(--line); }
+.g-rule { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 4px 14px; padding-block: 26px; border-block-end: 1px solid var(--line); }
+.g-rule .step-n { font-size: 56px; grid-row: span 2; }
+.g-rule h3 { font: 700 1.2rem/1.3 var(--text); margin-block: 2px 8px; }
+.g-rule p { color: var(--dim); max-inline-size: var(--measure); }
+.g-ex { grid-column: 2; display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 14px; align-items: center; margin-block-start: 16px; padding: 10px; border-radius: 16px; background: var(--surface); text-decoration: none; box-shadow: inset 0 0 0 1px var(--line); transition: box-shadow var(--d1) ease; }
+.g-ex-media { position: relative; display: block; border-radius: 10px; overflow: hidden; }
+.g-ex-media .reel-media { aspect-ratio: 9 / 16 !important; }
+.g-play { position: absolute; inset-block-end: 8px; inset-inline-start: 8px; z-index: 2; display: grid; place-items: center; inline-size: 30px; block-size: 30px; border-radius: 50%; background: var(--cream); color: var(--void); }
+.g-play svg { transform: translateX(1px); }
+.g-ex-copy { display: grid; gap: 6px; }
+.g-ex-label { font: 600 0.75rem/1.4 var(--text); letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); }
+:lang(he) .g-ex-label { font-size: 0.85rem; letter-spacing: 0.02em; }
+.g-ex-text { font-size: 0.98rem; line-height: 1.45; }
+@media (hover: hover) and (pointer: fine) { .g-ex:hover { box-shadow: inset 0 0 0 1px var(--cyan); } }
+
+/* Sectors: the Reel beside its two answers (what video, what it gets you) */
+.g-sectors { padding: clamp(48px, 8vw, 120px) var(--pad) clamp(56px, 8vw, 120px); }
+.g-sector-list { display: grid; gap: 36px; }
+.g-sector { display: grid; grid-template-columns: minmax(118px, 38%) minmax(0, 1fr); gap: 16px; align-items: start; }
+.g-sector-media .card-meta { padding-block-start: 8px; }
+.g-sector-name { font-family: var(--display); font-weight: 700; font-size: clamp(30px, 8vw, 52px); line-height: 0.95; margin-block-end: 12px; }
+:lang(en) .g-sector-name { text-transform: uppercase; }
+.g-sector-copy dl { margin: 0; display: grid; gap: 4px; }
+.g-sector-copy dt { margin-block-start: 8px; font: 600 0.75rem/1.4 var(--text); letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); }
+:lang(he) .g-sector-copy dt { font-size: 0.85rem; letter-spacing: 0.02em; }
+.g-sector-copy dt:first-child { margin-block-start: 0; }
+.g-sector-copy dd { margin: 0; font-size: 0.95rem; line-height: 1.5; }
+
+/* CTA: the home page card, plus one line of copy */
+.g-cta-sub { position: relative; margin-block-start: 16px; font-size: 1.1rem; font-weight: 600; max-inline-size: 40ch; }
+.guide .cta-row { margin-block-end: 0; }
+.g-back { margin-block-start: 40px; }
+
+@media (min-width: 700px) {
+  .g-stats { grid-template-columns: repeat(2, minmax(0, 360px)); }
+  .g-rule { grid-template-columns: 96px minmax(0, 1fr) minmax(300px, 380px); gap: 0 32px; align-items: center; padding-block: 36px; }
+  .g-rule .step-n { font-size: 88px; grid-row: auto; }
+  .g-rule h3 { font-size: 1.45rem; }
+  .g-ex { grid-column: auto; margin-block-start: 0; }
+  .g-sector-list { grid-template-columns: 1fr 1fr; gap: 64px 48px; }
+}
+@media (min-width: 1100px) {
+  .g-hero { padding-block-start: 96px; }
+  .g-sector { grid-template-columns: minmax(180px, 42%) minmax(0, 1fr); gap: 28px; }
+}
