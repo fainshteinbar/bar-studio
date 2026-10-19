@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T04:17:27.905Z",
+  "generated_at": "2026-10-19T05:17:20.627Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
@@ -7,10 +7,10 @@
     "total_videos": 21,
     "all_videos": 21,
     "excluded_trial": 0,
-    "total_views": 666605,
+    "total_views": 666711,
     "views_counted_over": 21,
     "views_sample": false,
-    "top_visible_views": 222446,
+    "top_visible_views": 222490,
     "top_visible_id": "17943051837086700",
     "shown": 21,
     "hidden": 0,
@@ -39,7 +39,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4301,
+      "views": 4303,
       "likes": 38
     },
     {
@@ -61,7 +61,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 358,
+      "views": 366,
       "likes": 1,
       "is_shared_to_feed": true
     },
@@ -84,7 +84,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23758,
+      "views": 23759,
       "likes": 321,
       "is_shared_to_feed": true
     },
@@ -130,7 +130,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 160243,
+      "views": 160244,
       "likes": 138,
       "is_shared_to_feed": true
     },
@@ -153,8 +153,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104443,
-      "likes": 4576,
+      "views": 104456,
+      "likes": 4577,
       "is_shared_to_feed": true
     },
     {
@@ -176,7 +176,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4475,
+      "views": 4479,
       "likes": 103,
       "is_shared_to_feed": true
     },
@@ -199,7 +199,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 44588,
+      "views": 44616,
       "likes": 1019,
       "is_shared_to_feed": true
     },
@@ -245,8 +245,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 222446,
-      "likes": 4745,
+      "views": 222490,
+      "likes": 4747,
       "is_shared_to_feed": true
     },
     {
@@ -383,7 +383,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 14915,
+      "views": 14916,
       "likes": 118,
       "is_shared_to_feed": true
     },
@@ -452,7 +452,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 58455,
+      "views": 58459,
       "likes": 2085,
       "is_shared_to_feed": true
     },
