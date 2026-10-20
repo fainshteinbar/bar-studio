@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-20T02:17:28.550Z",
+  "generated_at": "2026-10-20T03:17:21.774Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 22,
-    "all_videos": 25,
-    "excluded_trial": 3,
-    "total_views": 670459,
+    "all_videos": 27,
+    "excluded_trial": 5,
+    "total_views": 670502,
     "views_counted_over": 22,
     "views_sample": false,
-    "top_visible_views": 223571,
+    "top_visible_views": 223579,
     "top_visible_id": "17943051837086700",
     "shown": 22,
     "hidden": 0,
@@ -19,6 +19,38 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18071487035773521",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Des1eDBSwdb/",
+      "timestamp": "2026-10-20T03:11:02+0000",
+      "caption": "כל מי ששיחק בסימס יודע בדיוק מה קורה עכשיו 💀\nהסימס, אבל במציאות. שלחו למי שהוציא את הסולם מהבריכה.\n\nסרטון שנוצר ב-AI.\n#הסימס #סימס #TheSims #נוסטלגיה #AIvideo",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "has_video": false,
+      "id": "18103164779569620",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DesyYr7ylUe/",
+      "timestamp": "2026-10-20T02:44:09+0000",
+      "caption": "Everyone who played The Sims knows exactly what happens next 💀\nThe Sims, but live action. Send this to whoever removed the pool ladder.\n\nAI-generated video.\n#TheSims #Sims4 #liveaction #nostalgia #AIvideo",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 99,
+      "likes": 1
+    },
     {
       "has_video": true,
       "video_url": "https://bfain-media.b-cdn.net/reels/18190448545363511.mp4",
@@ -39,7 +71,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1855,
+      "views": 1862,
       "likes": 32
     },
     {
@@ -55,8 +87,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1643,
-      "likes": 16
+      "views": 1706,
+      "likes": 18
     },
     {
       "has_video": false,
@@ -87,7 +119,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2153,
+      "views": 2157,
       "likes": 16
     },
     {
@@ -110,7 +142,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4350,
+      "views": 4353,
       "likes": 38
     },
     {
@@ -132,7 +164,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 383,
+      "views": 386,
       "likes": 1,
       "is_shared_to_feed": true
     },
@@ -155,7 +187,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23804,
+      "views": 23806,
       "likes": 323,
       "is_shared_to_feed": true
     },
@@ -178,7 +210,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2823,
+      "views": 2826,
       "likes": 29,
       "is_shared_to_feed": true
     },
@@ -201,7 +233,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 160282,
+      "views": 160283,
       "likes": 138,
       "is_shared_to_feed": true
     },
@@ -224,7 +256,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104615,
+      "views": 104617,
       "likes": 4581,
       "is_shared_to_feed": true
     },
@@ -247,7 +279,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4503,
+      "views": 4504,
       "likes": 104,
       "is_shared_to_feed": true
     },
@@ -270,7 +302,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 45030,
+      "views": 45042,
       "likes": 1031,
       "is_shared_to_feed": true
     },
@@ -293,7 +325,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4426,
+      "views": 4427,
       "likes": 48,
       "is_shared_to_feed": true
     },
@@ -316,7 +348,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 223571,
+      "views": 223579,
       "likes": 4773,
       "is_shared_to_feed": true
     },
