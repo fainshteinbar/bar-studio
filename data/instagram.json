@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-20T14:17:24.500Z",
+  "generated_at": "2026-10-20T16:17:24.534Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 22,
-    "all_videos": 27,
-    "excluded_trial": 5,
-    "total_views": 671778,
+    "all_videos": 28,
+    "excluded_trial": 6,
+    "total_views": 672041,
     "views_counted_over": 22,
     "views_sample": false,
-    "top_visible_views": 224223,
+    "top_visible_views": 224376,
     "top_visible_id": "17943051837086700",
     "shown": 22,
     "hidden": 0,
@@ -19,6 +19,22 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18118567256062261",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DeuFC8aS3wN/",
+      "timestamp": "2026-10-20T14:46:24+0000",
+      "caption": "״אני לא רעבה״ 🙄\nכל זוג מכיר את הרגע הזה. תייגו את מי שתמיד ״רק ביס״ 👇\n\n#זוגיות #טוסט #גבינה #ASMR #מערכון\n\nהסרטון נוצר בבינה מלאכותית. קונספט יצירתי, לא פרסומת רשמית של תנובה / עמק.",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 176,
+      "likes": 6
+    },
     {
       "has_video": false,
       "id": "18071487035773521",
@@ -32,7 +48,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2715,
+      "views": 2761,
       "likes": 16
     },
     {
@@ -48,7 +64,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1995,
+      "views": 2015,
       "likes": 11
     },
     {
@@ -71,7 +87,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1975,
+      "views": 1989,
       "likes": 34
     },
     {
@@ -87,7 +103,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1754,
+      "views": 1758,
       "likes": 18
     },
     {
@@ -119,7 +135,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2279,
+      "views": 2297,
       "likes": 17
     },
     {
@@ -142,7 +158,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4411,
+      "views": 4432,
       "likes": 38
     },
     {
@@ -164,7 +180,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 393,
+      "views": 397,
       "likes": 1,
       "is_shared_to_feed": true
     },
@@ -187,7 +203,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23841,
+      "views": 23844,
       "likes": 326,
       "is_shared_to_feed": true
     },
@@ -210,7 +226,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2853,
+      "views": 2860,
       "likes": 29,
       "is_shared_to_feed": true
     },
@@ -233,7 +249,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 160292,
+      "views": 160294,
       "likes": 138,
       "is_shared_to_feed": true
     },
@@ -256,8 +272,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104693,
-      "likes": 4583,
+      "views": 104707,
+      "likes": 4584,
       "is_shared_to_feed": true
     },
     {
@@ -302,8 +318,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 45303,
-      "likes": 1032,
+      "views": 45348,
+      "likes": 1035,
       "is_shared_to_feed": true
     },
     {
@@ -348,8 +364,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 224223,
-      "likes": 4788,
+      "views": 224376,
+      "likes": 4790,
       "is_shared_to_feed": true
     },
     {
