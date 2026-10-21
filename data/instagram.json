@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-21T06:17:21.911Z",
+  "generated_at": "2026-10-21T08:17:46.821Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 23,
-    "all_videos": 27,
-    "excluded_trial": 4,
-    "total_views": 676054,
+    "all_videos": 31,
+    "excluded_trial": 8,
+    "total_views": 676240,
     "views_counted_over": 23,
     "views_sample": false,
-    "top_visible_views": 224889,
+    "top_visible_views": 224992,
     "top_visible_id": "17943051837086700",
     "shown": 23,
     "hidden": 0,
@@ -19,6 +19,86 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18200904895376654",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Dev279OS9-U/",
+      "timestamp": "2026-10-21T07:21:14+0000",
+      "caption": "Always the last one. 🌊\nSend this to the friend who’d never make it across.\n\nAI-generated. Not real footage.\n#bible #exodus #redsea #80snostalgia #aivideo",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 156,
+      "likes": 1
+    },
+    {
+      "has_video": false,
+      "id": "18021259553731125",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Dev2s1FSlKG/",
+      "timestamp": "2026-10-21T07:19:16+0000",
+      "caption": "The sea was closing. You were still in the middle. 🌊\nSend this to the friend who’s always last.\n\nAI-generated. Not real footage.\n#bible #exodus #redsea #80snostalgia #aivideo",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 102,
+      "likes": 0
+    },
+    {
+      "has_video": false,
+      "id": "17971784100154611",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Dev0GV8ynN9/",
+      "timestamp": "2026-10-21T06:56:43+0000",
+      "caption": "The day we lost Paradise. 🍎🐍\nSend this to someone who always says “just one bite.”\n\nAI-generated. Not real footage.\n#bible #genesis #adamandeve #80snostalgia #aivideo",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 1685,
+      "likes": 17
+    },
+    {
+      "has_video": false,
+      "id": "18001493640040296",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Devz5Hwysz_/",
+      "timestamp": "2026-10-21T06:54:41+0000",
+      "caption": "Every Sims player knows exactly who did this 💀\nSend this to the friend who always removed the ladder.\nAI-generated video.\n#TheSims #Sims4 #nostalgia #AIvideo",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 305,
+      "likes": 4
+    },
+    {
+      "has_video": false,
+      "id": "18116591819052858",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DevzKtkSRBq/",
+      "timestamp": "2026-10-21T06:48:15+0000",
+      "caption": "״אני לא רעבה״ 🙄\nכל זוג מכיר את הרגע הזה. תייגו את מי שתמיד ״רק ביס״ 👇\n\n#זוגיות #טוסט #גבינה #ASMR #מערכון\n\nהסרטון נוצר בבינה מלאכותית. קונספט יצירתי, לא פרסומת רשמית של תנובה / עמק.",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 161,
+      "likes": 2
+    },
     {
       "has_video": false,
       "id": "18574918831073859",
@@ -32,8 +112,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 374,
-      "likes": 1
+      "views": 514,
+      "likes": 2
     },
     {
       "has_video": false,
@@ -48,8 +128,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 600,
-      "likes": 3
+      "views": 1213,
+      "likes": 6
     },
     {
       "has_video": false,
@@ -64,24 +144,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1244,
+      "views": 1250,
       "likes": 14
-    },
-    {
-      "has_video": false,
-      "id": "18118567256062261",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DeuFC8aS3wN/",
-      "timestamp": "2026-10-20T14:46:24+0000",
-      "caption": "״אני לא רעבה״ 🙄\nכל זוג מכיר את הרגע הזה. תייגו את מי שתמיד ״רק ביס״ 👇\n\n#זוגיות #טוסט #גבינה #ASMR #מערכון\n\nהסרטון נוצר בבינה מלאכותית. קונספט יצירתי, לא פרסומת רשמית של תנובה / עמק.",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 671,
-      "likes": 17
     },
     {
       "has_video": true,
@@ -103,7 +167,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3087,
+      "views": 3111,
       "likes": 23
     },
     {
@@ -126,7 +190,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2014,
+      "views": 2018,
       "likes": 34
     },
     {
@@ -149,7 +213,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4488,
+      "views": 4493,
       "likes": 39
     },
     {
@@ -171,7 +235,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 402,
+      "views": 403,
       "likes": 1,
       "is_shared_to_feed": true
     },
@@ -194,7 +258,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23872,
+      "views": 23876,
       "likes": 327,
       "is_shared_to_feed": true
     },
@@ -217,7 +281,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2877,
+      "views": 2878,
       "likes": 29,
       "is_shared_to_feed": true
     },
@@ -263,8 +327,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104790,
-      "likes": 4585,
+      "views": 104801,
+      "likes": 4586,
       "is_shared_to_feed": true
     },
     {
@@ -286,7 +350,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4523,
+      "views": 4525,
       "likes": 105,
       "is_shared_to_feed": true
     },
@@ -309,7 +373,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 45514,
+      "views": 45544,
       "likes": 1042,
       "is_shared_to_feed": true
     },
@@ -355,8 +419,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 224889,
-      "likes": 4804,
+      "views": 224992,
+      "likes": 4807,
       "is_shared_to_feed": true
     },
     {
@@ -493,7 +557,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 14922,
+      "views": 14923,
       "likes": 118,
       "is_shared_to_feed": true
     },
