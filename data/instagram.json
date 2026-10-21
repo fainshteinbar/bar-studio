@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-21T15:17:21.200Z",
+  "generated_at": "2026-10-21T17:17:20.977Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 23,
-    "all_videos": 31,
-    "excluded_trial": 8,
-    "total_views": 677223,
+    "all_videos": 33,
+    "excluded_trial": 10,
+    "total_views": 677563,
     "views_counted_over": 23,
     "views_sample": false,
-    "top_visible_views": 225608,
+    "top_visible_views": 225813,
     "top_visible_id": "17943051837086700",
     "shown": 23,
     "hidden": 0,
@@ -19,6 +19,38 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18632185720057094",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DewxO--yEE2/",
+      "timestamp": "2026-10-21T15:50:46+0000",
+      "caption": "לפעמים זה באמת עוגיות 🍪\nכל נכד יודע מה יש בקופסה הכחולה של סבתא. כמעט.\nשלחו למי שאף פעם לא פותח אותה.\n\n🎬 סרטון AI\n#מבוססעלסיפוראמיתי #סבתא #עוגיותחמאה #DanishDelights",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 349,
+      "likes": 1
+    },
+    {
+      "has_video": false,
+      "id": "18352197949265516",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DewxLmByrjp/",
+      "timestamp": "2026-10-21T15:50:22+0000",
+      "caption": "לפעמים זה באמת עוגיות 🍪\nכל נכד יודע מה יש בקופסה הכחולה של סבתא. כמעט.\nשלחו למי שאף פעם לא פותח אותה.\n\n🎬 סרטון AI\n#מבוססעלסיפוראמיתי #סבתא #עוגיותחמאה #DanishDelights",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 175,
+      "likes": 0
+    },
     {
       "has_video": false,
       "id": "18200904895376654",
@@ -32,8 +64,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2333,
-      "likes": 30
+      "views": 2481,
+      "likes": 33
     },
     {
       "has_video": false,
@@ -48,8 +80,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 10575,
-      "likes": 139
+      "views": 14652,
+      "likes": 221
     },
     {
       "has_video": false,
@@ -64,8 +96,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 3390,
-      "likes": 39
+      "views": 3519,
+      "likes": 44
     },
     {
       "has_video": false,
@@ -80,7 +112,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 4308,
+      "views": 4377,
       "likes": 10
     },
     {
@@ -96,7 +128,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 487,
+      "views": 666,
       "likes": 2
     },
     {
@@ -112,7 +144,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 760,
+      "views": 812,
       "likes": 4
     },
     {
@@ -128,7 +160,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1306,
+      "views": 1307,
       "likes": 6
     },
     {
@@ -144,7 +176,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1329,
+      "views": 1348,
       "likes": 14
     },
     {
@@ -167,7 +199,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3197,
+      "views": 3230,
       "likes": 24
     },
     {
@@ -190,7 +222,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2036,
+      "views": 2044,
       "likes": 36
     },
     {
@@ -213,7 +245,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4517,
+      "views": 4518,
       "likes": 40
     },
     {
@@ -235,7 +267,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 418,
+      "views": 420,
       "likes": 2,
       "is_shared_to_feed": true
     },
@@ -258,8 +290,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23892,
-      "likes": 327,
+      "views": 23902,
+      "likes": 328,
       "is_shared_to_feed": true
     },
     {
@@ -281,7 +313,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2888,
+      "views": 2893,
       "likes": 29,
       "is_shared_to_feed": true
     },
@@ -304,7 +336,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 160312,
+      "views": 160315,
       "likes": 138,
       "is_shared_to_feed": true
     },
@@ -327,8 +359,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104846,
-      "likes": 4590,
+      "views": 104867,
+      "likes": 4591,
       "is_shared_to_feed": true
     },
     {
@@ -350,7 +382,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4535,
+      "views": 4543,
       "likes": 106,
       "is_shared_to_feed": true
     },
@@ -373,7 +405,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 45656,
+      "views": 45692,
       "likes": 1045,
       "is_shared_to_feed": true
     },
@@ -396,7 +428,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4433,
+      "views": 4434,
       "likes": 49,
       "is_shared_to_feed": true
     },
@@ -419,8 +451,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 225608,
-      "likes": 4823,
+      "views": 225813,
+      "likes": 4829,
       "is_shared_to_feed": true
     },
     {
@@ -442,7 +474,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1125,
+      "views": 1126,
       "likes": 11,
       "is_shared_to_feed": true
     },
@@ -465,7 +497,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 928,
+      "views": 929,
       "likes": 13,
       "is_shared_to_feed": true
     },
@@ -511,7 +543,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 1701,
+      "views": 1702,
       "likes": 18,
       "is_shared_to_feed": true
     },
@@ -580,8 +612,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 6155,
-      "likes": 88,
+      "views": 6157,
+      "likes": 89,
       "is_shared_to_feed": true
     },
     {
@@ -626,7 +658,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 58501,
+      "views": 58503,
       "likes": 2086,
       "is_shared_to_feed": true
     },
