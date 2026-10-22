@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-10-22T03:17:27.637Z",
+  "generated_at": "2026-10-22T04:18:10.770Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 23,
-    "all_videos": 32,
-    "excluded_trial": 9,
-    "total_views": 679820,
-    "views_counted_over": 23,
+    "total_videos": 24,
+    "all_videos": 31,
+    "excluded_trial": 7,
+    "total_views": 716741,
+    "views_counted_over": 24,
     "views_sample": false,
-    "top_visible_views": 226179,
+    "top_visible_views": 227025,
     "top_visible_id": "17943051837086700",
-    "shown": 23,
+    "shown": 24,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
@@ -32,7 +32,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 640,
+      "views": 707,
       "likes": 1
     },
     {
@@ -48,40 +48,31 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1444,
+      "views": 1478,
       "likes": 11
     },
     {
-      "has_video": false,
-      "id": "18200904895376654",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/Dev279OS9-U/",
-      "timestamp": "2026-10-21T07:21:14+0000",
-      "caption": "Always the last one. 🌊\nSend this to the friend who’d never make it across.\n\nAI-generated. Not real footage.\n#bible #exodus #redsea #80snostalgia #aivideo",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 3444,
-      "likes": 40
-    },
-    {
-      "has_video": false,
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/18021259553731125.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/18021259553731125.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/18021259553731125.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/18021259553731125.webp",
+      "lqip": "data:image/webp;base64,UklGRsIAAABXRUJQVlA4ILYAAADQBQCdASoYACsAPu1or1IppSQiqrgIATAdiWcAy6RNdDpEX4eKWk6TwPhm4AY1WosW3+tlr8pgAP1CVt1Xg8X8X5faTykOz4pEZIxwkI7nrOqzxBwgjbcDcoAdlBGx4th26pSDtdsE7h78BibFo4gBaebCsGxzVv3sm+bGKUNqC+YEpuZbkDW74bgcpe8UdQEpOA7n8f5R09zxzlgd9C/Q7UT1zYlPsEv8rQ2sVAr439f8pb4gAA==",
+      "width": 720,
+      "height": 1280,
+      "duration": 20.5,
       "id": "18021259553731125",
       "placeholder": false,
       "permalink": "https://www.instagram.com/reel/Dev2s1FSlKG/",
       "timestamp": "2026-10-21T07:19:16+0000",
       "caption": "The sea was closing. You were still in the middle. 🌊\nSend this to the friend who’s always last.\n\nAI-generated. Not real footage.\n#bible #exodus #redsea #80snostalgia #aivideo",
       "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 34827,
-      "likes": 493
+      "views": 36066,
+      "likes": 514
     },
     {
       "has_video": false,
@@ -96,7 +87,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5085,
+      "views": 5088,
       "likes": 14
     },
     {
@@ -112,7 +103,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1369,
+      "views": 1370,
       "likes": 6
     },
     {
@@ -183,7 +174,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3284,
+      "views": 3286,
       "likes": 24
     },
     {
@@ -206,7 +197,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2082,
+      "views": 2083,
       "likes": 37
     },
     {
@@ -389,7 +380,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 47342,
+      "views": 47348,
       "likes": 1048,
       "is_shared_to_feed": true
     },
@@ -435,7 +426,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 226179,
+      "views": 227025,
       "likes": 4835,
       "is_shared_to_feed": true
     },
