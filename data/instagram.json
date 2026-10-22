@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-22T04:18:10.770Z",
+  "generated_at": "2026-10-22T05:17:18.604Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 24,
-    "all_videos": 31,
-    "excluded_trial": 7,
-    "total_views": 716741,
+    "all_videos": 33,
+    "excluded_trial": 9,
+    "total_views": 718097,
     "views_counted_over": 24,
     "views_sample": false,
-    "top_visible_views": 227025,
+    "top_visible_views": 227038,
     "top_visible_id": "17943051837086700",
     "shown": 24,
     "hidden": 0,
@@ -19,6 +19,38 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18497196016105404",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DeyH6YuyHty/",
+      "timestamp": "2026-10-22T04:28:01+0000",
+      "caption": "לפעמים זה באמת עוגיות 🍪\nכל נכד יודע מה יש בקופסה הכחולה של סבתא. כמעט.\nשלחו למי שאף פעם לא פותח אותה.\n \n🎬 סרטון AI\n#מבוססעלסיפוראמיתי #סבתא #עוגיותחמאה #DanishDelights",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 142,
+      "likes": 0
+    },
+    {
+      "has_video": false,
+      "id": "17943248997096994",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DeyH1mfyMO_/",
+      "timestamp": "2026-10-22T04:27:23+0000",
+      "caption": "לפעמים זה באמת עוגיות 🍪\nכל נכד יודע מה יש בקופסה הכחולה של סבתא. כמעט.\nשלחו למי שאף פעם לא פותח אותה.\n \n🎬 סרטון AI\n#מבוססעלסיפוראמיתי #סבתא #עוגיותחמאה #DanishDelights",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 175,
+      "likes": 0
+    },
     {
       "has_video": false,
       "id": "18632185720057094",
@@ -32,7 +64,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 707,
+      "views": 860,
       "likes": 1
     },
     {
@@ -48,8 +80,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1478,
-      "likes": 11
+      "views": 1564,
+      "likes": 12
     },
     {
       "has_video": true,
@@ -71,8 +103,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 36066,
-      "likes": 514
+      "views": 37379,
+      "likes": 533
     },
     {
       "has_video": false,
@@ -87,7 +119,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5088,
+      "views": 5093,
       "likes": 14
     },
     {
@@ -103,7 +135,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1370,
+      "views": 1373,
       "likes": 6
     },
     {
@@ -119,7 +151,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 915,
+      "views": 916,
       "likes": 4
     },
     {
@@ -174,7 +206,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3286,
+      "views": 3296,
       "likes": 24
     },
     {
@@ -197,7 +229,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2083,
+      "views": 2084,
       "likes": 37
     },
     {
@@ -265,7 +297,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23942,
+      "views": 23944,
       "likes": 328,
       "is_shared_to_feed": true
     },
@@ -334,7 +366,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104923,
+      "views": 104929,
       "likes": 4595,
       "is_shared_to_feed": true
     },
@@ -380,7 +412,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 47348,
+      "views": 47359,
       "likes": 1048,
       "is_shared_to_feed": true
     },
@@ -426,7 +458,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 227025,
+      "views": 227038,
       "likes": 4835,
       "is_shared_to_feed": true
     },
