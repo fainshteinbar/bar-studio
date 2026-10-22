@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-22T15:41:22.247Z",
+  "generated_at": "2026-10-22T16:17:40.876Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 25,
-    "all_videos": 34,
-    "excluded_trial": 9,
-    "total_views": 727380,
+    "all_videos": 31,
+    "excluded_trial": 6,
+    "total_views": 727597,
     "views_counted_over": 25,
     "views_sample": false,
-    "top_visible_views": 227576,
+    "top_visible_views": 227601,
     "top_visible_id": "17943051837086700",
     "shown": 25,
     "hidden": 0,
@@ -19,6 +19,22 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18105679214118543",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DezWrOSSFlO/",
+      "timestamp": "2026-10-22T15:56:15+0000",
+      "caption": "A website like this, from one prompt. Free.\nI turned my whole portfolio site into a single Claude Code prompt. It interviews you, designs, builds, tests itself on phone and desktop, and puts it online. Hosting is free (needs Claude Code).\nComment “SITE” and I’ll DM you the prompt.\nOne thing in this video isn’t real. Did you catch it?\n#ClaudeCode #portfolio #freelancer #AI",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": true,
       "video_url": "https://bfain-media.b-cdn.net/reels/18062613656529472.mp4",
@@ -39,7 +55,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 274,
+      "views": 283,
       "likes": 10
     },
     {
@@ -55,7 +71,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2158,
+      "views": 2166,
       "likes": 7
     },
     {
@@ -71,7 +87,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1626,
+      "views": 1664,
       "likes": 15
     },
     {
@@ -87,7 +103,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1981,
+      "views": 1987,
       "likes": 6
     },
     {
@@ -126,8 +142,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 45424,
-      "likes": 700
+      "views": 45597,
+      "likes": 705
     },
     {
       "has_video": false,
@@ -142,72 +158,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5446,
+      "views": 5518,
       "likes": 15
-    },
-    {
-      "has_video": false,
-      "id": "18116591819052858",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DevzKtkSRBq/",
-      "timestamp": "2026-10-21T06:48:15+0000",
-      "caption": "״אני לא רעבה״ 🙄\nכל זוג מכיר את הרגע הזה. תייגו את מי שתמיד ״רק ביס״ 👇\n\n#זוגיות #טוסט #גבינה #ASMR #מערכון\n\nהסרטון נוצר בבינה מלאכותית. קונספט יצירתי, לא פרסומת רשמית של תנובה / עמק.",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 1382,
-      "likes": 6
-    },
-    {
-      "has_video": false,
-      "id": "18574918831073859",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DevXMteScPM/",
-      "timestamp": "2026-10-21T02:44:11+0000",
-      "caption": "״אני לא רעבה״ 🙄\nכל זוג מכיר את הרגע הזה. תייגו את מי שתמיד ״רק ביס״ 👇\n\n#זוגיות #טוסט #גבינה #ASMR #מערכון\n\nהסרטון נוצר בבינה מלאכותית. קונספט יצירתי, לא פרסומת רשמית של תנובה / עמק.",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 920,
-      "likes": 4
-    },
-    {
-      "has_video": false,
-      "id": "18135930616732322",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DevWXxaygsd/",
-      "timestamp": "2026-10-21T02:37:42+0000",
-      "caption": "״אני לא רעבה״ 🙄\nכל זוג מכיר את הרגע הזה. תייגו את מי שתמיד ״רק ביס״ 👇\n\n#זוגיות #טוסט #גבינה #ASMR #מערכון\n\nהסרטון נוצר בבינה מלאכותית. קונספט יצירתי, לא פרסומת רשמית של תנובה / עמק.",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 1334,
-      "likes": 6
-    },
-    {
-      "has_video": false,
-      "id": "18412052434095501",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DeuQh2Yy5y8/",
-      "timestamp": "2026-10-20T16:26:40+0000",
-      "caption": "״אני לא רעבה״ 🙄\nכל זוג מכיר את הרגע הזה. תייגו את מי שתמיד ״רק ביס״ 👇\n\n#זוגיות #טוסט #גבינה #ASMR #מערכון\n\nהסרטון נוצר בבינה מלאכותית. קונספט יצירתי, לא פרסומת רשמית של תנובה / עמק.",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 1383,
-      "likes": 14
     },
     {
       "has_video": true,
@@ -252,7 +204,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2113,
+      "views": 2115,
       "likes": 38
     },
     {
@@ -275,7 +227,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4562,
+      "views": 4563,
       "likes": 40
     },
     {
@@ -389,7 +341,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104991,
+      "views": 104992,
       "likes": 4598,
       "is_shared_to_feed": true
     },
@@ -435,7 +387,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 47510,
+      "views": 47516,
       "likes": 1052,
       "is_shared_to_feed": true
     },
@@ -481,8 +433,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 227576,
-      "likes": 4855,
+      "views": 227601,
+      "likes": 4857,
       "is_shared_to_feed": true
     },
     {
