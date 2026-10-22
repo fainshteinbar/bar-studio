@@ -1,24 +1,47 @@
 {
-  "generated_at": "2026-10-22T11:17:22.520Z",
+  "generated_at": "2026-10-22T12:18:22.929Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 24,
-    "all_videos": 33,
+    "total_videos": 25,
+    "all_videos": 34,
     "excluded_trial": 9,
-    "total_views": 725158,
-    "views_counted_over": 24,
+    "total_views": 725683,
+    "views_counted_over": 25,
     "views_sample": false,
-    "top_visible_views": 227296,
+    "top_visible_views": 227374,
     "top_visible_id": "17943051837086700",
-    "shown": 24,
+    "shown": 25,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/18062613656529472.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/18062613656529472.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/18062613656529472.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/18062613656529472.webp",
+      "lqip": "data:image/webp;base64,UklGRtwAAABXRUJQVlA4INAAAAAQBgCdASoYACsAPu1urVIppiQipWsxMB2JZwAD5ULcPoYj/MDPNODwZsBlYbCbzkpvcEF5LXq2RAAA/vm8uzvVYyRJIknfB0ntxJr7iDsEIcQoAbfuwHde4qDyDNFeSd2+QA5CWmtxlkdgKFggl9536ClUi6XskUBAG0sLtlMpyohl7IzNFSyo4dYFR7QkdUYKBLzZGwAUG4c3B3ez5UArwqCUvk7+gg4PVPqVqYpiXjumzKJK7D48fvsFm4tbQwuFeOLrL7megd0Fh5Ei3QAA",
+      "width": 720,
+      "height": 1280,
+      "duration": 146.6,
+      "id": "18062613656529472",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Dey8QraSBGx/",
+      "timestamp": "2026-10-22T12:05:49+0000",
+      "caption": "85 שנה. כספת אחת. וסוד שרק אברהם יודע לפתוח 🔐\n\nמשפחת רייס פנתה אליי עם בקשה: סרט ליום ההולדת ה־85 של אברהם, המייסד של REISZ. לא מצגת תמונות, אלא סרט אמיתי שמספר את הסיפור שלו.\n\nיצאנו מאלבום משפחתי וכמה סיפורים, ובנינו סרט שלם:\nירושלים של שנות ה־50, הסדקית של 37 מטר בנחלת שבעה, הכתבת המשפחה לאורך שלושה דורות, וכספת אחת במשרד שמסתירה בדיוק את מה שהופך אותו לאברהם.\n\nתמונות אמיתיות מהאלבום שקמות לחיים, קריינות, מוזיקה מקורית, ברכה מהמשפחה בסוף. וכל פרט עבר אישור של המשפחה לפני שהגענו לגרסה הסופית.\n\n“כולם התרגשו מהסרט ויצא רמה סופר גבוהה” ❤️\nעוד לקוח מרוצה, ועוד משפחה שקיבלה מתנה שתישאר איתה לתמיד.\n\nרוצים סרט כזה ליום הולדת, לחתונה, לאירוע משפחתי או לחברה שלכם? כל הפרטים בפרופיל.\n\n#סרטמחווה #יוםהולדת85 #סרטמשפחתי #AIוידאו #מתנהמרגשת הפקתוידאו bfainstudio",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
+      "flag_reason": "",
+      "views": 28,
+      "likes": 7
+    },
     {
       "has_video": false,
       "id": "18497196016105404",
@@ -32,7 +55,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1600,
+      "views": 1835,
       "likes": 7
     },
     {
@@ -48,7 +71,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 801,
+      "views": 934,
       "likes": 6
     },
     {
@@ -64,7 +87,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1686,
+      "views": 1837,
       "likes": 6
     },
     {
@@ -80,7 +103,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1623,
+      "views": 1638,
       "likes": 12
     },
     {
@@ -103,8 +126,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 43906,
-      "likes": 668
+      "views": 44279,
+      "likes": 675
     },
     {
       "has_video": false,
@@ -206,7 +229,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3362,
+      "views": 3377,
       "likes": 25
     },
     {
@@ -229,7 +252,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2104,
+      "views": 2106,
       "likes": 38
     },
     {
@@ -252,7 +275,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4540,
+      "views": 4542,
       "likes": 40
     },
     {
@@ -274,7 +297,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 431,
+      "views": 433,
       "likes": 2,
       "is_shared_to_feed": true
     },
@@ -297,7 +320,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23955,
+      "views": 23956,
       "likes": 329,
       "is_shared_to_feed": true
     },
@@ -320,7 +343,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2904,
+      "views": 2905,
       "likes": 29,
       "is_shared_to_feed": true
     },
@@ -366,7 +389,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104973,
+      "views": 104975,
       "likes": 4597,
       "is_shared_to_feed": true
     },
@@ -412,8 +435,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 47463,
-      "likes": 1050,
+      "views": 47484,
+      "likes": 1051,
       "is_shared_to_feed": true
     },
     {
@@ -458,8 +481,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 227296,
-      "likes": 4846,
+      "views": 227374,
+      "likes": 4849,
       "is_shared_to_feed": true
     },
     {
