@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-21T22:17:19.115Z",
+  "generated_at": "2026-10-22T01:17:52.559Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 23,
-    "all_videos": 33,
-    "excluded_trial": 10,
-    "total_views": 678162,
+    "all_videos": 32,
+    "excluded_trial": 9,
+    "total_views": 678223,
     "views_counted_over": 23,
     "views_sample": false,
-    "top_visible_views": 226145,
+    "top_visible_views": 226170,
     "top_visible_id": "17943051837086700",
     "shown": 23,
     "hidden": 0,
@@ -32,7 +32,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 613,
+      "views": 630,
       "likes": 1
     },
     {
@@ -48,8 +48,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1146,
-      "likes": 9
+      "views": 1425,
+      "likes": 11
     },
     {
       "has_video": false,
@@ -64,8 +64,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 3322,
-      "likes": 39
+      "views": 3377,
+      "likes": 40
     },
     {
       "has_video": false,
@@ -80,24 +80,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 26132,
-      "likes": 377
-    },
-    {
-      "has_video": false,
-      "id": "17971784100154611",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/Dev0GV8ynN9/",
-      "timestamp": "2026-10-21T06:56:43+0000",
-      "caption": "The day we lost Paradise. 🍎🐍\nSend this to someone who always says “just one bite.”\n\nAI-generated. Not real footage.\n#bible #genesis #adamandeve #80snostalgia #aivideo",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 4502,
-      "likes": 61
+      "views": 32078,
+      "likes": 451
     },
     {
       "has_video": false,
@@ -112,8 +96,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5062,
-      "likes": 13
+      "views": 5075,
+      "likes": 14
     },
     {
       "has_video": false,
@@ -128,7 +112,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1362,
+      "views": 1367,
       "likes": 6
     },
     {
@@ -144,7 +128,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 888,
+      "views": 909,
       "likes": 4
     },
     {
@@ -160,7 +144,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1331,
+      "views": 1334,
       "likes": 6
     },
     {
@@ -199,7 +183,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3274,
+      "views": 3283,
       "likes": 24
     },
     {
@@ -222,7 +206,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2079,
+      "views": 2081,
       "likes": 37
     },
     {
@@ -290,7 +274,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23926,
+      "views": 23936,
       "likes": 328,
       "is_shared_to_feed": true
     },
@@ -359,8 +343,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 104915,
-      "likes": 4594,
+      "views": 104921,
+      "likes": 4595,
       "is_shared_to_feed": true
     },
     {
@@ -405,7 +389,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 45758,
+      "views": 45767,
       "likes": 1048,
       "is_shared_to_feed": true
     },
@@ -451,7 +435,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 226145,
+      "views": 226170,
       "likes": 4835,
       "is_shared_to_feed": true
     },
