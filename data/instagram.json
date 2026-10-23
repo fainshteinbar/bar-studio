@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T20:17:34.566Z",
+  "generated_at": "2026-10-23T20:40:38.685Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
@@ -7,10 +7,10 @@
     "total_videos": 26,
     "all_videos": 37,
     "excluded_trial": 11,
-    "total_views": 732698,
+    "total_views": 732729,
     "views_counted_over": 26,
     "views_sample": false,
-    "top_visible_views": 228833,
+    "top_visible_views": 228841,
     "top_visible_id": "17943051837086700",
     "shown": 26,
     "hidden": 0,
@@ -48,8 +48,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 3798,
-      "likes": 223
+      "views": 3849,
+      "likes": 226
     },
     {
       "has_video": false,
@@ -87,7 +87,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 628,
+      "views": 635,
       "likes": 13
     },
     {
@@ -174,7 +174,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2310,
+      "views": 2320,
       "likes": 8
     },
     {
@@ -190,7 +190,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2014,
+      "views": 2020,
       "likes": 16
     },
     {
@@ -206,7 +206,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2034,
+      "views": 2035,
       "likes": 6
     },
     {
@@ -222,7 +222,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1732,
+      "views": 1735,
       "likes": 12
     },
     {
@@ -245,7 +245,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 48110,
+      "views": 48115,
       "likes": 755
     },
     {
@@ -330,7 +330,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4599,
+      "views": 4600,
       "likes": 40
     },
     {
@@ -421,7 +421,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 160339,
+      "views": 160341,
       "likes": 138,
       "is_shared_to_feed": true
     },
@@ -444,7 +444,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 105129,
+      "views": 105132,
       "likes": 4604,
       "is_shared_to_feed": true
     },
@@ -467,7 +467,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4565,
+      "views": 4566,
       "likes": 106,
       "is_shared_to_feed": true
     },
@@ -490,8 +490,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 47819,
-      "likes": 1055,
+      "views": 47822,
+      "likes": 1056,
       "is_shared_to_feed": true
     },
     {
@@ -513,7 +513,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4437,
+      "views": 4438,
       "likes": 49,
       "is_shared_to_feed": true
     },
@@ -536,7 +536,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 228833,
+      "views": 228841,
       "likes": 4874,
       "is_shared_to_feed": true
     },
