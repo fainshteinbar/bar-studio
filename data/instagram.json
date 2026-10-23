@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-23T01:02:45.314Z",
+  "generated_at": "2026-10-23T04:17:27.302Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 25,
-    "all_videos": 31,
-    "excluded_trial": 6,
-    "total_views": 729633,
+    "all_videos": 33,
+    "excluded_trial": 8,
+    "total_views": 729890,
     "views_counted_over": 25,
     "views_sample": false,
-    "top_visible_views": 227885,
+    "top_visible_views": 227894,
     "top_visible_id": "17943051837086700",
     "shown": 25,
     "hidden": 0,
@@ -19,6 +19,38 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "17952875310276962",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/De0rOY-yHvg/",
+      "timestamp": "2026-10-23T04:15:04+0000",
+      "caption": "I never filmed this video. But the prompt that built my site is real, and it’s free.\nI turned my whole portfolio site into a single Claude Code prompt. It interviews you, designs, builds, tests itself on phone and desktop, and puts it online. Hosting is free (needs Claude Code).\nComment “SITE” and I’ll DM you the prompt.\n#ClaudeCode #portfolio #freelancer #AI",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "has_video": false,
+      "id": "17938513311122261",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/De0rL4byvUl/",
+      "timestamp": "2026-10-23T04:14:41+0000",
+      "caption": "I never filmed this video. But the prompt that built my site is real, and it’s free.\nI turned my whole portfolio site into a single Claude Code prompt. It interviews you, designs, builds, tests itself on phone and desktop, and puts it online. Hosting is free (needs Claude Code).\nComment “SITE” and I’ll DM you the prompt.\n#ClaudeCode #portfolio #freelancer #AI",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": false,
       "id": "18105679214118543",
@@ -55,7 +87,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 322,
+      "views": 323,
       "likes": 10
     },
     {
@@ -71,7 +103,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2252,
+      "views": 2253,
       "likes": 8
     },
     {
@@ -87,7 +119,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1920,
+      "views": 1923,
       "likes": 15
     },
     {
@@ -142,8 +174,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 47150,
-      "likes": 735
+      "views": 47369,
+      "likes": 740
     },
     {
       "has_video": false,
@@ -158,7 +190,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 6084,
+      "views": 6092,
       "likes": 18
     },
     {
@@ -181,7 +213,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3400,
+      "views": 3401,
       "likes": 25
     },
     {
@@ -204,7 +236,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2126,
+      "views": 2128,
       "likes": 38
     },
     {
@@ -227,7 +259,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4576,
+      "views": 4577,
       "likes": 40
     },
     {
@@ -272,7 +304,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 23977,
+      "views": 23985,
       "likes": 329,
       "is_shared_to_feed": true
     },
@@ -318,7 +350,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 160332,
+      "views": 160333,
       "likes": 138,
       "is_shared_to_feed": true
     },
@@ -341,7 +373,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 105030,
+      "views": 105033,
       "likes": 4599,
       "is_shared_to_feed": true
     },
@@ -387,7 +419,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 47573,
+      "views": 47585,
       "likes": 1053,
       "is_shared_to_feed": true
     },
@@ -433,7 +465,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 227885,
+      "views": 227894,
       "likes": 4859,
       "is_shared_to_feed": true
     },
