@@ -1,24 +1,63 @@
 {
-  "generated_at": "2026-10-23T06:32:52.259Z",
+  "generated_at": "2026-10-23T07:41:23.335Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 25,
-    "all_videos": 33,
-    "excluded_trial": 8,
-    "total_views": 730062,
-    "views_counted_over": 25,
+    "total_videos": 26,
+    "all_videos": 35,
+    "excluded_trial": 9,
+    "total_views": 730332,
+    "views_counted_over": 26,
     "views_sample": false,
-    "top_visible_views": 227934,
+    "top_visible_views": 227981,
     "top_visible_id": "17943051837086700",
-    "shown": 25,
+    "shown": 26,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18432584074151797",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/De1CHk_Siwx/",
+      "timestamp": "2026-10-23T07:35:12+0000",
+      "caption": "את הסרטון הזה לא צילמתי. אבל הפרומפט שבנה לי את האתר אמיתי, והוא בחינם.\nהפכתי את כל אתר תיק העבודות שלי לפרומפט אחד ל-Claude Code. הוא מראיין אתכם, מעצב, בונה, בודק את עצמו בטלפון ובמחשב, ומעלה לאוויר. האחסון בחינם (צריך Claude Code).\nתגיבו “אתר” ואשלח לכם את הפרומפט בהודעה.\n#ClaudeCode #תיקעבודות #פרילנסרים #בינהמלאכותית",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/18074712920497404.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/18074712920497404.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/18074712920497404.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/18074712920497404.webp",
+      "lqip": "data:image/webp;base64,UklGRjwBAABXRUJQVlA4IDABAACwBwCdASoYACsAPu1iq1CppSOiqrgMATAdiWgAsR+wTo21Mh+eu18fa97CrX9KggTdY7kyy8DeAs5GDKs+p8cFUQj5RtaoAP70ojZiha5ka2Dm/VW6tLgIS4qmtRGnjTpjM1ocnPpqVBWOM6QcRhb5Bl9ORGwjCdn4Rm42oCH/Fn63NrJ2txg/DQpmHx7bOpz+U0PDbIvs8u5+WuqKsADmk5KLe2YA0AwhwucC5+9E5RDT7mk0Z8FfKEB9q9nbHFKd0bN259O0EZ0LnUYmACoJpcKFMocmJEi6dopUpGGZCjdt3id/wyCQDdouZUAAG+85WbmE1pB3CYLuVuQHtkpT9ZtXifXSvi7UsV7mI2Qfr3dzKEpD3qymAvtT69EWpskIeg8sOx3F1Y6501ArGoAA",
+      "width": 720,
+      "height": 1280,
+      "duration": 36,
+      "id": "18074712920497404",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/De0-2saSveg/",
+      "timestamp": "2026-10-23T07:07:03+0000",
+      "caption": "Our trip group chat has been “deciding” since 2024. So I gave it a funeral and finally built the app I kept saying I’d build: everyone adds a place, one vote each, voting closes at 6/6. Lisbon won. Built on Base44, in my own words, and shared as one link in the chat.\n\nMade with AI: the people, places and voices are synthetic. The Base44 screens are real recordings of the app I built.\n\n#base44 #vibecoding #grouptrip #aivideo #seedance",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
+      "flag_reason": "",
+      "views": 132,
+      "likes": 6
+    },
     {
       "has_video": false,
       "id": "17952875310276962",
@@ -32,7 +71,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 137,
+      "views": 146,
       "likes": 1
     },
     {
@@ -48,7 +87,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 126,
+      "views": 132,
       "likes": 1
     },
     {
@@ -87,7 +126,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 334,
+      "views": 341,
       "likes": 10
     },
     {
@@ -103,7 +142,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2257,
+      "views": 2262,
       "likes": 8
     },
     {
@@ -119,7 +158,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1927,
+      "views": 1929,
       "likes": 15
     },
     {
@@ -174,7 +213,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 47443,
+      "views": 47499,
       "likes": 741
     },
     {
@@ -190,7 +229,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 6099,
+      "views": 6102,
       "likes": 18
     },
     {
@@ -213,7 +252,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3403,
+      "views": 3407,
       "likes": 25
     },
     {
@@ -259,7 +298,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4577,
+      "views": 4578,
       "likes": 40
     },
     {
@@ -373,7 +412,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 105039,
+      "views": 105042,
       "likes": 4600,
       "is_shared_to_feed": true
     },
@@ -396,7 +435,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 4559,
+      "views": 4560,
       "likes": 106,
       "is_shared_to_feed": true
     },
@@ -419,7 +458,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 47622,
+      "views": 47640,
       "likes": 1053,
       "is_shared_to_feed": true
     },
@@ -465,7 +504,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 227934,
+      "views": 227981,
       "likes": 4859,
       "is_shared_to_feed": true
     },
@@ -603,7 +642,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 14925,
+      "views": 14926,
       "likes": 118,
       "is_shared_to_feed": true
     },
