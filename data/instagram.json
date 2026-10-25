@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-25T08:18:00.493Z",
+  "generated_at": "2026-10-25T09:17:20.274Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 27,
-    "all_videos": 31,
-    "excluded_trial": 4,
-    "total_views": 736926,
+    "all_videos": 32,
+    "excluded_trial": 5,
+    "total_views": 737088,
     "views_counted_over": 27,
     "views_sample": false,
-    "top_visible_views": 230858,
+    "top_visible_views": 230918,
     "top_visible_id": "17943051837086700",
     "shown": 27,
     "hidden": 0,
@@ -19,6 +19,22 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18058584200795940",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/De6VQnOyIfZ/",
+      "timestamp": "2026-10-25T08:58:36+0000",
+      "caption": "This footage was recovered from a time machine. 66 million years ago. ☄️\n\nHe made it back in time to see them. He didn’t make it back.\n\n#dinosaurs #trex #foundfootage #timetravel #ai",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": false,
       "id": "18075157556744093",
@@ -32,7 +48,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 187,
+      "views": 190,
       "likes": 0
     },
     {
@@ -48,7 +64,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 4390,
+      "views": 4391,
       "likes": 261
     },
     {
@@ -71,7 +87,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 750,
+      "views": 751,
       "likes": 15
     },
     {
@@ -94,7 +110,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 253,
+      "views": 297,
       "likes": 4
     },
     {
@@ -117,7 +133,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 385,
+      "views": 386,
       "likes": 12
     },
     {
@@ -156,7 +172,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49139,
+      "views": 49169,
       "likes": 777
     },
     {
@@ -195,7 +211,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3469,
+      "views": 3470,
       "likes": 26
     },
     {
@@ -218,7 +234,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2154,
+      "views": 2156,
       "likes": 38
     },
     {
@@ -263,7 +279,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 451,
+      "views": 452,
       "likes": 3,
       "is_shared_to_feed": true
     },
@@ -355,7 +371,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 105248,
+      "views": 105259,
       "likes": 4607,
       "is_shared_to_feed": true
     },
@@ -401,7 +417,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 48331,
+      "views": 48342,
       "likes": 1071,
       "is_shared_to_feed": true
     },
@@ -447,8 +463,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 230858,
-      "likes": 4932,
+      "views": 230918,
+      "likes": 4934,
       "is_shared_to_feed": true
     },
     {
