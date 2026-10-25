@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-10-25T05:22:59.871Z",
+  "generated_at": "2026-10-25T06:17:42.426Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 26,
-    "all_videos": 34,
-    "excluded_trial": 8,
-    "total_views": 736348,
+    "all_videos": 31,
+    "excluded_trial": 5,
+    "total_views": 736463,
     "views_counted_over": 26,
     "views_sample": false,
-    "top_visible_views": 230734,
+    "top_visible_views": 230776,
     "top_visible_id": "17943051837086700",
     "shown": 26,
     "hidden": 0,
-    "missing_media_url": 1,
-    "missing_media_url_pct": 2.9
+    "missing_media_url": 0,
+    "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
@@ -32,24 +32,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 0,
+      "views": 142,
       "likes": 0
-    },
-    {
-      "has_video": false,
-      "id": "17877078000651056",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/De1bzvESROs/",
-      "timestamp": "2026-10-23T11:19:36+0000",
-      "caption": "POV: You were in the boat when He said “Peace. Be still.” 🌊\n\nMark 4:35-41\n\nSend this to someone going through a storm right now.\n\n#jesus #bible #faith #christian #ai",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 140,
-      "likes": 6
     },
     {
       "has_video": false,
@@ -87,7 +71,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 746,
+      "views": 747,
       "likes": 13
     },
     {
@@ -131,22 +115,6 @@
     },
     {
       "has_video": false,
-      "id": "18497196016105404",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DeyH6YuyHty/",
-      "timestamp": "2026-10-22T04:28:01+0000",
-      "caption": "לפעמים זה באמת עוגיות 🍪\nכל נכד יודע מה יש בקופסה הכחולה של סבתא. כמעט.\nשלחו למי שאף פעם לא פותח אותה.\n \n🎬 סרטון AI\n#מבוססעלסיפוראמיתי #סבתא #עוגיותחמאה #DanishDelights",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 2368,
-      "likes": 8
-    },
-    {
-      "has_video": false,
       "id": "18632185720057094",
       "placeholder": false,
       "permalink": "https://www.instagram.com/reel/DewxO--yEE2/",
@@ -160,22 +128,6 @@
       "flag_reason": "",
       "views": 2106,
       "likes": 6
-    },
-    {
-      "has_video": false,
-      "id": "18352197949265516",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DewxLmByrjp/",
-      "timestamp": "2026-10-21T15:50:22+0000",
-      "caption": "לפעמים זה באמת עוגיות 🍪\nכל נכד יודע מה יש בקופסה הכחולה של סבתא. כמעט.\nשלחו למי שאף פעם לא פותח אותה.\n\n🎬 סרטון AI\n#מבוססעלסיפוראמיתי #סבתא #עוגיותחמאה #DanishDelights",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 1749,
-      "likes": 12
     },
     {
       "has_video": true,
@@ -197,7 +149,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49025,
+      "views": 49055,
       "likes": 775
     },
     {
@@ -396,7 +348,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 105243,
+      "views": 105244,
       "likes": 4607,
       "is_shared_to_feed": true
     },
@@ -442,8 +394,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 48261,
-      "likes": 1070,
+      "views": 48302,
+      "likes": 1071,
       "is_shared_to_feed": true
     },
     {
@@ -488,8 +440,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 230734,
-      "likes": 4929,
+      "views": 230776,
+      "likes": 4930,
       "is_shared_to_feed": true
     },
     {
