@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-10-25T05:17:21.018Z",
+  "generated_at": "2026-10-25T05:22:59.871Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
     "total_videos": 26,
-    "all_videos": 38,
-    "excluded_trial": 12,
-    "total_views": 736344,
+    "all_videos": 34,
+    "excluded_trial": 8,
+    "total_views": 736348,
     "views_counted_over": 26,
     "views_sample": false,
-    "top_visible_views": 230732,
+    "top_visible_views": 230734,
     "top_visible_id": "17943051837086700",
     "shown": 26,
     "hidden": 0,
     "missing_media_url": 1,
-    "missing_media_url_pct": 2.6
+    "missing_media_url_pct": 2.9
   },
   "hero": null,
   "items": [
@@ -68,22 +68,6 @@
       "likes": 261
     },
     {
-      "has_video": false,
-      "id": "18432584074151797",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/De1CHk_Siwx/",
-      "timestamp": "2026-10-23T07:35:12+0000",
-      "caption": "את הסרטון הזה לא צילמתי. אבל הפרומפט שבנה לי את האתר אמיתי, והוא בחינם.\nהפכתי את כל אתר תיק העבודות שלי לפרומפט אחד ל-Claude Code. הוא מראיין אתכם, מעצב, בונה, בודק את עצמו בטלפון ובמחשב, ומעלה לאוויר. האחסון בחינם (צריך Claude Code).\nתגיבו “אתר” ואשלח לכם את הפרומפט בהודעה.\n#ClaudeCode #תיקעבודות #פרילנסרים #בינהמלאכותית",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 119,
-      "likes": 0
-    },
-    {
       "has_video": true,
       "video_url": "https://bfain-media.b-cdn.net/reels/18074712920497404.mp4",
       "full_url": "https://bfain-media.b-cdn.net/reels/18074712920497404.full.mp4",
@@ -123,38 +107,6 @@
       "likes": 1
     },
     {
-      "has_video": false,
-      "id": "17938513311122261",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/De0rL4byvUl/",
-      "timestamp": "2026-10-23T04:14:41+0000",
-      "caption": "I never filmed this video. But the prompt that built my site is real, and it’s free.\nI turned my whole portfolio site into a single Claude Code prompt. It interviews you, designs, builds, tests itself on phone and desktop, and puts it online. Hosting is free (needs Claude Code).\nComment “SITE” and I’ll DM you the prompt.\n#ClaudeCode #portfolio #freelancer #AI",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 154,
-      "likes": 1
-    },
-    {
-      "has_video": false,
-      "id": "18105679214118543",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DezWrOSSFlO/",
-      "timestamp": "2026-10-22T15:56:15+0000",
-      "caption": "A website like this, from one prompt. Free.\nI turned my whole portfolio site into a single Claude Code prompt. It interviews you, designs, builds, tests itself on phone and desktop, and puts it online. Hosting is free (needs Claude Code).\nComment “SITE” and I’ll DM you the prompt.\nOne thing in this video isn’t real. Did you catch it?\n#ClaudeCode #portfolio #freelancer #AI",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 114,
-      "likes": 0
-    },
-    {
       "has_video": true,
       "video_url": "https://bfain-media.b-cdn.net/reels/18062613656529472.mp4",
       "full_url": "https://bfain-media.b-cdn.net/reels/18062613656529472.full.mp4",
@@ -192,22 +144,6 @@
       "flag_reason": "",
       "views": 2368,
       "likes": 8
-    },
-    {
-      "has_video": false,
-      "id": "17943248997096994",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DeyH1mfyMO_/",
-      "timestamp": "2026-10-22T04:27:23+0000",
-      "caption": "לפעמים זה באמת עוגיות 🍪\nכל נכד יודע מה יש בקופסה הכחולה של סבתא. כמעט.\nשלחו למי שאף פעם לא פותח אותה.\n \n🎬 סרטון AI\n#מבוססעלסיפוראמיתי #סבתא #עוגיותחמאה #DanishDelights",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 2090,
-      "likes": 16
     },
     {
       "has_video": false,
@@ -261,7 +197,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49023,
+      "views": 49025,
       "likes": 775
     },
     {
@@ -552,7 +488,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 230732,
+      "views": 230734,
       "likes": 4929,
       "is_shared_to_feed": true
     },
