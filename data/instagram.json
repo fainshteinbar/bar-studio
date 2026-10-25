@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-10-25T07:17:22.947Z",
+  "generated_at": "2026-10-25T08:18:00.493Z",
   "placeholder": false,
   "source": "instagram api → bunny cdn",
   "media_base_url": "https://bfain-media.b-cdn.net",
   "stats": {
-    "total_videos": 26,
+    "total_videos": 27,
     "all_videos": 31,
-    "excluded_trial": 5,
-    "total_views": 736554,
-    "views_counted_over": 26,
+    "excluded_trial": 4,
+    "total_views": 736926,
+    "views_counted_over": 27,
     "views_sample": false,
-    "top_visible_views": 230808,
+    "top_visible_views": 230858,
     "top_visible_id": "17943051837086700",
-    "shown": 26,
+    "shown": 27,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
@@ -32,7 +32,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 167,
+      "views": 187,
       "likes": 0
     },
     {
@@ -48,7 +48,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 4387,
+      "views": 4390,
       "likes": 261
     },
     {
@@ -71,24 +71,31 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 748,
-      "likes": 13
+      "views": 750,
+      "likes": 15
     },
     {
-      "has_video": false,
+      "has_video": true,
+      "video_url": "https://bfain-media.b-cdn.net/reels/17952875310276962.mp4",
+      "full_url": "https://bfain-media.b-cdn.net/reels/17952875310276962.full.mp4",
+      "rail_url": "https://bfain-media.b-cdn.net/reels/17952875310276962.rail.mp4",
+      "poster_url": "https://bfain-media.b-cdn.net/reels/17952875310276962.webp",
+      "lqip": "data:image/webp;base64,UklGRhIBAABXRUJQVlA4IAYBAACwBgCdASoYACsAPuViqk2pJaQiKq35IByJQBjmAsE7SeN423N8tz6PVNlhJ/U/cV0YhoequuDBYvT7ZDFgAAD+7pE1wCTIditrkIZCiIAkCH5i+sJp3Lz3Q0Z/wEKEITIilrfM2k6yKk+J87CUA2Y5OpkdB1VUXyv015zzxF9STqafCFSMUqnNtjTYQcOKFM+OCRasAiBSpL23RX/7uPHFE5zvY1tTi3bY3OeKgFrSfWd1l/Lh4caLhuWDVX2sqVTlf7w2Ab+ylExGQmJ3GQF8YKtlPW1pzoAd5oENI1o85KjCeGsueroxfD0RK+pYa/47USKWbG6FN3ovXjGriLpmhBYhKAAA",
+      "width": 720,
+      "height": 1280,
+      "duration": 20.5,
       "id": "17952875310276962",
       "placeholder": false,
       "permalink": "https://www.instagram.com/reel/De0rOY-yHvg/",
       "timestamp": "2026-10-23T04:15:04+0000",
       "caption": "I never filmed this video. But the prompt that built my site is real, and it’s free.\nI turned my whole portfolio site into a single Claude Code prompt. It interviews you, designs, builds, tests itself on phone and desktop, and puts it online. Hosting is free (needs Claude Code).\nComment “SITE” and I’ll DM you the prompt.\n#ClaudeCode #portfolio #freelancer #AI",
       "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 195,
-      "likes": 1
+      "views": 253,
+      "likes": 4
     },
     {
       "has_video": true,
@@ -110,7 +117,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 383,
+      "views": 385,
       "likes": 12
     },
     {
@@ -126,7 +133,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2106,
+      "views": 2108,
       "likes": 6
     },
     {
@@ -149,8 +156,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49091,
-      "likes": 776
+      "views": 49139,
+      "likes": 777
     },
     {
       "has_video": false,
@@ -211,7 +218,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2152,
+      "views": 2154,
       "likes": 38
     },
     {
@@ -302,7 +309,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 2929,
+      "views": 2930,
       "likes": 29,
       "is_shared_to_feed": true
     },
@@ -394,7 +401,7 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 48317,
+      "views": 48331,
       "likes": 1071,
       "is_shared_to_feed": true
     },
@@ -440,8 +447,8 @@
       "visible": true,
       "status": "shown",
       "flag_reason": "",
-      "views": 230808,
-      "likes": 4930,
+      "views": 230858,
+      "likes": 4932,
       "is_shared_to_feed": true
     },
     {
