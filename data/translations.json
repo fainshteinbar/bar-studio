@@ -138,6 +138,12 @@
       "pitch": "Planes used to land here",
       "more": "Soon, landing here for something else. 24 cuisines from around the world, 500 seats, music, and people.",
       "source": "gemini-3.8-flash (Gemini), 2026-10-26"
+    },
+    "18143140507615187": {
+      "hash": "321b7e469aa55105",
+      "pitch": "Match point. 40-40. No tie-break.",
+      "more": "A quasi-ad I directed for EZ7 PADEL TOUR in a Grand Slam promo style: night court, golden point, and the wall. Created with AI.",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-10-26"
     }
   }
 }

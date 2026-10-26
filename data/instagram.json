@@ -1,24 +1,47 @@
 {
-  "generated_at": "2026-10-26T14:17:28.895Z",
+  "generated_at": "2026-10-26T15:31:30.951Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
-    "total_videos": 29,
-    "all_videos": 34,
+    "total_videos": 30,
+    "all_videos": 35,
     "excluded_trial": 5,
-    "total_views": 741918,
-    "views_counted_over": 29,
+    "total_views": 742243,
+    "views_counted_over": 30,
     "views_sample": false,
-    "top_visible_views": 232101,
+    "top_visible_views": 232177,
     "top_visible_id": "17943051837086700",
-    "shown": 29,
+    "shown": 30,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18143140507615187.mp4",
+      "full_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18143140507615187.full.mp4",
+      "rail_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18143140507615187.rail.mp4",
+      "poster_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18143140507615187.webp",
+      "lqip": "data:image/webp;base64,UklGRhoBAABXRUJQVlA4IA4BAACwBgCdASoYACsAPu1isFEppKSjqrgKATAdiUAXBjF12wfTsrfEqwDJ/+80bh/4o95UBw7ypnrA1ZNEGJL3EADOPy2cT8C2f3zJJy9fnlTPsYuzD6su3aBdqbLSj3zTmuf5Mwx1QRuTVuNewqTbLCUrAEH1O2/BNIFefYlgjnqra0VmO1igCk5FXdtIhBHz8nYyMvpyrkItZr4Aog7b5b5ZpXgtgUFlOsH6jAf7B9Qr1I1PHaYDiMOLCEKBfkwHJ4Y7du9j7pVp4Up4P0l1/ymnmzhZaT0kI1lQko0wLmJ1tUEPOxqhFZ3XAjIt/EW6QYXSK/wOUXuB+kvQ8K/dik1C5CHCghicMKDOHtxwAAA=",
+      "width": 720,
+      "height": 1280,
+      "duration": 26.3,
+      "id": "18143140507615187",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/De9hlzUyx2c/",
+      "timestamp": "2026-10-26T14:44:10+0000",
+      "caption": "נקודה אחת. 40-40. אין הארכה.\nפרסומת ספק שביימתי ל-EZ7 PADEL TOUR, בסגנון פרומו של גראנד סלאם: מגרש לילה, נקודת זהב, והקיר.\nנוצר עם AI.\n#פאדל #padel #EZ7 #AIvideo #פרסומת",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
+      "flag_reason": "",
+      "views": 148,
+      "likes": 3
+    },
     {
       "has_video": true,
       "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18018152579952632.mp4",
@@ -39,7 +62,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 515,
+      "views": 544,
       "likes": 11
     },
     {
@@ -62,8 +85,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1406,
-      "likes": 18
+      "views": 1410,
+      "likes": 19
     },
     {
       "has_video": false,
@@ -78,7 +101,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1038,
+      "views": 1039,
       "likes": 21
     },
     {
@@ -94,7 +117,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 483,
+      "views": 485,
       "likes": 14
     },
     {
@@ -110,7 +133,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 4929,
+      "views": 4931,
       "likes": 295
     },
     {
@@ -133,8 +156,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 784,
-      "likes": 15
+      "views": 787,
+      "likes": 16
     },
     {
       "has_video": true,
@@ -179,8 +202,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 390,
-      "likes": 12
+      "views": 392,
+      "likes": 13
     },
     {
       "has_video": false,
@@ -195,7 +218,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2127,
+      "views": 2128,
       "likes": 6
     },
     {
@@ -218,8 +241,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49993,
-      "likes": 808
+      "views": 50017,
+      "likes": 809
     },
     {
       "has_video": false,
@@ -257,7 +280,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3483,
+      "views": 3485,
       "likes": 26
     },
     {
@@ -280,7 +303,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2169,
+      "views": 2170,
       "likes": 38
     },
     {
@@ -326,7 +349,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 458,
+      "views": 460,
       "likes": 3
     },
     {
@@ -349,7 +372,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24054,
+      "views": 24055,
       "likes": 331
     },
     {
@@ -418,8 +441,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105534,
-      "likes": 4618
+      "views": 105547,
+      "likes": 4619
     },
     {
       "has_video": true,
@@ -441,7 +464,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4582,
+      "views": 4583,
       "likes": 106
     },
     {
@@ -464,8 +487,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 48730,
-      "likes": 1083
+      "views": 48749,
+      "likes": 1084
     },
     {
       "has_video": true,
@@ -510,8 +533,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 232101,
-      "likes": 4955
+      "views": 232177,
+      "likes": 4958
     },
     {
       "has_video": true,
