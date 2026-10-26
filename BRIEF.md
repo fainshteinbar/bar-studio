@@ -39,7 +39,7 @@ C. Video delivery. Decide how to show Instagram videos fast and in sync. Known c
 - Instagram embeds/iframes are heavy, show Instagram UI, and don't give clean muted autoplay loops — likely too slow for goal #4.
 - The Instagram API only returns media for professional (Creator/Business) accounts, and its media URLs are temporary, so videos must be re-hosted rather than hot-linked.
 - Videos should not be committed to the git repo (size limits).
-Expected direction unless research shows something better: a scheduled job (e.g., GitHub Actions cron) that pulls new media via the Instagram API, stores mp4 + poster image on a video/CDN host (e.g., Cloudflare R2 or Bunny Stream — compare cost for my volume), and writes a JSON manifest the site reads. Include token refresh so it doesn't silently break after 60 days.
+Expected direction unless research shows something better: a scheduled job (e.g., GitHub Actions cron) that pulls new media via the Instagram API, stores mp4 + poster image on a video/CDN host (e.g., Cloudflare R2, or a separate GitHub Pages media repo — compare cost for my volume), and writes a JSON manifest the site reads. Include token refresh so it doesn't silently break after 60 days.
 My account is set up as a Creator (professional) account, as far as I know — confirm this works with the API you choose.
 
 Phase 1 output: write PLAN.md in the repo root with findings, decisions, installed skills and the build plan. Later phases may run in a fresh session on a different model, so PLAN.md plus this brief must be enough to continue without redoing the research.
