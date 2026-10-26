@@ -1,4 +1,4 @@
-# Hourly Instagram → Bunny CDN sync, caption translation, site rebuild and deploy (PLAN.md 4.6).
+# Hourly Instagram → media repo (GitHub Pages) sync, caption translation, site rebuild and deploy (PLAN.md 4.6).
 # Each run reads the media list and every Reel's views (scripts/ig-sync.mjs --detect) and picks a mode:
 #   full  - a Reel added/removed, caption edited, hidden list changed, or an English caption pending:
 #           ffmpeg, download, transcode, upload, translate, build, commit
@@ -83,14 +83,13 @@ jobs:
         if: steps.detect.outputs.mode == 'full'
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg webp >/dev/null
 
-      - name: Sync (full - Reels to Bunny, translation; stats - fresh view counts only)
+      - name: Sync (full - Reels to the media repo, translation; stats - fresh view counts only)
         if: steps.detect.outputs.mode != 'none'
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_API_VERSION: ${{ vars.IG_API_VERSION }}
-          BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
-          BUNNY_STORAGE_ZONE: ${{ vars.BUNNY_STORAGE_ZONE }}
-          BUNNY_STORAGE_HOST: ${{ vars.BUNNY_STORAGE_HOST }}
+          MEDIA_DEPLOY_KEY: ${{ secrets.MEDIA_DEPLOY_KEY }}
+          MEDIA_REPO: ${{ vars.MEDIA_REPO }}
           MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
@@ -122,7 +121,7 @@ jobs:
           read -r existing updated <<< "$(gh issue list --state open --search "\"$title\" in:title" --json number,updatedAt -q '.[0] | "\(.number) \(.updatedAt)"')"
           body="The Instagram sync failed: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
 
-          Common causes: the Instagram token expired or was revoked (regenerate it in the Meta app dashboard, then run gh secret set IG_ACCESS_TOKEN), the GitHub PAT expired (create a new one, gh secret set GH_SECRETS_PAT, update the GH_PAT_EXPIRES_AT variable), or Bunny rejected the upload (check BUNNY_STORAGE_PASSWORD). See PLAN.md section 5."
+          Common causes: the Instagram token expired or was revoked (regenerate it in the Meta app dashboard, then run gh secret set IG_ACCESS_TOKEN), the GitHub PAT expired (create a new one, gh secret set GH_SECRETS_PAT, update the GH_PAT_EXPIRES_AT variable), or the media repo rejected the push (check the MEDIA_DEPLOY_KEY secret and the write deploy key on bar-studio-media). See PLAN.md section 5."
           if [ -z "$existing" ] || [ "$existing" = "null" ]; then gh issue create --title "$title" --body "$body"; exit 0; fi
           if [ $(( $(date -u +%s) - $(date -u -d "$updated" +%s) )) -lt 72000 ]; then echo "Issue #$existing was updated in the last 20 h; not commenting again."; exit 0; fi
           gh issue comment "$existing" --body "$body"

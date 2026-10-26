@@ -3,7 +3,7 @@
 //   -> index.html (he, rtl, the site root) and en/index.html (en, ltr), sitemap.xml, robots.txt
 // Zero dependencies (template engine below).
 //
-// Manifest: data/instagram.json (committed; written by the CI sync with Bunny CDN URLs). MANIFEST=local uses
+// Manifest: data/instagram.json (committed; written by the CI sync with media-repo URLs). MANIFEST=local uses
 // data/instagram.local.json (gitignored, media/ig paths) for offline work.
 // The two first-screen rail posters (the LCP image and its neighbour) are copied into assets/first/ and served
 // from the site's own origin, so LCP never waits on a second connection to the media CDN.

@@ -2,7 +2,7 @@
 // downloads new ones in the same run (Instagram media URLs expire), makes three renditions + a poster,
 // translates new captions, and writes the manifest the site is built from.
 //
-//   node scripts/ig-sync.mjs --upload [--force]   production (CI): media to Bunny Storage, manifest data/instagram.json
+//   node scripts/ig-sync.mjs --upload [--force]   production (CI): media to the bar-studio-media repo (GitHub Pages), manifest data/instagram.json
 //   node scripts/ig-sync.mjs --local              local preview: media/ig/ + data/instagram.local.json (both gitignored)
 //   node scripts/ig-sync.mjs --check              token + account check only
 //   node scripts/ig-sync.mjs --upload --detect     hourly gate: writes mode=full|stats|none to GITHUB_OUTPUT
@@ -20,10 +20,11 @@
 //   none   nothing to do: exit before writing anything.
 //
 // Env: IG_ACCESS_TOKEN (else .secrets/ig-token locally), IG_API_VERSION (default v26.0),
-//      upload mode: BUNNY_STORAGE_PASSWORD (secret), BUNNY_STORAGE_ZONE, BUNNY_STORAGE_HOST, MEDIA_BASE_URL,
+//      upload mode: MEDIA_DEPLOY_KEY (secret, write deploy key of the media repo), MEDIA_REPO (owner/name), MEDIA_BASE_URL,
 //      translation: GEMINI_API_KEY (Gemini free tier; without it new English captions stay empty, never Hebrew).
 // Secrets are never printed; any URL that appears in an error is redacted.
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync, appendFileSync, createWriteStream, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync, appendFileSync, createWriteStream, rmSync, copyFileSync, chmodSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { Readable } from 'node:stream';
@@ -44,17 +45,16 @@ const MANIFEST = UPLOAD ? 'data/instagram.json' : 'data/instagram.local.json';
 const TOKEN = (process.env.IG_ACCESS_TOKEN || (existsSync('.secrets/ig-token') ? readFileSync('.secrets/ig-token', 'utf8') : '')).trim();
 if (!TOKEN) { console.error('No Instagram token (IG_ACCESS_TOKEN).'); process.exit(2); }
 
-const BUNNY = {
-  password: process.env.BUNNY_STORAGE_PASSWORD || '',
-  zone: process.env.BUNNY_STORAGE_ZONE || '',
-  host: (process.env.BUNNY_STORAGE_HOST || 'storage.bunnycdn.com').replace(/^https?:\/\//, '').replace(/\/$/, ''),
+const MEDIA = {
+  deployKey: process.env.MEDIA_DEPLOY_KEY || '',
+  repo: process.env.MEDIA_REPO || '',
   base: (process.env.MEDIA_BASE_URL || '').replace(/\/$/, ''),
 };
-if (UPLOAD && !DETECT && (!BUNNY.password || !BUNNY.zone || !BUNNY.base)) {
-  console.error('Upload mode needs BUNNY_STORAGE_PASSWORD, BUNNY_STORAGE_ZONE and MEDIA_BASE_URL.');
+if (UPLOAD && !DETECT && (!MEDIA.deployKey || !MEDIA.repo || !MEDIA.base)) {
+  console.error('Upload mode needs MEDIA_DEPLOY_KEY, MEDIA_REPO and MEDIA_BASE_URL.');
   process.exit(2);
 }
-const SECRETS = [TOKEN, BUNNY.password, process.env.GEMINI_API_KEY].filter(Boolean);
+const SECRETS = [TOKEN, MEDIA.deployKey.trim(), process.env.GEMINI_API_KEY].filter(Boolean);
 const redact = (s) => SECRETS.reduce((acc, x) => acc.split(x).join('[secret]'), String(s)).replace(/access_token=[^&\s"]+/g, 'access_token=[secret]');
 
 async function api(path, params = {}) {
@@ -78,15 +78,31 @@ async function download(url, file) {
   await pipeline(Readable.fromWeb(r.body), createWriteStream(file));
 }
 
-const TYPES = { '.mp4': 'video/mp4', '.webp': 'image/webp' };
-async function bunnyPut(localFile, remotePath) {
-  const ext = remotePath.slice(remotePath.lastIndexOf('.'));
-  const r = await fetch(`https://${BUNNY.host}/${BUNNY.zone}/${remotePath}`, {
-    method: 'PUT',
-    headers: { AccessKey: BUNNY.password, 'Content-Type': TYPES[ext] || 'application/octet-stream' },
-    body: readFileSync(localFile),
-  });
-  if (r.status !== 201 && r.status !== 200) throw new Error(redact(`Bunny upload failed for ${remotePath}: HTTP ${r.status}`));
+// Media host: a public repo served by GitHub Pages. Files are staged in a shallow clone and pushed once per run.
+let mediaClone = null, mediaGit = null, mediaKeyDir = null;
+function mediaSetup() {
+  if (mediaClone) return;
+  mediaClone = tempDir('igsync-media');
+  mediaKeyDir = tempDir('igsync-key');
+  const keyFile = join(mediaKeyDir, 'id');
+  writeFileSync(keyFile, MEDIA.deployKey.trim() + '\n');
+  chmodSync(keyFile, 0o600);
+  const env = { ...process.env, GIT_SSH_COMMAND: `ssh -i ${keyFile} -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new` };
+  mediaGit = (...a) => { try { return execFileSync('git', a, { cwd: mediaClone, env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }); } catch (e) { throw new Error(redact(`git ${a[0]} failed: ${e.stderr || e.message}`)); } };
+  mediaGit('clone', '--quiet', '--depth', '1', `git@github.com:${MEDIA.repo}.git`, '.');
+}
+function mediaPut(localFile, remotePath) {
+  mediaSetup();
+  mkdirSync(join(mediaClone, remotePath, '..'), { recursive: true });
+  copyFileSync(localFile, join(mediaClone, remotePath));
+}
+function mediaPublish(message) {
+  if (!mediaClone) return;
+  mediaGit('add', '-A');
+  if (!mediaGit('status', '--porcelain').trim()) { console.log('Media repo: nothing to push.'); return; }
+  mediaGit('-c', 'user.name=bfain-sync', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com', 'commit', '--quiet', '-m', message);
+  mediaGit('push', '--quiet', 'origin', 'HEAD:main');
+  console.log('Media repo: pushed.');
 }
 
 const me = await api('/me', { fields: 'user_id,username,account_type,media_count' });
@@ -182,7 +198,7 @@ if (DETECT || mode === 'none') process.exit(0);
 // 4. Renditions + poster for each visible Reel that is new (or --force); reuse everything else.
 const OUT = LOCAL ? 'media/ig' : tempDir('igsync-out');
 mkdirSync(OUT, { recursive: true });
-const urlFor = (name) => (UPLOAD ? `${BUNNY.base}/reels/${name}` : `${OUT}/${name}`);
+const urlFor = (name) => (UPLOAD ? `${MEDIA.base}/reels/${name}` : `${OUT}/${name}`);
 const tmp = tempDir('igsync');
 const items = [];
 let processed = 0, reused = 0;
@@ -190,7 +206,7 @@ try {
   for (const m of videos) {
     const status = statusOf(m), hidden = status !== 'shown';   // hidden by hand or an excluded Trial Reel
     const prev = prevById[m.id];
-    const reusable = UPLOAD && !has('--force') && prev?.has_video && prev.video_url?.startsWith(BUNNY.base);
+    const reusable = UPLOAD && !has('--force') && prev?.has_video && prev.video_url?.startsWith(MEDIA.base);
     const localReady = LOCAL && existsSync(join(OUT, `${m.id}.mp4`)) && existsSync(join(OUT, `${m.id}.full.mp4`)) && existsSync(join(OUT, `${m.id}.rail.mp4`)) && existsSync(join(OUT, `${m.id}.webp`));
     let entry;
     if (hidden) {
@@ -216,7 +232,7 @@ try {
       if (!lqip || brightness(webp) < 12) lqip = posterFrom(prevMp4, webp, { pick: true });
       rmSync(raw, { force: true });
       if (UPLOAD) {
-        for (const f of [prevMp4, fullMp4, railMp4, webp]) await bunnyPut(f, `reels/${f.split('/').pop()}`);
+        for (const f of [prevMp4, fullMp4, railMp4, webp]) mediaPut(f, `reels/${f.split('/').pop()}`);
       }
       const pw = probe(webp);
       entry = {
@@ -227,7 +243,7 @@ try {
       if (LOCAL) writeFileSync(join(OUT, `${m.id}.json`), JSON.stringify(entry));
       processed++;
       const kb = (f) => Math.round(statSync(f).size / 1024);
-      console.log(`   + ${m.id} ${m.timestamp.slice(0, 10)}  preview ${kb(prevMp4)} KB · full ${kb(fullMp4)} KB · rail ${kb(railMp4)} KB${UPLOAD ? ' · uploaded' : ''}`);
+      console.log(`   + ${m.id} ${m.timestamp.slice(0, 10)}  preview ${kb(prevMp4)} KB · full ${kb(fullMp4)} KB · rail ${kb(railMp4)} KB${UPLOAD ? ' · staged' : ''}`);
     } else {
       entry = { has_video: false };
     }
@@ -240,8 +256,10 @@ try {
       views: await viewsFor(m.id), likes: m.like_count ?? null,
     });
   }
+  mediaPublish(`Sync Reels (${processed} new/processed) ${new Date().toISOString().slice(0, 16)} UTC`);
 } finally {
   rmSync(tmp, { recursive: true, force: true });
+  if (mediaClone) { rmSync(mediaClone, { recursive: true, force: true }); rmSync(mediaKeyDir, { recursive: true, force: true }); }
   if (UPLOAD) rmSync(OUT, { recursive: true, force: true });
 }
 
@@ -261,8 +279,8 @@ const nextSig = (m) => displaySignature(m);
 const manifest = {
   generated_at: new Date().toISOString(),
   placeholder: false,
-  source: UPLOAD ? 'instagram api → bunny cdn' : 'instagram api (local preview)',
-  media_base_url: UPLOAD ? BUNNY.base : '',
+  source: UPLOAD ? 'instagram api → github pages media repo' : 'instagram api (local preview)',
+  media_base_url: UPLOAD ? MEDIA.base : '',
   stats: {
     total_videos: playable.length,
     all_videos: videos.length,
