@@ -1,24 +1,47 @@
 {
-  "generated_at": "2026-10-26T07:17:33.474Z",
+  "generated_at": "2026-10-26T09:22:52.677Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
-    "total_videos": 28,
-    "all_videos": 33,
+    "total_videos": 29,
+    "all_videos": 34,
     "excluded_trial": 5,
-    "total_views": 740645,
-    "views_counted_over": 28,
+    "total_views": 741091,
+    "views_counted_over": 29,
     "views_sample": false,
-    "top_visible_views": 231708,
+    "top_visible_views": 231780,
     "top_visible_id": "17943051837086700",
-    "shown": 28,
+    "shown": 29,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18018152579952632.mp4",
+      "full_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18018152579952632.full.mp4",
+      "rail_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18018152579952632.rail.mp4",
+      "poster_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18018152579952632.webp",
+      "lqip": "data:image/webp;base64,UklGRlQBAABXRUJQVlA4IEgBAACQCACdASoYACsAPu1ip02ppaOiKq35MB2JaACdMuhJUEHh/je5cLx/zByZTNilSw0Tea0CQ4iUjuzA3scne6rZg0md4+2J7SXJ56SGAAD+3O/ixZyN6J/Iy4+954PFn1feHJpSodDsvnuCVRKiLdXBP1h3kCkvCTNiF0QUcqGeACQtmkjlbRrGpIogDu5OYqdFz1zmqCRBbpXQQlpIJZYFPJ64GKfYMSsu0q0SkNDR9BXkwf1XjSne+VX54UXakT5IZh+B33r7OQO2QonaHUqG2LV4CuKziOEeWgKVAmsNfEwrHhlV9GVu4swnkbPsiwSnqOcLoEPQ23jmUhUuQIUc+DkGgWnoAjFxVMkG/GdrfJKx2j+yc/OAaI3IuYVvK87y3FRbT/p3U3NUsuuvmS7KE4M+4GP4BFJMtLGNR8iyKtRebGltIAAA",
+      "width": 720,
+      "height": 1280,
+      "duration": 32.6,
+      "id": "18018152579952632",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/De8yFAwSwnZ/",
+      "timestamp": "2026-10-26T07:49:02+0000",
+      "caption": "פה פעם נחתו מטוסים ✈️\nבקרוב, נוחתים פה בשביל משהו אחר.\n\n24 מטבחים מכל העולם, 500 מקומות ישיבה, מוזיקה ואנשים.\nשוק הטרמינל, פארק הטרמינל אילת.\nנפתח בקרוב.\n\n*הסרטון נוצר ב-AI, הדמיה להמחשה בלבד\n\n#שוק_הטרמינל #אילת #Eilat #פארק_הטרמינל #אוכל_באילת בילוי_באילת",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
+      "flag_reason": "",
+      "views": 272,
+      "likes": 6
+    },
     {
       "has_video": true,
       "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18020288633948602.mp4",
@@ -39,7 +62,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1393,
+      "views": 1397,
       "likes": 18
     },
     {
@@ -55,7 +78,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1024,
+      "views": 1038,
       "likes": 21
     },
     {
@@ -71,7 +94,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 475,
+      "views": 477,
       "likes": 14
     },
     {
@@ -87,8 +110,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 4832,
-      "likes": 288
+      "views": 4864,
+      "likes": 290
     },
     {
       "has_video": true,
@@ -110,7 +133,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 774,
+      "views": 775,
       "likes": 15
     },
     {
@@ -133,7 +156,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 397,
+      "views": 401,
       "likes": 6
     },
     {
@@ -172,7 +195,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2120,
+      "views": 2121,
       "likes": 6
     },
     {
@@ -195,8 +218,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49836,
-      "likes": 804
+      "views": 49885,
+      "likes": 805
     },
     {
       "has_video": false,
@@ -326,7 +349,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24047,
+      "views": 24048,
       "likes": 331
     },
     {
@@ -395,7 +418,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105482,
+      "views": 105494,
       "likes": 4617
     },
     {
@@ -441,8 +464,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 48625,
-      "likes": 1079
+      "views": 48653,
+      "likes": 1082
     },
     {
       "has_video": true,
@@ -487,8 +510,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 231708,
-      "likes": 4947
+      "views": 231780,
+      "likes": 4949
     },
     {
       "has_video": true,
@@ -602,7 +625,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4428,
+      "views": 4430,
       "likes": 51
     },
     {
@@ -740,7 +763,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2458,
+      "views": 2459,
       "likes": 11
     }
   ]
