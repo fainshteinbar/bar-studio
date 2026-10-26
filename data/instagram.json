@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T20:46:01.940Z",
+  "generated_at": "2026-10-26T21:17:23.134Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -7,10 +7,10 @@
     "total_videos": 30,
     "all_videos": 35,
     "excluded_trial": 5,
-    "total_views": 743153,
+    "total_views": 743224,
     "views_counted_over": 30,
     "views_sample": false,
-    "top_visible_views": 232520,
+    "top_visible_views": 232557,
     "top_visible_id": "17943051837086700",
     "shown": 30,
     "hidden": 0,
@@ -39,7 +39,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 363,
+      "views": 382,
       "likes": 8
     },
     {
@@ -62,7 +62,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 630,
+      "views": 634,
       "likes": 12
     },
     {
@@ -85,7 +85,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1415,
+      "views": 1416,
       "likes": 19
     },
     {
@@ -241,7 +241,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50120,
+      "views": 50121,
       "likes": 810
     },
     {
@@ -441,7 +441,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105583,
+      "views": 105592,
       "likes": 4621
     },
     {
@@ -533,8 +533,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 232520,
-      "likes": 4962
+      "views": 232557,
+      "likes": 4965
     },
     {
       "has_video": true,
