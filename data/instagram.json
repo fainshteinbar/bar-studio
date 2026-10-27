@@ -1,24 +1,47 @@
 {
-  "generated_at": "2026-10-27T06:17:27.734Z",
+  "generated_at": "2026-10-27T07:18:21.582Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
-    "total_videos": 30,
-    "all_videos": 35,
+    "total_videos": 31,
+    "all_videos": 36,
     "excluded_trial": 5,
-    "total_views": 743982,
-    "views_counted_over": 30,
+    "total_views": 744205,
+    "views_counted_over": 31,
     "views_sample": false,
-    "top_visible_views": 232755,
+    "top_visible_views": 232819,
     "top_visible_id": "17943051837086700",
-    "shown": 30,
+    "shown": 31,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18117132779044506.mp4",
+      "full_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18117132779044506.full.mp4",
+      "rail_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18117132779044506.rail.mp4",
+      "poster_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18117132779044506.webp",
+      "lqip": "data:image/webp;base64,UklGRtgAAABXRUJQVlA4IMwAAAAwBgCdASoYACsAPu1qsFEppaSipWsxMB2JYgDCs2jEWF/KaLIKQhrLvBEd8PQXqbER2dXUjv1vp7LKAPpgv2lSHrO55xrJNxunBgYN+zOCXjOyHKD56rsdvhJ8N2kOSoKO+XnzNPUFd296Qmxdres416Y/mjNvXKee5MWhXZIXmAEguEP+RMgmjWpcpnrjbxFp2VylgCgHNsSkvx/wmxSkOPTdE+xYhf/ZQFeLm5o+FjmMs+IECXzsuiNFmm3Hx82lME9lYLP58uwAAAA=",
+      "width": 720,
+      "height": 1280,
+      "duration": 43.1,
+      "id": "18117132779044506",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/De_SdOGyu6f/",
+      "timestamp": "2026-10-27T07:11:15+0000",
+      "caption": "קנינו בית שעוד לא קיים.\n\nלילה אחד עמדנו על מגרש ריק ברוקח פינת נמיר ושאלנו “זה פה?”. סרטון קונספט למוזה: הבית שעוד לא נבנה, והרגע שבו מבינים שכן.\n\nקונספט של bfain.studio, לא בשיתוף עם המותג. נוצר ב-AI, ההדמיה להמחשה בלבד.\n\n#נדלן #תלאביב #AIvideo #bfainstudio",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
+      "flag_reason": "",
+      "views": 8,
+      "likes": 0
+    },
     {
       "has_video": true,
       "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18143140507615187.mp4",
@@ -39,7 +62,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 656,
+      "views": 720,
       "likes": 9
     },
     {
@@ -62,7 +85,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 674,
+      "views": 701,
       "likes": 12
     },
     {
@@ -85,7 +108,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1475,
+      "views": 1492,
       "likes": 21
     },
     {
@@ -156,7 +179,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 797,
+      "views": 798,
       "likes": 16
     },
     {
@@ -241,8 +264,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50213,
-      "likes": 811
+      "views": 50225,
+      "likes": 812
     },
     {
       "has_video": false,
@@ -257,7 +280,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 6144,
+      "views": 6146,
       "likes": 18
     },
     {
@@ -372,7 +395,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24073,
+      "views": 24074,
       "likes": 331
     },
     {
@@ -395,7 +418,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2939,
+      "views": 2940,
       "likes": 29
     },
     {
@@ -441,8 +464,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105610,
-      "likes": 4621
+      "views": 105620,
+      "likes": 4622
     },
     {
       "has_video": true,
@@ -487,7 +510,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 48867,
+      "views": 48885,
       "likes": 1086
     },
     {
@@ -533,7 +556,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 232755,
+      "views": 232819,
       "likes": 4968
     },
     {
