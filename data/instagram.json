@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-27T16:52:45.205Z",
+  "generated_at": "2026-10-27T17:17:22.526Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
     "total_videos": 31,
-    "all_videos": 36,
-    "excluded_trial": 5,
-    "total_views": 746733,
+    "all_videos": 37,
+    "excluded_trial": 6,
+    "total_views": 746838,
     "views_counted_over": 31,
     "views_sample": false,
-    "top_visible_views": 233990,
+    "top_visible_views": 234066,
     "top_visible_id": "17943051837086700",
     "shown": 31,
     "hidden": 0,
@@ -19,6 +19,22 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18076764263734396",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfAXGipStmU/",
+      "timestamp": "2026-10-27T17:10:14+0000",
+      "caption": "ככה נראית עברית מ-AI. אז בניתי סקיל שבונה פונט עברי שלם מאפס 🔥\n12 סבבים, 27 אותיות, 10 ספרות ו-3 משקלים, בלי שום פונט בסיס.\nבמקום לשלם על רישיון: כתבו “סקיל” בתגובה ואשלח לכם אותו.\nאיזה מותג הייתם ממתגים איתו ראשון?\nשלחו למעצב שעדיין אומר ש-AI לא יודע עברית.\n#טיפוגרפיה #פונטים #עיצובגרפי #מיתוג",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": true,
       "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18117132779044506.mp4",
@@ -39,7 +55,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 372,
+      "views": 375,
       "likes": 4
     },
     {
@@ -62,7 +78,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1105,
+      "views": 1107,
       "likes": 11
     },
     {
@@ -108,7 +124,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1603,
+      "views": 1604,
       "likes": 23
     },
     {
@@ -124,7 +140,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1044,
+      "views": 1045,
       "likes": 21
     },
     {
@@ -156,7 +172,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 4981,
+      "views": 4983,
       "likes": 295
     },
     {
@@ -202,7 +218,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 412,
+      "views": 413,
       "likes": 7
     },
     {
@@ -264,8 +280,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50362,
-      "likes": 817
+      "views": 50374,
+      "likes": 818
     },
     {
       "has_video": false,
@@ -464,7 +480,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105701,
+      "views": 105703,
       "likes": 4624
     },
     {
@@ -510,7 +526,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49073,
+      "views": 49081,
       "likes": 1087
     },
     {
@@ -556,8 +572,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 233990,
-      "likes": 4984
+      "views": 234066,
+      "likes": 4985
     },
     {
       "has_video": true,
