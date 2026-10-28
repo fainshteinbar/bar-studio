@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-10-28T06:17:28.065Z",
+  "generated_at": "2026-10-28T07:23:10.936Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
-    "total_videos": 31,
-    "all_videos": 37,
+    "total_videos": 32,
+    "all_videos": 38,
     "excluded_trial": 6,
-    "total_views": 748362,
-    "views_counted_over": 31,
+    "total_views": 749324,
+    "views_counted_over": 32,
     "views_sample": false,
-    "top_visible_views": 235073,
+    "top_visible_views": 235162,
     "top_visible_id": "17943051837086700",
-    "shown": 31,
+    "shown": 32,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
@@ -21,19 +21,42 @@
   "items": [
     {
       "has_video": false,
-      "id": "18076764263734396",
+      "id": "18119900003060306",
       "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DfAXGipStmU/",
-      "timestamp": "2026-10-27T17:10:14+0000",
-      "caption": "ככה נראית עברית מ-AI. אז בניתי סקיל שבונה פונט עברי שלם מאפס 🔥\n12 סבבים, 27 אותיות, 10 ספרות ו-3 משקלים, בלי שום פונט בסיס.\nבמקום לשלם על רישיון: כתבו “סקיל” בתגובה ואשלח לכם אותו.\nאיזה מותג הייתם ממתגים איתו ראשון?\nשלחו למעצב שעדיין אומר ש-AI לא יודע עברית.\n#טיפוגרפיה #פונטים #עיצובגרפי #מיתוג",
+      "permalink": "https://www.instagram.com/reel/DfB1ZgHS_07/",
+      "timestamp": "2026-10-28T06:54:04+0000",
+      "caption": "ישיבה מס׳ 412 של ועד הבית. על סדר היום: העגלה בלובי.\nדירה 4 הטילה וטו, הוועד הטיל סנקציות, הפנטהאוז חתם על ברית הגנה, ואז שולה מדירה 1 התעוררה.\nסעיף שתיים בשבוע הבא: הגינה.\n\nשלחו לוועד של הבניין שלכם.\n\nנוצר עם AI, כל הדמויות בדיוניות.\n#ועדבית #קומדיה #AI",
       "lane": "reels",
       "visible": false,
       "status": "excluded-trial",
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 696,
-      "likes": 2
+      "views": 7,
+      "likes": 0
+    },
+    {
+      "has_video": true,
+      "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18076764263734396.mp4",
+      "full_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18076764263734396.full.mp4",
+      "rail_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18076764263734396.rail.mp4",
+      "poster_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18076764263734396.webp",
+      "lqip": "data:image/webp;base64,UklGRtIAAABXRUJQVlA4IMYAAAAwBgCdASoYACsAPu1qrVCppaQipWzJMB2JZwDHMywYYJm3dAF+AFk4pFeiAjXqpsm+URESLG8Or/AAAP74R7Evy0YPXEkzAobc4y6KQ5rPOXpyy8Aw4x6h6xBbacEz3DjHIXpjh2mkgd/dWY8qL9axtoU12cOmEw1sBJyJV/y5CtACKwns7gN6jF9ZploOi6aM5GgZUMK/ORPT+smt3jrRxnFM6qcOCZMMNfdKygHEQ5AT89e5/6KanIRJOan9O1zWIIzAAAA=",
+      "width": 720,
+      "height": 1280,
+      "duration": 20.5,
+      "id": "18076764263734396",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfAXGipStmU/",
+      "timestamp": "2026-10-27T17:10:14+0000",
+      "caption": "ככה נראית עברית מ-AI. אז בניתי סקיל שבונה פונט עברי שלם מאפס 🔥\n12 סבבים, 27 אותיות, 10 ספרות ו-3 משקלים, בלי שום פונט בסיס.\nבמקום לשלם על רישיון: כתבו “סקיל” בתגובה ואשלח לכם אותו.\nאיזה מותג הייתם ממתגים איתו ראשון?\nשלחו למעצב שעדיין אומר ש-AI לא יודע עברית.\n#טיפוגרפיה #פונטים #עיצובגרפי #מיתוג",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
+      "flag_reason": "",
+      "views": 831,
+      "likes": 4
     },
     {
       "has_video": true,
@@ -55,7 +78,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 458,
+      "views": 465,
       "likes": 5
     },
     {
@@ -78,8 +101,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1116,
-      "likes": 11
+      "views": 1119,
+      "likes": 12
     },
     {
       "has_video": true,
@@ -101,7 +124,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 736,
+      "views": 738,
       "likes": 12
     },
     {
@@ -140,7 +163,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1061,
+      "views": 1062,
       "likes": 21
     },
     {
@@ -172,7 +195,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 4989,
+      "views": 4990,
       "likes": 295
     },
     {
@@ -241,7 +264,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 399,
+      "views": 400,
       "likes": 13
     },
     {
@@ -280,7 +303,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50541,
+      "views": 50556,
       "likes": 823
     },
     {
@@ -319,8 +342,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3496,
-      "likes": 26
+      "views": 3497,
+      "likes": 27
     },
     {
       "has_video": true,
@@ -365,7 +388,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4631,
+      "views": 4632,
       "likes": 40
     },
     {
@@ -411,7 +434,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24129,
+      "views": 24131,
       "likes": 333
     },
     {
@@ -480,7 +503,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105737,
+      "views": 105739,
       "likes": 4625
     },
     {
@@ -503,7 +526,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4597,
+      "views": 4598,
       "likes": 106
     },
     {
@@ -526,7 +549,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49189,
+      "views": 49195,
       "likes": 1087
     },
     {
@@ -549,7 +572,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4446,
+      "views": 4447,
       "likes": 49
     },
     {
@@ -572,8 +595,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 235073,
-      "likes": 4997
+      "views": 235162,
+      "likes": 4998
     },
     {
       "has_video": true,

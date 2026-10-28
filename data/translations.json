@@ -150,6 +150,12 @@
       "pitch": "We bought a house that doesn't exist yet.",
       "more": "One night we stood on an empty lot at Rokach and Namir and asked, is this it? Concept video for Muza: the unbuilt home, and the moment it feels real. Concept by",
       "source": "gemini-3.5-flash-lite (Gemini), 2026-10-27"
+    },
+    "18076764263734396": {
+      "hash": "425c6338c2859b70",
+      "pitch": "This is what AI Hebrew looks like. So I built a skill that generates a full Hebrew font fr",
+      "more": "12 rounds, 27 letters, 10 digits, and 3 weights, with zero base font. Instead of paying for a license: comment “skill” and I’ll send it over.",
+      "source": "gemini-3.8-flash (Gemini), 2026-10-28"
     }
   }
 }
