@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-28T12:17:28.776Z",
+  "generated_at": "2026-10-28T13:17:20.746Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
     "total_videos": 32,
-    "all_videos": 39,
-    "excluded_trial": 7,
-    "total_views": 750618,
+    "all_videos": 41,
+    "excluded_trial": 9,
+    "total_views": 750818,
     "views_counted_over": 32,
     "views_sample": false,
-    "top_visible_views": 235619,
+    "top_visible_views": 235717,
     "top_visible_id": "17943051837086700",
     "shown": 32,
     "hidden": 0,
@@ -19,6 +19,38 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "17918012907265231",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfCfaKkSw-r/",
+      "timestamp": "2026-10-28T13:01:07+0000",
+      "caption": "דירה 4 הטילה וטו על העגלה בלובי. מכאן זה רק הסלים 🏢\nכל ועד בית בישראל הוא בעצם מועצת הביטחון.\nשלחו לקבוצה של הבניין (רק אל תסירו אף אחד)\nסעיף שתיים: הגינה. בקרוב.\nסרטון AI · קונספט ובימוי: בר פיינשטיין\n#ועדבית #שכנים #קומדיה #AI",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "has_video": false,
+      "id": "18415622992081003",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfCfTWlyy9C/",
+      "timestamp": "2026-10-28T13:00:14+0000",
+      "caption": "כל לילה בשתיים. דפיקות מהתקרה. ניסינו הכול 🫣\nעד שגילינו מי זה.\nיש לכם שכן כזה? תשלחו לו. הוא יודע מה הוא עשה.\nסרטון AI · קונספט ובימוי: בר פיינשטיין\n#השכןמלמעלה #שכנים #דירה #קומדיה",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": false,
       "id": "17954256717334814",
@@ -32,8 +64,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 585,
-      "likes": 4
+      "views": 618,
+      "likes": 5
     },
     {
       "has_video": false,
@@ -48,7 +80,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 137,
+      "views": 139,
       "likes": 0
     },
     {
@@ -71,7 +103,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1390,
+      "views": 1451,
       "likes": 8
     },
     {
@@ -117,7 +149,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1121,
+      "views": 1124,
       "likes": 12
     },
     {
@@ -140,7 +172,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 743,
+      "views": 744,
       "likes": 12
     },
     {
@@ -163,7 +195,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1659,
+      "views": 1662,
       "likes": 25
     },
     {
@@ -211,7 +243,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 4992,
+      "views": 4993,
       "likes": 295
     },
     {
@@ -234,7 +266,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 826,
+      "views": 827,
       "likes": 16
     },
     {
@@ -319,7 +351,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50647,
+      "views": 50656,
       "likes": 826
     },
     {
@@ -358,7 +390,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3502,
+      "views": 3503,
       "likes": 27
     },
     {
@@ -404,7 +436,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4636,
+      "views": 4637,
       "likes": 40
     },
     {
@@ -519,8 +551,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105755,
-      "likes": 4625
+      "views": 105758,
+      "likes": 4626
     },
     {
       "has_video": true,
@@ -565,7 +597,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49254,
+      "views": 49272,
       "likes": 1089
     },
     {
@@ -588,7 +620,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4447,
+      "views": 4448,
       "likes": 49
     },
     {
@@ -611,8 +643,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 235619,
-      "likes": 5010
+      "views": 235717,
+      "likes": 5014
     },
     {
       "has_video": true,
