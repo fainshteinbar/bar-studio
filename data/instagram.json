@@ -1,24 +1,47 @@
 {
-  "generated_at": "2026-10-28T14:17:25.033Z",
+  "generated_at": "2026-10-28T15:20:50.951Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
-    "total_videos": 32,
-    "all_videos": 41,
+    "total_videos": 33,
+    "all_videos": 42,
     "excluded_trial": 9,
-    "total_views": 750997,
-    "views_counted_over": 32,
+    "total_views": 751413,
+    "views_counted_over": 33,
     "views_sample": false,
-    "top_visible_views": 235829,
+    "top_visible_views": 235961,
     "top_visible_id": "17943051837086700",
-    "shown": 32,
+    "shown": 33,
     "hidden": 0,
     "missing_media_url": 0,
     "missing_media_url_pct": 0
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18119404693788158.mp4",
+      "full_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18119404693788158.full.mp4",
+      "rail_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18119404693788158.rail.mp4",
+      "poster_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18119404693788158.webp",
+      "lqip": "data:image/webp;base64,UklGRiYBAABXRUJQVlA4IBoBAAAQBwCdASoYACsAPu1yrlMppqQipWmZMB2JagC07AgDX4TjqKMC87scZ3JOmLIwo8bNWwQF+qWZoWvF7xcIE8muyAD+9FSCN6NwyXfjyNzuIDQPamZGiPGlp9XlAZX15yBwl8kZW9qJIZHo4x4L3ro4h5WrIXYULNSiVGj6wwjx0CxzjmRfmh8lTJSYCNmFm9zWfaTm0D5wkoPYEtjwRRjbq8UG+IkfPEYQjTrkCv8J2NIMnS830KBdV3gpEZ/aVX8Cpf5cIggFpsDOMVniMJV1++Ov2k/EyiUxNsbU99TJVvzlca/nSNs5XcnC1n/2qG2fHwFzUm9vQlxqLvSK7ze5sOUVrOOmirZ7z3gDCq8MRyVxhtCxkzgAAAA=",
+      "width": 720,
+      "height": 1280,
+      "duration": 22,
+      "id": "18119404693788158",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfCpVhJSMfA/",
+      "timestamp": "2026-10-28T14:28:27+0000",
+      "caption": "07:00. המטבח של דיזנגוף 99 מתעורר 🍳\nשעה אחת ממטבח שקט לאולם מלא: עגבניות ישר מהכיור, מחמצת שנחתכת בקראנץ’, ביצים רכות בחמאה, והדלתות נפתחות.\n🎧 תקשיבו עם סאונד.\n\nקונספט, לא בשיתוף עם המותג · נוצר ב-AI\n#דיזנגוף99 #בראנץ #תלאביב #asmr",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
+      "flag_reason": "",
+      "views": 196,
+      "likes": 7
+    },
     {
       "has_video": false,
       "id": "17918012907265231",
@@ -32,8 +55,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 614,
-      "likes": 1
+      "views": 862,
+      "likes": 2
     },
     {
       "has_video": false,
@@ -48,7 +71,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 141,
+      "views": 215,
       "likes": 0
     },
     {
@@ -64,8 +87,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 685,
-      "likes": 6
+      "views": 745,
+      "likes": 7
     },
     {
       "has_video": false,
@@ -103,7 +126,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1470,
+      "views": 1485,
       "likes": 9
     },
     {
@@ -126,7 +149,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 490,
+      "views": 491,
       "likes": 5
     },
     {
@@ -149,7 +172,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1126,
+      "views": 1127,
       "likes": 12
     },
     {
@@ -172,7 +195,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 744,
+      "views": 745,
       "likes": 12
     },
     {
@@ -195,7 +218,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1666,
+      "views": 1668,
       "likes": 25
     },
     {
@@ -266,7 +289,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 827,
+      "views": 829,
       "likes": 16
     },
     {
@@ -289,7 +312,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 421,
+      "views": 422,
       "likes": 7
     },
     {
@@ -312,7 +335,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 408,
+      "views": 409,
       "likes": 13
     },
     {
@@ -328,7 +351,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2164,
+      "views": 2166,
       "likes": 7
     },
     {
@@ -351,8 +374,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50673,
-      "likes": 826
+      "views": 50689,
+      "likes": 828
     },
     {
       "has_video": false,
@@ -390,7 +413,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3503,
+      "views": 3506,
       "likes": 27
     },
     {
@@ -413,7 +436,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2193,
+      "views": 2194,
       "likes": 38
     },
     {
@@ -436,7 +459,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4637,
+      "views": 4642,
       "likes": 40
     },
     {
@@ -459,7 +482,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 473,
+      "views": 474,
       "likes": 3
     },
     {
@@ -482,7 +505,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24137,
+      "views": 24138,
       "likes": 333
     },
     {
@@ -505,7 +528,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2950,
+      "views": 2951,
       "likes": 29
     },
     {
@@ -528,7 +551,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 160366,
+      "views": 160367,
       "likes": 138
     },
     {
@@ -551,7 +574,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105759,
+      "views": 105762,
       "likes": 4626
     },
     {
@@ -574,7 +597,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4599,
+      "views": 4601,
       "likes": 106
     },
     {
@@ -597,8 +620,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49292,
-      "likes": 1089
+      "views": 49316,
+      "likes": 1090
     },
     {
       "has_video": true,
@@ -620,7 +643,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4448,
+      "views": 4450,
       "likes": 49
     },
     {
@@ -643,8 +666,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 235829,
-      "likes": 5015
+      "views": 235961,
+      "likes": 5017
     },
     {
       "has_video": true,
@@ -666,7 +689,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1130,
+      "views": 1131,
       "likes": 11
     },
     {
@@ -689,7 +712,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 931,
+      "views": 932,
       "likes": 13
     },
     {
@@ -735,7 +758,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1705,
+      "views": 1707,
       "likes": 18
     },
     {

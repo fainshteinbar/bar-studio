@@ -156,6 +156,12 @@
       "pitch": "This is what AI Hebrew looks like. So I built a skill that generates a full Hebrew font fr",
       "more": "12 rounds, 27 letters, 10 digits, and 3 weights, with zero base font. Instead of paying for a license: comment “skill” and I’ll send it over.",
       "source": "gemini-3.8-flash (Gemini), 2026-10-28"
+    },
+    "18119404693788158": {
+      "hash": "e93646d3c806c43a",
+      "pitch": "07:00. The kitchen at Dizengoff 99 wakes up",
+      "more": "One hour from a quiet kitchen to a full dining room: tomatoes straight from the sink, sourdough sliced with a crunch, soft eggs in butter, and the doors open. L",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-10-28"
     }
   }
 }
