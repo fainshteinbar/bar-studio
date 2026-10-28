@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-28T07:23:10.936Z",
+  "generated_at": "2026-10-28T08:17:25.544Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
     "total_videos": 32,
-    "all_videos": 38,
-    "excluded_trial": 6,
-    "total_views": 749324,
+    "all_videos": 39,
+    "excluded_trial": 7,
+    "total_views": 749599,
     "views_counted_over": 32,
     "views_sample": false,
-    "top_visible_views": 235162,
+    "top_visible_views": 235240,
     "top_visible_id": "17943051837086700",
     "shown": 32,
     "hidden": 0,
@@ -19,6 +19,22 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "17954256717334814",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfB4GNSS4bd/",
+      "timestamp": "2026-10-28T07:18:14+0000",
+      "caption": "שתיים בלילה. דפיקות מהתקרה. אז הם עשו את הדבר היחיד שנשאר 🫣\nבניין חדש. התחלה חדשה. ואז הם הבינו מי עבר איתם.\nהטריילר שכל מי שגר מתחת למישהו כבר ראה מהמיטה.\nתשלחו לשכן מלמעלה. הוא יודע מה הוא עשה.\nסרטון AI · קונספט\n#השכןמלמעלה #טריילר #אימה #דירה",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 163,
+      "likes": 1
+    },
     {
       "has_video": false,
       "id": "18119900003060306",
@@ -32,7 +48,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 7,
+      "views": 135,
       "likes": 0
     },
     {
@@ -55,8 +71,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 831,
-      "likes": 4
+      "views": 970,
+      "likes": 6
     },
     {
       "has_video": true,
@@ -78,7 +94,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 465,
+      "views": 475,
       "likes": 5
     },
     {
@@ -124,7 +140,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 738,
+      "views": 739,
       "likes": 12
     },
     {
@@ -147,7 +163,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1640,
+      "views": 1641,
       "likes": 24
     },
     {
@@ -163,7 +179,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1062,
+      "views": 1063,
       "likes": 21
     },
     {
@@ -195,7 +211,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 4990,
+      "views": 4991,
       "likes": 295
     },
     {
@@ -241,7 +257,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 415,
+      "views": 416,
       "likes": 7
     },
     {
@@ -264,7 +280,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 400,
+      "views": 401,
       "likes": 13
     },
     {
@@ -280,7 +296,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2160,
+      "views": 2161,
       "likes": 7
     },
     {
@@ -303,7 +319,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50556,
+      "views": 50571,
       "likes": 823
     },
     {
@@ -434,7 +450,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24131,
+      "views": 24133,
       "likes": 333
     },
     {
@@ -503,7 +519,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105739,
+      "views": 105745,
       "likes": 4625
     },
     {
@@ -549,7 +565,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49195,
+      "views": 49215,
       "likes": 1087
     },
     {
@@ -595,8 +611,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 235162,
-      "likes": 4998
+      "views": 235240,
+      "likes": 5001
     },
     {
       "has_video": true,
@@ -802,7 +818,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 58550,
+      "views": 58551,
       "likes": 2086
     },
     {
