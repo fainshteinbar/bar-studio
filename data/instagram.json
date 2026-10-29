@@ -1,24 +1,39 @@
 {
-  "generated_at": "2026-10-29T17:06:05.116Z",
+  "generated_at": "2026-10-29T17:17:35.186Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
     "total_videos": 33,
-    "all_videos": 38,
+    "all_videos": 39,
     "excluded_trial": 5,
-    "total_views": 754150,
+    "total_views": 754177,
     "views_counted_over": 33,
     "views_sample": false,
-    "top_visible_views": 237591,
+    "top_visible_views": 237608,
     "top_visible_id": "17943051837086700",
     "shown": 33,
     "hidden": 0,
-    "missing_media_url": 0,
-    "missing_media_url_pct": 0
+    "missing_media_url": 1,
+    "missing_media_url_pct": 2.6
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18119885431989711",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfFhE2Qy16n/",
+      "timestamp": "2026-10-29T17:14:16+0000",
+      "caption": "כל בוקר היא פתחה את הווילון לים אחר.\nקרחון בראשון. לגונה בשני. ספינת מפרש בשלישי. פינגווינים ברביעי. סערה בחמישי.\nבשישי, רק ערפל.\nובשבת הוא חזר. הים שלה.\n\nראיתי את כל הימים. נשארתי בשלי.\n\nקונספט פרסומת שיצרתי מאפס ל-SEVEN SEAS, שדה דב מערב, תל אביב.\nלא פרסומת לדירה. פרסומת לבוקר.\n\nאיזה ים הייתם בוחרים לבוקר שלכם? 👇\n\n🎵 אריק איינשטיין · אוהב להיות בבית\n*קונספט לא רשמי. נוצר ב-AI. ההדמיה להמחשה בלבד.\n\n#נדלן #תלאביב #שדהדבמערב #SevenSeas #AIvideo פרסומת קריאייטיב",
+      "lane": "reels",
+      "visible": false,
+      "status": "shown",
+      "is_shared_to_feed": true,
+      "flag_reason": "",
+      "views": 5,
+      "likes": 0
+    },
     {
       "has_video": true,
       "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18119404693788158.mp4",
@@ -110,7 +125,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1563,
+      "views": 1565,
       "likes": 10
     },
     {
@@ -287,7 +302,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 414,
+      "views": 415,
       "likes": 13
     },
     {
@@ -310,7 +325,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50968,
+      "views": 50973,
       "likes": 830
     },
     {
@@ -510,7 +525,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105830,
+      "views": 105831,
       "likes": 4628
     },
     {
@@ -556,7 +571,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49535,
+      "views": 49536,
       "likes": 1093
     },
     {
@@ -602,8 +617,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 237591,
-      "likes": 5048
+      "views": 237608,
+      "likes": 5049
     },
     {
       "has_video": true,
