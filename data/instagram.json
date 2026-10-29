@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-29T15:17:24.903Z",
+  "generated_at": "2026-10-29T16:18:20.139Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
     "total_videos": 33,
-    "all_videos": 42,
-    "excluded_trial": 9,
-    "total_views": 753909,
+    "all_videos": 38,
+    "excluded_trial": 5,
+    "total_views": 754009,
     "views_counted_over": 33,
     "views_sample": false,
-    "top_visible_views": 237427,
+    "top_visible_views": 237494,
     "top_visible_id": "17943051837086700",
     "shown": 33,
     "hidden": 0,
@@ -55,7 +55,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1536,
+      "views": 1540,
       "likes": 4
     },
     {
@@ -71,7 +71,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2368,
+      "views": 2377,
       "likes": 7
     },
     {
@@ -89,22 +89,6 @@
       "flag_reason": "",
       "views": 1356,
       "likes": 11
-    },
-    {
-      "has_video": false,
-      "id": "18119900003060306",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DfB1ZgHS_07/",
-      "timestamp": "2026-10-28T06:54:04+0000",
-      "caption": "ישיבה מס׳ 412 של ועד הבית. על סדר היום: העגלה בלובי.\nדירה 4 הטילה וטו, הוועד הטיל סנקציות, הפנטהאוז חתם על ברית הגנה, ואז שולה מדירה 1 התעוררה.\nסעיף שתיים בשבוע הבא: הגינה.\n\nשלחו לוועד של הבניין שלכם.\n\nנוצר עם AI, כל הדמויות בדיוניות.\n#ועדבית #קומדיה #AI",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 174,
-      "likes": 0
     },
     {
       "has_video": true,
@@ -126,7 +110,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1560,
+      "views": 1561,
       "likes": 10
     },
     {
@@ -149,7 +133,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 516,
+      "views": 517,
       "likes": 6
     },
     {
@@ -195,7 +179,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 762,
+      "views": 764,
       "likes": 12
     },
     {
@@ -218,40 +202,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1708,
+      "views": 1711,
       "likes": 26
-    },
-    {
-      "has_video": false,
-      "id": "18058584200795940",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/De6VQnOyIfZ/",
-      "timestamp": "2026-10-25T08:58:36+0000",
-      "caption": "This footage was recovered from a time machine. 66 million years ago. ☄️\n\nHe made it back in time to see them. He didn’t make it back.\n\n#dinosaurs #trex #foundfootage #timetravel #ai",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 1067,
-      "likes": 21
-    },
-    {
-      "has_video": false,
-      "id": "18075157556744093",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/De56v2yy4zO/",
-      "timestamp": "2026-10-25T05:06:53+0000",
-      "caption": "POV: You time-traveled to the last day of the dinosaurs ☄️\n\n66 million years ago, it was over in a single day.\n\nWould you have run, or kept filming?\n\n#dinosaurs #trex #asteroid #pov #ai",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 494,
-      "likes": 14
     },
     {
       "has_video": false,
@@ -312,7 +264,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 428,
+      "views": 429,
       "likes": 7
     },
     {
@@ -339,22 +291,6 @@
       "likes": 13
     },
     {
-      "has_video": false,
-      "id": "18632185720057094",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DewxO--yEE2/",
-      "timestamp": "2026-10-21T15:50:46+0000",
-      "caption": "לפעמים זה באמת עוגיות 🍪\nכל נכד יודע מה יש בקופסה הכחולה של סבתא. כמעט.\nשלחו למי שאף פעם לא פותח אותה.\n\n🎬 סרטון AI\n#מבוססעלסיפוראמיתי #סבתא #עוגיותחמאה #DanishDelights",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 2182,
-      "likes": 7
-    },
-    {
       "has_video": true,
       "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18021259553731125.mp4",
       "full_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18021259553731125.full.mp4",
@@ -374,7 +310,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50951,
+      "views": 50961,
       "likes": 830
     },
     {
@@ -574,7 +510,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105821,
+      "views": 105826,
       "likes": 4628
     },
     {
@@ -620,7 +556,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49515,
+      "views": 49525,
       "likes": 1092
     },
     {
@@ -666,8 +602,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 237427,
-      "likes": 5042
+      "views": 237494,
+      "likes": 5045
     },
     {
       "has_video": true,
