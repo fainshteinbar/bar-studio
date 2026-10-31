@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T18:48:44.383Z",
+  "generated_at": "2026-10-31T19:17:28.140Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -7,10 +7,10 @@
     "total_videos": 34,
     "all_videos": 40,
     "excluded_trial": 5,
-    "total_views": 757883,
+    "total_views": 757985,
     "views_counted_over": 34,
     "views_sample": false,
-    "top_visible_views": 239723,
+    "top_visible_views": 239732,
     "top_visible_id": "17943051837086700",
     "shown": 34,
     "hidden": 0,
@@ -39,7 +39,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 462,
+      "views": 546,
       "likes": 7
     },
     {
@@ -194,7 +194,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1167,
+      "views": 1168,
       "likes": 13
     },
     {
@@ -348,7 +348,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51273,
+      "views": 51276,
       "likes": 832
     },
     {
@@ -548,7 +548,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105915,
+      "views": 105916,
       "likes": 4634
     },
     {
@@ -571,7 +571,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4628,
+      "views": 4629,
       "likes": 106
     },
     {
@@ -594,7 +594,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49830,
+      "views": 49832,
       "likes": 1101
     },
     {
@@ -640,7 +640,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 239723,
+      "views": 239732,
       "likes": 5088
     },
     {
@@ -847,7 +847,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 58554,
+      "views": 58555,
       "likes": 2086
     },
     {
