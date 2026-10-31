@@ -1,24 +1,47 @@
 {
-  "generated_at": "2026-10-31T16:17:28.050Z",
+  "generated_at": "2026-10-31T17:18:30.732Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
-    "total_videos": 33,
-    "all_videos": 39,
+    "total_videos": 34,
+    "all_videos": 40,
     "excluded_trial": 5,
-    "total_views": 757239,
-    "views_counted_over": 33,
+    "total_views": 757326,
+    "views_counted_over": 34,
     "views_sample": false,
-    "top_visible_views": 239602,
+    "top_visible_views": 239658,
     "top_visible_id": "17943051837086700",
-    "shown": 33,
+    "shown": 34,
     "hidden": 0,
     "missing_media_url": 1,
-    "missing_media_url_pct": 2.6
+    "missing_media_url_pct": 2.5
   },
   "hero": null,
   "items": [
+    {
+      "has_video": true,
+      "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18100118168427984.mp4",
+      "full_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18100118168427984.full.mp4",
+      "rail_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18100118168427984.rail.mp4",
+      "poster_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18100118168427984.webp",
+      "lqip": "data:image/webp;base64,UklGRvYAAABXRUJQVlA4IOoAAABwBgCdASoYACsAPu1usFKppiSipWmZMB2JZAC3uCM2p9XA+Vg7EfypY9uLMpb5oZhjUoVCK/riVjK8mAAA/vaI7HBl0PE1Lj3vTz6RDgMQ0UWFFicD7udV/FBhsx0HD5/+N+Ypn31Z9I+IOOyGN7OI0/HxEy6IYuLEJLrjhPN9vIH6gcjzszD4U0d6+ToEqlV08ql9yGshFEZK2eVyJ9emCSDSvmhR0wIiTg7bbpyx4luAZqcncp8IdRVypxMmRACC7C0vWKjIphxEFBJyoyxfQEA7Qsdr0Pb7vAWZSrO5nY/dyRXP0FcaAAA=",
+      "width": 720,
+      "height": 1280,
+      "duration": 73.3,
+      "id": "18100118168427984",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfKqo3yyuk1/",
+      "timestamp": "2026-10-31T17:13:38+0000",
+      "caption": "The box said some assembly required. It didn’t say what was missing. 📦\nWould you send him back?\nSome Assembly Required · Season 1 · Episode 1\n@microdra.ma @adarena.app #MicroDrama #PilotRush #AdArena",
+      "lane": "reels",
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
+      "flag_reason": "",
+      "views": 7,
+      "likes": 0
+    },
     {
       "has_video": false,
       "id": "18119885431989711",
@@ -54,7 +77,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 462,
+      "views": 463,
       "likes": 15
     },
     {
@@ -70,7 +93,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1587,
+      "views": 1588,
       "likes": 4
     },
     {
@@ -86,7 +109,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2590,
+      "views": 2594,
       "likes": 9
     },
     {
@@ -148,7 +171,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 545,
+      "views": 547,
       "likes": 6
     },
     {
@@ -194,7 +217,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 810,
+      "views": 811,
       "likes": 13
     },
     {
@@ -217,7 +240,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1765,
+      "views": 1766,
       "likes": 28
     },
     {
@@ -325,7 +348,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51261,
+      "views": 51263,
       "likes": 832
     },
     {
@@ -456,7 +479,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24223,
+      "views": 24224,
       "likes": 334
     },
     {
@@ -525,7 +548,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105911,
+      "views": 105912,
       "likes": 4634
     },
     {
@@ -571,7 +594,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49798,
+      "views": 49813,
       "likes": 1100
     },
     {
@@ -617,7 +640,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 239602,
+      "views": 239658,
       "likes": 5088
     },
     {
