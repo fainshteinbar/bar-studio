@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T23:17:31.661Z",
+  "generated_at": "2026-11-01T03:17:27.189Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -7,10 +7,10 @@
     "total_videos": 34,
     "all_videos": 40,
     "excluded_trial": 5,
-    "total_views": 759758,
+    "total_views": 759869,
     "views_counted_over": 34,
     "views_sample": false,
-    "top_visible_views": 239811,
+    "top_visible_views": 239837,
     "top_visible_id": "17943051837086700",
     "shown": 34,
     "hidden": 0,
@@ -39,8 +39,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2159,
-      "likes": 32
+      "views": 2209,
+      "likes": 33
     },
     {
       "has_video": false,
@@ -54,7 +54,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 605,
+      "views": 607,
       "likes": 22
     },
     {
@@ -109,7 +109,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2602,
+      "views": 2604,
       "likes": 9
     },
     {
@@ -240,7 +240,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1782,
+      "views": 1784,
       "likes": 28
     },
     {
@@ -256,7 +256,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5075,
+      "views": 5076,
       "likes": 298
     },
     {
@@ -279,7 +279,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 880,
+      "views": 881,
       "likes": 17
     },
     {
@@ -348,7 +348,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51312,
+      "views": 51336,
       "likes": 832
     },
     {
@@ -479,7 +479,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24230,
+      "views": 24233,
       "likes": 334
     },
     {
@@ -525,7 +525,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 160377,
+      "views": 160378,
       "likes": 138
     },
     {
@@ -571,7 +571,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4630,
+      "views": 4632,
       "likes": 106
     },
     {
@@ -594,7 +594,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49838,
+      "views": 49840,
       "likes": 1101
     },
     {
@@ -640,8 +640,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 239811,
-      "likes": 5089
+      "views": 239837,
+      "likes": 5092
     },
     {
       "has_video": true,
