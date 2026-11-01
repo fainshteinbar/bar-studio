@@ -1,24 +1,40 @@
 {
-  "generated_at": "2026-11-01T14:17:29.226Z",
+  "generated_at": "2026-11-01T15:17:30.488Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
     "total_videos": 34,
-    "all_videos": 40,
-    "excluded_trial": 5,
-    "total_views": 760541,
+    "all_videos": 41,
+    "excluded_trial": 6,
+    "total_views": 760628,
     "views_counted_over": 34,
     "views_sample": false,
-    "top_visible_views": 240023,
+    "top_visible_views": 240047,
     "top_visible_id": "17943051837086700",
     "shown": 34,
     "hidden": 0,
     "missing_media_url": 1,
-    "missing_media_url_pct": 2.5
+    "missing_media_url_pct": 2.4
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "17967372243078621",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfNCBu3yufF/",
+      "timestamp": "2026-11-01T15:16:26+0000",
+      "caption": "What if your next train ride took you straight into the Frieza Saga? 🚆⚡\n#dragonballz #dbz #anime #aivideo #nextstop",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": true,
       "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18100118168427984.mp4",
@@ -39,7 +55,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2513,
+      "views": 2549,
       "likes": 37
     },
     {
@@ -148,7 +164,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1608,
+      "views": 1610,
       "likes": 11
     },
     {
@@ -256,7 +272,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5096,
+      "views": 5098,
       "likes": 300
     },
     {
@@ -325,7 +341,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 429,
+      "views": 430,
       "likes": 13
     },
     {
@@ -348,7 +364,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51379,
+      "views": 51383,
       "likes": 833
     },
     {
@@ -387,7 +403,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3537,
+      "views": 3538,
       "likes": 27
     },
     {
@@ -410,7 +426,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2226,
+      "views": 2231,
       "likes": 38
     },
     {
@@ -548,7 +564,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105935,
+      "views": 105936,
       "likes": 4636
     },
     {
@@ -571,7 +587,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4632,
+      "views": 4633,
       "likes": 106
     },
     {
@@ -594,7 +610,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49887,
+      "views": 49897,
       "likes": 1101
     },
     {
@@ -640,7 +656,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 240023,
+      "views": 240047,
       "likes": 5095
     },
     {
@@ -847,7 +863,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 58555,
+      "views": 58557,
       "likes": 2086
     },
     {
