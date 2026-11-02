@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T18:51:34.071Z",
+  "generated_at": "2026-11-02T19:17:30.423Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -7,10 +7,10 @@
     "total_videos": 35,
     "all_videos": 41,
     "excluded_trial": 5,
-    "total_views": 763707,
+    "total_views": 763723,
     "views_counted_over": 35,
     "views_sample": false,
-    "top_visible_views": 240329,
+    "top_visible_views": 240332,
     "top_visible_id": "17943051837086700",
     "shown": 35,
     "hidden": 0,
@@ -32,8 +32,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2790,
-      "likes": 2
+      "views": 3200,
+      "likes": 3
     },
     {
       "has_video": false,
@@ -48,7 +48,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1574,
+      "views": 1579,
       "likes": 64
     },
     {
@@ -71,7 +71,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1777,
+      "views": 1780,
       "likes": 72
     },
     {
@@ -94,7 +94,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3060,
+      "views": 3068,
       "likes": 46
     },
     {
@@ -148,7 +148,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2618,
+      "views": 2620,
       "likes": 10
     },
     {
@@ -240,7 +240,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 855,
+      "views": 856,
       "likes": 13
     },
     {
@@ -617,7 +617,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50004,
+      "views": 50005,
       "likes": 1102
     },
     {
@@ -663,7 +663,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 240329,
+      "views": 240332,
       "likes": 5103
     },
     {
