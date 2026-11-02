@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T03:17:26.386Z",
+  "generated_at": "2026-11-02T04:17:26.036Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -7,7 +7,7 @@
     "total_videos": 34,
     "all_videos": 42,
     "excluded_trial": 7,
-    "total_views": 761228,
+    "total_views": 761249,
     "views_counted_over": 34,
     "views_sample": false,
     "top_visible_views": 240152,
@@ -32,8 +32,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1470,
-      "likes": 54
+      "views": 1476,
+      "likes": 55
     },
     {
       "has_video": false,
@@ -48,8 +48,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1373,
-      "likes": 45
+      "views": 1396,
+      "likes": 47
     },
     {
       "has_video": true,
@@ -71,7 +71,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2848,
+      "views": 2857,
       "likes": 43
     },
     {
@@ -86,7 +86,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 613,
+      "views": 614,
       "likes": 23
     },
     {
@@ -288,7 +288,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5104,
+      "views": 5105,
       "likes": 300
     },
     {
@@ -380,7 +380,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51439,
+      "views": 51449,
       "likes": 836
     },
     {
@@ -511,7 +511,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24284,
+      "views": 24285,
       "likes": 336
     },
     {
@@ -626,7 +626,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49934,
+      "views": 49935,
       "likes": 1102
     },
     {
