@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-11-02T06:17:23.060Z",
+  "generated_at": "2026-11-02T07:18:21.053Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
-    "total_videos": 34,
-    "all_videos": 42,
-    "excluded_trial": 7,
-    "total_views": 761319,
-    "views_counted_over": 34,
+    "total_videos": 35,
+    "all_videos": 40,
+    "excluded_trial": 4,
+    "total_views": 762807,
+    "views_counted_over": 35,
     "views_sample": false,
-    "top_visible_views": 240159,
+    "top_visible_views": 240167,
     "top_visible_id": "17943051837086700",
-    "shown": 34,
+    "shown": 35,
     "hidden": 0,
     "missing_media_url": 1,
-    "missing_media_url_pct": 2.4
+    "missing_media_url_pct": 2.5
   },
   "hero": null,
   "items": [
@@ -32,24 +32,31 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1481,
-      "likes": 55
+      "views": 1491,
+      "likes": 57
     },
     {
-      "has_video": false,
+      "has_video": true,
+      "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/17967372243078621.mp4",
+      "full_url": "https://fainshteinbar.github.io/bar-studio-media/reels/17967372243078621.full.mp4",
+      "rail_url": "https://fainshteinbar.github.io/bar-studio-media/reels/17967372243078621.rail.mp4",
+      "poster_url": "https://fainshteinbar.github.io/bar-studio-media/reels/17967372243078621.webp",
+      "lqip": "data:image/webp;base64,UklGRqYBAABXRUJQVlA4IJoBAADQCACdASoYACsAPu1urlIppiQiqrgIATAdiWgAri3y1j/sGRavLMqkVvWYxvFqB5iYpz8pPxbbFhY5lKabALMe7YRlLy6vdbSQyICDHoAAAP7pmJ27S1ME4TGzezWyekyeKm/Yqyfzxg9KYYWAUjpkkD5Y9YzywuaOqs7Ja9t9ChFJM3/jbdg4XmLhn0Hmva/4NtYM4SLAbTnUn92VkcJACof+4GQ99TEt/ROKl6VxG2mSIQrxZBFykKpe9kHjcKPOqzCroKBI/OG8CShCz0U6D3y5aZJD/eqGb2+BDHZjziiHLBvn4AKPpzIZHSd3KkjxWHkRUrKHFQQmxMgycygML0wRwX9UZai56YIyCAwX7oLt+3Cu4jTcIEnQq86Tni0EMsOYWXbtpG586CrVR7UMwGK5JMA8OV0904TaVV7rOCz7KZvnmG+gR90SdGL1sf6UTgbBqwm8EoFfr/zhxrbEYZBPBw0/DLsAB/6r/++iD9+Mr/82zh9iu6kQP/E8iH7jdpsRDgIfbPpgfwhq+Hv+WJ3fU/iOTWgAAA==",
+      "width": 720,
+      "height": 1280,
+      "duration": 28.9,
       "id": "17967372243078621",
       "placeholder": false,
       "permalink": "https://www.instagram.com/reel/DfNCBu3yufF/",
       "timestamp": "2026-11-01T15:16:26+0000",
       "caption": "What if your next train ride took you straight into the Frieza Saga? 🚆⚡\n#dragonballz #dbz #anime #aivideo #nextstop",
       "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1419,
-      "likes": 51
+      "views": 1453,
+      "likes": 55
     },
     {
       "has_video": true,
@@ -71,8 +78,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2886,
-      "likes": 43
+      "views": 2895,
+      "likes": 44
     },
     {
       "has_video": false,
@@ -86,7 +93,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 614,
+      "views": 616,
       "likes": 23
     },
     {
@@ -109,24 +116,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 479,
+      "views": 482,
       "likes": 16
-    },
-    {
-      "has_video": false,
-      "id": "17918012907265231",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DfCfaKkSw-r/",
-      "timestamp": "2026-10-28T13:01:07+0000",
-      "caption": "דירה 4 הטילה וטו על העגלה בלובי. מכאן זה רק הסלים 🏢\nכל ועד בית בישראל הוא בעצם מועצת הביטחון.\nשלחו לקבוצה של הבניין (רק אל תסירו אף אחד)\nסעיף שתיים: הגינה. בקרוב.\nסרטון AI · קונספט ובימוי: בר פיינשטיין\n#ועדבית #שכנים #קומדיה #AI",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 1588,
-      "likes": 4
     },
     {
       "has_video": false,
@@ -134,7 +125,7 @@
       "placeholder": false,
       "permalink": "https://www.instagram.com/reel/DfCfTWlyy9C/",
       "timestamp": "2026-10-28T13:00:14+0000",
-      "caption": "כל לילה בשתיים. דפיקות מהתקרה. ניסינו הכול 🫣\nעד שגילינו מי זה.\nיש לכם שכן כזה? תשלחו לו. הוא יודע מה הוא עשה.\nסרטון AI · קונספט ובימוי: בר פיינשטיין\n#השכןמלמעלה #שכנים #דירה #קומדיה",
+      "caption": "⁨\tכל לילה בשתיים. דפיקות מהתקרה. ניסינו הכול 🫣\nעד שגילינו מי זה.\nיש לכם שכן כזה? תשלחו לו. הוא יודע מה הוא עשה.\nסרטון AI ·\n#השכןמלמעלה #שכנים #דירה #קומדיה⁩",
       "lane": "reels",
       "visible": false,
       "status": "excluded-trial",
@@ -143,22 +134,6 @@
       "flag_reason": "",
       "views": 2609,
       "likes": 9
-    },
-    {
-      "has_video": false,
-      "id": "17954256717334814",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DfB4GNSS4bd/",
-      "timestamp": "2026-10-28T07:18:14+0000",
-      "caption": "שתיים בלילה. דפיקות מהתקרה. אז הם עשו את הדבר היחיד שנשאר 🫣\nבניין חדש. התחלה חדשה. ואז הם הבינו מי עבר איתם.\nהטריילר שכל מי שגר מתחת למישהו כבר ראה מהמיטה.\nתשלחו לשכן מלמעלה. הוא יודע מה הוא עשה.\nסרטון AI · קונספט\n#השכןמלמעלה #טריילר #אימה #דירה",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 1357,
-      "likes": 11
     },
     {
       "has_video": true,
@@ -288,7 +263,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5109,
+      "views": 5111,
       "likes": 301
     },
     {
@@ -380,7 +355,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51459,
+      "views": 51464,
       "likes": 836
     },
     {
@@ -511,7 +486,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24287,
+      "views": 24290,
       "likes": 336
     },
     {
@@ -603,7 +578,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4642,
+      "views": 4643,
       "likes": 106
     },
     {
@@ -626,7 +601,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49950,
+      "views": 49956,
       "likes": 1102
     },
     {
@@ -672,7 +647,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 240159,
+      "views": 240167,
       "likes": 5098
     },
     {
