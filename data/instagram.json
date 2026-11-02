@@ -1,24 +1,40 @@
 {
-  "generated_at": "2026-11-02T15:17:31.520Z",
+  "generated_at": "2026-11-02T16:17:36.561Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
     "total_videos": 35,
-    "all_videos": 40,
-    "excluded_trial": 4,
-    "total_views": 763453,
+    "all_videos": 41,
+    "excluded_trial": 5,
+    "total_views": 763523,
     "views_counted_over": 35,
     "views_sample": false,
-    "top_visible_views": 240300,
+    "top_visible_views": 240313,
     "top_visible_id": "17943051837086700",
     "shown": 35,
     "hidden": 0,
     "missing_media_url": 1,
-    "missing_media_url_pct": 2.5
+    "missing_media_url_pct": 2.4
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "17919531087463648",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfPsxFKywiT/",
+      "timestamp": "2026-11-02T16:07:58+0000",
+      "caption": "תמיד מלמטה. שם התאריך הכי רחוק 🥛\nשלחו למי שתמיד שולף מלמטה\n\n#שוקו #סופרמרקט #ישראלים #מצחיק\n🎬 נוצר ב-AI",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": false,
       "id": "17988712812082041",
@@ -32,7 +48,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1558,
+      "views": 1563,
       "likes": 64
     },
     {
@@ -55,8 +71,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1715,
-      "likes": 70
+      "views": 1732,
+      "likes": 71
     },
     {
       "has_video": true,
@@ -78,7 +94,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3006,
+      "views": 3016,
       "likes": 46
     },
     {
@@ -224,7 +240,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 829,
+      "views": 840,
       "likes": 13
     },
     {
@@ -247,7 +263,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1826,
+      "views": 1828,
       "likes": 29
     },
     {
@@ -263,7 +279,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5113,
+      "views": 5115,
       "likes": 300
     },
     {
@@ -286,7 +302,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 906,
+      "views": 907,
       "likes": 17
     },
     {
@@ -332,7 +348,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 430,
+      "views": 431,
       "likes": 13
     },
     {
@@ -355,7 +371,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51496,
+      "views": 51503,
       "likes": 835
     },
     {
@@ -486,7 +502,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24313,
+      "views": 24316,
       "likes": 338
     },
     {
@@ -532,7 +548,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 160380,
+      "views": 160381,
       "likes": 138
     },
     {
@@ -555,7 +571,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105961,
+      "views": 105963,
       "likes": 4638
     },
     {
@@ -601,7 +617,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49985,
+      "views": 49987,
       "likes": 1102
     },
     {
@@ -647,8 +663,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 240300,
-      "likes": 5102
+      "views": 240313,
+      "likes": 5103
     },
     {
       "has_video": true,
