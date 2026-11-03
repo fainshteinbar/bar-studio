@@ -1,71 +1,94 @@
 {
-  "generated_at": "2026-11-03T06:17:23.570Z",
+  "generated_at": "2026-11-03T08:19:30.279Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
-    "total_videos": 35,
-    "all_videos": 42,
+    "total_videos": 36,
+    "all_videos": 43,
     "excluded_trial": 6,
-    "total_views": 764108,
-    "views_counted_over": 35,
+    "total_views": 795972,
+    "views_counted_over": 36,
     "views_sample": false,
-    "top_visible_views": 240362,
+    "top_visible_views": 240374,
     "top_visible_id": "17943051837086700",
-    "shown": 35,
+    "shown": 36,
     "hidden": 0,
     "missing_media_url": 1,
-    "missing_media_url_pct": 2.4
+    "missing_media_url_pct": 2.3
   },
   "hero": null,
   "items": [
     {
       "has_video": false,
+      "id": "18099878417106857",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfRak7lysI9/",
+      "timestamp": "2026-11-03T08:07:35+0000",
+      "caption": "אם “לשחרר את שולי סאן” היה ב־4DX, כנראה שלא הייתי יוצא משם 😭\nולפחות מישהו הרוויח כיסא.\n\nפרודיית AI לא רשמית, ללא קשר להפקת הסרט.\n#לשחרראתשולי #קולנוע #4DX",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "has_video": false,
+      "id": "18134103076690052",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfRaeJASyl9/",
+      "timestamp": "2026-11-03T08:06:51+0000",
+      "caption": "אם “לשחרר את שולי סאן” היה ב־4DX, כנראה שלא הייתי יוצא משם 😭\nולפחות מישהו הרוויח כיסא.\n\nפרודיית AI לא רשמית, ללא קשר להפקת הסרט.\n#לשחרראתשולי #קולנוע #4DX",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "has_video": false,
+      "id": "17914667688555448",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DfRWwJYSjF2/",
+      "timestamp": "2026-11-03T07:34:08+0000",
+      "caption": "ים סוף נקרע שוב, והפעם באילת 🌊\nהמציל היה בטוח שראה הכל 🏖️\nשלחו למי שכבר מתכנן חופשה בסיני\nמה המציל שלכם היה אומר?\nנוצר ב-AI\n#אילת #יםסוף #ישראלים #מציל #מטקות קומדיה AI",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 141,
+      "likes": 0
+    },
+    {
+      "has_video": true,
+      "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18134376601773397.mp4",
+      "full_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18134376601773397.full.mp4",
+      "rail_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18134376601773397.rail.mp4",
+      "poster_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18134376601773397.webp",
+      "lqip": "data:image/webp;base64,UklGRg4BAABXRUJQVlA4IAIBAAAQBwCdASoYACsAPu1uqFGppiOiqrgKATAdiWcAy6WM+Cl8gMzVc7ROVnS5aGCPNBmPuzUd3fF7m1G1654tTCZWUAD7bsLv+/MuOvc8jFjCg0Kj3qszlYlTWgIYFJAGfDKVTj+lblPhXTOcIUCpi7VpbYonKhm7lsKm9/EOLz1PNRrJJQMyYShRXMHHwUXwqr2romjUGggkFsd9ZYsEBZDVHrgr6yvz1k3zis9kXlq69LQRvuQGk+bfsO6ZNBifNqGxyX8vL4dqGTSVEXwdOJPw5Pyk2BeMwW46q7dPRyMMzxe7tS+XUCF6cm6NJNTWD0LsRKumNubGtyM6y1cfP4SAAAA=",
+      "width": 720,
+      "height": 1280,
+      "duration": 18,
       "id": "18134376601773397",
       "placeholder": false,
       "permalink": "https://www.instagram.com/reel/DfQ1AGVy7_K/",
       "timestamp": "2026-11-03T02:39:13+0000",
       "caption": "תמיד מלמטה. שם התאריך הכי רחוק 🥛\nשלחו למי שתמיד שולף מלמטה\n\n#שוקו #סופרמרקט #ישראלים #מצחיק\n🎬 נוצר ב-AI",
       "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 27278,
-      "likes": 53
-    },
-    {
-      "has_video": false,
-      "id": "17919531087463648",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DfPsxFKywiT/",
-      "timestamp": "2026-11-02T16:07:58+0000",
-      "caption": "תמיד מלמטה. שם התאריך הכי רחוק 🥛\nשלחו למי שתמיד שולף מלמטה\n\n#שוקו #סופרמרקט #ישראלים #מצחיק\n🎬 נוצר ב-AI",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 4484,
-      "likes": 5
-    },
-    {
-      "has_video": false,
-      "id": "17988712812082041",
-      "placeholder": false,
-      "permalink": "https://www.instagram.com/reel/DfNOX0kSNh0/",
-      "timestamp": "2026-11-01T17:04:01+0000",
-      "caption": "What if your next train ride took you straight into the Frieza Saga? 🚆⚡\n#dragonballz #dbz #anime #aivideo #nextstop",
-      "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
-      "flag_reason": "",
-      "views": 1600,
-      "likes": 66
+      "views": 31786,
+      "likes": 67
     },
     {
       "has_video": true,
@@ -87,7 +110,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1864,
+      "views": 1872,
       "likes": 76
     },
     {
@@ -110,7 +133,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3104,
+      "views": 3117,
       "likes": 46
     },
     {
@@ -125,7 +148,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 623,
+      "views": 624,
       "likes": 23
     },
     {
@@ -148,7 +171,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 493,
+      "views": 494,
       "likes": 17
     },
     {
@@ -187,7 +210,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1617,
+      "views": 1618,
       "likes": 11
     },
     {
@@ -210,7 +233,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 553,
+      "views": 554,
       "likes": 6
     },
     {
@@ -233,7 +256,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1173,
+      "views": 1174,
       "likes": 13
     },
     {
@@ -256,7 +279,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 884,
+      "views": 893,
       "likes": 16
     },
     {
@@ -279,7 +302,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1835,
+      "views": 1838,
       "likes": 29
     },
     {
@@ -295,8 +318,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5123,
-      "likes": 301
+      "views": 5124,
+      "likes": 302
     },
     {
       "has_video": true,
@@ -364,7 +387,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 431,
+      "views": 432,
       "likes": 13
     },
     {
@@ -387,7 +410,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51575,
+      "views": 51590,
       "likes": 836
     },
     {
@@ -426,7 +449,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3554,
+      "views": 3555,
       "likes": 27
     },
     {
@@ -518,7 +541,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24368,
+      "views": 24369,
       "likes": 340
     },
     {
@@ -541,7 +564,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2963,
+      "views": 2964,
       "likes": 29
     },
     {
@@ -564,7 +587,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 160386,
+      "views": 160387,
       "likes": 138
     },
     {
@@ -587,7 +610,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105977,
+      "views": 105979,
       "likes": 4639
     },
     {
@@ -633,7 +656,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50067,
+      "views": 50074,
       "likes": 1104
     },
     {
@@ -679,7 +702,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 240362,
+      "views": 240374,
       "likes": 5103
     },
     {
