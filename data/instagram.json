@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T15:17:33.989Z",
+  "generated_at": "2026-11-03T16:17:26.302Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -7,10 +7,10 @@
     "total_videos": 37,
     "all_videos": 42,
     "excluded_trial": 4,
-    "total_views": 812447,
+    "total_views": 813751,
     "views_counted_over": 37,
     "views_sample": false,
-    "top_visible_views": 240426,
+    "top_visible_views": 240439,
     "top_visible_id": "17943051837086700",
     "shown": 37,
     "hidden": 0,
@@ -39,8 +39,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4878,
-      "likes": 15
+      "views": 5635,
+      "likes": 18
     },
     {
       "has_video": false,
@@ -48,14 +48,14 @@
       "placeholder": false,
       "permalink": "https://www.instagram.com/reel/DfRWwJYSjF2/",
       "timestamp": "2026-11-03T07:34:08+0000",
-      "caption": "⁨\tים סוף נקרע שוב, והפעם באילת 🌊\nהמציל היה בטוח שראה הכל 🏖️\nשלחו למי שכבר מתכנן חופשה בסיני\nמה המציל שלכם היה אומר?\nנוצר ב-AI\n#אילת #יםסוף #ישראלים #מציל #מטקות קומדיה AI⁩",
+      "caption": "⁨\t⁨\tים סוף נקרע שוב, והפעם באילת 🌊\nהמציל היה בטוח שראה הכל 🏖️\nשלחו למי שכבר מתכנן חופשה בסיני\nמה המציל שלכם היה אומר?\nנוצר ב-AI\n#אילת #יםסוף #ישראלים #מציל #מטקות קומדיה AI⁩⁩",
       "lane": "reels",
       "visible": false,
       "status": "excluded-trial",
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2940,
+      "views": 2950,
       "likes": 6
     },
     {
@@ -78,8 +78,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 43076,
-      "likes": 111
+      "views": 43583,
+      "likes": 112
     },
     {
       "has_video": true,
@@ -101,7 +101,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1920,
+      "views": 1922,
       "likes": 77
     },
     {
@@ -124,8 +124,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3161,
-      "likes": 46
+      "views": 3163,
+      "likes": 47
     },
     {
       "has_video": false,
@@ -139,7 +139,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 627,
+      "views": 629,
       "likes": 23
     },
     {
@@ -162,7 +162,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 497,
+      "views": 498,
       "likes": 17
     },
     {
@@ -270,7 +270,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 900,
+      "views": 901,
       "likes": 16
     },
     {
@@ -401,7 +401,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51605,
+      "views": 51607,
       "likes": 836
     },
     {
@@ -601,7 +601,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 105996,
+      "views": 105998,
       "likes": 4640
     },
     {
@@ -624,7 +624,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4649,
+      "views": 4651,
       "likes": 106
     },
     {
@@ -647,7 +647,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50138,
+      "views": 50153,
       "likes": 1104
     },
     {
@@ -693,7 +693,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 240426,
+      "views": 240439,
       "likes": 5103
     },
     {
