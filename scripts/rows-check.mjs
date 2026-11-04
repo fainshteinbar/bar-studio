@@ -17,7 +17,10 @@ const LIVE = process.argv.slice(2).find((a) => /^https?:/.test(a));
 const OUT = process.env.SHOTS_OUT || `shots-local/${LIVE ? 'live' : 'local'}`;
 const BASE = LIVE ? LIVE.replace(/\/?$/, '/') : `http://localhost:${PORT}/`;
 // Grid card poster sizes on the live site before the rows (measured 2026-11-04): 390 px -> 173 x 307, 1440 px -> 429 x 763.
-const BASELINE = { mobile: 173, desktop: 429 };
+// On desktop the poster is also capped so a whole row fits the window (Bar, 2026-11-04: a 13" MacBook could not see a
+// card and its caption together): never smaller than the grid's card or the window-fit size, whichever is smaller.
+// assets/js/app.js may then shrink it by up to about 10% so the next card peeks.
+const BASELINE = { mobile: () => 173, desktop: (h) => Math.min(429, Math.max(214, ((h - 300) * 9) / 16)) * 0.88 };
 const VIEWPORTS = {
   mobile: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 },
   desktop: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 },
@@ -62,7 +65,8 @@ for (const lang of ['he', 'en']) {
     check(key, 'no featured section in rows layout', !(await page.locator('section.featured').count()));
 
     // Sizes and scroll direction on the second row (the first is the top row, with rank numbers).
-    const strip = page.locator('section.row').nth(1).locator('.row-strip');
+    const longest = await page.evaluate(() => { const rs = [...document.querySelectorAll('section.row:not(.row-top)')]; return rs.reduce((m, r, i) => (r.querySelectorAll('.row-item').length > rs[m].querySelectorAll('.row-item').length ? i : m), 0); });
+    const strip = page.locator('section.row:not(.row-top)').nth(longest).locator('.row-strip');
     await strip.scrollIntoViewIfNeeded();
     await page.evaluate(() => scrollBy(0, -80));
     await sleep(600);
@@ -74,7 +78,8 @@ for (const lang of ['he', 'en']) {
         peek: items.map(visible).find((v) => v < 0.98) ?? null, perScreen: items.filter((b) => visible(b) > 0.98).length, canScroll: s.scrollWidth > s.clientWidth };
     });
     r.card = { w: Math.round(geo.w), h: Math.round(geo.h), fullyVisible: geo.perScreen, peekOfNext: geo.peek == null ? null : Math.round(geo.peek * 100) / 100 };
-    check(key, `card not smaller than the grid (${BASELINE[vpName]} px)`, geo.w >= BASELINE[vpName] - 0.5, `${Math.round(geo.w)} px`);
+    const minW = BASELINE[vpName](vp.viewport.height);
+    check(key, `card not smaller than the grid or the window fit (${Math.round(minW)} px)`, geo.w >= minW - 0.5, `${Math.round(geo.w)} px`);
     if (geo.second) {
       if (geo.canScroll) check(key, 'next card peeks', geo.peek > 0.05 && geo.peek < 0.95, String(r.card.peekOfNext));
       check(key, lang === 'he' ? 'second card is to the left (RTL)' : 'second card is to the right (LTR)', lang === 'he' ? geo.second.r <= geo.first.l + 1 : geo.second.l >= geo.first.r - 1);

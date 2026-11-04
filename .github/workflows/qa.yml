@@ -66,6 +66,10 @@ jobs:
         if: success() || failure()
         run: node scripts/rows-check.mjs $LIVE_URL
 
+      - name: Desktop checks, Chrome and WebKit (window fit, posters, video, mouse drag)
+        if: success() || failure()
+        run: npx playwright install --with-deps webkit >/dev/null && node scripts/desktop-check.mjs $LIVE_URL
+
       - name: Screenshots 390 / 1440, he / en
         if: success() || failure()
         run: PAGES=home node scripts/shots.mjs $LIVE_URL

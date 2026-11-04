@@ -55,7 +55,8 @@ const API = `https://graph.instagram.com/${process.env.IG_API_VERSION || 'v26.0'
 const PREVIEW_SECONDS = 12; // rule 14: grid previews are the first 12 s
 const MANIFEST = process.env.SYNC_MANIFEST || (UPLOAD ? 'data/instagram.json' : 'data/instagram.local.json');
 const FIXTURE = process.env.IG_FIXTURE ? JSON.parse(readFileSync(process.env.IG_FIXTURE, 'utf8')) : null;
-if (FIXTURE && UPLOAD && !DETECT) { console.error('IG_FIXTURE is for --local and --detect dry runs only.'); process.exit(2); }
+// SYNC_DRYRUN_UPLOAD: an upload run against a fixture, for the media-repo-down test (test/rows/sync-dryrun.mjs).
+if (FIXTURE && UPLOAD && !DETECT && !process.env.SYNC_DRYRUN_UPLOAD) { console.error('IG_FIXTURE is for --local and --detect dry runs only.'); process.exit(2); }
 
 const TOKEN = FIXTURE ? 'fixture' : (process.env.IG_ACCESS_TOKEN || (existsSync('.secrets/ig-token') ? readFileSync('.secrets/ig-token', 'utf8') : '')).trim();
 if (!TOKEN) { console.error('No Instagram token (IG_ACCESS_TOKEN).'); process.exit(2); }
@@ -101,7 +102,10 @@ async function download(url, file) {
 }
 
 // Media host: a public repo served by GitHub Pages. Files are staged in a shallow clone and pushed once per run.
-let mediaClone = null, mediaGit = null, mediaKeyDir = null;
+// When it cannot be reached (clone or push fails, e.g. a GitHub Git outage), the run does not fail: the Reels that
+// needed it keep their previous state (a new one stays hidden), everything else is updated, and the next run retries.
+// Only if that has lasted more than a day does the run fail, so the failure issue is opened.
+let mediaClone = null, mediaGit = null, mediaKeyDir = null, mediaDown = '';
 function mediaSetup() {
   if (mediaClone) return;
   mediaClone = tempDir('igsync-media');
@@ -111,7 +115,18 @@ function mediaSetup() {
   chmodSync(keyFile, 0o600);
   const env = { ...process.env, GIT_SSH_COMMAND: `ssh -i ${keyFile} -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new` };
   mediaGit = (...a) => { try { return execFileSync('git', a, { cwd: mediaClone, env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }); } catch (e) { throw new Error(redact(`git ${a[0]} failed: ${e.stderr || e.message}`)); } };
-  mediaGit('clone', '--quiet', '--depth', '1', `git@github.com:${MEDIA.repo}.git`, '.');
+  try {
+    mediaGit('clone', '--quiet', '--depth', '1', `git@github.com:${MEDIA.repo}.git`, '.');
+  } catch (e) {
+    rmSync(mediaClone, { recursive: true, force: true }); mediaClone = null;
+    rmSync(mediaKeyDir, { recursive: true, force: true }); mediaKeyDir = null;
+    throw e;
+  }
+}
+// True when the media repo can take files this run; the first failure is remembered and later Reels skip it.
+function mediaReady() {
+  if (mediaDown) return false;
+  try { mediaSetup(); return true; } catch (e) { mediaDown = e.message; console.log(`::warning::Media repo unreachable, new media waits for the next run: ${mediaDown.split('\n')[0]}`); return false; }
 }
 // addOnly: never replace a file that is already in the media repo (embed posters only ever add files).
 function mediaPut(localFile, remotePath, { addOnly = false } = {}) {
@@ -232,6 +247,10 @@ const urlFor = (name) => (UPLOAD ? `${MEDIA.base}/reels/${name}` : `${OUT}/${nam
 const tmp = tempDir('igsync');
 const items = [];
 let processed = 0, reused = 0;
+const deferred = [], staged = [];   // Reels waiting for the media repo; Reels whose new files are staged in it
+const MEDIA_FIELDS = ['has_video', 'playback', 'embed_url', 'video_url', 'full_url', 'rail_url', 'poster_url', 'lqip', 'width', 'height', 'duration', 'poster_source'];
+const embedReusable = (prev) => isEmbed(prev) && !has('--force') && (!UPLOAD || !!prev.poster_url?.startsWith(MEDIA.base));
+const keep = (prev) => (prev ? Object.fromEntries(MEDIA_FIELDS.filter((k) => k in prev).map((k) => [k, prev[k]])) : { has_video: false });
 try {
   for (const m of videos) {
     const status = statusOf(m), hidden = status !== 'shown';   // hidden by hand or an excluded Trial Reel
@@ -245,6 +264,9 @@ try {
     } else if (reusable || localReady) {
       entry = reusable ? { ...prev } : JSON.parse(readFileSync(join(OUT, `${m.id}.json`), 'utf8'));
       reused++;
+    } else if (UPLOAD && (m.media_url || (shortcodeOf(m.permalink) && !embedReusable(prev))) && !mediaReady()) {
+      entry = keep(prev);   // media repo down: as it was (a new Reel stays hidden until the next run)
+      deferred.push(m.id);
     } else if (m.media_url) {
       const raw = join(tmp, `${m.id}.src.mp4`);
       const prevMp4 = join(OUT, `${m.id}.mp4`), fullMp4 = join(OUT, `${m.id}.full.mp4`), railMp4 = join(OUT, `${m.id}.rail.mp4`), webp = join(OUT, `${m.id}.webp`);
@@ -263,6 +285,7 @@ try {
       rmSync(raw, { force: true });
       if (UPLOAD) {
         for (const f of [prevMp4, fullMp4, railMp4, webp]) mediaPut(f, `reels/${f.split('/').pop()}`);
+        staged.push({ id: m.id, prev });
       }
       const pw = probe(webp);
       entry = {
@@ -274,7 +297,7 @@ try {
       processed++;
       const kb = (f) => Math.round(statSync(f).size / 1024);
       console.log(`   + ${m.id} ${m.timestamp.slice(0, 10)}  preview ${kb(prevMp4)} KB · full ${kb(fullMp4)} KB · rail ${kb(railMp4)} KB${UPLOAD ? ' · staged' : ''}`);
-    } else if (isEmbed(prev) && !has('--force') && (!UPLOAD || prev.poster_url?.startsWith(MEDIA.base))) {
+    } else if (embedReusable(prev)) {
       entry = { ...prev };   // licensed audio, poster already on the media host
       reused++;
     } else if (shortcodeOf(m.permalink)) {
@@ -292,7 +315,7 @@ try {
         } catch (e) { console.log(`   ${m.id}: cover download failed (${redact(e.message)}); using the branded poster`); }
       }
       if (!lqip) lqip = brandedPoster(webp);
-      if (UPLOAD) mediaPut(webp, `reels/${m.id}.embed.webp`, { addOnly: true });
+      if (UPLOAD) { mediaPut(webp, `reels/${m.id}.embed.webp`, { addOnly: true }); staged.push({ id: m.id, prev }); }
       const pw = probe(webp);
       entry = {
         has_video: false, playback: 'embed', embed_url: `https://www.instagram.com/reel/${shortcodeOf(m.permalink)}/embed/`,
@@ -313,10 +336,24 @@ try {
       views: await viewsFor(m.id), likes: m.like_count ?? null,
     });
   }
-  mediaPublish(`Sync Reels (${processed} new/processed) ${new Date().toISOString().slice(0, 16)} UTC`);
+  try {
+    mediaPublish(`Sync Reels (${processed} new/processed) ${new Date().toISOString().slice(0, 16)} UTC`);
+  } catch (e) {
+    // Push failed: the staged files are not on the media host, so those Reels go back to their previous state.
+    mediaDown = e.message;
+    console.log(`::warning::Media repo push failed, ${staged.length} Reel(s) wait for the next run: ${mediaDown.split('\n')[0]}`);
+    for (const { id, prev } of staged) {
+      const i = items.findIndex((x) => x.id === id);
+      const base = Object.fromEntries(Object.entries(items[i]).filter(([k]) => !MEDIA_FIELDS.includes(k)));
+      items[i] = { ...base, ...keep(prev), visible: items[i].status === 'shown' && (!!prev?.has_video || isEmbed(prev)) };
+      deferred.push(id);
+    }
+    processed -= staged.length;
+  }
 } finally {
   rmSync(tmp, { recursive: true, force: true });
-  if (mediaClone) { rmSync(mediaClone, { recursive: true, force: true }); rmSync(mediaKeyDir, { recursive: true, force: true }); }
+  if (mediaClone) rmSync(mediaClone, { recursive: true, force: true });
+  if (mediaKeyDir) rmSync(mediaKeyDir, { recursive: true, force: true });
   if (UPLOAD) rmSync(OUT, { recursive: true, force: true });
 }
 
@@ -345,6 +382,7 @@ const manifest = {
   source: UPLOAD ? 'instagram api → github pages media repo' : 'instagram api (local preview)',
   media_base_url: UPLOAD ? MEDIA.base : '',
   build_inputs: inputsHash,
+  media_pending: deferred.length ? { ids: deferred, since: previous.media_pending?.since || new Date().toISOString(), reason: redact(mediaDown.split('\n')[0]).slice(0, 200) } : undefined,
   stats: {
     total_videos: playable.length,
     all_videos: videos.length,
@@ -377,5 +415,12 @@ const summary = [
   `Translations: ${tr.translated} new, ${tr.pending} missing.`,
   `Niches: ${nc.manual} manual, ${nc.cached + nc.gemini} Gemini (${nc.gemini} new), ${nc.keywords} keywords.`,
 ];
+if (deferred.length) summary.push(`Media repo unreachable: ${deferred.length} Reel(s) wait for the next run (${deferred.join(', ')}); everything else was updated.`);
 console.log('\n' + summary.join('\n'));
 if (process.env.GITHUB_STEP_SUMMARY) writeFileSync(process.env.GITHUB_STEP_SUMMARY, `### Instagram sync\n\n${summary.map((l) => `- ${l}`).join('\n')}\n`, { flag: 'a' });
+// Waiting for the media repo for more than a day is no longer a passing outage: fail (after writing everything) so
+// the failure issue is opened.
+if (manifest.media_pending && Date.now() - Date.parse(manifest.media_pending.since) > 24 * 3600e3) {
+  console.error(`Media repo unreachable since ${manifest.media_pending.since}: check MEDIA_DEPLOY_KEY and the deploy key on ${MEDIA.repo} (PLAN.md section 5).`);
+  process.exitCode = 1;
+}
