@@ -156,7 +156,11 @@ for (const lang of ['he', 'en']) {
     check(key, 'focused card scrolled into its strip', focusOk);
     await page.locator('section.row').first().locator('.row-strip').evaluate((s) => s.scrollTo({ left: 0, behavior: 'auto' }));
 
-    await page.locator('.rows').screenshot({ path: `${OUT}/rows-${key}.jpg`, type: 'jpeg', quality: 70 });
+    // Viewport capture at the first row (a capture of the whole .rows element drops touch emulation, and on a slow
+    // font host it can time out); a failed screenshot never fails the checks.
+    await page.evaluate(() => { const r = document.querySelector('section.row'); scrollTo(0, r.getBoundingClientRect().top + scrollY - 80); });
+    await sleep(1500);
+    await page.screenshot({ path: `${OUT}/rows-${key}.jpg`, type: 'jpeg', quality: 72, timeout: 60000 }).catch((e) => console.log(`   screenshot skipped: ${String(e).split('\n')[0]}`));
 
     // Embed player (licensed-audio Reels).
     const embedCard = page.locator('.row-card[data-embed]').first();
@@ -170,7 +174,7 @@ for (const lang of ['he', 'en']) {
       r.embed = { ...dlg, requests: instagram.length };
       check(key, 'embed iframe created on tap', dlg.open && /instagram\.com\/reel\/[\w-]+\/embed\/$/.test(dlg.src), dlg.src);
       check(key, '"Open on Instagram" link in the player', /instagram\.com\/reel\//.test(dlg.ig || ''));
-      await page.screenshot({ path: `${OUT}/rows-${key}-embed.jpg`, type: 'jpeg', quality: 72 });
+      await page.screenshot({ path: `${OUT}/rows-${key}-embed.jpg`, type: 'jpeg', quality: 72, timeout: 60000 }).catch(() => {});
       // Inside the frame: is there a video, does it play on a tap, and is audio actually decoded?
       const frame = page.frames().find((f) => /instagram\.com\/reel\/.+\/embed/.test(f.url()));
       if (frame) {
@@ -193,7 +197,7 @@ for (const lang of ['he', 'en']) {
         r.embed.playsInEmbed = !!(r.embed.afterTap2 && !r.embed.afterTap2.paused && r.embed.afterTap2.t > (r.embed.afterTap?.t ?? 0));
         r.embed.audioDecoded = r.embed.afterTap2?.audioBytes ?? null;
         await page.bringToFront();
-        await page.screenshot({ path: `${OUT}/rows-${key}-embed-playing.jpg`, type: 'jpeg', quality: 72 });
+        await page.screenshot({ path: `${OUT}/rows-${key}-embed-playing.jpg`, type: 'jpeg', quality: 72, timeout: 60000 }).catch(() => {});
         // Esc right after a mouse click inside the embed (focus would otherwise be stuck in the cross-origin frame).
         await page.keyboard.press('Escape');
         await sleep(600);
