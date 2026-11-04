@@ -18,6 +18,7 @@ import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { pitchOf, englishPitch, readTranslations } from './lib/captions.mjs';
 import { compactFor } from './lib/display.mjs';
+import { readNiches, readNicheCache, nicheOf, buildRows } from './lib/niches.mjs';
 
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
 const site = read('i18n/site.json');
@@ -36,6 +37,12 @@ const translations = readTranslations();
 const overridesAll = existsSync('data/overrides.json') ? read('data/overrides.json') : {};
 console.log(`manifest: ${MANIFEST}`);
 const langs = { he: read('i18n/he.json'), en: read('i18n/en.json') };
+// Layout flag (data/niches.json): "rows" = niche rows instead of the featured Reel + grid; "grid" = the page as it
+// was before the rows (the grid code below is untouched and still renders when the flag says so).
+const niches = readNiches();
+const nicheCache = readNicheCache();
+const ROWS = niches.layout !== 'grid';
+console.log(`layout: ${ROWS ? 'rows' : 'grid'}`);
 
 // Featured = most-watched visible Reel; rail = data/overrides.json rail IDs, else the newest four others.
 function pickRail(items, ov) {
@@ -152,6 +159,40 @@ function guideContext(t, lang, items, compact) {
 const WA_ICON =
   '<svg class="wa-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2Z"/></svg>';
 
+// Niche rows (PLAN.md 4.10), baked into the HTML: a section per row (h2 + a horizontal scroll-snap strip of cards).
+// Each card is a button that opens the player; the poster is the whole tap target. The first row's posters load right
+// after first paint, the others when their row nears the viewport (assets/js/reels.js). Views stay hidden for the
+// niches in overrides.guide.hide_views (realestate), in the top row too.
+const CHEVRON = '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>';
+function rowsHtml(t, items) {
+  const hide = new Set(overridesAll.guide?.hide_views || []);
+  const rows = buildRows(items, niches, nicheCache);
+  const card = (it, rank) => {
+    const views = hide.has(nicheOf(it, niches, nicheCache)) ? '' : it.views_fmt;
+    const play = it.embed ? `data-embed="${esc(it.embed)}"` : `data-full="${it.full}"`;
+    return `<li class="row-item">` +
+      (rank ? `<span class="rank" aria-hidden="true">${rank}</span>` : '') +
+      `<button type="button" class="row-card" aria-label="${esc(it.title)}" data-reel data-href="${esc(it.href)}" ${play} data-poster="${it.poster}" data-pitch="${esc(it.pitch)}" data-lang="${it.pitch_lang}" data-views="${esc(views)}">` +
+      `<span class="row-media">${it.media}</span>` +
+      `<span class="row-meta" aria-hidden="true">` +
+      (it.pitch ? `<span class="row-pitch" lang="${it.pitch_lang}" dir="${it.pitch_dir}">${esc(it.pitch)}</span>` : '') +
+      (views ? `<span class="row-stat"><span class="ltr">${views}</span> ${esc(t.grid.views)}</span>` : '') +
+      `</span></button></li>`;
+  };
+  return rows.map((r, i) => {
+    const id = `row-${r.key}`;
+    const title = t.rows.titles[r.key] || (console.warn(`   rows: no title for "${r.key}" in i18n rows.titles`), r.key);
+    const tag = r.top ? 'ol' : 'ul';
+    return `<section class="row${r.top ? ' row-top' : ''}" aria-labelledby="${id}-title">` +
+      `<h2 id="${id}-title" class="row-title">${esc(title)}</h2>` +
+      `<div class="row-wrap">` +
+      `<${tag} class="row-strip" tabindex="0" aria-labelledby="${id}-title"${i === 0 ? ' data-eager' : ''}>${r.items.map((it, k) => card(it, r.top ? k + 1 : 0)).join('')}</${tag}>` +
+      `<button type="button" class="row-arrow row-prev" aria-label="${esc(`${t.rows.prev}: ${title}`)}" aria-disabled="true">${CHEVRON}</button>` +
+      `<button type="button" class="row-arrow row-next" aria-label="${esc(`${t.rows.next}: ${title}`)}">${CHEVRON}</button>` +
+      `</div></section>`;
+  }).join('\n');
+}
+
 // page: 'home' (/, /en/) or 'guide' (/guide/, /en/guide/). root is the path back to the site root.
 function context(lang, root, base, page = 'home') {
   const t = langs[lang];
@@ -212,6 +253,7 @@ function context(lang, root, base, page = 'home') {
       pitch_lang: pitchHe ? 'he' : 'en',
       pitch_dir: pitchHe ? 'rtl' : 'ltr',
       full: esc(url(it.full_url || it.video_url || '')),
+      embed: it.playback === 'embed' && !it.has_video ? it.embed_url || '' : '',
       poster: esc(url(it.poster_url)),
       date_fmt: it.timestamp ? dateFmt.format(new Date(it.timestamp)) : '',
       media_rail: mediaHtml(it, { eager: i < 2, priority: false }),
@@ -222,6 +264,7 @@ function context(lang, root, base, page = 'home') {
   const rail = railSrc.map((x, i) => ({ ...x, media_rail: mediaHtml(x, { eager: i < 2, priority: i < 2, railVideo: true }) }));
   const featuredCtx = featured && { ...featured, media_big: mediaHtml(featured, {}) };
   const words = (str) => str.split(' ').map((w, i) => `<span class="w"><span style="--i:${i}">${esc(w)}</span></span>`).join(' ');
+  const rows_html = ROWS ? rowsHtml(t, items) : '';
 
   const h = manifest.hero || { landscape: { poster_url: '', video_url: '', width: 16, height: 9 }, portrait: { poster_url: '', video_url: '', width: 9, height: 16 } };
   const heroImg = (v, prio) =>
@@ -318,6 +361,8 @@ function context(lang, root, base, page = 'home') {
     sample,
     rail,
     featured: featuredCtx,
+    rows_layout: ROWS,
+    rows_html,
     others,
     hero_words_a: words(t.hero.title_a),
     hero_words_b: words(t.hero.title_b),

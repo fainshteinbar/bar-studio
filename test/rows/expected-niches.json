@@ -1,0 +1,10 @@
+{
+  "_help": "Bar's initial row assignment (2026-11-04), by the start of each caption. scripts/niches-init.mjs writes it to data/niches.json manual and reports where Gemini and the keywords disagree. Every shown Reel not listed here is comedy.",
+  "realestate": ["כל בוקר היא פתחה את הווילון", "קנינו בית שעוד לא קיים", "היום הזה עוד לא קרה", "אחרי 14 דירות"],
+  "sport": ["אלי דסה ענה", "יום ראשון בעבודה", "נקודה אחת. 40-40", "20 שניות של דרמת ספורט", "טכנית… אין פה מגע", "כשסיפור מהפודקאסט"],
+  "food": ["כל ישראלי מכיר את קופסת הגלידה", "הוא התלונן על 139", "07:00. המטבח של דיזנגוף", "פה פעם נחתו מטוסים", "אמא שלי עשתה אותי מנהל"],
+  "events": ["POV: העולם עוצר בדרך לחתונה", "אם באירוע שלכם", "85 שנה. כספת אחת"],
+  "pov": ["The sea was closing", "The day we lost Paradise", "What if your next train ride"],
+  "ai": ["Maureen doesn", "Our trip group chat", "I never filmed this video", "ככה נראית עברית מ-AI", "I counted. Forty-seven", "The AI was doing great"],
+  "rest": "comedy"
+}

@@ -17,12 +17,28 @@
   };
 
   // Deferred posters (below the first screen): real poster replaces the inline LQIP after load, near the viewport.
-  const lazyPosters = [...document.querySelectorAll('img[data-poster]')];
   const loadPoster = (img) => { if (img.dataset.poster) { img.src = img.dataset.poster; delete img.dataset.poster; } };
+  const strips = [...document.querySelectorAll('.row-strip')];
+  const lazyPosters = [...document.querySelectorAll('img[data-poster]')].filter((img) => !img.closest('.row-strip'));
   const startPosters = () => {
-    if (!('IntersectionObserver' in window)) return lazyPosters.forEach(loadPoster);
+    if (!('IntersectionObserver' in window)) return [...document.querySelectorAll('img[data-poster]')].forEach(loadPoster);
     const pio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { loadPoster(e.target); pio.unobserve(e.target); } }), { rootMargin: '800px 0px' });
     lazyPosters.forEach((img) => pio.observe(img));
+    // Rows: the first row's posters all load now; every other row once it is near the viewport, then whatever lies
+    // within one strip width either side of what is visible, as the strip scrolls.
+    const ahead = (strip) => {
+      const s = strip.getBoundingClientRect();
+      strip.querySelectorAll('img[data-poster]').forEach((img) => { const r = img.getBoundingClientRect(); if (r.left < s.right + s.width && r.right > s.left - s.width) loadPoster(img); });
+    };
+    strips.filter((s) => 'eager' in s.dataset).forEach((s) => s.querySelectorAll('img[data-poster]').forEach(loadPoster));
+    const rio = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      rio.unobserve(e.target);
+      ahead(e.target);
+      let q = false;
+      e.target.addEventListener('scroll', () => { if (!q) { q = true; requestAnimationFrame(() => { q = false; ahead(e.target); }); } }, { passive: true });
+    }), { rootMargin: '800px 0px' });
+    strips.forEach((s) => rio.observe(s));
   };
   afterFirstPaint(startPosters);
 
@@ -58,8 +74,13 @@
   // batch can hold stale entries from intermediate scroll positions.
   function reconcile() {
     if (document.hidden || suspended) { vids.forEach((v) => v.pause()); return; }
+    // Top-most first; within a row, nearest the inline start first (cards on one row share a top).
+    const rtl = document.documentElement.dir === 'rtl';
+    const key = (v) => { const r = v.getBoundingClientRect(); return [Math.round(r.top / 40), rtl ? -r.right : r.left]; };
     const grid = [...visible].filter((v) => !isHero(v))
-      .sort((a, b) => (b === preferred) - (a === preferred) || a.getBoundingClientRect().top - b.getBoundingClientRect().top)
+      .map((v) => [v, key(v)])
+      .sort(([a, ka], [b, kb]) => (b === preferred) - (a === preferred) || ka[0] - kb[0] || ka[1] - kb[1])
+      .map(([v]) => v)
       .slice(0, cap());
     const want = new Set([...grid, ...[...visible].filter(isHero)]);
     vids.forEach((v) => (want.has(v) ? play(v) : v.paused || v.pause()));

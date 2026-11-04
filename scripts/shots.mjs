@@ -144,6 +144,16 @@ for (const d of dirs) {
       await page.addStyleTag({ content: '*, *::before, *::after { animation-timeline: auto !important; animation-range: normal !important; }' });
       await sleep(600);
       await page.screenshot({ path: `${OUT}/${key}-full.jpg`, type: 'jpeg', quality: 60, fullPage: true });
+      // The player with Instagram's embed open (licensed-audio Reels), when the page has one.
+      const embedCard = page.locator('[data-reel][data-embed]').first();
+      if (await embedCard.count()) {
+        await embedCard.scrollIntoViewIfNeeded();
+        await embedCard.click();
+        await sleep(4000);
+        await page.screenshot({ path: `${OUT}/${key}-embed.jpg`, type: 'jpeg', quality: 72 });
+        r.embedOpen = await page.evaluate(() => !!document.querySelector('dialog.player[open] iframe.player-embed'));
+        await page.keyboard.press('Escape');
+      }
       report[key] = r;
       const flag = (b) => (b ? 'ok' : 'FAIL');
       console.log(

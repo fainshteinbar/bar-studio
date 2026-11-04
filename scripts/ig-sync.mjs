@@ -19,19 +19,32 @@
 //          exits without writing anything.
 //   none   nothing to do: exit before writing anything.
 //
+//   A change to data/niches.json or i18n/*.json (rows, titles, the layout flag) also counts as "stats": the site is
+//   rebuilt and committed, so switching layout back to "grid" needs no manual run.
+//
+// Licensed audio: a shown Reel without media_url (the API withholds the file) is shown with playback "embed": its cover
+// (thumbnail_url, downloaded in the same run because it expires) becomes the poster, and the site opens Instagram's
+// official embed in the player on tap. The video itself is never downloaded. When media_url appears later, the next run
+// ("media now available") makes the usual renditions and the Reel switches to playback "file".
+// Rows: every visible Reel gets a niche (scripts/lib/niches.mjs): data/niches.json manual > Gemini (cached in
+// data/niche-cache.json) > keywords.
+//
 // Env: IG_ACCESS_TOKEN (else .secrets/ig-token locally), IG_API_VERSION (default v26.0),
 //      upload mode: MEDIA_DEPLOY_KEY (secret, write deploy key of the media repo), MEDIA_REPO (owner/name), MEDIA_BASE_URL,
-//      translation: GEMINI_API_KEY (Gemini free tier; without it new English captions stay empty, never Hebrew).
+//      translation and niches: GEMINI_API_KEY (Gemini free tier; without it new English captions stay empty, never
+//      Hebrew, and new Reels are sorted by keywords).
+//      dry runs: IG_FIXTURE (a JSON file of API responses instead of the network), SYNC_MANIFEST, SYNC_MEDIA_DIR.
 // Secrets are never printed; any URL that appears in an error is redacted.
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync, appendFileSync, createWriteStream, rmSync, copyFileSync, chmodSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { Readable } from 'node:stream';
-import { transcodeReel, transcodeFull, posterFrom, laneFor, tempDir, probe, brightness } from './lib/media.mjs';
+import { transcodeReel, transcodeFull, posterFrom, brandedPoster, laneFor, tempDir, probe, brightness } from './lib/media.mjs';
 import { readTranslations, writeTranslations, captionHash, isHebrew, pitchOf } from './lib/captions.mjs';
 import { translateMissing } from './lib/translate.mjs';
 import { displaySignature } from './lib/display.mjs';
+import { readNiches, readNicheCache, writeNicheCache, classifyMissing, buildInputsHash } from './lib/niches.mjs';
 
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
@@ -40,9 +53,11 @@ const LOCAL = has('--local');
 const DETECT = has('--detect');
 const API = `https://graph.instagram.com/${process.env.IG_API_VERSION || 'v26.0'}`;
 const PREVIEW_SECONDS = 12; // rule 14: grid previews are the first 12 s
-const MANIFEST = UPLOAD ? 'data/instagram.json' : 'data/instagram.local.json';
+const MANIFEST = process.env.SYNC_MANIFEST || (UPLOAD ? 'data/instagram.json' : 'data/instagram.local.json');
+const FIXTURE = process.env.IG_FIXTURE ? JSON.parse(readFileSync(process.env.IG_FIXTURE, 'utf8')) : null;
+if (FIXTURE && UPLOAD && !DETECT) { console.error('IG_FIXTURE is for --local and --detect dry runs only.'); process.exit(2); }
 
-const TOKEN = (process.env.IG_ACCESS_TOKEN || (existsSync('.secrets/ig-token') ? readFileSync('.secrets/ig-token', 'utf8') : '')).trim();
+const TOKEN = FIXTURE ? 'fixture' : (process.env.IG_ACCESS_TOKEN || (existsSync('.secrets/ig-token') ? readFileSync('.secrets/ig-token', 'utf8') : '')).trim();
 if (!TOKEN) { console.error('No Instagram token (IG_ACCESS_TOKEN).'); process.exit(2); }
 
 const MEDIA = {
@@ -58,6 +73,13 @@ const SECRETS = [TOKEN, MEDIA.deployKey.trim(), process.env.GEMINI_API_KEY].filt
 const redact = (s) => SECRETS.reduce((acc, x) => acc.split(x).join('[secret]'), String(s)).replace(/access_token=[^&\s"]+/g, 'access_token=[secret]');
 
 async function api(path, params = {}) {
+  if (FIXTURE) {
+    // Dry runs: "/me", "/<user>/media" and "/<id>/insights" answered from the fixture file.
+    if (path === '/me') return FIXTURE.me;
+    if (path.endsWith('/media')) return { data: FIXTURE.media };
+    const id = path.match(/^\/(\w+)\/insights$/)?.[1];
+    return { data: [{ values: [{ value: FIXTURE.views?.[id] ?? 0 }] }] };
+  }
   const u = new URL(path.startsWith('http') ? path : `${API}${path}`);
   for (const [k, v] of Object.entries(params)) u.searchParams.set(k, v);
   if (!u.searchParams.has('access_token')) u.searchParams.set('access_token', TOKEN);
@@ -91,8 +113,10 @@ function mediaSetup() {
   mediaGit = (...a) => { try { return execFileSync('git', a, { cwd: mediaClone, env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }); } catch (e) { throw new Error(redact(`git ${a[0]} failed: ${e.stderr || e.message}`)); } };
   mediaGit('clone', '--quiet', '--depth', '1', `git@github.com:${MEDIA.repo}.git`, '.');
 }
-function mediaPut(localFile, remotePath) {
+// addOnly: never replace a file that is already in the media repo (embed posters only ever add files).
+function mediaPut(localFile, remotePath, { addOnly = false } = {}) {
   mediaSetup();
+  if (addOnly && existsSync(join(mediaClone, remotePath))) { console.log(`   ${remotePath} is already in the media repo; kept as it is.`); return; }
   mkdirSync(join(mediaClone, remotePath, '..'), { recursive: true });
   copyFileSync(localFile, join(mediaClone, remotePath));
 }
@@ -155,6 +179,10 @@ async function viewsFor(id) {
 
 // 1b. Early exit (hourly schedule): stop here unless something a visitor would see has changed.
 const reasons = [], pending = [], light = [];   // media work; English captions to translate; data-only changes
+// Shortcode for https://www.instagram.com/reel/<shortcode>/embed/ (Instagram's official embed).
+const shortcodeOf = (permalink) => String(permalink || '').match(/instagram\.com\/(?:[\w.]+\/)?(?:reel|reels|p|tv)\/([\w-]+)/)?.[1] || '';
+const isEmbed = (x) => x?.playback === 'embed' && !x.has_video;   // licensed audio: shown through Instagram's embed
+const inputsHash = buildInputsHash();
 if (UPLOAD && !has('--force')) {
   const cache = readTranslations();
   const ids = new Set(videos.map((m) => m.id));
@@ -165,12 +193,14 @@ if (UPLOAD && !has('--force')) {
     if (!shown) continue;
     if ((m.caption || '') !== (prev.caption || '')) reasons.push(`caption edited ${m.id}`);
     if (!prev.has_video && m.media_url) reasons.push(`media now available ${m.id}`);
-    if (prev.has_video && !overrides.captions_en?.[m.id]) {
+    if (!prev.has_video && !m.media_url && !isEmbed(prev) && shortcodeOf(m.permalink)) reasons.push(`no media_url, embed poster needed ${m.id}`);
+    if ((prev.has_video || isEmbed(prev)) && !overrides.captions_en?.[m.id]) {
       const src = pitchOf(m.caption);
       if ((isHebrew(src.pitch) || isHebrew(src.more)) && cache.items?.[m.id]?.hash !== captionHash(m.caption)) pending.push(`English caption pending ${m.id}`);
     }
   }
   for (const id of Object.keys(prevById)) if (!ids.has(id)) reasons.push(`Reel removed ${id}`);
+  if (previous.build_inputs !== inputsHash) light.push('rows, titles or layout changed (data/niches.json, i18n)');
 }
 
 // 1c. Stats: fresh views (and likes) for every Reel; does any number a visitor sees change?
@@ -179,7 +209,7 @@ if (UPLOAD && !has('--force') && !reasons.length) {
   const fresh = { ...previous, items: [] };
   for (const m of videos) {
     const prev = prevById[m.id] || {}, status = statusOf(m);
-    fresh.items.push({ ...prev, status, visible: status === 'shown' && !!prev.has_video, views: await viewsFor(m.id), likes: m.like_count ?? null });
+    fresh.items.push({ ...prev, status, visible: status === 'shown' && (!!prev.has_video || isEmbed(prev)), views: await viewsFor(m.id), likes: m.like_count ?? null });
   }
   const views = fresh.items.filter((i) => i.visible).map((i) => i.views).filter((v) => typeof v === 'number');
   fresh.stats = { ...previous.stats, total_videos: fresh.items.filter((i) => i.visible).length, total_views: views.length ? views.reduce((a, b) => a + b, 0) : null };
@@ -196,7 +226,7 @@ if (DETECT || mode === 'none') process.exit(0);
 // 3. Visibility (data/reels.json, read above): media IDs Bar has hidden.
 
 // 4. Renditions + poster for each visible Reel that is new (or --force); reuse everything else.
-const OUT = LOCAL ? 'media/ig' : tempDir('igsync-out');
+const OUT = LOCAL ? process.env.SYNC_MEDIA_DIR || 'media/ig' : tempDir('igsync-out');
 mkdirSync(OUT, { recursive: true });
 const urlFor = (name) => (UPLOAD ? `${MEDIA.base}/reels/${name}` : `${OUT}/${name}`);
 const tmp = tempDir('igsync');
@@ -211,7 +241,7 @@ try {
     let entry;
     if (hidden) {
       // never downloaded or uploaded; media already on the CDN stays referenced, so un-hiding is instant
-      entry = prev?.has_video ? { ...prev } : { has_video: false };
+      entry = prev?.has_video || isEmbed(prev) ? { ...prev } : { has_video: false };
     } else if (reusable || localReady) {
       entry = reusable ? { ...prev } : JSON.parse(readFileSync(join(OUT, `${m.id}.json`), 'utf8'));
       reused++;
@@ -244,14 +274,41 @@ try {
       processed++;
       const kb = (f) => Math.round(statSync(f).size / 1024);
       console.log(`   + ${m.id} ${m.timestamp.slice(0, 10)}  preview ${kb(prevMp4)} KB · full ${kb(fullMp4)} KB · rail ${kb(railMp4)} KB${UPLOAD ? ' · staged' : ''}`);
+    } else if (isEmbed(prev) && !has('--force') && (!UPLOAD || prev.poster_url?.startsWith(MEDIA.base))) {
+      entry = { ...prev };   // licensed audio, poster already on the media host
+      reused++;
+    } else if (shortcodeOf(m.permalink)) {
+      // Licensed audio: no media_url, so the file is never fetched. The cover (thumbnail_url, signed and expiring) is
+      // downloaded now and becomes the poster; with no cover, a plain branded poster. The player opens Instagram's
+      // official embed on tap. <id>.embed.webp is a new name, so nothing already in the media repo is replaced.
+      const webp = join(OUT, `${m.id}.embed.webp`);
+      let lqip = null, cover = false;
+      if (m.thumbnail_url) {
+        try {
+          const jpg = join(tmp, `${m.id}.jpg`);
+          await download(m.thumbnail_url, jpg);
+          lqip = posterFrom(jpg, webp, { isImage: true });
+          cover = true;
+        } catch (e) { console.log(`   ${m.id}: cover download failed (${redact(e.message)}); using the branded poster`); }
+      }
+      if (!lqip) lqip = brandedPoster(webp);
+      if (UPLOAD) mediaPut(webp, `reels/${m.id}.embed.webp`, { addOnly: true });
+      const pw = probe(webp);
+      entry = {
+        has_video: false, playback: 'embed', embed_url: `https://www.instagram.com/reel/${shortcodeOf(m.permalink)}/embed/`,
+        poster_url: urlFor(`${m.id}.embed.webp`), lqip, width: pw.w, height: pw.h, poster_source: cover ? 'cover' : 'branded',
+      };
+      processed++;
+      console.log(`   + ${m.id} ${m.timestamp.slice(0, 10)}  no media_url (licensed audio): official embed, ${entry.poster_source} poster${UPLOAD ? ' · staged' : ''}`);
     } else {
       entry = { has_video: false };
     }
+    if (entry.has_video) { entry.playback = 'file'; delete entry.embed_url; }
     items.push({
       ...entry,
       id: m.id, placeholder: false, permalink: m.permalink, timestamp: m.timestamp,
       caption: m.caption || '', lane: laneFor(m.caption, m.id, overrides.lanes || {}),
-      visible: !hidden && !!entry.has_video, status, excluded: status === 'excluded-trial' ? 'trial' : undefined,
+      visible: !hidden && (!!entry.has_video || isEmbed(entry)), status, excluded: status === 'excluded-trial' ? 'trial' : undefined,
       is_shared_to_feed: m.is_shared_to_feed ?? null, flag_reason: status === 'hidden' ? String(hiddenCfg[m.id]) : '',
       views: await viewsFor(m.id), likes: m.like_count ?? null,
     });
@@ -269,6 +326,12 @@ const tr = await translateMissing(items, cache, overrides);
 if (tr.translated) writeTranslations(cache);
 console.log(`Translations: ${tr.translated} new, ${tr.failed} failed, ${tr.pending} still missing${tr.noCredentials ? ' (no usable GEMINI_API_KEY)' : ''}.`);
 
+// 6. Rows: a niche for every visible Reel (manual > cached Gemini > Gemini > keywords), cached in data/niche-cache.json.
+const nicheCache = readNicheCache();
+const nc = await classifyMissing(items, readNiches(), nicheCache);
+if (nc.changed) writeNicheCache(nicheCache);
+console.log(`Niches: ${nc.manual} manual, ${nc.cached} cached, ${nc.gemini} new from Gemini, ${nc.keywords} by keywords${nc.noCredentials ? ' (no usable GEMINI_API_KEY)' : ''}.`);
+
 // Every number on the site comes from visible Reels only; the raw data keeps the excluded ones.
 const playable = items.filter((i) => i.visible);
 const views = playable.map((i) => i.views).filter((v) => typeof v === 'number');
@@ -281,6 +344,7 @@ const manifest = {
   placeholder: false,
   source: UPLOAD ? 'instagram api → github pages media repo' : 'instagram api (local preview)',
   media_base_url: UPLOAD ? MEDIA.base : '',
+  build_inputs: inputsHash,
   stats: {
     total_videos: playable.length,
     all_videos: videos.length,
@@ -292,13 +356,15 @@ const manifest = {
     top_visible_id: top?.id ?? null,
     shown: playable.length,
     hidden: items.filter((i) => i.status === 'hidden').length,
+    embed: playable.filter(isEmbed).length,
     missing_media_url: missing.length,
     missing_media_url_pct: videos.length ? Math.round((missing.length / videos.length) * 1000) / 10 : 0,
   },
   hero: null,
   items,
 };
-if (UPLOAD && mode === 'stats' && !tr.translated && nextSig(manifest) === nextSig(previous)) {
+const nichesMoved = items.some((i) => i.visible && i.niche !== prevById[i.id]?.niche);
+if (UPLOAD && mode === 'stats' && !tr.translated && !nc.changed && !nichesMoved && previous.build_inputs === inputsHash && nextSig(manifest) === nextSig(previous)) {
   console.log('Nothing a visitor would see changed (no new translation, same displayed numbers): not writing the manifest.');
   process.exit(0);
 }
@@ -307,8 +373,9 @@ const s = manifest.stats;
 const summary = [
   `Wrote ${MANIFEST}: ${items.length} Reels · ${s.shown} shown · ${s.hidden} hidden · ${processed} new/processed · ${reused} reused.`,
   `Views: ${s.total_views ?? 'n/a'} total across ${s.views_counted_over} Reels.`,
-  `Licensed-audio check: ${missing.length} of ${videos.length} returned no media_url (${s.missing_media_url_pct}%).${s.missing_media_url_pct > 25 ? ' Over 25%: use the masters-folder fallback (PLAN.md 4.6).' : ''}`,
+  `Licensed-audio check: ${missing.length} of ${videos.length} returned no media_url (${s.missing_media_url_pct}%); ${s.embed} shown through the official embed.${s.missing_media_url_pct > 25 ? ' Over 25%: use the masters-folder fallback (PLAN.md 4.6).' : ''}`,
   `Translations: ${tr.translated} new, ${tr.pending} missing.`,
+  `Niches: ${nc.manual} manual, ${nc.cached + nc.gemini} Gemini (${nc.gemini} new), ${nc.keywords} keywords.`,
 ];
 console.log('\n' + summary.join('\n'));
 if (process.env.GITHUB_STEP_SUMMARY) writeFileSync(process.env.GITHUB_STEP_SUMMARY, `### Instagram sync\n\n${summary.map((l) => `- ${l}`).join('\n')}\n`, { flag: 'a' });

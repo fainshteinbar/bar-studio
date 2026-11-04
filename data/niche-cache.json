@@ -1,0 +1,4 @@
+{
+  "_help": "Rows chosen by Gemini for Reels without a manual entry in data/niches.json, by media ID + caption hash (an edited caption is classified again). Written by the sync.",
+  "items": {}
+}
