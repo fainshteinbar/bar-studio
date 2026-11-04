@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-11-04T06:17:27.198Z",
+  "generated_at": "2026-11-04T07:18:43.599Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "stats": {
-    "total_videos": 37,
+    "total_videos": 38,
     "all_videos": 42,
-    "excluded_trial": 4,
-    "total_views": 819476,
-    "views_counted_over": 37,
+    "excluded_trial": 3,
+    "total_views": 822951,
+    "views_counted_over": 38,
     "views_sample": false,
-    "top_visible_views": 240468,
+    "top_visible_views": 240473,
     "top_visible_id": "17943051837086700",
-    "shown": 37,
+    "shown": 38,
     "hidden": 0,
     "missing_media_url": 1,
     "missing_media_url_pct": 2.4
@@ -39,24 +39,31 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 10099,
+      "views": 10373,
       "likes": 21
     },
     {
-      "has_video": false,
+      "has_video": true,
+      "video_url": "https://fainshteinbar.github.io/bar-studio-media/reels/17914667688555448.mp4",
+      "full_url": "https://fainshteinbar.github.io/bar-studio-media/reels/17914667688555448.full.mp4",
+      "rail_url": "https://fainshteinbar.github.io/bar-studio-media/reels/17914667688555448.rail.mp4",
+      "poster_url": "https://fainshteinbar.github.io/bar-studio-media/reels/17914667688555448.webp",
+      "lqip": "data:image/webp;base64,UklGRkgBAABXRUJQVlA4IDwBAACwBwCdASoYACsAPu1iqU+ppSOiKrgN+TAdiWIAnSFRtQDTEtHHJptJbcjjRSlV17nTndUuIeYvB57HYCL8ke0rzhKbUugAAP6uimeMr6L+/YbtGZCPq0GaALSNqFajp1cC2dJpbZG8unQeaVAN6wXqG1prADxBH2yMarb9rgqS21ymE2k6CsCj85sbbA8Sc9z3XSzPJ40HIz1Prvhdo+ZyF3dlGCm9xJuG/CM3K0Hzd2RwcG/hSKfV5d9JD8pyPFDJR1ifi4+N6L0/wUM1SMT6ywZrT8Vc90FiNhAX/kBd3cpUlCsTLqW/Esr4RxzHXK5vjkLYSx7lcy+Bmhx1yxZ+uFu8v22umFfRfy/nZr5TSFQP8i5jdhQ5WeP5YEZ5lPFGnQDnx/yrLqxQdDcVDaWbnX0GZVT7nkTZAAAA",
+      "width": 720,
+      "height": 1280,
+      "duration": 13.2,
       "id": "17914667688555448",
       "placeholder": false,
       "permalink": "https://www.instagram.com/reel/DfRWwJYSjF2/",
       "timestamp": "2026-11-03T07:34:08+0000",
       "caption": "⁨\t⁨\tים סוף נקרע שוב, והפעם באילת 🌊\nהמציל היה בטוח שראה הכל 🏖️\nשלחו למי שכבר מתכנן חופשה בסיני\nמה המציל שלכם היה אומר?\nנוצר ב-AI\n#אילת #יםסוף #ישראלים #מציל #מטקות קומדיה AI⁩⁩",
       "lane": "reels",
-      "visible": false,
-      "status": "excluded-trial",
-      "excluded": "trial",
-      "is_shared_to_feed": false,
+      "visible": true,
+      "status": "shown",
+      "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3043,
-      "likes": 6
+      "views": 3138,
+      "likes": 12
     },
     {
       "has_video": true,
@@ -78,7 +85,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 44335,
+      "views": 44348,
       "likes": 113
     },
     {
@@ -101,7 +108,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1963,
+      "views": 1968,
       "likes": 83
     },
     {
@@ -124,7 +131,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3219,
+      "views": 3226,
       "likes": 48
     },
     {
@@ -139,7 +146,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 634,
+      "views": 635,
       "likes": 23
     },
     {
@@ -162,7 +169,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 504,
+      "views": 506,
       "likes": 17
     },
     {
@@ -178,7 +185,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2657,
+      "views": 2659,
       "likes": 10
     },
     {
@@ -201,7 +208,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1620,
+      "views": 1622,
       "likes": 11
     },
     {
@@ -224,7 +231,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 559,
+      "views": 560,
       "likes": 6
     },
     {
@@ -247,7 +254,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1176,
+      "views": 1178,
       "likes": 13
     },
     {
@@ -270,7 +277,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 924,
+      "views": 925,
       "likes": 17
     },
     {
@@ -309,7 +316,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5152,
+      "views": 5155,
       "likes": 303
     },
     {
@@ -532,7 +539,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24413,
+      "views": 24416,
       "likes": 340
     },
     {
@@ -601,7 +608,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 106009,
+      "views": 106010,
       "likes": 4642
     },
     {
@@ -647,8 +654,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50320,
-      "likes": 1106
+      "views": 50336,
+      "likes": 1107
     },
     {
       "has_video": true,
@@ -693,7 +700,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 240468,
+      "views": 240473,
       "likes": 5105
     },
     {
@@ -762,7 +769,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3158,
+      "views": 3162,
       "likes": 21
     },
     {
@@ -854,7 +861,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 6173,
+      "views": 6174,
       "likes": 91
     },
     {
