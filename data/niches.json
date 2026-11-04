@@ -1,0 +1,147 @@
+{
+  "_help": "Rows on the home page (PLAN.md 4.10). layout: \"rows\" (niche rows) or \"grid\" (the previous featured Reel + grid, built exactly as before); the hourly sync rebuilds the site when this file or i18n/*.json changes. rows: the order on the page; titles live in i18n/<lang>.json rows.titles.<key>. A row with top: N is the N most-watched Reels and is the only row a Reel can share with another. about: what the niche means, for the Gemini classifier. keywords: the fallback when Gemini is unavailable, matched in row order against the caption and its hashtags; no match goes to fallback. min_row: a row with fewer Reels merges into fallback. manual: {media ID: row key}, always wins. A new niche is a new entry here plus its title in i18n, no code change.",
+  "layout": "rows",
+  "min_row": 3,
+  "fallback": "comedy",
+  "rows": [
+    {
+      "key": "top",
+      "top": 8
+    },
+    {
+      "key": "realestate",
+      "about": "real estate: apartments, homes, residential projects, property developers, neighbourhoods",
+      "keywords": [
+        "נדלן",
+        "דירה",
+        "דירות",
+        "בית שעוד לא",
+        "real estate",
+        "realestate",
+        "apartment",
+        "property"
+      ]
+    },
+    {
+      "key": "sport",
+      "about": "sport: football and other sports, clubs, players, signings, matches, sports brands and fitness",
+      "keywords": [
+        "כדורגל",
+        "כדורסל",
+        "ספורט",
+        "פאדל",
+        "padel",
+        "מכבי",
+        "maccabi",
+        "שער",
+        "football",
+        "soccer",
+        "basketball",
+        "sport"
+      ]
+    },
+    {
+      "key": "food",
+      "about": "food and drink: restaurants, cafes, food brands, markets, dishes, ice cream, kitchens",
+      "keywords": [
+        "אוכל",
+        "מסעדה",
+        "מטבח",
+        "גלידה",
+        "עוגה",
+        "קייק",
+        "בראנץ",
+        "food",
+        "restaurant",
+        "brunch",
+        "cake",
+        "pizza"
+      ]
+    },
+    {
+      "key": "events",
+      "about": "events and brands: weddings, birthdays, family films, event companies, shows, brand activations",
+      "keywords": [
+        "חתונה",
+        "מתחתנים",
+        "אירוע",
+        "יום ההולדת",
+        "יום הולדת",
+        "wedding",
+        "birthday",
+        "event"
+      ]
+    },
+    {
+      "key": "comedy",
+      "about": "comedy: everyday Israeli situations, relatable sketches, parody, satire (the default when nothing else fits)",
+      "keywords": []
+    },
+    {
+      "key": "pov",
+      "about": "POV and what-if: cinematic point-of-view stories, Bible scenes, nostalgia, anime and fantasy worlds",
+      "keywords": [
+        "bible",
+        "exodus",
+        "genesis",
+        "anime",
+        "what if",
+        "תנך"
+      ]
+    },
+    {
+      "key": "ai",
+      "about": "building with AI: AI tools, apps, agents, prompts, Claude Code, Base44, Seedance, AI workflows shown on screen",
+      "keywords": [
+        "base44",
+        "claude",
+        "seedance",
+        "prompt",
+        "פרומפט",
+        "סקיל",
+        "superagent",
+        "internal tool"
+      ]
+    }
+  ],
+  "manual": {
+    "18134103076690052": "comedy",
+    "18134376601773397": "comedy",
+    "17967372243078621": "pov",
+    "18100118168427984": "comedy",
+    "18119885431989711": "realestate",
+    "18119404693788158": "food",
+    "18076764263734396": "ai",
+    "18117132779044506": "realestate",
+    "18143140507615187": "sport",
+    "18018152579952632": "food",
+    "18020288633948602": "ai",
+    "18074712920497404": "ai",
+    "17952875310276962": "ai",
+    "18062613656529472": "events",
+    "18021259553731125": "pov",
+    "18071487035773521": "comedy",
+    "18190448545363511": "ai",
+    "17950188216301567": "food",
+    "17992231761067519": "events",
+    "18118207847060225": "pov",
+    "17951840157273477": "comedy",
+    "18118270045962443": "food",
+    "18112796969467846": "sport",
+    "17901612813374816": "comedy",
+    "17996145848834714": "comedy",
+    "18633783094026616": "ai",
+    "17943051837086700": "food",
+    "18127153129842174": "realestate",
+    "18487666432129017": "realestate",
+    "18113922386100931": "sport",
+    "17958556212232372": "comedy",
+    "18130994455682363": "comedy",
+    "17957239818238876": "sport",
+    "17981987253079891": "comedy",
+    "18110908592128454": "events",
+    "18115863469771345": "sport",
+    "18627196816008046": "sport",
+    "18105146096190451": "comedy"
+  }
+}

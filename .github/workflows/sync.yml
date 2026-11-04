@@ -2,7 +2,8 @@
 # Each run reads the media list and every Reel's views (scripts/ig-sync.mjs --detect) and picks a mode:
 #   full  - a Reel added/removed, caption edited, hidden list changed, or an English caption pending:
 #           ffmpeg, download, transcode, upload, translate, build, commit
-#   stats - only a number a visitor sees changed (e.g. 211K -> 212K, the proof-row total): build and commit
+#   stats - only a number a visitor sees changed (e.g. 211K -> 212K, the proof-row total), or data/niches.json /
+#           i18n changed (rows, titles, the layout flag): build and commit
 #   none  - nothing visible changed: stop, nothing downloaded, uploaded, translated or committed
 name: Instagram sync
 
@@ -105,7 +106,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           MODE: ${{ steps.detect.outputs.mode == 'full' && 'new or changed Reels' || 'view counts or English captions' }}
         run: |
-          git add -A data/instagram.json data/translations.json index.html en/index.html guide/index.html en/guide/index.html sitemap.xml robots.txt assets/first
+          git add -A data/instagram.json data/translations.json data/niche-cache.json index.html en/index.html guide/index.html en/guide/index.html sitemap.xml robots.txt assets/first
           if git diff --cached --quiet; then echo "No changes."; exit 0; fi
           git -c user.name="bfain-sync" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -q -m "Sync Instagram Reels, ${MODE} ($(date -u +'%F %H:%M') UTC)"
           git push

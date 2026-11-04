@@ -53,6 +53,23 @@ export function posterFrom(input, outWebp, { isImage = false, at = '0.3', width 
   }
 }
 
+// Simple branded poster (navy to void, a cyan bar at the foot) for a Reel that has no Instagram cover at all.
+export function brandedPoster(outWebp, { width = 540, height = 960 } = {}) {
+  const tmp = tempDir('brand');
+  try {
+    const png = join(tmp, 'b.png');
+    const bar = `drawbox=x=0:y=${height - 14}:w=${width}:h=14:color=0x00C2FF:t=fill`;
+    try {
+      run('ffmpeg', ['-v', 'error', '-y', '-f', 'lavfi', '-i', `gradients=s=${width}x${height}:c0=0x1A1464:c1=0x07071C:x0=0:y0=0:x1=${width}:y1=${height}:n=2`, '-frames:v', '1', '-vf', bar, png]);
+    } catch {
+      run('ffmpeg', ['-v', 'error', '-y', '-f', 'lavfi', '-i', `color=c=0x1A1464:s=${width}x${height}`, '-frames:v', '1', '-vf', bar, png]);
+    }
+    return posterFrom(png, outWebp, { isImage: true, width });
+  } finally {
+    rmSync(tmp, { recursive: true, force: true });
+  }
+}
+
 // Hero loops: 16:9 built 3-up from the newest reels (3 segments, 0.4 s crossfades),
 // plus a 9:16 one-at-a-time loop for portrait screens. Posters for both.
 export function buildHeroLoops(videos, outDir) {

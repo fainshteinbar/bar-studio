@@ -16,7 +16,7 @@ Keep it as short as the original or shorter. Keep names, brands, places, numbers
 Do not add hashtags, emoji, quotation marks that are not in the original, or explanations.
 Input and output are JSON: "pitch" is the first line (the hook); "more" is the follow-up, an empty string if it is empty.`;
 
-const noCreds = (why) => Object.assign(new Error(`Gemini translation unavailable: ${why}`), { noCredentials: true });
+const noCreds = (why) => Object.assign(new Error(`Gemini unavailable: ${why}`), { noCredentials: true });
 
 async function call(path, init = {}) {
   const r = await fetch(`${API}${path}`, { ...init, headers: { 'x-goog-api-key': KEY, 'Content-Type': 'application/json', ...(init.headers || {}) } });
@@ -44,21 +44,18 @@ async function candidateModels() {
   return models;
 }
 
-// Returns { pitch, more, model } in English, or null when this caption could not be translated (safety block,
+// One JSON answer from Gemini: { data, model }, or null when no model gave a usable answer (safety block,
 // malformed output, or every model out of quota). Throws { noCredentials } when the key is missing or rejected.
-export async function translateCaption({ pitch, more }) {
+// Shared by caption translation and niche classification (scripts/lib/niches.mjs): same key, models and fallback.
+export async function generateJson({ system, payload, schema, temperature }) {
   if (!KEY) throw noCreds('GEMINI_API_KEY is not set');
   for (const model of await candidateModels()) {
     const { status, j } = await call(`/models/${model}:generateContent`, {
       method: 'POST',
       body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM }] },
-        contents: [{ role: 'user', parts: [{ text: JSON.stringify({ pitch, more }) }] }],
-        generationConfig: {
-          temperature: 0.5,
-          responseMimeType: 'application/json',
-          responseSchema: { type: 'OBJECT', properties: { pitch: { type: 'STRING' }, more: { type: 'STRING' } }, required: ['pitch', 'more'] },
-        },
+        systemInstruction: { parts: [{ text: system }] },
+        contents: [{ role: 'user', parts: [{ text: JSON.stringify(payload) }] }],
+        generationConfig: { temperature, responseMimeType: 'application/json', responseSchema: schema },
       }),
     });
     if (status === 429) { console.log(`   ${model}: free quota reached, trying the next model`); continue; }
@@ -69,14 +66,26 @@ export async function translateCaption({ pitch, more }) {
     const text = cand?.content?.parts?.map((p) => p.text || '').join('');
     if (!text || (cand.finishReason && cand.finishReason !== 'STOP')) return null;
     try {
-      const out = JSON.parse(text);
-      if (!out.pitch || isHebrew(out.pitch) || isHebrew(out.more)) return null;
-      return { pitch: String(out.pitch).trim().slice(0, 90), more: String(out.more || '').trim().slice(0, 160), model };
+      return { data: JSON.parse(text), model };
     } catch {
       return null;
     }
   }
   return null;
+}
+
+// Returns { pitch, more, model } in English, or null when this caption could not be translated.
+// Throws { noCredentials } when the key is missing or rejected.
+export async function translateCaption({ pitch, more }) {
+  const r = await generateJson({
+    system: SYSTEM,
+    payload: { pitch, more },
+    schema: { type: 'OBJECT', properties: { pitch: { type: 'STRING' }, more: { type: 'STRING' } }, required: ['pitch', 'more'] },
+    temperature: 0.5,
+  });
+  const out = r?.data;
+  if (!out?.pitch || isHebrew(out.pitch) || isHebrew(out.more)) return null;
+  return { pitch: String(out.pitch).trim().slice(0, 90), more: String(out.more || '').trim().slice(0, 160), model: r.model };
 }
 
 // Translate every visible Reel whose English is missing or stale. Mutates the cache; untranslated Reels are

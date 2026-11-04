@@ -56,9 +56,9 @@
     <a class="ul guide-entry" href="{{guide_url}}">{{t.guide.home_entry}} <span class="arrow" aria-hidden="true">→</span></a>
   </section>
 
-  {{#if featured}}
+  {{#unless rows_layout}}{{#if featured}}
   <section class="featured" aria-labelledby="featured-title">
-    <a class="feat-media" href="{{featured.href}}" target="_blank" rel="noopener" data-reel data-full="{{featured.full}}" data-poster="{{featured.poster}}" data-pitch="{{featured.pitch}}" data-lang="{{featured.pitch_lang}}" data-views="{{featured.views_fmt}}"><span class="sr-only">{{featured.title}}. {{t.d6.watch}}.</span>{{{featured.media_big}}}<span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span></a>
+    <a class="feat-media" href="{{featured.href}}" target="_blank" rel="noopener" data-reel{{#if featured.embed}} data-embed="{{featured.embed}}"{{/if}} data-full="{{featured.full}}" data-poster="{{featured.poster}}" data-pitch="{{featured.pitch}}" data-lang="{{featured.pitch_lang}}" data-views="{{featured.views_fmt}}"><span class="sr-only">{{featured.title}}. {{t.d6.watch}}.</span>{{{featured.media_big}}}<span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span></a>
     <div class="feat-copy">
       <p class="eyebrow">{{t.d6.featured_eyebrow}}</p>
       <p class="feat-num"><span class="ltr">{{featured.views_fmt}}</span> <span class="feat-unit">{{t.grid.views}}</span></p>
@@ -80,7 +80,7 @@
     <ul class="grid">
       {{#each others}}
       <li class="card">
-        <a href="{{it.href}}" target="_blank" rel="noopener" data-reel data-full="{{it.full}}" data-poster="{{it.poster}}" data-pitch="{{it.pitch}}" data-lang="{{it.pitch_lang}}" data-views="{{it.views_fmt}}">
+        <a href="{{it.href}}" target="_blank" rel="noopener" data-reel{{#if it.embed}} data-embed="{{it.embed}}"{{/if}} data-full="{{it.full}}" data-poster="{{it.poster}}" data-pitch="{{it.pitch}}" data-lang="{{it.pitch_lang}}" data-views="{{it.views_fmt}}">
           <span class="card-media">{{{it.media}}}{{#if it.placeholder}}<span class="reel-badge">{{t.grid.badge}}</span>{{/if}}</span>
           <span class="card-meta">
             {{#if it.pitch}}<span class="card-pitch" lang="{{it.pitch_lang}}" dir="{{it.pitch_dir}}">{{it.pitch}}</span>{{/if}}
@@ -91,7 +91,11 @@
       {{/each}}
     </ul>
     <a class="ul more" href="{{ig_url}}" target="_blank" rel="noopener">{{t.grid.more}} <span class="arrow" aria-hidden="true">→</span></a>
-  </section>
+  </section>{{/unless}}{{#if rows_layout}}
+  <div class="rows" id="work">
+{{{rows_html}}}
+    <a class="ul more" href="{{ig_url}}" target="_blank" rel="noopener">{{t.grid.more}} <span class="arrow" aria-hidden="true">→</span></a>
+  </div>{{/if}}
 
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">{{#each t.d6.marquee}}<span>{{it}}</span><i>◆</i>{{/each}}{{#each t.d6.marquee}}<span>{{it}}</span><i>◆</i>{{/each}}</div>

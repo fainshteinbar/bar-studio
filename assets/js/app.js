@@ -14,22 +14,48 @@
     let opener = null;
     let pushed = false;
 
+    // Licensed-audio Reels (data-embed) play in Instagram's official embed: the iframe is created on open and removed
+    // on close, so the page itself never loads anything from Instagram. "Open on Instagram" stays as the way out.
+    let frame = null, tabbed = false;
+    // A click inside the cross-origin embed moves focus into it, where Esc never reaches this page. When focus went
+    // there by a click (not by Tab: keyboard users keep focus in the embed to operate it), it comes back to the
+    // close button. The page sees no pointer events over the frame, so "the last key was not Tab" is the signal.
+    addEventListener('keydown', (e) => { tabbed = e.key === 'Tab'; }, true);
+    addEventListener('blur', () => {
+      if (dlg.open && frame && !tabbed) setTimeout(() => { if (document.activeElement === frame) dlg.querySelector('.player-close').focus({ preventScroll: true }); }, 0);
+    });
     const open = (a) => {
-      if (!a || !a.dataset.full) return false;
+      if (!a || !(a.dataset.full || a.dataset.embed)) return false;
       opener = a;
-      vid.poster = a.dataset.poster || '';
-      vid.src = a.dataset.full;
+      const embed = a.dataset.embed;
+      dlg.classList.toggle('is-embed', !!embed);
+      vid.hidden = !!embed;
+      if (embed) {
+        frame = document.createElement('iframe');
+        frame.className = 'player-embed';
+        frame.src = embed;
+        frame.title = (a.dataset.pitch || '') + ' · Instagram';
+        frame.allow = 'autoplay; encrypted-media; picture-in-picture; clipboard-write; web-share';
+        frame.allowFullscreen = true;
+        frame.setAttribute('scrolling', 'no');
+        vid.after(frame);
+      } else {
+        vid.poster = a.dataset.poster || '';
+        vid.src = a.dataset.full;
+      }
       pitch.textContent = a.dataset.pitch || '';
       pitch.lang = a.dataset.lang || '';
       pitch.dir = a.dataset.lang === 'he' ? 'rtl' : 'ltr';
       views.hidden = !a.dataset.views;
       views.querySelector('.ltr').textContent = a.dataset.views || '';
-      ig.href = a.href;
+      ig.href = a.href || a.dataset.href;
       window.reels?.suspend(true);
       dlg.showModal();
-      vid.muted = false;
-      const p = vid.play();
-      if (p && p.catch) p.catch(() => { vid.muted = true; vid.play().catch(() => {}); });
+      if (!embed) {
+        vid.muted = false;
+        const p = vid.play();
+        if (p && p.catch) p.catch(() => { vid.muted = true; vid.play().catch(() => {}); });
+      }
       history.pushState({ player: true }, '');
       pushed = true;
       return true;
@@ -39,6 +65,8 @@
       vid.pause();
       vid.removeAttribute('src');
       vid.load();
+      frame?.remove();
+      frame = null;
       dlg.close();
       window.reels?.suspend(false);
       if (pushed && !fromHistory) history.back();
@@ -47,8 +75,8 @@
     };
 
     document.addEventListener('click', (e) => {
-      const a = e.target.closest('a[data-reel]');
-      if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = e.target.closest('[data-reel]');
+      if (!a || e.defaultPrevented || e.button !== 0 || (a.href && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey))) return;
       if (open(a)) e.preventDefault();
     });
     document.querySelector('[data-open-featured]')?.addEventListener('click', () => open(document.querySelector('.feat-media')));
@@ -137,11 +165,37 @@
 
   // Hovering a card gives its Reel priority under the playing cap.
   if (fine) {
-    document.querySelectorAll('.card a, .feat-media').forEach((a) => {
+    document.querySelectorAll('.card a, .feat-media, .row-card').forEach((a) => {
       const v = a.querySelector('video');
       if (!v) return;
       a.addEventListener('pointerenter', () => window.reels?.prefer(v));
       a.addEventListener('pointerleave', () => window.reels?.prefer(null));
     });
   }
+
+  // Rows: previous/next arrows (fine pointers; hidden at either end), and a focused card is scrolled into its strip.
+  // scrollLeft is 0 at the inline start and grows negative toward the end in RTL, so the sign follows the direction.
+  document.querySelectorAll('.row').forEach((row) => {
+    const strip = row.querySelector('.row-strip');
+    const prev = row.querySelector('.row-prev'), next = row.querySelector('.row-next');
+    if (!strip) return;
+    const sign = getComputedStyle(strip).direction === 'rtl' ? -1 : 1;
+    const behavior = reduce ? 'auto' : 'smooth';
+    const update = () => {
+      const pos = Math.abs(strip.scrollLeft), max = strip.scrollWidth - strip.clientWidth;
+      prev?.setAttribute('aria-disabled', String(pos <= 2));
+      next?.setAttribute('aria-disabled', String(pos >= max - 2));
+    };
+    const go = (d) => strip.scrollBy({ left: d * sign * strip.clientWidth * 0.85, behavior });
+    prev?.addEventListener('click', () => prev.getAttribute('aria-disabled') !== 'true' && go(-1));
+    next?.addEventListener('click', () => next.getAttribute('aria-disabled') !== 'true' && go(1));
+    let queued = false;
+    strip.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } }, { passive: true });
+    strip.addEventListener('focusin', (e) => {
+      const item = e.target !== strip && e.target.closest('.row-item');
+      if (item) item.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior });
+    });
+    addEventListener('resize', update, { passive: true });
+    update();
+  });
 })();

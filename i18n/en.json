@@ -70,6 +70,21 @@
     "more": "More work on Instagram",
     "open": "Watch with sound on Instagram"
   },
+  "rows": {
+    "_help": "Home page row titles, by the keys in data/niches.json. A new niche: a new key here and a row in niches.json.",
+    "titles": {
+      "top": "Most watched",
+      "realestate": "Homes that don't exist yet",
+      "sport": "On the pitch",
+      "food": "On the table",
+      "events": "For events & brands",
+      "comedy": "Know someone like this?",
+      "pov": "POV: You were there",
+      "ai": "Built with AI"
+    },
+    "prev": "Previous",
+    "next": "Next"
+  },
   "proof": {
     "title": "By the numbers",
     "sample_tag": "Sample data",

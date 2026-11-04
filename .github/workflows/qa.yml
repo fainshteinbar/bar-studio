@@ -1,0 +1,83 @@
+# Site quality gate (PLAN.md 4.10), on a GitHub runner (US, Linux), like the PageSpeed numbers in PLAN.md 6.2.
+# Builds the site, then: sync dry run against fixtures, Gemini vs. the manual row list (report only), the row and
+# player checks in Chrome, screenshots at 390 and 1440 px in both languages, and Lighthouse 3 runs per page and form
+# factor (median; performance, accessibility, best practices, SEO >= 95, mobile LCP < 2.5 s, CLS < 0.02).
+# Every check runs even when an earlier one failed, so one run reports everything.
+# Runs on pushes to the netflix-rows branch, and by hand (target "live" measures https://fainshteinbar.github.io/bar-studio/).
+name: Site QA
+
+on:
+  push:
+    branches: [netflix-rows]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: local (build of this ref, served on the runner) or live (the deployed site)
+        type: choice
+        options: [local, live]
+        default: local
+
+concurrency:
+  group: qa-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      LIVE_URL: ${{ inputs.target == 'live' && 'https://fainshteinbar.github.io/bar-studio/' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: |
+          npm ci --no-audit --no-fund
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg webp >/dev/null
+          google-chrome --version
+
+      - name: Build (the committed build must be current)
+        if: env.LIVE_URL == ''
+        run: |
+          node scripts/build.mjs
+          git diff --stat -- index.html en/index.html guide en/guide
+          if ! git diff --quiet -- index.html en/index.html; then echo "::error::index.html is not the build of this commit; run node scripts/build.mjs and commit"; exit 1; fi
+
+      - name: Sync dry run (fixtures, no token, no Gemini key)
+        if: env.LIVE_URL == ''
+        run: node test/rows/sync-dryrun.mjs
+
+      - name: Rows by Gemini vs. the manual list (report only)
+        if: (success() || failure()) && env.LIVE_URL == ''
+        continue-on-error: true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          NICHES_TABLE: shots-local/niches-table.json
+        run: mkdir -p shots-local && node scripts/niches-init.mjs | tee shots-local/niches-table.txt
+
+      - name: Row and player checks (Chrome)
+        if: success() || failure()
+        run: node scripts/rows-check.mjs $LIVE_URL
+
+      - name: Screenshots 390 / 1440, he / en
+        if: success() || failure()
+        run: PAGES=home node scripts/shots.mjs $LIVE_URL
+
+      - name: Lighthouse gate (3 runs, median)
+        if: success() || failure()
+        run: node scripts/lh-gate.mjs $LIVE_URL
+
+      - name: Keep the reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-${{ env.LIVE_URL == '' && 'local' || 'live' }}-${{ github.run_number }}
+          path: shots-local/
+          retention-days: 14
