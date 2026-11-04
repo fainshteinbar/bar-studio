@@ -181,10 +181,19 @@
     if (!strip) return;
     const sign = getComputedStyle(strip).direction === 'rtl' ? -1 : 1;
     const behavior = reduce ? 'auto' : 'smooth';
+    const wrap = strip.parentElement, pages = row.querySelector('.row-pages');
+    // Page dashes (one per screenful) and the edge fades follow the scroll position.
     const update = () => {
       const pos = Math.abs(strip.scrollLeft), max = strip.scrollWidth - strip.clientWidth;
       prev?.setAttribute('aria-disabled', String(pos <= 2));
       next?.setAttribute('aria-disabled', String(pos >= max - 2));
+      wrap.classList.toggle('is-moved', pos > 2);
+      wrap.classList.toggle('is-end', pos >= max - 2);
+      if (!pages) return;
+      const n = max > 2 ? Math.ceil(strip.scrollWidth / strip.clientWidth - 0.05) : 0;
+      if (pages.childElementCount !== n) pages.innerHTML = '<i></i>'.repeat(n);
+      const cur = max > 2 ? Math.round((pos / max) * (n - 1)) : 0;
+      [...pages.children].forEach((d, k) => d.classList.toggle('on', k === cur));
     };
     const go = (d) => strip.scrollBy({ left: d * sign * strip.clientWidth * 0.85, behavior });
     prev?.addEventListener('click', () => prev.getAttribute('aria-disabled') !== 'true' && go(-1));
@@ -195,7 +204,8 @@
       const item = e.target !== strip && e.target.closest('.row-item');
       if (item) item.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior });
     });
-    addEventListener('resize', update, { passive: true });
+    // Also when a row skipped by content-visibility gets its real size.
+    if ('ResizeObserver' in window) new ResizeObserver(update).observe(strip); else addEventListener('resize', update, { passive: true });
     update();
   });
 })();

@@ -176,7 +176,7 @@ function rowsHtml(t, items) {
       `<span class="row-media">${it.media}</span>` +
       `<span class="row-meta" aria-hidden="true">` +
       (it.pitch ? `<span class="row-pitch" lang="${it.pitch_lang}" dir="${it.pitch_dir}">${esc(it.pitch)}</span>` : '') +
-      (views ? `<span class="row-stat"><span class="ltr">${views}</span> ${esc(t.grid.views)}</span>` : '') +
+      (views ? `<span class="row-stat"><span class="ltr row-num">${views}</span> ${esc(t.grid.views)}</span>` : '') +
       `</span></button></li>`;
   };
   return rows.map((r, i) => {
@@ -184,7 +184,7 @@ function rowsHtml(t, items) {
     const title = t.rows.titles[r.key] || (console.warn(`   rows: no title for "${r.key}" in i18n rows.titles`), r.key);
     const tag = r.top ? 'ol' : 'ul';
     return `<section class="row${r.top ? ' row-top' : ''}" aria-labelledby="${id}-title">` +
-      `<h2 id="${id}-title" class="row-title">${esc(title)}</h2>` +
+      `<div class="row-head"><h2 id="${id}-title" class="row-title">${esc(title)}</h2><span class="row-pages" aria-hidden="true"></span></div>` +
       `<div class="row-wrap">` +
       `<${tag} class="row-strip" tabindex="0" aria-labelledby="${id}-title"${i === 0 ? ' data-eager' : ''}>${r.items.map((it, k) => card(it, r.top ? k + 1 : 0)).join('')}</${tag}>` +
       `<button type="button" class="row-arrow row-prev" aria-label="${esc(`${t.rows.prev}: ${title}`)}" aria-disabled="true">${CHEVRON}</button>` +
