@@ -28,6 +28,8 @@ const C = reel('900000000000000003', 'DfTEST00003', 'Just a reel with no keyword
 const fixture = (media) => ({ me: { user_id: '1', username: 'fixture', account_type: 'MEDIA_CREATOR', media_count: media.length }, media, views: { [A.id]: 1200, [B.id]: 3400, [C.id]: 50 } });
 writeFileSync(join(T, 'f1.json'), JSON.stringify(fixture([A, B, C])));
 writeFileSync(join(T, 'f2.json'), JSON.stringify(fixture([{ ...A, media_url: `${BASE}/b.mp4` }, B, C])));
+const D = reel('900000000000000004', 'DfTEST00004', 'A brand new reel', { media_url: `${BASE}/b.mp4`, thumbnail_url: `${BASE}/cover.webp` });
+writeFileSync(join(T, 'f3.json'), JSON.stringify({ ...fixture([D, A, B, C]), views: { [A.id]: 1200, [B.id]: 99000, [C.id]: 50, [D.id]: 10 } }));
 
 const MANIFEST = join(T, 'manifest.json');
 const env = (f, extra = {}) => ({ ...process.env, IG_FIXTURE: join(T, f), SYNC_MANIFEST: MANIFEST, SYNC_MEDIA_DIR: join(T, 'media'), GEMINI_API_KEY: '', IG_ACCESS_TOKEN: '', GITHUB_OUTPUT: join(T, 'out.txt'), GITHUB_STEP_SUMMARY: '', ...extra });
@@ -75,6 +77,22 @@ try {
   m = JSON.parse(readFileSync(MANIFEST, 'utf8'));
   const a2 = m.items.find((i) => i.id === A.id);
   expect('A is now playback "file"', r.code === 0 && a2.playback === 'file' && a2.has_video && !a2.embed_url, JSON.stringify({ playback: a2.playback, has_video: a2.has_video }));
+  // Media repo down (an upload run with a key that cannot work): the run still succeeds, every number is updated,
+  // the new Reel D waits hidden, and the Reels already shown keep their state.
+  const before = readFileSync(MANIFEST, 'utf8');
+  const down = await new Promise((done) => {
+    const c = spawn('node', ['scripts/ig-sync.mjs', '--upload'], { env: env('f3.json', { SYNC_DRYRUN_UPLOAD: '1', MEDIA_DEPLOY_KEY: 'not-a-key', MEDIA_REPO: 'fainshteinbar/does-not-exist-dryrun', MEDIA_BASE_URL: 'https://example.invalid/media' }) });
+    let log = ''; c.stdout.on('data', (d) => (log += d)); c.stderr.on('data', (d) => (log += d));
+    c.on('close', (code) => done({ code, log }));
+  });
+  m = JSON.parse(readFileSync(MANIFEST, 'utf8'));
+  const d = m.items.find((i) => i.id === D.id), b2 = m.items.find((i) => i.id === B.id), a3 = m.items.find((i) => i.id === A.id);
+  expect('media repo down: the run still exits 0', down.code === 0, down.log.split('\n').filter((l) => /warning|Error/.test(l)).slice(0, 2).join(' | '));
+  expect('media repo down: view counts still updated', m.stats.total_views === 99000 + 1200 + 50 && b2.views === 99000, String(m.stats.total_views));
+  expect('media repo down: the new Reel waits, hidden, listed as pending', d && d.visible === false && !d.has_video && m.media_pending?.ids.includes(D.id), JSON.stringify(m.media_pending));
+  expect('media repo down: shown Reels keep their media', b2.visible && b2.has_video && a3.visible && a3.playback === 'file', JSON.stringify({ b: b2.playback, a: a3.playback }));
+  expect('no deploy key left on disk', !down.log.includes('not-a-key'));
+  writeFileSync(MANIFEST, before);
   const dataAfter = ['data/translations.json', 'data/niche-cache.json', 'data/instagram.json'].map((f) => existsSync(f) ? readFileSync(f, 'utf8') : '');
   expect('nothing in data/ written', dataAfter.every((x, i) => x === dataBefore[i]));
 } finally {

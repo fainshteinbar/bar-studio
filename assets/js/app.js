@@ -155,7 +155,7 @@
     };
     addEventListener('pointermove', (e) => {
       x = e.clientX; y = e.clientY;
-      const on = !!e.target.closest?.('[data-reel]') && !document.querySelector('dialog.player[open]');
+      const on = !!e.target.closest?.('[data-reel]') && !document.querySelector('dialog.player[open]') && !document.documentElement.classList.contains('is-dragging');
       if (on && !label.classList.contains('is-on')) { lx = x; ly = y; }
       label.classList.toggle('is-on', on);
       if (!raf) raf = requestAnimationFrame(tick);
@@ -172,6 +172,27 @@
       a.addEventListener('pointerleave', () => window.reels?.prefer(null));
     });
   }
+
+  // Rows from 600 px: the CSS size (grid card or window fit) can leave the next card barely visible or almost whole.
+  // Shrink the cards a little (at most about 10%) so a clear part of the next one always peeks. The rows are below the
+  // first screen, so this never moves anything in view.
+  const rowsEl = document.querySelector('.rows');
+  const fitPeek = () => {
+    if (!rowsEl) return;
+    rowsEl.style.removeProperty('--card');
+    if (innerWidth < 600) return;
+    const probe = rowsEl.querySelector('.row:not(.row-top) .row-item');
+    if (!probe) return;
+    const cs = getComputedStyle(probe.parentElement);
+    const card = probe.getBoundingClientRect().width, gap = parseFloat(cs.columnGap) || 16, pad = parseFloat(cs.paddingInlineStart) || 0;
+    const slots = (innerWidth - pad + gap) / (card + gap), n = Math.floor(slots), frac = slots - n;
+    if (frac >= 0.15 && frac <= 0.86) return;
+    const target = frac < 0.15 ? n + 0.3 : n + 1.3;   // always more slots than now: the cards only shrink
+    rowsEl.style.setProperty('--card', `${Math.floor((innerWidth - pad + gap) / target - gap)}px`);
+  };
+  fitPeek();
+  let fitQueued = 0;
+  addEventListener('resize', () => { cancelAnimationFrame(fitQueued); fitQueued = requestAnimationFrame(fitPeek); }, { passive: true });
 
   // Rows: previous/next arrows (fine pointers; hidden at either end), and a focused card is scrolled into its strip.
   // scrollLeft is 0 at the inline start and grows negative toward the end in RTL, so the sign follows the direction.
@@ -200,6 +221,35 @@
     next?.addEventListener('click', () => next.getAttribute('aria-disabled') !== 'true' && go(1));
     let queued = false;
     strip.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } }, { passive: true });
+    // Mouse drag: the strip follows the pointer (no snapping meanwhile), then snaps to the nearest card. A drag never
+    // counts as a click on the card it started on. Touch and pen keep the browser's own swiping.
+    let drag = null;
+    strip.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      drag = { x: e.clientX, left: strip.scrollLeft, moved: false, id: e.pointerId };
+    });
+    strip.addEventListener('pointermove', (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      const dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) < 6) return;
+      if (!drag.moved) { drag.moved = true; strip.setPointerCapture(e.pointerId); strip.classList.add('is-dragging'); document.documentElement.classList.add('is-dragging'); }
+      strip.scrollLeft = drag.left - dx;
+    });
+    const endDrag = (e) => {
+      if (!drag || (e && e.pointerId !== drag.id)) return;
+      const moved = drag.moved;
+      drag = null;
+      if (!moved) return;
+      strip.classList.remove('is-dragging');
+      document.documentElement.classList.remove('is-dragging');
+      // Swallow the click that follows the release; snapping resumes once the class is gone.
+      const swallow = (c) => { c.preventDefault(); c.stopPropagation(); };
+      strip.addEventListener('click', swallow, { capture: true, once: true });
+      setTimeout(() => strip.removeEventListener('click', swallow, { capture: true }), 0);
+    };
+    strip.addEventListener('pointerup', endDrag);
+    strip.addEventListener('pointercancel', endDrag);
+    strip.addEventListener('dragstart', (e) => e.preventDefault());
     strip.addEventListener('focusin', (e) => {
       const item = e.target !== strip && e.target.closest('.row-item');
       if (item) item.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior });
