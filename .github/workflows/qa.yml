@@ -2,6 +2,7 @@
 # Builds the site, then: sync dry run against fixtures, Gemini vs. the manual row list (report only), the row and
 # player checks in Chrome, screenshots at 390 and 1440 px in both languages, and Lighthouse 3 runs per page and form
 # factor (median; performance, accessibility, best practices, SEO >= 95, mobile LCP < 2.5 s, CLS < 0.02).
+# Every check runs even when an earlier one failed, so one run reports everything.
 # Runs on pushes to the netflix-rows branch, and by hand (target "live" measures https://fainshteinbar.github.io/bar-studio/).
 name: Site QA
 
@@ -53,7 +54,7 @@ jobs:
         run: node test/rows/sync-dryrun.mjs
 
       - name: Rows by Gemini vs. the manual list (report only)
-        if: env.LIVE_URL == ''
+        if: (success() || failure()) && env.LIVE_URL == ''
         continue-on-error: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -62,12 +63,15 @@ jobs:
         run: mkdir -p shots-local && node scripts/niches-init.mjs | tee shots-local/niches-table.txt
 
       - name: Row and player checks (Chrome)
+        if: success() || failure()
         run: node scripts/rows-check.mjs $LIVE_URL
 
       - name: Screenshots 390 / 1440, he / en
+        if: success() || failure()
         run: PAGES=home node scripts/shots.mjs $LIVE_URL
 
       - name: Lighthouse gate (3 runs, median)
+        if: success() || failure()
         run: node scripts/lh-gate.mjs $LIVE_URL
 
       - name: Keep the reports

@@ -6,7 +6,7 @@
 // Then: the same data again must be mode "none" (the embed must not trigger work every hour); a changed layout flag
 // must be "stats" (rebuild); fixture 2 gives A a media_url: detect says "media now available" and the next run turns
 // A into playback "file". Nothing in data/ is written. Exit code 1 on any failed expectation.
-import { execFileSync, spawnSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync, copyFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -31,13 +31,20 @@ writeFileSync(join(T, 'f2.json'), JSON.stringify(fixture([{ ...A, media_url: `${
 
 const MANIFEST = join(T, 'manifest.json');
 const env = (f, extra = {}) => ({ ...process.env, IG_FIXTURE: join(T, f), SYNC_MANIFEST: MANIFEST, SYNC_MEDIA_DIR: join(T, 'media'), GEMINI_API_KEY: '', IG_ACCESS_TOKEN: '', GITHUB_OUTPUT: join(T, 'out.txt'), GITHUB_STEP_SUMMARY: '', ...extra });
-const run = (args, f) => { writeFileSync(join(T, 'out.txt'), ''); const r = spawnSync('node', ['scripts/ig-sync.mjs', ...args], { env: env(f), encoding: 'utf8' }); return { code: r.status, log: r.stdout + r.stderr, mode: readFileSync(join(T, 'out.txt'), 'utf8').match(/mode=(\w+)/)?.[1] }; };
+// Async on purpose: the fixture server lives in this process, so a blocking spawnSync would starve it.
+const run = (args, f) => new Promise((done) => {
+  writeFileSync(join(T, 'out.txt'), '');
+  const c = spawn('node', ['scripts/ig-sync.mjs', ...args], { env: env(f) });
+  let log = '';
+  c.stdout.on('data', (d) => (log += d)); c.stderr.on('data', (d) => (log += d));
+  c.on('close', (code) => done({ code, log, mode: readFileSync(join(T, 'out.txt'), 'utf8').match(/mode=(\w+)/)?.[1] }));
+});
 const fails = [];
 const expect = (name, ok, detail = '') => { console.log(`${ok ? 'ok  ' : 'FAIL'} ${name}${detail ? `  (${detail})` : ''}`); if (!ok) fails.push(name); };
 const dataBefore = ['data/translations.json', 'data/niche-cache.json', 'data/instagram.json'].map((f) => existsSync(f) ? readFileSync(f, 'utf8') : '');
 
 try {
-  let r = run(['--local'], 'f1.json');
+  let r = await run(['--local'], 'f1.json');
   console.log(r.log.split('\n').filter((l) => /^\s+\+|Niches|Licensed|Translations|Wrote/.test(l)).join('\n'));
   expect('local run 1 exits 0', r.code === 0, r.code ? r.log.slice(-600) : '');
   let m = JSON.parse(readFileSync(MANIFEST, 'utf8'));
@@ -52,19 +59,19 @@ try {
   expect('new Reels without a Gemini key sorted by keywords', by[A.id].niche === 'realestate' && by[B.id].niche === 'events' && by[C.id].niche === 'comedy' && [A, B, C].every((x) => by[x.id].niche_source === 'keywords'),
     [A, B, C].map((x) => `${by[x.id].niche}/${by[x.id].niche_source}`).join(' '));
 
-  r = run(['--upload', '--detect'], 'f1.json');
+  r = await run(['--upload', '--detect'], 'f1.json');
   expect('same data again: mode none (no hourly work for embed Reels)', r.mode === 'none', `${r.mode}: ${r.log.split('\n').find((l) => /Work to do|No media work|Nothing/.test(l))}`);
 
   const niches = readFileSync('data/niches.json', 'utf8');
   try {
     writeFileSync('data/niches.json', niches.replace('"layout": "rows"', '"layout": "grid"'));
-    r = run(['--upload', '--detect'], 'f1.json');
+    r = await run(['--upload', '--detect'], 'f1.json');
     expect('layout flag changed: mode stats (rebuild, no media work)', r.mode === 'stats', `${r.mode}: ${r.log.split('\n').find((l) => /No media work|Work to do|Nothing/.test(l))}`);
   } finally { writeFileSync('data/niches.json', niches); }
 
-  r = run(['--upload', '--detect'], 'f2.json');
+  r = await run(['--upload', '--detect'], 'f2.json');
   expect('media_url appears: detect says "media now available", mode full', r.mode === 'full' && r.log.includes(`media now available ${A.id}`), r.mode);
-  r = run(['--local'], 'f2.json');
+  r = await run(['--local'], 'f2.json');
   m = JSON.parse(readFileSync(MANIFEST, 'utf8'));
   const a2 = m.items.find((i) => i.id === A.id);
   expect('A is now playback "file"', r.code === 0 && a2.playback === 'file' && a2.has_video && !a2.embed_url, JSON.stringify({ playback: a2.playback, has_video: a2.has_video }));

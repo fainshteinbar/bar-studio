@@ -3,7 +3,7 @@
 //   node scripts/lh-gate.mjs https://fainshteinbar.github.io/bar-studio/   the live site
 // Gate: performance, accessibility, best practices and SEO >= 95; mobile LCP < 2.5 s; CLS < 0.02.
 // Writes shots-local/<target>/lighthouse/<page>-<ff>-<n>.json and gate.json; exit code 1 when the gate fails.
-import { spawnSync } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync, appendFileSync } from 'node:fs';
 import { serve } from './serve.mjs';
 
@@ -23,8 +23,14 @@ for (const page of ['he', 'en']) {
     const runs = [];
     for (let n = 1; n <= RUNS; n++) {
       const file = `${OUT}/${page}-${ff}-${n}.json`;
-      const r = spawnSync('npx', ['lighthouse', `${BASE}${page === 'en' ? 'en/' : ''}`, '--quiet', '--output=json', `--output-path=${file}`,
-        ...(ff === 'desktop' ? ['--preset=desktop'] : []), '--chrome-flags=--headless=new --no-sandbox'], { stdio: ['ignore', 'ignore', 'pipe'], env: { ...process.env, CHROME_PATH: chrome } });
+      // Async: the local server runs in this process (a blocking spawnSync would leave Lighthouse waiting forever).
+      const r = await new Promise((done) => {
+        const c = spawn('npx', ['lighthouse', `${BASE}${page === 'en' ? 'en/' : ''}`, '--quiet', '--output=json', `--output-path=${file}`,
+          ...(ff === 'desktop' ? ['--preset=desktop'] : []), '--chrome-flags=--headless=new --no-sandbox'], { stdio: ['ignore', 'ignore', 'pipe'], env: { ...process.env, CHROME_PATH: chrome } });
+        let stderr = '';
+        c.stderr.on('data', (d) => (stderr += d));
+        c.on('close', (status) => done({ status, stderr }));
+      });
       if (r.status !== 0) { failures.push(`${page}-${ff} run ${n}: lighthouse exited ${r.status} ${String(r.stderr).slice(-300)}`); continue; }
       const j = JSON.parse(readFileSync(file, 'utf8'));
       const c = j.categories, a = j.audits;
