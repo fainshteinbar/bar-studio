@@ -16,13 +16,20 @@ const expectedOf = (caption) => {
   return expected.rest;
 };
 const shown = manifest.items.filter((i) => i.status === 'shown');
+const PACE = +(process.env.NICHES_PACE_MS || 6500);
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const rows = [];
 let gemini = true;
 for (const it of shown) {
   let g = '';
   if (gemini) {
-    try { g = (await geminiNiche(it.caption, { ...cfg, manual: {} }))?.niche || '(no answer)'; }
-    catch (e) { if (!e.noCredentials) throw e; console.log(`Gemini: ${e.message}`); gemini = false; g = ''; }
+    // Paced for the free tier's per-minute limit (38 back-to-back calls hit 429/503); one retry after a pause.
+    for (let attempt = 0; attempt < 2 && (!g || g === '(no answer)'); attempt++) {
+      if (attempt) await sleep(30000);
+      try { g = (await geminiNiche(it.caption, { ...cfg, manual: {} }))?.niche || '(no answer)'; }
+      catch (e) { if (!e.noCredentials) throw e; console.log(`Gemini: ${e.message}`); gemini = false; g = ''; break; }
+    }
+    await sleep(PACE);
   }
   rows.push({ id: it.id, start: clean(it.caption).slice(0, 34), expected: expectedOf(it.caption), gemini: g, keywords: keywordNiche(it.caption, cfg) });
 }
