@@ -1,4 +1,10 @@
 {
   "_help": "Rows chosen by Gemini for Reels without a manual entry in data/niches.json, by media ID + caption hash (an edited caption is classified again). Written by the sync.",
-  "items": {}
+  "items": {
+    "17914667688555448": {
+      "hash": "0bff38afd7bf69ec",
+      "niche": "comedy",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-11-04"
+    }
+  }
 }

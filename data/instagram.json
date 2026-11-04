@@ -1,19 +1,21 @@
 {
-  "generated_at": "2026-11-04T09:17:21.041Z",
+  "generated_at": "2026-11-04T11:30:58.713Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
+  "build_inputs": "21c5fc6b084654e5",
   "stats": {
-    "total_videos": 38,
+    "total_videos": 39,
     "all_videos": 42,
     "excluded_trial": 3,
-    "total_views": 823874,
-    "views_counted_over": 38,
+    "total_views": 825259,
+    "views_counted_over": 39,
     "views_sample": false,
-    "top_visible_views": 240477,
+    "top_visible_views": 240481,
     "top_visible_id": "17943051837086700",
-    "shown": 38,
+    "shown": 39,
     "hidden": 0,
+    "embed": 1,
     "missing_media_url": 1,
     "missing_media_url_pct": 2.4
   },
@@ -39,8 +41,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 11109,
-      "likes": 21
+      "views": 11720,
+      "likes": 21,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -62,8 +67,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3202,
-      "likes": 14
+      "views": 3229,
+      "likes": 15,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "gemini"
     },
     {
       "has_video": true,
@@ -85,8 +93,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 44389,
-      "likes": 113
+      "views": 44412,
+      "likes": 113,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -108,8 +119,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1976,
-      "likes": 83
+      "views": 1986,
+      "likes": 83,
+      "playback": "file",
+      "niche": "pov",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -131,23 +145,35 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3235,
-      "likes": 48
+      "views": 3259,
+      "likes": 48,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "manual"
     },
     {
       "has_video": false,
+      "playback": "embed",
+      "embed_url": "https://www.instagram.com/reel/DfFhE2Qy16n/embed/",
+      "poster_url": "https://fainshteinbar.github.io/bar-studio-media/reels/18119885431989711.embed.webp",
+      "lqip": "data:image/webp;base64,UklGRtoAAABXRUJQVlA4IM4AAAAQBgCdASoYACsAPulkqU2pJaQiKq35IB0JQBXDgs2r/l5B3F/6jrcDUs6po2JzrvHvr04/K/IeAYAA/uzYYiCNO0eLNkGwWEg4HOI6xbQGqav1BQbE5C5sGtfkz6GZdIex9j7abzlYcWlDFjTNcyDc8v1bgy3SAVAB0wcrg/k4sN3XTIF/kz15d/TVEdjFVHQe1PwdSEmqvp1T8U+0pq/nU0Z1X/grihXOhfs+cSIo5iHZSeMC/ZfHb2v+/5Hvac7P2cBo44eBVf0OSgAAAA==",
+      "width": 540,
+      "height": 960,
+      "poster_source": "cover",
       "id": "18119885431989711",
       "placeholder": false,
       "permalink": "https://www.instagram.com/reel/DfFhE2Qy16n/",
       "timestamp": "2026-10-29T17:14:16+0000",
       "caption": "כל בוקר היא פתחה את הווילון לים אחר.\nקרחון בראשון. לגונה בשני. ספינת מפרש בשלישי. פינגווינים ברביעי. סערה בחמישי.\nבשישי, רק ערפל.\nובשבת הוא חזר. הים שלה.\n\nראיתי את כל הימים. נשארתי בשלי.\n\nקונספט פרסומת שיצרתי מאפס ל-SEVEN SEAS, שדה דב מערב, תל אביב.\nלא פרסומת לדירה. פרסומת לבוקר.\n\nאיזה ים הייתם בוחרים לבוקר שלכם? 👇\n\n🎵 אריק איינשטיין · אוהב להיות בבית\n*קונספט לא רשמי. נוצר ב-AI. ההדמיה להמחשה בלבד.\n\n#נדלן #תלאביב #שדהדבמערב #SevenSeas #AIvideo פרסומת קריאייטיב",
       "lane": "reels",
-      "visible": false,
+      "visible": true,
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 639,
-      "likes": 23
+      "likes": 23,
+      "niche": "realestate",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -169,8 +195,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 508,
-      "likes": 17
+      "views": 510,
+      "likes": 17,
+      "playback": "file",
+      "niche": "food",
+      "niche_source": "manual"
     },
     {
       "has_video": false,
@@ -185,7 +214,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2661,
+      "views": 2663,
       "likes": 10
     },
     {
@@ -209,7 +238,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 1622,
-      "likes": 11
+      "likes": 11,
+      "playback": "file",
+      "niche": "ai",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -232,7 +264,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 560,
-      "likes": 6
+      "likes": 6,
+      "playback": "file",
+      "niche": "realestate",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -255,7 +290,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 1178,
-      "likes": 13
+      "likes": 13,
+      "playback": "file",
+      "niche": "sport",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -278,7 +316,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 926,
-      "likes": 17
+      "likes": 17,
+      "playback": "file",
+      "niche": "food",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -301,7 +342,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 1855,
-      "likes": 29
+      "likes": 29,
+      "playback": "file",
+      "niche": "ai",
+      "niche_source": "manual"
     },
     {
       "has_video": false,
@@ -316,7 +360,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5160,
+      "views": 5163,
       "likes": 303
     },
     {
@@ -339,8 +383,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 929,
-      "likes": 17
+      "views": 930,
+      "likes": 17,
+      "playback": "file",
+      "niche": "ai",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -363,7 +410,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 451,
-      "likes": 7
+      "likes": 7,
+      "playback": "file",
+      "niche": "ai",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -385,8 +435,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 436,
-      "likes": 13
+      "views": 437,
+      "likes": 13,
+      "playback": "file",
+      "niche": "events",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -408,8 +461,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51699,
-      "likes": 839
+      "views": 51717,
+      "likes": 839,
+      "playback": "file",
+      "niche": "pov",
+      "niche_source": "manual"
     },
     {
       "has_video": false,
@@ -448,7 +504,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 3568,
-      "likes": 27
+      "likes": 27,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -471,7 +530,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 2245,
-      "likes": 38
+      "likes": 38,
+      "playback": "file",
+      "niche": "ai",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -494,7 +556,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 4697,
-      "likes": 40
+      "likes": 40,
+      "playback": "file",
+      "niche": "food",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -517,7 +582,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 485,
-      "likes": 3
+      "likes": 3,
+      "playback": "file",
+      "niche": "events",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -539,8 +607,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24420,
-      "likes": 340
+      "views": 24423,
+      "likes": 340,
+      "playback": "file",
+      "niche": "pov",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -563,7 +634,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 2967,
-      "likes": 29
+      "likes": 29,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -586,7 +660,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 160393,
-      "likes": 138
+      "likes": 138,
+      "playback": "file",
+      "niche": "food",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -608,8 +685,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 106016,
-      "likes": 4642
+      "views": 106017,
+      "likes": 4642,
+      "playback": "file",
+      "niche": "sport",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -632,7 +712,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 4663,
-      "likes": 106
+      "likes": 106,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -654,8 +737,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 50360,
-      "likes": 1108
+      "views": 50381,
+      "likes": 1108,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -678,7 +764,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 4457,
-      "likes": 49
+      "likes": 49,
+      "playback": "file",
+      "niche": "ai",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -700,8 +789,11 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 240477,
-      "likes": 5105
+      "views": 240481,
+      "likes": 5105,
+      "playback": "file",
+      "niche": "food",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -724,7 +816,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 1135,
-      "likes": 11
+      "likes": 11,
+      "playback": "file",
+      "niche": "realestate",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -747,7 +842,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 935,
-      "likes": 13
+      "likes": 13,
+      "playback": "file",
+      "niche": "realestate",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -770,7 +868,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 3162,
-      "likes": 21
+      "likes": 21,
+      "playback": "file",
+      "niche": "sport",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -793,7 +894,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 1710,
-      "likes": 18
+      "likes": 18,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -816,7 +920,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 4435,
-      "likes": 51
+      "likes": 51,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -839,7 +946,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 14936,
-      "likes": 118
+      "likes": 118,
+      "playback": "file",
+      "niche": "sport",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -862,7 +972,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 6174,
-      "likes": 91
+      "likes": 91,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -885,7 +998,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 841,
-      "likes": 9
+      "likes": 9,
+      "playback": "file",
+      "niche": "events",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -908,7 +1024,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 58566,
-      "likes": 2086
+      "likes": 2086,
+      "playback": "file",
+      "niche": "sport",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -931,7 +1050,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 692,
-      "likes": 10
+      "likes": 10,
+      "playback": "file",
+      "niche": "sport",
+      "niche_source": "manual"
     },
     {
       "has_video": true,
@@ -954,7 +1076,10 @@
       "is_shared_to_feed": true,
       "flag_reason": "",
       "views": 2465,
-      "likes": 11
+      "likes": 11,
+      "playback": "file",
+      "niche": "comedy",
+      "niche_source": "manual"
     }
   ]
 }
