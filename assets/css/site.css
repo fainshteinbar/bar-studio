@@ -177,6 +177,9 @@ body { background: var(--void); color: var(--cream); font: 400 16px/1.6 var(--te
 @media (max-width: 599px) { .rows { --gap: 12px; --card: calc((100vw - var(--pad) - var(--gap)) / 1.15); } }
 @media (min-width: 1100px) { .rows { --card: min(calc((100vw - 2 * var(--pad) - 2 * var(--gridgap)) / 3), 430px); } }
 .row + .row { margin-block-start: clamp(36px, 5vw, 64px); }
+/* Rows are below the first screen everywhere: skip their style and layout until they come near the viewport.
+   The reserved size is the row's own (title + poster + two caption lines), so nothing moves when one renders. */
+.row { content-visibility: auto; contain-intrinsic-size: auto calc(clamp(28px, 3.4vw, 52px) * 1.05 + clamp(10px, 1.4vw, 18px) + var(--card) * 16 / 9 + 92px); }
 .row-title { padding-inline: var(--pad); margin-block-end: clamp(10px, 1.4vw, 18px); font: 700 clamp(28px, 3.4vw, 52px)/1.05 var(--display); }
 :lang(en) .row-title { text-transform: uppercase; }
 .row-wrap { position: relative; }
