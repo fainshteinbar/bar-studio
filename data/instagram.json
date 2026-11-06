@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T23:17:22.719Z",
+  "generated_at": "2026-11-06T00:17:24.297Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -8,7 +8,7 @@
     "total_videos": 41,
     "all_videos": 45,
     "excluded_trial": 4,
-    "total_views": 829624,
+    "total_views": 829665,
     "views_counted_over": 41,
     "views_sample": false,
     "top_visible_views": 240572,
@@ -42,8 +42,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 684,
-      "likes": 22,
+      "views": 716,
+      "likes": 23,
       "niche": "comedy",
       "niche_source": "gemini"
     },
@@ -60,7 +60,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 4094,
+      "views": 4096,
       "likes": 27
     },
     {
@@ -84,7 +84,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1512,
+      "views": 1516,
       "likes": 12,
       "niche": "pov",
       "niche_source": "gemini"
@@ -187,7 +187,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2086,
+      "views": 2087,
       "likes": 89,
       "playback": "file",
       "niche": "pov",
@@ -383,7 +383,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 961,
+      "views": 963,
       "likes": 17,
       "playback": "file",
       "niche": "food",
@@ -409,7 +409,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1877,
+      "views": 1879,
       "likes": 29,
       "playback": "file",
       "niche": "ai",
@@ -428,7 +428,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5221,
+      "views": 5223,
       "likes": 307
     },
     {
