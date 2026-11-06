@@ -15,6 +15,11 @@
       "hash": "c94d1e9fa1dc108d",
       "niche": "comedy",
       "source": "gemini-3.5-flash-lite (Gemini), 2026-11-05"
+    },
+    "18120137798287952": {
+      "hash": "7164d58ae2f8b1ff",
+      "niche": "food",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-11-06"
     }
   }
 }
