@@ -192,6 +192,12 @@
       "pitch": "From a single peanut to the beach",
       "more": "There is nothing, nothing, nothing like Bamba. Created with AI",
       "source": "gemini-3.5-flash-lite (Gemini), 2026-11-06"
+    },
+    "17971135155390808": {
+      "hash": "94d1b721d9c2b33a",
+      "pitch": "Israeli winter. 16° in the morning, 23° at noon, 9° at night, and the café AC set to 17.",
+      "more": "200 meters down Rothschild, 4 looks. Send this to whoever left the house in a t-shirt and got stuck tonight without a jacket.",
+      "source": "gemini-3.8-flash (Gemini), 2026-11-08"
     }
   }
 }
