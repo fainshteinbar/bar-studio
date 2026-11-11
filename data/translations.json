@@ -204,6 +204,12 @@
       "pitch": "Took a full iced coffee, left Ramat Gan, went through Yarkon Park, and finished on the cli",
       "more": "The only question: will it spill? Watch till the end",
       "source": "gemini-3.8-flash (Gemini), 2026-11-09"
+    },
+    "18139383016635871": {
+      "hash": "97c19ff920b2483b",
+      "pitch": "El Al gave me a whole plane",
+      "more": "Or did they? Everything you saw was built with AI. No plane, no hangar, no cameraman.",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-11-11"
     }
   }
 }
