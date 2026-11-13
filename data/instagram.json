@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T04:17:28.760Z",
+  "generated_at": "2026-11-13T05:17:27.464Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -8,7 +8,7 @@
     "total_videos": 46,
     "all_videos": 53,
     "excluded_trial": 7,
-    "total_views": 851042,
+    "total_views": 851059,
     "views_counted_over": 46,
     "views_sample": false,
     "top_visible_views": 241116,
@@ -34,8 +34,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 0,
-      "likes": 0
+      "views": 170,
+      "likes": 1
     },
     {
       "has_video": false,
@@ -50,7 +50,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 170,
+      "views": 171,
       "likes": 0
     },
     {
@@ -66,7 +66,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2177,
+      "views": 2180,
       "likes": 12
     },
     {
@@ -82,7 +82,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1562,
+      "views": 1569,
       "likes": 10
     },
     {
@@ -106,7 +106,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 829,
+      "views": 830,
       "likes": 16,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -158,7 +158,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 468,
+      "views": 469,
       "likes": 13,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -184,7 +184,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1759,
+      "views": 1761,
       "likes": 37,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -339,7 +339,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 48985,
+      "views": 48987,
       "likes": 121,
       "playback": "file",
       "niche": "comedy",
@@ -365,8 +365,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3000,
-      "likes": 157,
+      "views": 3006,
+      "likes": 156,
       "playback": "file",
       "niche": "pov",
       "niche_source": "manual"
@@ -853,7 +853,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24667,
+      "views": 24669,
       "likes": 343,
       "playback": "file",
       "niche": "pov",
@@ -983,7 +983,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51062,
+      "views": 51065,
       "likes": 1117,
       "playback": "file",
       "niche": "comedy",
