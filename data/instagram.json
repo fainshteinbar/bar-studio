@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-13T03:17:41.758Z",
+  "generated_at": "2026-11-13T04:17:28.760Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "build_inputs": "21c5fc6b084654e5",
   "stats": {
     "total_videos": 46,
-    "all_videos": 52,
-    "excluded_trial": 6,
-    "total_views": 851037,
+    "all_videos": 53,
+    "excluded_trial": 7,
+    "total_views": 851042,
     "views_counted_over": 46,
     "views_sample": false,
     "top_visible_views": 241116,
@@ -21,6 +21,22 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "17917075767551252",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Dfqtqr0S2D0/",
+      "timestamp": "2026-11-13T03:55:27+0000",
+      "caption": "⁨\tMapleStory מייפל סטורי - Live Action 🍁\nשלחו למי שבילה איתכם את כל החופש הגדול בהניסיס\n#maplestory #מייפלסטורי #nostalgia #oldgames #aivideo⁩",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 0,
+      "likes": 0
+    },
     {
       "has_video": false,
       "id": "18358245862169757",
@@ -50,7 +66,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2175,
+      "views": 2177,
       "likes": 12
     },
     {
@@ -66,7 +82,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1557,
+      "views": 1562,
       "likes": 10
     },
     {
@@ -90,7 +106,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 828,
+      "views": 829,
       "likes": 16,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -220,7 +236,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4624,
+      "views": 4625,
       "likes": 45,
       "niche": "food",
       "niche_source": "gemini"
@@ -271,7 +287,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 12675,
+      "views": 12676,
       "likes": 24,
       "playback": "file",
       "niche": "comedy",
@@ -837,8 +853,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24665,
-      "likes": 342,
+      "views": 24667,
+      "likes": 343,
       "playback": "file",
       "niche": "pov",
       "niche_source": "manual"
