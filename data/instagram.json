@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T01:17:40.158Z",
+  "generated_at": "2026-11-13T02:10:04.306Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -8,7 +8,7 @@
     "total_videos": 46,
     "all_videos": 52,
     "excluded_trial": 6,
-    "total_views": 851022,
+    "total_views": 851024,
     "views_counted_over": 46,
     "views_sample": false,
     "top_visible_views": 241116,
@@ -90,7 +90,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 824,
+      "views": 825,
       "likes": 16,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -349,7 +349,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2996,
+      "views": 2997,
       "likes": 157,
       "playback": "file",
       "niche": "pov",
