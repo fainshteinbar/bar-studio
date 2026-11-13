@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T09:17:41.236Z",
+  "generated_at": "2026-11-13T10:03:47.951Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -8,10 +8,10 @@
     "total_videos": 46,
     "all_videos": 53,
     "excluded_trial": 7,
-    "total_views": 851148,
+    "total_views": 851169,
     "views_counted_over": 46,
     "views_sample": false,
-    "top_visible_views": 241127,
+    "top_visible_views": 241129,
     "top_visible_id": "17943051837086700",
     "shown": 46,
     "hidden": 0,
@@ -27,15 +27,15 @@
       "placeholder": false,
       "permalink": "https://www.instagram.com/reel/Dfqtqr0S2D0/",
       "timestamp": "2026-11-13T03:55:27+0000",
-      "caption": "⁨\tMapleStory מייפל סטורי - Live Action 🍁\nשלחו למי שבילה איתכם את כל החופש הגדול בהניסיס\n#maplestory #מייפלסטורי #nostalgia #oldgames #aivideo⁩",
+      "caption": "⁨\t⁨\tMapleStory מייפל סטורי - Live Action 🍁\nשלחו למי שבילה איתכם את כל החופש הגדול בהניסיס\n#maplestory #מייפלסטורי #nostalgia #oldgames #aivideo⁩⁩",
       "lane": "reels",
       "visible": false,
       "status": "excluded-trial",
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 728,
-      "likes": 3
+      "views": 1210,
+      "likes": 6
     },
     {
       "has_video": false,
@@ -66,7 +66,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2202,
+      "views": 2205,
       "likes": 12
     },
     {
@@ -82,7 +82,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1575,
+      "views": 1578,
       "likes": 10
     },
     {
@@ -106,7 +106,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 856,
+      "views": 857,
       "likes": 17,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -132,7 +132,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3693,
+      "views": 3698,
       "likes": 37,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -184,7 +184,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1762,
+      "views": 1763,
       "likes": 37,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -339,7 +339,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49001,
+      "views": 49003,
       "likes": 121,
       "playback": "file",
       "niche": "comedy",
@@ -365,7 +365,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3010,
+      "views": 3012,
       "likes": 156,
       "playback": "file",
       "niche": "pov",
@@ -983,8 +983,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51066,
-      "likes": 1117,
+      "views": 51074,
+      "likes": 1118,
       "playback": "file",
       "niche": "comedy",
       "niche_source": "manual"
@@ -1035,7 +1035,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 241127,
+      "views": 241129,
       "likes": 5117,
       "playback": "file",
       "niche": "food",
