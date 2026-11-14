@@ -216,6 +216,12 @@
       "pitch": "The client just asked for a tiny fix.",
       "more": "So I did exactly what he wanted. Tag someone who knows the feeling.",
       "source": "gemini-3.5-flash-lite (Gemini), 2026-11-12"
+    },
+    "17917075767551252": {
+      "hash": "44891a43e1a3748d",
+      "pitch": "You are 12, right after leveling up in",
+      "more": "MapleStory Live Action. Send this to whoever spent the whole summer break with you in Henesys.",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-11-14"
     }
   }
 }

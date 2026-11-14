@@ -40,6 +40,11 @@
       "hash": "db8a7fde37972593",
       "niche": "comedy",
       "source": "gemini-3.5-flash-lite (Gemini), 2026-11-12"
+    },
+    "17917075767551252": {
+      "hash": "44891a43e1a3748d",
+      "niche": "pov",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-11-14"
     }
   }
 }
