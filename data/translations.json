@@ -222,6 +222,12 @@
       "pitch": "You are 12, right after leveling up in",
       "more": "MapleStory Live Action. Send this to whoever spent the whole summer break with you in Henesys.",
       "source": "gemini-3.5-flash-lite (Gemini), 2026-11-14"
+    },
+    "18123537206060714": {
+      "hash": "d471d9075c3ac469",
+      "pitch": "A month ago, I quit a good job. By choice.",
+      "more": "And ever since, almost every night, the same question comes back: what if I made a mistake? I've been in Thailand for a year now. Left one home far behind, buil",
+      "source": "gemini-3.8-flash (Gemini), 2026-11-15"
     }
   }
 }
