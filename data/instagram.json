@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T22:17:34.349Z",
+  "generated_at": "2026-11-18T03:17:46.410Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "build_inputs": "21c5fc6b084654e5",
   "stats": {
     "total_videos": 48,
-    "all_videos": 59,
-    "excluded_trial": 11,
-    "total_views": 856527,
+    "all_videos": 61,
+    "excluded_trial": 13,
+    "total_views": 856555,
     "views_counted_over": 48,
     "views_sample": false,
     "top_visible_views": 241379,
@@ -17,10 +17,42 @@
     "hidden": 0,
     "embed": 1,
     "missing_media_url": 1,
-    "missing_media_url_pct": 1.7
+    "missing_media_url_pct": 1.6
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18112411669916431",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Df3bGwxStTl/",
+      "timestamp": "2026-11-18T02:23:30+0000",
+      "caption": "POV: אבא שלך תמיד “אהב רק את הביסקוויט” 🫠\nתייגו את מי שעשה לכם את זה.\n\n#קרמבו #ילדות #aivideo",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 43,
+      "likes": 0
+    },
+    {
+      "has_video": false,
+      "id": "18076447565727421",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/Df3a404StEs/",
+      "timestamp": "2026-11-18T02:22:12+0000",
+      "caption": "אבא שלי תמיד אמר שהוא אוהב רק את הביסקוויט. לקח לי שנים להבין למה 🫠\nתייגו את מי שתמיד “אהב את הביסקוויט”.\n\n#קרמבו #ילדות #aivideo",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 144,
+      "likes": 2
+    },
     {
       "has_video": false,
       "id": "18079695359459384",
@@ -34,7 +66,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 3301,
+      "views": 3357,
       "likes": 22
     },
     {
@@ -50,7 +82,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2011,
+      "views": 2017,
       "likes": 7
     },
     {
@@ -106,7 +138,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1104,
+      "views": 1107,
       "likes": 61,
       "niche": "pov",
       "niche_source": "gemini"
@@ -124,7 +156,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 9536,
+      "views": 9549,
       "likes": 422
     },
     {
@@ -164,7 +196,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2008,
+      "views": 2012,
       "likes": 25,
       "niche": "pov",
       "niche_source": "gemini"
@@ -222,7 +254,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 939,
+      "views": 940,
       "likes": 20,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -248,7 +280,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3810,
+      "views": 3811,
       "likes": 39,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -300,7 +332,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1801,
+      "views": 1802,
       "likes": 38,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -455,7 +487,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49503,
+      "views": 49512,
       "likes": 124,
       "playback": "file",
       "niche": "comedy",
@@ -481,7 +513,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3393,
+      "views": 3395,
       "likes": 175,
       "playback": "file",
       "niche": "pov",
@@ -651,7 +683,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1221,
+      "views": 1222,
       "likes": 14,
       "playback": "file",
       "niche": "sport",
@@ -823,7 +855,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 52845,
+      "views": 52849,
       "likes": 861,
       "playback": "file",
       "niche": "pov",
@@ -969,7 +1001,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24700,
+      "views": 24701,
       "likes": 345,
       "playback": "file",
       "niche": "pov",
@@ -1099,7 +1131,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51372,
+      "views": 51373,
       "likes": 1123,
       "playback": "file",
       "niche": "comedy",
