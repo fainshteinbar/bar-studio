@@ -55,6 +55,11 @@
       "hash": "5debf94ec432a18d",
       "niche": "pov",
       "source": "gemini-3.8-flash (Gemini), 2026-11-18"
+    },
+    "18129067615911314": {
+      "hash": "2c7b3ed39c7fadfe",
+      "niche": "pov",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-11-18"
     }
   }
 }
