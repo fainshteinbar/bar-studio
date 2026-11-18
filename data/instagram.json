@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T07:17:32.597Z",
+  "generated_at": "2026-11-18T09:17:35.529Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -8,10 +8,10 @@
     "total_videos": 48,
     "all_videos": 61,
     "excluded_trial": 13,
-    "total_views": 856592,
+    "total_views": 856623,
     "views_counted_over": 48,
     "views_sample": false,
-    "top_visible_views": 241380,
+    "top_visible_views": 241383,
     "top_visible_id": "17943051837086700",
     "shown": 48,
     "hidden": 0,
@@ -34,8 +34,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 542,
-      "likes": 7
+      "views": 1114,
+      "likes": 17
     },
     {
       "has_video": false,
@@ -50,8 +50,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2679,
-      "likes": 30
+      "views": 3274,
+      "likes": 33
     },
     {
       "has_video": false,
@@ -66,7 +66,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 3453,
+      "views": 3484,
       "likes": 24
     },
     {
@@ -82,7 +82,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 2027,
+      "views": 2029,
       "likes": 7
     },
     {
@@ -138,7 +138,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1109,
+      "views": 1111,
       "likes": 61,
       "niche": "pov",
       "niche_source": "gemini"
@@ -156,7 +156,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 9558,
+      "views": 9560,
       "likes": 423
     },
     {
@@ -196,7 +196,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2014,
+      "views": 2019,
       "likes": 25,
       "niche": "pov",
       "niche_source": "gemini"
@@ -332,7 +332,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1803,
+      "views": 1804,
       "likes": 38,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -487,7 +487,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49513,
+      "views": 49522,
       "likes": 124,
       "playback": "file",
       "niche": "comedy",
@@ -513,7 +513,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3398,
+      "views": 3399,
       "likes": 176,
       "playback": "file",
       "niche": "pov",
@@ -949,7 +949,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4723,
+      "views": 4724,
       "likes": 41,
       "playback": "file",
       "niche": "food",
@@ -975,7 +975,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 510,
+      "views": 511,
       "likes": 4,
       "playback": "file",
       "niche": "events",
@@ -1001,7 +1001,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 24705,
+      "views": 24707,
       "likes": 345,
       "playback": "file",
       "niche": "pov",
@@ -1131,7 +1131,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51384,
+      "views": 51389,
       "likes": 1123,
       "playback": "file",
       "niche": "comedy",
@@ -1183,7 +1183,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 241380,
+      "views": 241383,
       "likes": 5122,
       "playback": "file",
       "niche": "food",
@@ -1339,7 +1339,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 14956,
+      "views": 14957,
       "likes": 118,
       "playback": "file",
       "niche": "sport",
