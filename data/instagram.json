@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T23:17:48.187Z",
+  "generated_at": "2026-11-21T00:17:40.816Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -8,7 +8,7 @@
     "total_videos": 51,
     "all_videos": 53,
     "excluded_trial": 2,
-    "total_views": 882053,
+    "total_views": 882061,
     "views_counted_over": 51,
     "views_sample": false,
     "top_visible_views": 241593,
@@ -68,7 +68,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 13271,
+      "views": 13272,
       "likes": 126,
       "niche": "pov",
       "niche_source": "gemini"
@@ -110,7 +110,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1144,
+      "views": 1145,
       "likes": 63,
       "niche": "pov",
       "niche_source": "gemini"
@@ -136,7 +136,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 10330,
+      "views": 10332,
       "likes": 457,
       "niche": "pov",
       "niche_source": "gemini"
@@ -162,7 +162,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2057,
+      "views": 2058,
       "likes": 25,
       "niche": "pov",
       "niche_source": "gemini"
@@ -188,7 +188,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 956,
+      "views": 957,
       "likes": 22,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -214,7 +214,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 3933,
+      "views": 3934,
       "likes": 43,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -344,7 +344,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1761,
+      "views": 1762,
       "likes": 15,
       "niche": "pov",
       "niche_source": "gemini"
