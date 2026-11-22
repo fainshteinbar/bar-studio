@@ -65,6 +65,11 @@
       "hash": "d55e9f5b64568aad",
       "niche": "realestate",
       "source": "gemini-3.5-flash-lite (Gemini), 2026-11-19"
+    },
+    "18019119395986180": {
+      "hash": "feb5c2fe6a893cfd",
+      "niche": "pov",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-11-22"
     }
   }
 }
