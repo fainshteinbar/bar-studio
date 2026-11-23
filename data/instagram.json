@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T08:18:44.228Z",
+  "generated_at": "2026-11-23T09:17:39.534Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -8,7 +8,7 @@
     "total_videos": 52,
     "all_videos": 57,
     "excluded_trial": 5,
-    "total_views": 884875,
+    "total_views": 884918,
     "views_counted_over": 52,
     "views_sample": false,
     "top_visible_views": 241768,
@@ -34,8 +34,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1641,
-      "likes": 35
+      "views": 1724,
+      "likes": 36
     },
     {
       "has_video": false,
@@ -50,7 +50,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1466,
+      "views": 1478,
       "likes": 17
     },
     {
@@ -66,8 +66,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1650,
-      "likes": 26
+      "views": 1974,
+      "likes": 28
     },
     {
       "has_video": true,
@@ -90,7 +90,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 685,
+      "views": 710,
       "likes": 34,
       "niche": "pov",
       "niche_source": "gemini"
@@ -142,7 +142,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 13626,
+      "views": 13627,
       "likes": 132,
       "niche": "pov",
       "niche_source": "gemini"
@@ -443,7 +443,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 12725,
+      "views": 12727,
       "likes": 25,
       "playback": "file",
       "niche": "comedy",
@@ -977,8 +977,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 25644,
-      "likes": 351,
+      "views": 25658,
+      "likes": 352,
       "playback": "file",
       "niche": "pov",
       "niche_source": "manual"
@@ -1107,7 +1107,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 51786,
+      "views": 51787,
       "likes": 1129,
       "playback": "file",
       "niche": "comedy",
