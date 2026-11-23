@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T06:17:36.980Z",
+  "generated_at": "2026-11-23T07:17:27.265Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -8,7 +8,7 @@
     "total_videos": 52,
     "all_videos": 57,
     "excluded_trial": 5,
-    "total_views": 884748,
+    "total_views": 884814,
     "views_counted_over": 52,
     "views_sample": false,
     "top_visible_views": 241768,
@@ -34,8 +34,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 91,
-      "likes": 1
+      "views": 1020,
+      "likes": 18
     },
     {
       "has_video": false,
@@ -50,8 +50,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 71,
-      "likes": 0
+      "views": 1037,
+      "likes": 13
     },
     {
       "has_video": false,
@@ -66,8 +66,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 80,
-      "likes": 0
+      "views": 837,
+      "likes": 15
     },
     {
       "has_video": true,
@@ -90,8 +90,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 627,
-      "likes": 33,
+      "views": 658,
+      "likes": 34,
       "niche": "pov",
       "niche_source": "gemini"
     },
@@ -142,7 +142,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 13622,
+      "views": 13624,
       "likes": 132,
       "niche": "pov",
       "niche_source": "gemini"
@@ -392,7 +392,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4682,
+      "views": 4683,
       "likes": 45,
       "niche": "food",
       "niche_source": "gemini"
@@ -572,7 +572,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 705,
+      "views": 706,
       "likes": 23,
       "niche": "realestate",
       "niche_source": "manual"
@@ -977,7 +977,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 25590,
+      "views": 25621,
       "likes": 351,
       "playback": "file",
       "niche": "pov",
