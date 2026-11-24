@@ -70,6 +70,11 @@
       "hash": "feb5c2fe6a893cfd",
       "niche": "pov",
       "source": "gemini-3.5-flash-lite (Gemini), 2026-11-22"
+    },
+    "18112502065923091": {
+      "hash": "15fb4c0ccfdc9ad1",
+      "niche": "sport",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-11-24"
     }
   }
 }

@@ -240,6 +240,12 @@
       "pitch": "In Israel, you buy an apartment on paper. So I took the paper and turned it into a home.",
       "more": "From one floor plan on the table, to the 3D model, to that first morning on the balcony. No shoots, no existing renders. Just the blueprint. What moment would y",
       "source": "gemini-3.8-flash (Gemini), 2026-11-19"
+    },
+    "18112502065923091": {
+      "hash": "15fb4c0ccfdc9ad1",
+      "pitch": "Anyone who played neighborhood football knows: at 23:00 the municipality turns off the lig",
+      "more": "And then there is only one rule. Last goal wins. Send to the guys who play with you",
+      "source": "gemini-3.5-flash-lite (Gemini), 2026-11-24"
     }
   }
 }
