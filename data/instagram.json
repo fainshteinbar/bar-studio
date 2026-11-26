@@ -1,26 +1,58 @@
 {
-  "generated_at": "2026-11-25T22:17:36.438Z",
+  "generated_at": "2026-11-26T08:17:34.853Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "build_inputs": "21c5fc6b084654e5",
   "stats": {
     "total_videos": 53,
-    "all_videos": 63,
-    "excluded_trial": 10,
-    "total_views": 895325,
+    "all_videos": 65,
+    "excluded_trial": 12,
+    "total_views": 895421,
     "views_counted_over": 53,
     "views_sample": false,
-    "top_visible_views": 242029,
+    "top_visible_views": 242037,
     "top_visible_id": "17943051837086700",
     "shown": 53,
     "hidden": 0,
     "embed": 1,
     "missing_media_url": 1,
-    "missing_media_url_pct": 1.6
+    "missing_media_url_pct": 1.5
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18403835590204275",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DgMSjORSLBP/",
+      "timestamp": "2026-11-26T04:52:39+0000",
+      "caption": "כל אחת מכירה את ה״שנייה בשירותים״ הזאת 🚽⚽\nשלחו למי שנעלם בדקה ה-90.\n🎬 נוצר בעזרת AI\n\n#כדורגלישראלי #ליגתהעל #פנטזי",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 138,
+      "likes": 1
+    },
+    {
+      "has_video": false,
+      "id": "17997265701063058",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DgMSetNyOSM/",
+      "timestamp": "2026-11-26T04:52:06+0000",
+      "caption": "כל אחת מכירה את ה״שנייה בשירותים״ הזאת 🚽⚽\nשלחו למי שנעלם בדקה ה-90.\n🎬 נוצר בעזרת AI\n\n#כדורגלישראלי #ליגתהעל #פנטזי",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 117,
+      "likes": 0
+    },
     {
       "has_video": false,
       "id": "18135017999497282",
@@ -34,8 +66,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 123,
-      "likes": 0
+      "views": 1169,
+      "likes": 13
     },
     {
       "has_video": false,
@@ -50,7 +82,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 232,
+      "views": 282,
       "likes": 0
     },
     {
@@ -66,7 +98,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 123,
+      "views": 134,
       "likes": 0
     },
     {
@@ -98,8 +130,8 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 3005,
-      "likes": 59
+      "views": 3052,
+      "likes": 60
     },
     {
       "has_video": false,
@@ -114,7 +146,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 3303,
+      "views": 3306,
       "likes": 57
     },
     {
@@ -170,7 +202,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 8352,
+      "views": 8356,
       "likes": 161,
       "niche": "sport",
       "niche_source": "gemini"
@@ -196,7 +228,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1131,
+      "views": 1133,
       "likes": 54,
       "niche": "pov",
       "niche_source": "gemini"
@@ -222,7 +254,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 692,
+      "views": 693,
       "likes": 38,
       "niche": "realestate",
       "niche_source": "gemini"
@@ -248,7 +280,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 13857,
+      "views": 13871,
       "likes": 136,
       "niche": "pov",
       "niche_source": "gemini"
@@ -316,7 +348,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 10620,
+      "views": 10646,
       "likes": 464,
       "niche": "pov",
       "niche_source": "gemini"
@@ -394,7 +426,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4053,
+      "views": 4059,
       "likes": 44,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -472,7 +504,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1776,
+      "views": 1777,
       "likes": 45,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -549,7 +581,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 12735,
+      "views": 12737,
       "likes": 25,
       "playback": "file",
       "niche": "comedy",
@@ -852,7 +884,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 5323,
+      "views": 5324,
       "likes": 308
     },
     {
@@ -953,7 +985,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 52944,
+      "views": 52947,
       "likes": 863,
       "playback": "file",
       "niche": "pov",
@@ -1031,7 +1063,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4730,
+      "views": 4732,
       "likes": 41,
       "playback": "file",
       "niche": "food",
@@ -1083,7 +1115,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 25881,
+      "views": 25887,
       "likes": 357,
       "playback": "file",
       "niche": "pov",
@@ -1135,7 +1167,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 160441,
+      "views": 160442,
       "likes": 139,
       "playback": "file",
       "niche": "food",
@@ -1161,7 +1193,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 106567,
+      "views": 106568,
       "likes": 4652,
       "playback": "file",
       "niche": "sport",
@@ -1213,7 +1245,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 52103,
+      "views": 52112,
       "likes": 1136,
       "playback": "file",
       "niche": "comedy",
@@ -1265,7 +1297,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 242029,
+      "views": 242037,
       "likes": 5138,
       "playback": "file",
       "niche": "food",
@@ -1447,7 +1479,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 6229,
+      "views": 6239,
       "likes": 92,
       "playback": "file",
       "niche": "comedy",
