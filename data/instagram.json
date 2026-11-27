@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T02:17:23.746Z",
+  "generated_at": "2026-11-27T03:17:37.105Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -8,7 +8,7 @@
     "total_videos": 53,
     "all_videos": 65,
     "excluded_trial": 12,
-    "total_views": 895685,
+    "total_views": 895691,
     "views_counted_over": 53,
     "views_sample": false,
     "top_visible_views": 242055,
@@ -34,7 +34,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 181,
+      "views": 182,
       "likes": 1
     },
     {
@@ -146,7 +146,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 3330,
+      "views": 3331,
       "likes": 57
     },
     {
@@ -254,7 +254,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 700,
+      "views": 701,
       "likes": 38,
       "niche": "realestate",
       "niche_source": "gemini"
@@ -374,7 +374,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2084,
+      "views": 2087,
       "likes": 25,
       "niche": "pov",
       "niche_source": "gemini"
@@ -1115,7 +1115,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 25892,
+      "views": 25894,
       "likes": 357,
       "playback": "file",
       "niche": "pov",
