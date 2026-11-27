@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T00:17:36.661Z",
+  "generated_at": "2026-11-27T02:17:23.746Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -8,7 +8,7 @@
     "total_videos": 53,
     "all_videos": 65,
     "excluded_trial": 12,
-    "total_views": 895678,
+    "total_views": 895685,
     "views_counted_over": 53,
     "views_sample": false,
     "top_visible_views": 242055,
@@ -34,7 +34,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 179,
+      "views": 181,
       "likes": 1
     },
     {
@@ -254,7 +254,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 699,
+      "views": 700,
       "likes": 38,
       "niche": "realestate",
       "niche_source": "gemini"
@@ -280,7 +280,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 13970,
+      "views": 13971,
       "likes": 137,
       "niche": "pov",
       "niche_source": "gemini"
@@ -348,8 +348,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 10663,
-      "likes": 464,
+      "views": 10665,
+      "likes": 465,
       "niche": "pov",
       "niche_source": "gemini"
     },
@@ -426,7 +426,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4078,
+      "views": 4080,
       "likes": 44,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -1193,7 +1193,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 106571,
+      "views": 106572,
       "likes": 4652,
       "playback": "file",
       "niche": "sport",
