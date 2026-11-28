@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-28T07:17:31.028Z",
+  "generated_at": "2026-11-28T09:17:38.812Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
@@ -8,10 +8,10 @@
     "total_videos": 53,
     "all_videos": 73,
     "excluded_trial": 20,
-    "total_views": 896049,
+    "total_views": 896081,
     "views_counted_over": 53,
     "views_sample": false,
-    "top_visible_views": 242089,
+    "top_visible_views": 242092,
     "top_visible_id": "17943051837086700",
     "shown": 53,
     "hidden": 0,
@@ -34,7 +34,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 121,
+      "views": 123,
       "likes": 0
     },
     {
@@ -50,7 +50,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 118,
+      "views": 119,
       "likes": 1
     },
     {
@@ -258,7 +258,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 1228,
+      "views": 1229,
       "likes": 13
     },
     {
@@ -290,7 +290,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 3335,
+      "views": 3336,
       "likes": 57
     },
     {
@@ -330,7 +330,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 8375,
+      "views": 8379,
       "likes": 162,
       "niche": "sport",
       "niche_source": "gemini"
@@ -356,7 +356,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1145,
+      "views": 1146,
       "likes": 54,
       "niche": "pov",
       "niche_source": "gemini"
@@ -408,7 +408,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 14057,
+      "views": 14059,
       "likes": 138,
       "niche": "pov",
       "niche_source": "gemini"
@@ -476,7 +476,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 10699,
+      "views": 10701,
       "likes": 465,
       "niche": "pov",
       "niche_source": "gemini"
@@ -502,7 +502,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 2095,
+      "views": 2097,
       "likes": 25,
       "niche": "pov",
       "niche_source": "gemini"
@@ -554,7 +554,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4100,
+      "views": 4104,
       "likes": 45,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -606,7 +606,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1859,
+      "views": 1860,
       "likes": 39,
       "niche": "comedy",
       "niche_source": "gemini"
@@ -761,7 +761,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 49735,
+      "views": 49736,
       "likes": 124,
       "playback": "file",
       "niche": "comedy",
@@ -863,7 +863,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 664,
+      "views": 665,
       "likes": 19,
       "playback": "file",
       "niche": "food",
@@ -1113,7 +1113,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 52964,
+      "views": 52966,
       "likes": 862,
       "playback": "file",
       "niche": "pov",
@@ -1373,7 +1373,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 52165,
+      "views": 52174,
       "likes": 1137,
       "playback": "file",
       "niche": "comedy",
@@ -1425,7 +1425,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 242089,
+      "views": 242092,
       "likes": 5140,
       "playback": "file",
       "niche": "food",
