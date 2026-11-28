@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-28T04:17:44.292Z",
+  "generated_at": "2026-11-28T06:17:23.361Z",
   "placeholder": false,
   "source": "instagram api → github pages media repo",
   "media_base_url": "https://fainshteinbar.github.io/bar-studio-media",
   "build_inputs": "21c5fc6b084654e5",
   "stats": {
     "total_videos": 53,
-    "all_videos": 71,
-    "excluded_trial": 18,
-    "total_views": 896029,
+    "all_videos": 73,
+    "excluded_trial": 20,
+    "total_views": 896040,
     "views_counted_over": 53,
     "views_sample": false,
     "top_visible_views": 242089,
@@ -21,6 +21,38 @@
   },
   "hero": null,
   "items": [
+    {
+      "has_video": false,
+      "id": "18121073120608620",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DgRhZ1qStmd/",
+      "timestamp": "2026-11-28T05:38:32+0000",
+      "caption": "Which one are you?",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 95,
+      "likes": 0
+    },
+    {
+      "has_video": false,
+      "id": "18073558004790009",
+      "placeholder": false,
+      "permalink": "https://www.instagram.com/reel/DgRhCy6yFXx/",
+      "timestamp": "2026-11-28T05:35:18+0000",
+      "caption": "Would you live here?",
+      "lane": "reels",
+      "visible": false,
+      "status": "excluded-trial",
+      "excluded": "trial",
+      "is_shared_to_feed": false,
+      "flag_reason": "",
+      "views": 82,
+      "likes": 1
+    },
     {
       "has_video": false,
       "id": "18022705502950296",
@@ -82,7 +114,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 117,
+      "views": 119,
       "likes": 0
     },
     {
@@ -146,7 +178,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 113,
+      "views": 114,
       "likes": 1
     },
     {
@@ -178,7 +210,7 @@
       "excluded": "trial",
       "is_shared_to_feed": false,
       "flag_reason": "",
-      "views": 112,
+      "views": 113,
       "likes": 0
     },
     {
@@ -298,7 +330,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 8374,
+      "views": 8375,
       "likes": 162,
       "niche": "sport",
       "niche_source": "gemini"
@@ -324,7 +356,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1144,
+      "views": 1145,
       "likes": 54,
       "niche": "pov",
       "niche_source": "gemini"
@@ -444,7 +476,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 10696,
+      "views": 10699,
       "likes": 465,
       "niche": "pov",
       "niche_source": "gemini"
@@ -600,8 +632,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 1781,
-      "likes": 45,
+      "views": 1782,
+      "likes": 46,
       "niche": "comedy",
       "niche_source": "gemini"
     },
@@ -626,7 +658,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 4699,
+      "views": 4700,
       "likes": 45,
       "niche": "food",
       "niche_source": "gemini"
@@ -677,7 +709,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 12753,
+      "views": 12754,
       "likes": 25,
       "playback": "file",
       "niche": "comedy",
@@ -1185,7 +1217,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 517,
+      "views": 518,
       "likes": 4,
       "playback": "file",
       "niche": "events",
@@ -1211,7 +1243,7 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 25905,
+      "views": 25906,
       "likes": 357,
       "playback": "file",
       "niche": "pov",
@@ -1289,8 +1321,8 @@
       "status": "shown",
       "is_shared_to_feed": true,
       "flag_reason": "",
-      "views": 106575,
-      "likes": 4652,
+      "views": 106576,
+      "likes": 4653,
       "playback": "file",
       "niche": "sport",
       "niche_source": "manual"
